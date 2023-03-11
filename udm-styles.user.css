@@ -1,11 +1,22 @@
-#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(5),
-#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(5),
-#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(13),
-#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(13)
-{
-    display: none;
-}
+/* ==UserStyle==
+@name         UDM
+@namespace    github.com/openstyles/stylus
+@version      1.0.0
+@license      unlicense
+@preprocessor default
+@var color link-color "Link Color" red
+==/UserStyle== */
 
-#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(14){
-    display: flex;
+@-moz-document url-prefix("https://ireps.gov.in/iMMS/")
+{
+	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(5),
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(5),
+	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(13),
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(13) {
+		display: none;
+	}
+
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(14) {
+		display: flex;
+	}
 }
