@@ -7,7 +7,7 @@
 @var color link-color "Link Color" red
 ==/UserStyle== */
 
-@-moz-document url-prefix("https://ireps.gov.in/fcgi/")
+@-moz-document url-prefix("https://ecr.eoffice.railnet.gov.in")
 {
 	#quickNoting #myTemplates,
 	#quickNoting .childmenuLi {
