@@ -1,0 +1,121 @@
+*{
+    box-sizing: border-box !important;
+}
+
+body > * {
+    left: 0;
+}
+
+.Option1, .Option2, .Menu1{
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.Option1 .link,
+.Option2 .link{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+#MenuBar{
+    height: 25px;
+}
+
+.Options,
+#sub16, #sub17, #sub40{
+    display: block !important;
+}
+
+#TitleBar,
+#StatusBar{
+    width: 100% !important;
+    left: 0 !important;
+}
+
+#CanvassHolder{
+    left: 0 !important;
+}
+
+#s_2,
+#s_3,
+#s_4,
+#s_5,
+#s_6{
+    width: 100% !important;
+    margin: 0 !important;
+    height: auto !important;
+    left: 0 !important;
+}
+
+#s_2 > table{
+    width: 100%;
+}
+
+#s_2 > table td > div{
+    width: calc(100% - 15px) !important;
+/*     height: 100% !important; */
+}
+
+#s_2 > table td > div > table{
+    width: calc(100% - 15px) !important;
+}
+
+#s_3 > table{
+    width: 100%;
+}
+
+#s_3 > table td > div{
+    width: calc(100% - 15px) !important;
+    height: 100% !important;
+}
+
+#s_3 > table td > div > table{
+    width: calc(100% - 15px) !important;
+}
+
+#s_3 > table td > div > table tr td:last-child{
+    min-width: 80px;
+}
+
+#s_6 div > table{
+    width: 100%;
+}
+
+#s_18{
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+#_LovTable{
+    height: auto !important;
+}
+
+.depot_transfer #s_6{
+    width: calc(100% - 500px) !important;
+    left: auto !important;
+    right: 0 !important;
+}
+
+.availability #s_2{
+    width: 70% !important;
+}
+
+.availability #s_3{
+    width: 30% !important;
+    right: 0 !important;
+    left: auto !important;
+    top: 88px !important;
+}
+
+#divShowHtml1{
+    width: 100% !important;
+    height: auto !important;
+    left: 0 !important;
+}
+
+#divShowHtml1 > div{
+    height: auto !important;
+}
