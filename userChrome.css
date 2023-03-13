@@ -1,0 +1,31 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#contentAreaContextMenu menu[id^='extension_redux_devtools-menuitem'],
+#contentAreaContextMenu menuitem[id^='extension_redux_devtools-menuitem'],
+#contentAreaContextMenu menu[id^='_testpilot-containers-menuitem-'],
+#contentAreaContextMenu menuitem[id^='_testpilot-containers-menuitem-'],
+#contentAreaContextMenu menuitem[label = 'Copy Clean Link Location'],
+#contentAreaContextMenu #context-inspect-a11y,
+#contentAreaContextMenu #_74145f27-f039-47ce-a470-a662b129930a_-menuitem-_copy-link-to-clipboard,
+#contentAreaContextMenu #context-sendlinktodevice,
+#contentAreaContextMenu #context-savelinktopocket,
+#contentAreaContextMenu #context-bookmarklink,
+#contentAreaContextMenu #context-sendimage,
+#contentAreaContextMenu #context-setDesktopBackground,
+#contentAreaContextMenu #context-copyimage-contents,
+#contentAreaContextMenu #context-sep-setbackground
+{
+    display: none !important;
+}
+
+#context_closeTabsToTheStart{
+    display: none !important;
+}
+
+#tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background{
+    background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none) !important;
+}
+
+#tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
+    background-image: none !important;
+}
