@@ -136,4 +136,10 @@
 	#divShowHtml1 > div {
 		height: auto !important;
 	}
+
+	.gem_po_mapping #s_9 table,
+	.gem_po_mapping #s_9 table td div {
+		width: 100% !important;
+		height: 100% !important;
+	}
 }

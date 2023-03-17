@@ -9,68 +9,63 @@
 // @grant        none
 // ==/UserScript==
 
+window.addEventListener(
+	"load",
+	function () {
+		if (document.title.startsWith("Run Form - ")) {
+			var titleBar = document.querySelectorAll("#TitleBar")[0];
+			var title = titleBar.querySelectorAll("td")[1].innerText;
+			document.title = title;
+			titleBar.style.width = "100%";
+		}
 
-window.addEventListener('load', function(){
+		if (document.title == "Search Purchase Orders") {
+			var rlyName = document.querySelectorAll('input[name="RLYNM_0"]')[0];
+			//rlyName.value = "IR";
 
-    if(document.title.startsWith("Run Form - ")){
-        var titleBar = document.querySelectorAll('#TitleBar')[0];
-        var title = titleBar.querySelectorAll('td')[1].innerText;
-        document.title = title;
-        titleBar.style.width = "100%";
-    }
+			var stockNS = document.querySelectorAll('select[name="STKNS_0"]')[0];
+			stockNS.value = "N";
 
-    if(document.title == "Search Purchase Orders"){
-        var rlyName = document.querySelectorAll('input[name="RLYNM_0"]')[0];
-        //rlyName.value = "IR";
+			var poTo = document.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
+			var poToArray = poTo.split("-");
 
-        var stockNS = document.querySelectorAll('select[name="STKNS_0"]')[0];
-        stockNS.value = "N";
+			var poFromDay = +poToArray[0] + 1;
+			var poFromMonth = poToArray[1];
+			var poFromYear = +poToArray[2] - 1;
 
-        var poTo = document.querySelectorAll('#LBL_TB_DT_TO')[0].nextElementSibling.value;
-        var poToArray = poTo.split("-");
+			poFromDay = poFromDay.toString().length == 2 ? poFromDay : "0" + poFromDay;
 
-        var poFromDay = +poToArray[0] + 1;
-        var poFromMonth = poToArray[1];
-        var poFromYear = +poToArray[2] - 1;
+			var poFrom = poFromDay + "-" + poFromMonth + "-" + poFromYear;
+			document.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = poFrom;
+		}
 
-        poFromDay = (poFromDay.toString().length == 2) ? poFromDay : "0"+poFromDay;
+		var canvasHolder = document.querySelectorAll("#CanvassHolder")[0];
 
-        var poFrom = poFromDay + "-" + poFromMonth + "-" + poFromYear;
-        document.querySelectorAll('#LBL_TB_DT_FR')[0].nextElementSibling.value = poFrom;
-    }
+		if (document.title == "Depot Transfer Transactions") {
+			canvasHolder.classList.add("depot_transfer");
+		}
 
-    var canvasHolder = document.querySelectorAll('#CanvassHolder')[0];
+		if (document.title == "Availability Status of Items") {
+			canvasHolder.classList.add("availability");
+		}
 
-    if(document.title == "Depot Transfer Transactions"){
+		if (document.title == "Review / Act on Pending Demands") {
+			document.addEventListener("click", (e) => {
+				var id = e.target.id;
+				if (id.includes("DropBtn")) {
+					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+					var s_5 = document.querySelectorAll("#s_5")[0];
+					var s__cnvs5 = document.querySelectorAll("#s__cnvs5")[0];
 
-        canvasHolder.classList.add('depot_transfer');
+					s_5.style.top = scrollTop + "px";
+					s__cnvs5.style.top = scrollTop + "px";
+				}
+			});
+		}
 
-    }
-
-    if(document.title == "Availability Status of Items"){
-
-        canvasHolder.classList.add('availability');
-
-    }
-
-    if(document.title == "Review / Act on Pending Demands"){
-
-        document.addEventListener('click', e => {
-
-            var id = e.target.id;
-            if(id.includes('DropBtn')){
-
-                var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
-                var s_5 = document.querySelectorAll("#s_5")[0];
-                var s__cnvs5 = document.querySelectorAll("#s__cnvs5")[0];
-
-                s_5.style.top = scrollTop + "px";
-                s__cnvs5.style.top = scrollTop + "px";
-
-            }
-
-        });
-
-    }
-
-}, false);
+		if (document.title == "Review / Act on Pending Demands") {
+			canvasHolder.classList.add("gem_po_mapping");
+		}
+	},
+	false
+);
