@@ -141,5 +141,6 @@
 	.gem_po_mapping #s_9 table td div {
 		width: 100% !important;
 		height: 100% !important;
+		margin: 0 !important;
 	}
 }
