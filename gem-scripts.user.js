@@ -60,7 +60,7 @@
 
 	if (pathname.endsWith("/view_contracts")) {
 		document.addEventListener("focusout", (e) => {
-			if (e.target.parentElement.id == "bno") {
+			if (e.target.id == "bno") {
 				var contract = document.querySelectorAll("#bno")[0];
 				var contractValue = contract.value;
 				contract.value = contractValue.trim().split(" ").join("");
