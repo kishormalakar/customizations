@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeM
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.0.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://*.gem.gov.in/*
@@ -18,8 +18,8 @@
 		document.addEventListener("focusout", (e) => {
 			if (e.target.parentElement.classList.contains("search_contract")) {
 				var searchContract = document.querySelectorAll(".search_contract")[0];
-				var contract = searchContract.querySelectorAll("input")[0].value;
-				searchContract.querySelectorAll("input")[0].value = contract.split(" ").join("");
+				var contract = e.target.value;
+				e.target.value = contract.split(" ").join("");
 			}
 		});
 	}
