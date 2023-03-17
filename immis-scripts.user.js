@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      1.0.1
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -63,7 +63,7 @@ window.addEventListener(
 			});
 		}
 
-		if (document.title == "Review / Act on Pending Demands") {
+		if (document.title == "IMMIS Proposal GeM PO Mapping") {
 			canvasHolder.classList.add("gem_po_mapping");
 		}
 	},
