@@ -19,7 +19,7 @@ window.addEventListener(
 			titleBar.style.width = "100%";
 		}
 
-		if (document.title == "Search Purchase Orders") {
+		if (document.title == "Search Purchase Orders" || document.title == "Run Form - IMMIS/PUR/POSEARCH") {
 			var rlyName = document.querySelectorAll('input[name="RLYNM_0"]')[0];
 			//rlyName.value = "IR";
 
@@ -41,15 +41,15 @@ window.addEventListener(
 
 		var canvasHolder = document.querySelectorAll("#CanvassHolder")[0];
 
-		if (document.title == "Depot Transfer Transactions") {
+		if (document.title == "Depot Transfer Transactions" || document.title == "Run Form - IMMIS/DEP/DTBT") {
 			canvasHolder.classList.add("depot_transfer");
 		}
 
-		if (document.title == "Availability Status of Items") {
+		if (document.title == "Availability Status of Items" || document.title == "Run Form - IMMIS/DEP/AVAILSTAT") {
 			canvasHolder.classList.add("availability");
 		}
 
-		if (document.title == "Review / Act on Pending Demands") {
+		if (document.title == "Review / Act on Pending Demands" || document.title == "Run Form - IMMIS/PUR/DEMREVIEW") {
 			document.addEventListener("click", (e) => {
 				var id = e.target.id;
 				if (id.includes("DropBtn")) {
@@ -63,7 +63,7 @@ window.addEventListener(
 			});
 		}
 
-		if (document.title == "IMMIS Proposal GeM PO Mapping") {
+		if (document.title == "IMMIS Proposal GeM PO Mapping" || document.title == "Run Form - IMMIS/PUR/GEM_PO_MAP") {
 			canvasHolder.classList.add("gem_po_mapping");
 		}
 
