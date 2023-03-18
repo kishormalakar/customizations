@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.0.2
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -65,6 +65,19 @@ window.addEventListener(
 
 		if (document.title == "IMMIS Proposal GeM PO Mapping") {
 			canvasHolder.classList.add("gem_po_mapping");
+		}
+
+		if (document.title == "Run Form - IMMIS/PUR/DMDREGNS") {
+			document.addEventListener("click", (e) => {
+				if (e.target.title == "Return this Demand") {
+					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+					var s_2 = document.querySelectorAll("#s_2")[0];
+					var s__cnvs3 = document.querySelectorAll("#s__cnvs3")[0];
+
+					s_2.style.top = scrollTop + "px";
+					s__cnvs3.style.top = scrollTop + "px";
+				}
+			});
 		}
 	},
 	false

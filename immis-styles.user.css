@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.0
+@version      1.0.2
 @license      unlicense
 @preprocessor default
 @var color link-color "Link Color" red
@@ -72,7 +72,7 @@
 
 	#s_2 > table td > div {
 		width: calc(100% - 15px) !important;
-		/*     height: 100% !important; */
+		height: 100% !important;
 	}
 
 	#s_2 > table td > div > table {
