@@ -9,6 +9,50 @@
 
 @-moz-document url-prefix("https://ireps.gov.in/iMMS/")
 {
+	* {
+		box-sizing: border-box !important;
+	}
+
+	body,
+	html {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	body > .wrapper .container-fluid {
+		padding: 0 !important;
+		display: flex;
+	}
+
+	body > .wrapper .container-fluid > .row {
+		margin: 0 !important;
+	}
+
+	body > .wrapper > .container-fluid > .row > #main_content_col {
+		flex-direction: column;
+	}
+
+	body > .wrapper > .container-fluid > .row > #main_content_col > #home1 > div {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
+	body > .wrapper .container-fluid .col-lg-12 {
+		display: flex;
+		flex-direction: column;
+	}
+
+	body > .wrapper .container-fluid .col-lg-12 form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#purchaseOrderDetailsForm .dataTable thead > tr > th,
+	#purchaseOrderDetailsForm .dataTable tbody > tr > td {
+		padding-left: 5px !important;
+		padding-right: 10px !important;
+	}
+
 	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(5),
 	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(5),
 	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(13),

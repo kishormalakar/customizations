@@ -60,7 +60,9 @@
 	#s_6,
 	#s_7,
 	#s_8,
-	#s_9 {
+	#s_9,
+	#s_13,
+	#s_16 {
 		width: 100% !important;
 		margin: 0 !important;
 		height: auto !important;
@@ -133,8 +135,27 @@
 		width: 0 !important;
 	}
 
+	#s_21 {
+		width: 800px !important;
+		left: calc(50% - 400px) !important;
+	}
+
+	#s__cnvs22 {
+		width: 800px !important;
+		left: calc(50% - 400px) !important;
+	}
+
+	#BusyDiv {
+		width: 400px !important;
+		left: calc(50% - 200px) !important;
+	}
+
 	#_LovTable {
 		height: auto !important;
+	}
+
+	.depot_transfer #s_4 {
+		width: 502px !important;
 	}
 
 	.depot_transfer #s_6 {
@@ -169,5 +190,11 @@
 		width: 100% !important;
 		height: 100% !important;
 		margin: 0 !important;
+	}
+
+	.po_modification #s_8 {
+		width: 800px !important;
+		left: calc(50% - 400px) !important;
+		padding: 20px !important;
 	}
 }

@@ -50,7 +50,6 @@ javascript: (() => {
 
 		var addButton = svc.parentElement.nextElementSibling.querySelectorAll("a")[1];
 		addButton.click();
-		addButton.click();
 		var remarks = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
 		var remarksLabel = remarks.parentElement.previousElementSibling.querySelectorAll("select")[0];
 		var remarksType = remarks.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
@@ -374,6 +373,8 @@ javascript: (() => {
 				"jayanti.kashyap83@gov.in",
 			],
 		];
+
+		addButton.click();
 		var contactDetails =
 			tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] || tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
 		var contactDetailsLabel = contactDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
@@ -399,5 +400,26 @@ javascript: (() => {
 		contactDetailsLabel.value = 1;
 		contactDetailsType.value = "Consignee Details";
 		contactDetailsType.style.display = "block";
+
+		addButton.click();
+		var makeDetails =
+			tncDiv.querySelectorAll("textarea[id^=othrTNC]")[3] ||
+			tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] ||
+			tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
+		var makeDetailsLabel = makeDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
+		var makeDetailsType = makeDetails.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
+		var makeDetailsString = "";
+
+		plConsigneeArray.forEach((plConsignee) => {
+			if (makeDetailsString != "") {
+				makeDetailsString += ";\n";
+			}
+			makeDetailsString += "For " + plConsignee[0] + ": ";
+		});
+
+		makeDetails.value = makeDetailsString;
+		makeDetailsLabel.value = 1;
+		makeDetailsType.value = "Make/Brand";
+		makeDetailsType.style.display = "block";
 	});
 })();

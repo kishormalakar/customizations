@@ -79,6 +79,10 @@ window.addEventListener(
 				}
 			});
 		}
+
+		if (document.title == "PO Modification" || document.title == "Run Form - IMMIS/PUR/PO_MA") {
+			canvasHolder.classList.add("po_modification");
+		}
 	},
 	false
 );
