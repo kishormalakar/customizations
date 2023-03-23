@@ -80,8 +80,16 @@ window.addEventListener(
 			});
 		}
 
-		if (document.title == "PO Modification" || document.title == "Run Form - IMMIS/PUR/PO_MA") {
+		if (document.title == "PO Modification" || document.title == "Run Form - IMMIS/PUR/POMA") {
 			canvasHolder.classList.add("po_modification");
+		}
+
+		if (document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER") {
+			canvasHolder.classList.add("po_modification");
+		}
+
+		if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
+			canvasHolder.classList.add("tender_publishing");
 		}
 	},
 	false
