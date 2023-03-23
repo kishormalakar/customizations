@@ -50,6 +50,8 @@ window.addEventListener(
 		}
 
 		if (document.title == "Review / Act on Pending Demands" || document.title == "Run Form - IMMIS/PUR/DEMREVIEW") {
+			canvasHolder.classList.add("review_process_demand");
+
 			document.addEventListener("click", (e) => {
 				var id = e.target.id;
 				if (id.includes("DropBtn")) {
@@ -90,6 +92,51 @@ window.addEventListener(
 
 		if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
 			canvasHolder.classList.add("tender_publishing");
+		}
+
+		if (
+			document.title == "Coverage Status of Non-Stock Demands" ||
+			document.title == "Run Form - IMMIS/PUR/NSDMDSTAT"
+		) {
+			canvasHolder.classList.add("ns_demand_status");
+		}
+
+		if (
+			document.title == "Coverage Status of stock Demands" ||
+			document.title == "Run Form - IMMIS/PUR/STKDMDSTAT"
+		) {
+			canvasHolder.classList.add("ns_demand_status");
+		}
+
+		if (document.title == "Position of Items" || document.title == "Run Form - IMMIS/PUR/ITEMPOS") {
+			canvasHolder.classList.add("item_position");
+			var consigneeArray = [
+				"C&W/SUPDT/OBRADAM",
+				"H.TXR/PATRATU",
+				"Sr.SE/C&W/IC/PEH",
+				"CWS/BOXN/ROH/BRWD",
+				"SRSE/CS/RS/DHN",
+			];
+
+			document.addEventListener("click", (e) => {
+				if (e.target.closest("div") !== null && e.target.closest("div").id == "section_udm") {
+					var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
+					var consigneeTable = divShowHtml1
+						.querySelectorAll("div")[1]
+						.querySelectorAll("tbody")[0]
+						.querySelectorAll("tr");
+
+					for (var i = 2; i < consigneeTable.length; i++) {
+						var consigneeRow = consigneeTable[i];
+						var consignee = consigneeRow.querySelectorAll("td")[0].innerText;
+						var consigneeName = consignee.split(" ")[2];
+
+						if (!consigneeArray.includes(consigneeName)) {
+							consigneeRow.style.display = "none";
+						}
+					}
+				}
+			});
 		}
 	},
 	false
