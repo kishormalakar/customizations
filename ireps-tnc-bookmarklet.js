@@ -14,11 +14,17 @@ javascript: (() => {
 			.querySelectorAll("tbody")[0]
 			.children[4].querySelectorAll("tr")[1]
 			.querySelectorAll("td")[1].innerText;
-		var makeArray = technoCommercialTabulation
+		var conditionTables = technoCommercialTabulation
 			.querySelectorAll("tbody")[0]
 			.lastElementChild.querySelectorAll("td")[0]
-			.querySelectorAll(":scope > table")[51]
-			.querySelectorAll("tbody")[0].children;
+			.querySelectorAll(":scope > table");
+		var makeArray = [];
+		for (var k = 0; k < conditionTables.length; k++) {
+			if (conditionTables[k].querySelectorAll("td")[0].innerText.trim() == "Make Brand") {
+				makeArray = conditionTables[k + 1].querySelectorAll("tbody")[0].children;
+			}
+		}
+
 		let makes = [];
 
 		for (var i = 1; i < makeArray.length; i++) {
