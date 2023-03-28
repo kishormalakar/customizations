@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.7
+@version      1.0.8
 @var color link-color "Link Color" red
 ==/UserStyle== */
 
@@ -127,6 +127,14 @@
 		min-width: 80px;
 	}
 
+	#s_4 > table {
+		width: 100% !important;
+	}
+
+	#s_4 > table td > div {
+		width: 100% !important;
+	}
+
 	#s_5 {
 		width: 100% !important;
 		margin: 0 !important;
@@ -154,6 +162,11 @@
 	#s_7 table td > div > table tr td:nth-of-type(6) {
 		min-width: 400px;
 		padding-bottom: 10px;
+	}
+
+	#s_9 > div {
+		width: 100% !important;
+		height: auto !important;
 	}
 
 	#s_18 {
@@ -259,8 +272,28 @@
 		position: absolute !important;
 	}
 
-	.po_modification #s_6 table {
+	.po_modification #s_6 > table:nth-of-type(1) {
 		width: unset !important;
+	}
+
+	.po_modification #s_6 > table > tbody > tr {
+		display: flex;
+		justify-content: center;
+		margin: 5px;
+	}
+
+	.po_modification #s_6 > table:nth-of-type(2) {
+		width: unset !important;
+		min-height: 300px;
+	}
+
+	.po_modification #s_6 table th:nth-of-type(7) {
+		width: 300px !important;
+	}
+
+	.po_modification #s_6 div > table td {
+		padding: 5px;
+		height: 40px;
 	}
 
 	.po_modification #s_8,
@@ -316,5 +349,50 @@
 		top: 100px !important;
 		height: auto !important;
 		margin: 0 !important;
+	}
+
+	.demand_generation #s_4 {
+		position: absolute !important;
+	}
+
+	.rnote #s_6 > table:nth-of-type(1) td {
+		display: flex;
+		justify-content: center;
+	}
+
+	.drop_drr #s_2 {
+		width: 800px !important;
+	}
+
+	.drop_drr #s_4 {
+		width: 800px !important;
+		right: 0 !important;
+		left: unset !important;
+		top: 0 !important;
+	}
+
+	.drop_drr #s_4 td > div {
+		width: 100% !important;
+	}
+
+	.drop_drr #s_5 {
+		position: absolute !important;
+		right: 0 !important;
+		left: unset !important;
+		top: 0px !important;
+		width: calc(100% - 800px) !important;
+	}
+
+	.drop_drr #s_6 {
+		position: absolute !important;
+		right: 0 !important;
+		left: unset !important;
+		top: 33px !important;
+		width: calc(100% - 800px) !important;
+	}
+
+	.drop_drr #s_6 td > div {
+		width: 100% !important;
+		margin: auto !important;
 	}
 }
