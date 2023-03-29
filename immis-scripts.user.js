@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.8
+// @version      1.0.9
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -40,6 +40,7 @@ window.addEventListener(
 		}
 
 		var canvasHolder = document.querySelectorAll("#CanvassHolder")[0];
+		var body = document.querySelectorAll("body")[0];
 
 		if (document.title == "Depot Transfer Transactions" || document.title == "Run Form - IMMIS/DEP/DTBT") {
 			canvasHolder.classList.add("depot_transfer");

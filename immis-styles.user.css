@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.8
+@version      1.0.9
 @var color link-color "Link Color" red
 ==/UserStyle== */
 
@@ -272,6 +272,16 @@
 		position: absolute !important;
 	}
 
+	.po_modification #s_4 > table {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.po_modification #s_4 td > div {
+		width: 960px !important;
+		left: calc(50% - 480px) !important;
+	}
+
 	.po_modification #s_6 > table:nth-of-type(1) {
 		width: unset !important;
 	}
@@ -353,6 +363,16 @@
 
 	.demand_generation #s_4 {
 		position: absolute !important;
+	}
+
+	.demand_generation #s_4 > table {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.demand_generation #s_4 td > div {
+		width: 960px !important;
+		left: calc(50% - 480px) !important;
 	}
 
 	.rnote #s_6 > table:nth-of-type(1) td {
