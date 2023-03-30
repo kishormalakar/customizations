@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.7
+@version      1.0.8
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -80,29 +80,13 @@
 		left: 0 !important;
 	}
 
-	#s_2,
-	#s_3,
-	#s_4,
-	#s_5 {
-		position: relative !important;
-	}
-
-	#s_4 table td > div,
-	#s_7 table td > div,
-	#s_8 table td > div,
-	#s_10 table td > div,
-	#s_13 table td > div,
-	#s_16 table td > div {
+	td > div {
 		height: unset !important;
+		width: 100% !important;
 	}
 
 	#s_2 > table {
 		width: 100%;
-	}
-
-	#s_2 > table td > div {
-		width: calc(100% - 15px) !important;
-		height: 100% !important;
 	}
 
 	#s_2 > table td > div > table {
@@ -111,11 +95,6 @@
 
 	#s_3 > table {
 		width: 100%;
-	}
-
-	#s_3 > table td > div {
-		width: calc(100% - 15px) !important;
-		height: 100% !important;
 	}
 
 	#s_3 > table td > div > table {
@@ -127,10 +106,6 @@
 	}
 
 	#s_4 > table {
-		width: 100% !important;
-	}
-
-	#s_4 > table td > div {
 		width: 100% !important;
 	}
 
@@ -256,6 +231,11 @@
 		display: none;
 	}
 
+	.gem_po_mapping #s_2,
+	.gem_po_mapping #s_3 {
+		position: relative !important;
+	}
+
 	.gem_po_mapping #s_9 {
 		top: 40px !important;
 	}
@@ -318,6 +298,11 @@
 		margin: 0 !important;
 	}
 
+	.po_generation #s_2,
+	.po_generation #s_3 {
+		position: relative !important;
+	}
+
 	.po_generation #s_18 {
 		width: 800px !important;
 		top: 33px !important;
@@ -332,12 +317,21 @@
 		height: unset !important;
 	}
 
+	.tender_publishing #s_13 > table {
+		max-width: 1024px;
+	}
+
 	.tender_publishing #s_15 div {
 		height: auto !important;
 	}
 
 	.tender_publishing #s_16 {
 		top: 130px !important;
+	}
+
+	.review_process_demand #s_2,
+	.review_process_demand #s_3 {
+		position: relative !important;
 	}
 
 	.review_process_demand #s_5 {
@@ -347,8 +341,8 @@
 		padding: 20px !important;
 	}
 
-	.ns_demand_status #s_3 {
-		position: absolute !important;
+	.purchase_proposal #s_16 > table {
+		max-width: 1024px;
 	}
 
 	.purchase_proposal #divShowHtml2 {
@@ -358,10 +352,6 @@
 		top: 100px !important;
 		height: auto !important;
 		margin: 0 !important;
-	}
-
-	.demand_generation #s_4 {
-		position: absolute !important;
 	}
 
 	.demand_generation #s_4 > table {
@@ -374,24 +364,20 @@
 		left: calc(50% - 480px) !important;
 	}
 
+	.isl #s_2,
+	.isl #s_4 {
+		position: relative !important;
+	}
+
 	.rnote #s_6 > table:nth-of-type(1) td {
 		display: flex;
 		justify-content: center;
 	}
 
-	.drop_drr #s_2 {
-		width: 800px !important;
-	}
-
+	.drop_drr #s_2,
 	.drop_drr #s_4 {
 		width: 800px !important;
-		right: 0 !important;
-		left: unset !important;
-		top: 0 !important;
-	}
-
-	.drop_drr #s_4 td > div {
-		width: 100% !important;
+		position: relative !important;
 	}
 
 	.drop_drr #s_5 {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.7
+// @version      1.0.8
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -72,13 +72,27 @@ window.addEventListener(
 
 		if (document.title == "Demand Registration (Non-Stock)" || document.title == "Run Form - IMMIS/PUR/DMDREGNS") {
 			document.addEventListener("click", (e) => {
+				var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+
 				if (e.target.title == "Return this Demand") {
-					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
 					var s_2 = document.querySelectorAll("#s_2")[0];
 					var s__cnvs3 = document.querySelectorAll("#s__cnvs3")[0];
 					scrollTop += 150;
 
 					s__cnvs3.style.top = scrollTop + "px";
+				}
+				if (e.target.title == "View Demand Details") {
+					var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
+
+					divShowHtml1.style.top = scrollTop + "px";
+					divShowHtml1.style.maxWidth = "1024px";
+					divShowHtml1.style.marginLeft = "calc(50% - 512px)";
+				}
+				if (e.target.title == "Click to See List of Values") {
+					var lov = document.querySelectorAll("#LovDiv")[0];
+
+					lov.style.top = +scrollTop + +e.clientY + "px";
+					lov.style.left = e.clientX + "px";
 				}
 			});
 		}
@@ -87,7 +101,11 @@ window.addEventListener(
 			canvasHolder.classList.add("po_modification");
 		}
 
-		if (document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER") {
+		if (
+			document.title == "Purchase Order Generation" ||
+			document.title == "Run Form - IMMIS/PUR/ORDER" ||
+			document.title == "Run Form - IMMIS/PUR/ORDERGEN"
+		) {
 			canvasHolder.classList.add("po_generation");
 		}
 
@@ -150,6 +168,10 @@ window.addEventListener(
 
 		if (document.title == "Receipt Note Preparation" || document.title == "Run Form - IMMIS/DEP/RNOTE") {
 			body.classList.add("rnote");
+		}
+
+		if (document.title == "Receipt Inspection Report" || document.title == "Run Form - IMMIS/DEP/RI") {
+			body.classList.add("isl");
 		}
 
 		if (document.title == "DRR Status Update" || document.title == "Run Form - IMMIS/DEP/DRRDEL") {
