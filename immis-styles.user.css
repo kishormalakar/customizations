@@ -1,10 +1,9 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.9
+@version      1.0.7
 @var color link-color "Link Color" red
 ==/UserStyle== */
-
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
 {
 	* {
@@ -303,7 +302,7 @@
 
 	.po_modification #s_6 div > table td {
 		padding: 5px;
-		height: 40px;
+		min-height: 40px;
 	}
 
 	.po_modification #s_8,
@@ -414,5 +413,22 @@
 	.drop_drr #s_6 td > div {
 		width: 100% !important;
 		margin: auto !important;
+	}
+
+	.nit_search #s_3 {
+		position: absolute !important;
+		right: 0 !important;
+		left: calc(50% - 400px) !important;
+		width: 800px !important;
+	}
+
+	.nit_search #s_3 > * {
+		width: 100% !important;
+		margin: 0 !important;
+		padding: 10px !important;
+	}
+
+	.nit_search #s_3 #s_0_33 {
+		display: none !important;
 	}
 }

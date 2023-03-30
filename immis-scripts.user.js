@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.9
+// @version      1.0.7
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -154,6 +154,25 @@ window.addEventListener(
 
 		if (document.title == "DRR Status Update" || document.title == "Run Form - IMMIS/DEP/DRRDEL") {
 			body.classList.add("drop_drr");
+		}
+
+		if (document.title == "Search / View NIT and Tabulations" || document.title == "Run Form - IMMIS/NITSEARCH") {
+			body.classList.add("nit_search");
+
+			document.addEventListener("click", (e) => {
+				if (e.target.title == "Download Documents") {
+					alert("sdss");
+					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+					var s_3 = document.querySelectorAll("#s_3")[0];
+					var existingStyle = s_3.style.cssText;
+					scrollTop += 150;
+
+					s_3.style.cssText =
+						"top: " +
+						scrollTop +
+						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff;";
+				}
+			});
 		}
 
 		if (document.title == "Vendor Performance" || document.title == "Run Form - IMMIS/PUR/VENDPOS") {
