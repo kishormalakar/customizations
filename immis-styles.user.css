@@ -417,4 +417,14 @@
 	.nit_search #s_3 #s_0_33 {
 		display: none !important;
 	}
+
+	.plus_status #s_2,
+	.plus_status #s_3 {
+		position: relative !important;
+	}
+
+	.stocking_proposal #s_3,
+	.stocking_proposal #s_4 {
+		position: relative !important;
+	}
 }

@@ -178,6 +178,14 @@ window.addEventListener(
 			body.classList.add("drop_drr");
 		}
 
+		if (document.title == "Status of Stocking Proposals" || document.title == "Run Form - IMMIS/QFSTATUS") {
+			body.classList.add("plus_status");
+		}
+
+		if (document.title == "STOCKING PROPOSAL" || document.title == "Run Form - IMMIS/DEP/STKPROP") {
+			body.classList.add("stocking_proposal");
+		}
+
 		if (document.title == "Search / View NIT and Tabulations" || document.title == "Run Form - IMMIS/NITSEARCH") {
 			body.classList.add("nit_search");
 
