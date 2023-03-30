@@ -19,7 +19,51 @@ window.addEventListener(
 			titleBar.style.width = "100%";
 		}
 
+		var canvasHolder = document.querySelectorAll("#CanvassHolder")[0];
+		var body = document.querySelectorAll("body")[0];
+
+		let setRelativePositioning = () => {
+			var childElements = canvasHolder.children;
+			var numVisibleElements = 0;
+			var firstVisibleChild;
+			var firstVisibleChildName = "";
+			var secondVisibleChild;
+			var secondVisibleChildName = "";
+
+			for (var i = 0; i < childElements.length; i++) {
+				if (childElements[i].style.display == "block" || childElements[i].style.display == "flex") {
+					if (numVisibleElements == 0) {
+						firstVisibleChild = childElements[i];
+						firstVisibleChildName = childElements[i].id;
+					}
+					if (numVisibleElements == 1) {
+						secondVisibleChild = childElements[i];
+						secondVisibleChildName = childElements[i].id;
+					}
+					numVisibleElements++;
+				}
+			}
+
+			if (numVisibleElements == 2) {
+				if (
+					(firstVisibleChild.id == "s_2" && secondVisibleChild.id == "s_3") ||
+					(firstVisibleChild.id == "s_3" && secondVisibleChild.id == "s_4")
+				) {
+					firstVisibleChild.style.position = "relative";
+					secondVisibleChild.style.position = "relative";
+				}
+			}
+		};
+
+		setRelativePositioning();
+
+		document.addEventListener("click", (e) => {
+			setRelativePositioning();
+		});
+
 		if (document.title == "Search Purchase Orders" || document.title == "Run Form - IMMIS/PUR/POSEARCH") {
+			body.classList.add("po_search");
+
 			var rlyName = document.querySelectorAll('input[name="RLYNM_0"]')[0];
 			//rlyName.value = "IR";
 
@@ -38,9 +82,6 @@ window.addEventListener(
 			var poFrom = poFromDay + "-" + poFromMonth + "-" + poFromYear;
 			document.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = poFrom;
 		}
-
-		var canvasHolder = document.querySelectorAll("#CanvassHolder")[0];
-		var body = document.querySelectorAll("body")[0];
 
 		if (document.title == "Depot Transfer Transactions" || document.title == "Run Form - IMMIS/DEP/DTBT") {
 			canvasHolder.classList.add("depot_transfer");
@@ -184,6 +225,57 @@ window.addEventListener(
 
 		if (document.title == "STOCKING PROPOSAL" || document.title == "Run Form - IMMIS/DEP/STKPROP") {
 			body.classList.add("stocking_proposal");
+		}
+
+		if (document.title == "Registers for Purchase Module" || document.title == "Run Form - IMMIS/PUR/HQREGISTERS") {
+			body.classList.add("purchase_register");
+		}
+
+		if (document.title == "Stock Verification" || document.title == "Run Form - IMMIS/DEP/STKVERIFY") {
+			body.classList.add("stock_verification");
+		}
+
+		if (document.title == "Book Transfer" || document.title == "Run Form - IMMIS/DEP/BOOKXFER") {
+			body.classList.add("book_transfer");
+		}
+
+		if (
+			document.title == "Gen Requisition for Material consumed in testing" ||
+			document.title == "Run Form - IMMIS/DEP/REQN_GEN_DEPOT"
+		) {
+			body.classList.add("gen_req_for_consumed");
+		}
+
+		if (document.title == "Request for Creation of Vendor" || document.title == "Run Form - IMMIS/PUR/VENDREQ") {
+			body.classList.add("new_vendor_request");
+		}
+
+		if (
+			document.title == "Advance Intimation/Action for Estimate Sheets" ||
+			document.title == "Run Form - IMMIS/DEP/AIS"
+		) {
+			body.classList.add("ais");
+
+			document.addEventListener("click", (e) => {
+				if (e.target.value == "AAC") {
+					var s_3 = document.querySelectorAll("#s_3")[0];
+					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+
+					scrollTop += 150;
+
+					s_3.style.cssText =
+						"top: " +
+						scrollTop +
+						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff;";
+				}
+			});
+		}
+
+		if (
+			document.title == "Revision & Closure of Stock Accounts" ||
+			document.title == "Run Form - IMMIS/DEP/STKMASTER"
+		) {
+			body.classList.add("stockmaster_ard");
 		}
 
 		if (document.title == "Search / View NIT and Tabulations" || document.title == "Run Form - IMMIS/NITSEARCH") {
