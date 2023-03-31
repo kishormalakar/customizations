@@ -132,6 +132,11 @@
 		left: calc(50% - 400px) !important;
 	}
 
+	#s__cnvs7 {
+		width: 800px !important;
+		left: calc(50% - 400px) !important;
+	}
+
 	#s__cnvs22 {
 		width: 800px !important;
 		left: calc(50% - 400px) !important;
@@ -288,6 +293,13 @@
 		margin: 0 !important;
 	}
 
+	.po_generation #s_10 table td > div,
+	.po_generation #s_8 table td > div {
+		width: 1024px !important;
+		margin-left: calc(50% - 512px) !important;
+		height: auto !important;
+	}
+
 	.po_generation #s_18 {
 		width: 800px !important;
 		top: 33px !important;
@@ -379,8 +391,12 @@
 
 	.rnote #s_7 table td > div > table tr td:nth-of-type(5),
 	.rnote #s_7 table td > div > table tr td:nth-of-type(6) {
-		min-width: 326px;
+		min-width: 321px;
 		padding-bottom: 10px;
+	}
+
+	.rnote #s_7 table td > div > table tr td:nth-of-type(8) {
+		min-width: 60px;
 	}
 
 	.drop_drr #s_2,

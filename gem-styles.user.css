@@ -1,0 +1,12 @@
+/* ==UserStyle==
+@name         IMMIS
+@namespace    github.com/openstyles/stylus
+@version      1.0.9
+@var color link-color "Link Color" red
+==/UserStyle== */
+@-moz-document domain("gem.gov.in") {
+{
+	.buyer-flags-notification {
+		overflow-wrap: break-word;
+	}
+}
