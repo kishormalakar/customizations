@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.9
+// @version      1.0.10
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -45,10 +45,10 @@ window.addEventListener(
 			}
 
 			if (numVisibleElements == 2) {
-				if (
-					(firstVisibleChild.id == "s_2" && secondVisibleChild.id == "s_3") ||
-					(firstVisibleChild.id == "s_3" && secondVisibleChild.id == "s_4")
-				) {
+				if (numVisibleElements == 2) {
+					/*if((firstVisibleChild.id == "s_2" && secondVisibleChild.id == "s_3") || (firstVisibleChild.id == "s_3" && secondVisibleChild.id == "s_4")){
+                        
+                    }*/
 					firstVisibleChild.style.position = "relative";
 					secondVisibleChild.style.position = "relative";
 				}
@@ -257,9 +257,10 @@ window.addEventListener(
 			body.classList.add("ais");
 
 			document.addEventListener("click", (e) => {
+				var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+
 				if (e.target.value == "AAC") {
 					var s_3 = document.querySelectorAll("#s_3")[0];
-					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
 
 					scrollTop += 150;
 
@@ -267,6 +268,16 @@ window.addEventListener(
 						"top: " +
 						scrollTop +
 						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff;";
+				}
+				if (e.target.value == "Save/Forward/Authorize") {
+					var DivAlertBox = document.querySelectorAll("#DivAlertBox")[0];
+
+					scrollTop += 150;
+
+					DivAlertBox.style.cssText =
+						"top: " +
+						scrollTop +
+						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff; z-index: 99; position: absolute;";
 				}
 			});
 		}

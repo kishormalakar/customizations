@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.9
+@version      1.0.10
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -127,17 +127,7 @@
 		left: calc(50% - 400px) !important;
 	}
 
-	#s__cnvs3 {
-		width: 800px !important;
-		left: calc(50% - 400px) !important;
-	}
-
-	#s__cnvs7 {
-		width: 800px !important;
-		left: calc(50% - 400px) !important;
-	}
-
-	#s__cnvs22 {
+	div[id^="s__cnvs"] {
 		width: 800px !important;
 		left: calc(50% - 400px) !important;
 	}
