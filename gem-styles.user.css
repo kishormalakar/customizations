@@ -8,4 +8,12 @@
 	.buyer-flags-notification {
 		overflow-wrap: break-word;
 	}
+
+	.flox-chat-img {
+		display: none !important;
+	}
+
+	#flox-chat-iframe-wrapper-outer {
+		display: none !important;
+	}
 }
