@@ -490,4 +490,8 @@
 	.new_vendor_request #s_4 {
 		position: relative !important;
 	}
+
+	.stocking_proposal #divShowHtml1 > div > table {
+		width: 100%;
+	}
 }
