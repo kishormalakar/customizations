@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.11
+@version      1.0.12
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -493,5 +493,14 @@
 
 	.stocking_proposal #divShowHtml1 > div > table {
 		width: 100%;
+	}
+
+	.po_cancellation #s_4 {
+		position: absolute !important;
+	}
+
+	.po_cancellation #s_4 > table {
+		width: 1024px !important;
+		left: calc(50% - 512px) !important;
 	}
 }

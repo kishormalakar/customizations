@@ -504,6 +504,24 @@ javascript: (() => {
 			makeDetailsLabel.value = 1;
 			makeDetailsType.value = "Make/Brand";
 			makeDetailsType.style.display = "block";
+
+			addButton.click();
+			var poModificationDetails =
+				tncDiv.querySelectorAll("textarea[id^=othrTNC]")[4] ||
+				tncDiv.querySelectorAll("textarea[id^=othrTNC]")[3] ||
+				tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] ||
+				tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
+			var poModificationLabel =
+				poModificationDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
+			var poModificationType =
+				poModificationDetails.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
+
+			poModificationDetails.value =
+				"Firm should carefully examine the purchase order and immediately inform the purchaser in case of any corrections. Firm should raise PO Modification/Amendment requests in IREPS only. Requests received through other means shall not be entertained.";
+			poModificationDetails.style.height = poModificationDetails.scrollHeight;
+			poModificationLabel.value = 1;
+			poModificationType.value = "Modifcation/Amendment";
+			poModificationType.style.display = "block";
 		});
 	}
 })();

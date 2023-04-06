@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.11
+// @version      1.0.12
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -200,6 +200,12 @@ window.addEventListener(
 					}
 				}
 			});
+
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Escape") {
+					document.querySelectorAll("#divShowHtml1")[0].style.display = "none";
+				}
+			});
 		}
 
 		if (document.title == "Purchase Proposal" || document.title == "Run Form - IMMIS/PUR/PURPROP") {
@@ -292,6 +298,10 @@ window.addEventListener(
 			body.classList.add("stockmaster_ard");
 		}
 
+		if (document.title == "PO Cancellation" || document.title == "Run Form - IMMIS/PUR/POCA") {
+			body.classList.add("po_cancellation");
+		}
+
 		if (document.title == "Search / View NIT and Tabulations" || document.title == "Run Form - IMMIS/NITSEARCH") {
 			body.classList.add("nit_search");
 
@@ -312,7 +322,7 @@ window.addEventListener(
 		}
 
 		if (document.title == "Vendor Performance" || document.title == "Run Form - IMMIS/PUR/VENDPOS") {
-			canvasHolder.classList.add("vendor_performance");
+			body.classList.add("vendor_performance");
 
 			document.addEventListener("click", (e) => {
 				if (e.target.name == "btn_Show_0") {
