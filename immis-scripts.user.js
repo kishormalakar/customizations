@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.12
+// @version      1.0.13
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -266,10 +266,11 @@ window.addEventListener(
 
 			document.addEventListener("click", (e) => {
 				var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+				var s_3 = document.querySelectorAll("#s_3")[0];
+				var DivAlertBox = document.querySelectorAll("#DivAlertBox")[0];
+				var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
 
 				if (e.target.value == "AAC") {
-					var s_3 = document.querySelectorAll("#s_3")[0];
-
 					scrollTop += 150;
 
 					s_3.style.cssText =
@@ -278,11 +279,29 @@ window.addEventListener(
 						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff;";
 				}
 				if (e.target.value == "Save/Forward/Authorize") {
-					var DivAlertBox = document.querySelectorAll("#DivAlertBox")[0];
-
 					scrollTop += 150;
 
 					DivAlertBox.style.cssText =
+						"top: " +
+						scrollTop +
+						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff; z-index: 99; position: absolute;";
+				}
+				if (e.target.value == "Print") {
+					scrollTop += 150;
+
+					divShowHtml1.style.cssText =
+						"top: " +
+						scrollTop +
+						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff; z-index: 99; position: absolute;";
+				}
+
+				if (
+					e.target.parentElement.parentElement != null &&
+					e.target.parentElement.parentElement.id.includes("AIS_Row_")
+				) {
+					scrollTop += 150;
+
+					divShowHtml1.style.cssText =
 						"top: " +
 						scrollTop +
 						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff; z-index: 99; position: absolute;";
