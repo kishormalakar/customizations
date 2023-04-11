@@ -19,11 +19,10 @@ window.addEventListener(
 			titleBar.style.width = "100%";
 		}
 
-		var canvasHolder = document.querySelectorAll("#CanvassHolder")[0];
 		var body = document.querySelectorAll("body")[0];
 
 		let setRelativePositioning = () => {
-			var childElements = canvasHolder.children;
+			var childElements = document.querySelectorAll("#CanvassHolder")[0].children;
 			var numVisibleElements = 0;
 			var firstVisibleChild;
 			var firstVisibleChildName = "";
@@ -87,15 +86,15 @@ window.addEventListener(
 		}
 
 		if (document.title == "Depot Transfer Transactions" || document.title == "Run Form - IMMIS/DEP/DTBT") {
-			canvasHolder.classList.add("depot_transfer");
+			body.classList.add("depot_transfer");
 		}
 
 		if (document.title == "Availability Status of Items" || document.title == "Run Form - IMMIS/DEP/AVAILSTAT") {
-			canvasHolder.classList.add("availability");
+			body.classList.add("availability");
 		}
 
 		if (document.title == "Review / Act on Pending Demands" || document.title == "Run Form - IMMIS/PUR/DEMREVIEW") {
-			canvasHolder.classList.add("review_process_demand");
+			body.classList.add("review_process_demand");
 
 			document.addEventListener("click", (e) => {
 				var id = e.target.id;
@@ -111,7 +110,7 @@ window.addEventListener(
 		}
 
 		if (document.title == "IMMIS Proposal GeM PO Mapping" || document.title == "Run Form - IMMIS/PUR/GEM_PO_MAP") {
-			canvasHolder.classList.add("gem_po_mapping");
+			body.classList.add("gem_po_mapping");
 		}
 
 		if (document.title == "Demand Registration (Non-Stock)" || document.title == "Run Form - IMMIS/PUR/DMDREGNS") {
@@ -142,7 +141,7 @@ window.addEventListener(
 		}
 
 		if (document.title == "PO Modification" || document.title == "Run Form - IMMIS/PUR/POMA") {
-			canvasHolder.classList.add("po_modification");
+			body.classList.add("po_modification");
 		}
 
 		if (
@@ -150,29 +149,29 @@ window.addEventListener(
 			document.title == "Run Form - IMMIS/PUR/ORDER" ||
 			document.title == "Run Form - IMMIS/PUR/ORDERGEN"
 		) {
-			canvasHolder.classList.add("po_generation");
+			body.classList.add("po_generation");
 		}
 
 		if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
-			canvasHolder.classList.add("tender_publishing");
+			body.classList.add("tender_publishing");
 		}
 
 		if (
 			document.title == "Coverage Status of Non-Stock Demands" ||
 			document.title == "Run Form - IMMIS/PUR/NSDMDSTAT"
 		) {
-			canvasHolder.classList.add("ns_demand_status");
+			body.classList.add("ns_demand_status");
 		}
 
 		if (
 			document.title == "Coverage Status of stock Demands" ||
 			document.title == "Run Form - IMMIS/PUR/STKDMDSTAT"
 		) {
-			canvasHolder.classList.add("ns_demand_status");
+			body.classList.add("ns_demand_status");
 		}
 
 		if (document.title == "Position of Items" || document.title == "Run Form - IMMIS/PUR/ITEMPOS") {
-			canvasHolder.classList.add("item_position");
+			body.classList.add("item_position");
 			var consigneeArray = [
 				"C&W/SUPDT/OBRADAM",
 				"H.TXR/PATRATU",

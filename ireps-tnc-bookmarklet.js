@@ -520,7 +520,7 @@ javascript: (() => {
 				"Firm should carefully examine the purchase order and immediately inform the purchaser in case of any corrections. Firm should raise PO Modification/Amendment requests in IREPS only. Requests received through other means shall not be entertained.";
 			poModificationDetails.style.height = poModificationDetails.scrollHeight;
 			poModificationLabel.value = 1;
-			poModificationType.value = "Modifcation/Amendment";
+			poModificationType.value = "Amendment Request";
 			poModificationType.style.display = "block";
 		});
 	}

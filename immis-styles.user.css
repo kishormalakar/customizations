@@ -336,11 +336,19 @@
 		margin: 0 !important;
 	}
 
+	.demand_generation #s_4 {
+		position: absolute !important;
+	}
+
 	.demand_generation #s_4 > table {
 		display: flex;
 		flex-direction: column;
 		width: 1024px !important;
 		left: calc(50% - 512px) !important;
+	}
+
+	.demand_generation #s_4 > table > tbody > tr > td > div {
+		width: 1024px !important;
 	}
 
 	.isl #s_2,
@@ -493,6 +501,10 @@
 
 	.stocking_proposal #divShowHtml1 > div > table {
 		width: 100%;
+	}
+
+	.stocking_proposal #s_6 {
+		position: relative !important;
 	}
 
 	.po_cancellation #s_4 {
