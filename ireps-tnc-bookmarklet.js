@@ -30,7 +30,8 @@ javascript: (() => {
 		for (var i = 1; i < makeArray.length; i++) {
 			var item = makeArray[i];
 			var pl = item.querySelectorAll("td")[0].innerText.trim().replace(/\n/g, "").replace(/\t/g, "");
-			var offeredMakes = item.querySelectorAll("tbody")[0].children;
+			var offeredMakes =
+				item.querySelectorAll("td")[1].children.length != 0 ? item.querySelectorAll("tbody")[0].children : [];
 
 			var itemMake = {};
 			itemMake.pl = pl;

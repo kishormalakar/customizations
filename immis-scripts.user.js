@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.13
+// @version      1.0.14
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -202,7 +202,21 @@ window.addEventListener(
 
 			document.addEventListener("keydown", (e) => {
 				if (e.key === "Escape") {
-					document.querySelectorAll("#divShowHtml1")[0].style.display = "none";
+					var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
+
+					if (
+						divShowHtml1
+							.querySelectorAll("table")[0]
+							.querySelectorAll("tr")[0]
+							.innerText.startsWith("Consignee stock for PL NO:")
+					) {
+						divShowHtml1
+							.querySelectorAll("table")
+							[divShowHtml1.querySelectorAll("table").length - 1].querySelectorAll("input")[0]
+							.click();
+					} else {
+						document.querySelectorAll("#divShowHtml1")[0].style.display = "none";
+					}
 				}
 			});
 		}
