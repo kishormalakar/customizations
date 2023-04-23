@@ -546,4 +546,8 @@
 		width: 1024px !important;
 		left: calc(50% - 512px) !important;
 	}
+
+	.vendor_performance p {
+		text-indent: 0 !important;
+	}
 }

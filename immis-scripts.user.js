@@ -21,6 +21,44 @@ window.addEventListener(
 
 		var body = document.querySelectorAll("body")[0];
 
+		var zoneJson = {
+			CR: "01",
+			ER: "02",
+			NR: "03",
+			NER: "04",
+			NFR: "05",
+			SR: "06",
+			SCR: "07",
+			SER: "08",
+			WR: "09",
+			ECR: "10",
+			ECOR: "11",
+			NCR: "12",
+			NWR: "13",
+			SECR: "14",
+			SWR: "15",
+			WCR: "16",
+			METRO: "17",
+			CLW: "21",
+			BLW: "22",
+			ICF: "23",
+			RCF: "24",
+			RWF: "25",
+			PLW: "26",
+			MCFRBL: "27",
+			NFRCON: "28",
+			RWP: "29",
+			RB: "30",
+			RDSO: "31",
+			KRCL: "41",
+			CORE: "42",
+			COFMOW: "43",
+			RELTEL: "44",
+			WPO: "45",
+			NAIR: "55",
+			CRIS: "98",
+		};
+
 		let setRelativePositioning = () => {
 			var childElements = document.querySelectorAll("#CanvassHolder")[0].children;
 			var numVisibleElements = 0;
@@ -57,11 +95,13 @@ window.addEventListener(
 			}
 		};
 
-		setRelativePositioning();
-
-		document.addEventListener("click", (e) => {
+		if (document.title != "System Start Page") {
 			setRelativePositioning();
-		});
+
+			document.addEventListener("click", (e) => {
+				setRelativePositioning();
+			});
+		}
 
 		if (document.title == "Search Purchase Orders" || document.title == "Run Form - IMMIS/PUR/POSEARCH") {
 			body.classList.add("po_search");
@@ -410,6 +450,35 @@ window.addEventListener(
 							poQty = row.children[3].innerText.split(" ")[0];
 							cancelledQty = row.children[4].innerText == "-" ? 0 : row.children[4].innerText;
 							suppliedQty = row.children[5].innerText == "-" ? 0 : row.children[5].innerText;
+
+							var poZone = row.children[0].innerHTML.split("<hr>")[0];
+							var poNo = row.children[0].querySelectorAll("b")[0].innerText;
+							var poDate = row.children[0].innerText.split("dt. ")[1];
+							var poYear = "20" + poDate.split("/")[2];
+
+							var p1 = document.createElement("p");
+							p1.innerText = poZone;
+							row.children[0].innerHTML = "";
+							row.children[0].appendChild(p1);
+
+							var link = document.createElement("a");
+							var linkText = document.createTextNode(poNo);
+							link.appendChild(linkText);
+							link.title = poNo;
+							link.href =
+								"https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
+								poYear +
+								"/" +
+								zoneJson[poZone] +
+								"/" +
+								poNo +
+								".pdf";
+							link.target = "_blank";
+							row.children[0].appendChild(link);
+
+							var p2 = document.createElement("p");
+							p2.innerText = "dt. " + poDate;
+							row.children[0].appendChild(p2);
 						}
 
 						if (row.children.length == 8) {
