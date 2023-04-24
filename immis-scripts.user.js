@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.14
+// @version      1.0.15
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -172,10 +172,12 @@ window.addEventListener(
 					divShowHtml1.style.marginLeft = "calc(50% - 512px)";
 				}
 				if (e.target.title == "Click to See List of Values") {
-					var lov = document.querySelectorAll("#LovDiv")[0];
+					var LovDiv = document.querySelectorAll("#LovDiv")[0];
 
-					lov.style.top = +scrollTop + +e.clientY + "px";
-					lov.style.left = e.clientX + "px";
+					LovDiv.style.top = e.target.getBoundingClientRect().top + 250 + "px";
+					LovDiv.style.left = e.clientX + "px";
+
+					LovDiv.scrollIntoView({block: "end", inline: "nearest"});
 				}
 			});
 		}
@@ -360,6 +362,27 @@ window.addEventListener(
 						scrollTop +
 						"px !important; border: 2px solid black; padding: 5px; background-color: #66ffff; z-index: 99; position: absolute;";
 				}
+
+				if (e.target.value == "Select") {
+					scrollTop += 150;
+
+					s__cnvs4.style.cssText =
+						"top: " +
+						scrollTop +
+						"px !important; border: 5px solid black; padding: 5px; background-color: #aaaaaa; position: absolute;";
+				}
+
+				if (e.target.title == "Click to See List of Values") {
+					scrollTop += 150;
+
+					LovDiv.style.cssText =
+						"top: " +
+						e.target.getBoundingClientRect().top +
+						150 +
+						"px !important; border: 2px solid black; padding: 0; background-color: #aaaaaa; z-index: 99; position: absolute; left: calc(50% - 380px)";
+
+					LovDiv.scrollIntoView();
+				}
 			});
 		}
 
@@ -379,7 +402,6 @@ window.addEventListener(
 
 			document.addEventListener("click", (e) => {
 				if (e.target.title == "Download Documents") {
-					alert("sdss");
 					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
 					var s_3 = document.querySelectorAll("#s_3")[0];
 					var existingStyle = s_3.style.cssText;
