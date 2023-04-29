@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.15
+@version      1.0.16
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -549,5 +549,11 @@
 
 	.vendor_performance p {
 		text-indent: 0 !important;
+	}
+
+	.drr_registration #s_2,
+	.drr_registration #s_3,
+	.drr_registration #s_4 {
+		position: relative !important;
 	}
 }

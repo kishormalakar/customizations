@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.15
+// @version      1.0.16
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -527,6 +527,10 @@ window.addEventListener(
 						numFCPO;
 				}
 			});
+		}
+
+		if (document.title == "RR/Challan/DRR Registration" || document.title == "Run Form - IMMIS/DEP/DRR") {
+			body.classList.add("drr_registration");
 		}
 	},
 	false
