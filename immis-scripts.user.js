@@ -214,6 +214,8 @@ window.addEventListener(
 
 		if (document.title == "Position of Items" || document.title == "Run Form - IMMIS/PUR/ITEMPOS") {
 			body.classList.add("item_position");
+			var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
+
 			var consigneeArray = [
 				"C&W/SUPDT/OBRADAM",
 				"H.TXR/PATRATU",
@@ -224,7 +226,6 @@ window.addEventListener(
 
 			document.addEventListener("click", (e) => {
 				if (e.target.closest("div") !== null && e.target.closest("div").id == "section_udm") {
-					var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
 					var consigneeTable = divShowHtml1
 						.querySelectorAll("div")[1]
 						.querySelectorAll("tbody")[0]
@@ -242,10 +243,74 @@ window.addEventListener(
 				}
 			});
 
+			document.addEventListener("click", (e) => {
+				if (
+					e.target.name == "BTN_HST_0" &&
+					divShowHtml1
+						.querySelectorAll("table")[0]
+						.querySelectorAll("tr")[0]
+						.innerText.startsWith("Item Card for PL NO:")
+				) {
+					var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
+					var uncoveredDuesTable = section_udm.nextElementSibling;
+					var uncoveredDues = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
+
+					for (var i = 2; i < uncoveredDues.length; i++) {
+						var dueDate = uncoveredDues[i].children[8].innerText;
+
+						if (dueDate != "") {
+							var tenderDueDate = new Date(
+								"20" + dueDate.split("/")[2],
+								dueDate.split("/")[1] - 1,
+								dueDate.split("/")[0]
+							);
+							var today = new Date();
+
+							var dateDiff = Math.floor((today - tenderDueDate) / 86400000);
+
+							uncoveredDues[i].children[8].innerText = dueDate + " (" + dateDiff + " days)";
+						}
+					}
+				}
+			});
+
+			document.addEventListener("click", (e) => {
+				if (
+					e.target.name == "OTHER_RLY_0" &&
+					divShowHtml1
+						.querySelectorAll("table")[0]
+						.querySelectorAll("tr")[0]
+						.innerText.startsWith("Item Card for PL NO:")
+				) {
+					var otherRailwayTable = divShowHtml1.children[1].lastElementChild;
+					var otherRailwayTableRows = otherRailwayTable.querySelectorAll("tr");
+
+					for (var i = 3; i < otherRailwayTableRows.length; i++) {
+						var otherRailwayTableRow = otherRailwayTableRows[i];
+						if (
+							otherRailwayTableRow.getAttribute("bgcolor") == "#ffffff" &&
+							otherRailwayTableRow.nextElementSibling !== null
+						) {
+							var tableHeader1 = otherRailwayTable.querySelectorAll("tr")[1].cloneNode(true);
+							var tableHeader2 = otherRailwayTable.querySelectorAll("tr")[2].cloneNode(true);
+
+							otherRailwayTableRow.nextElementSibling.insertAdjacentElement("afterend", tableHeader2);
+							otherRailwayTableRow.nextElementSibling.insertAdjacentElement("afterend", tableHeader1);
+						}
+					}
+
+					var tableChildren = divShowHtml1.children[1].children;
+
+					for (var j = 3; j < tableChildren.length; j++) {
+						if (tableChildren[j].nextElementSibling != null) {
+							tableChildren[j].style.display = "none";
+						}
+					}
+				}
+			});
+
 			document.addEventListener("keydown", (e) => {
 				if (e.key === "Escape") {
-					var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
-
 					if (
 						divShowHtml1
 							.querySelectorAll("table")[0]
