@@ -224,6 +224,8 @@ window.addEventListener(
 				"SRSE/CS/RS/DHN",
 			];
 
+			var i, j;
+
 			document.addEventListener("click", (e) => {
 				if (e.target.closest("div") !== null && e.target.closest("div").id == "section_udm") {
 					var consigneeTable = divShowHtml1
@@ -241,9 +243,7 @@ window.addEventListener(
 						}
 					}
 				}
-			});
 
-			document.addEventListener("click", (e) => {
 				if (
 					e.target.name == "BTN_HST_0" &&
 					divShowHtml1
@@ -255,7 +255,7 @@ window.addEventListener(
 					var uncoveredDuesTable = section_udm.nextElementSibling;
 					var uncoveredDues = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
-					for (var i = 2; i < uncoveredDues.length; i++) {
+					for (i = 2; i < uncoveredDues.length; i++) {
 						var dueDate = uncoveredDues[i].children[8].innerText;
 
 						if (dueDate != "") {
@@ -272,9 +272,7 @@ window.addEventListener(
 						}
 					}
 				}
-			});
 
-			document.addEventListener("click", (e) => {
 				if (
 					e.target.name == "OTHER_RLY_0" &&
 					divShowHtml1
@@ -285,7 +283,7 @@ window.addEventListener(
 					var otherRailwayTable = divShowHtml1.children[1].lastElementChild;
 					var otherRailwayTableRows = otherRailwayTable.querySelectorAll("tr");
 
-					for (var i = 3; i < otherRailwayTableRows.length; i++) {
+					for (i = 3; i < otherRailwayTableRows.length; i++) {
 						var otherRailwayTableRow = otherRailwayTableRows[i];
 						if (
 							otherRailwayTableRow.getAttribute("bgcolor") == "#ffffff" &&
@@ -297,14 +295,39 @@ window.addEventListener(
 							otherRailwayTableRow.nextElementSibling.insertAdjacentElement("afterend", tableHeader2);
 							otherRailwayTableRow.nextElementSibling.insertAdjacentElement("afterend", tableHeader1);
 						}
+
+						if (
+							otherRailwayTableRow.getAttribute("bgcolor") == "#E8F1D4" &&
+							otherRailwayTableRow.children.length == 13
+						) {
+							var aac = otherRailwayTableRow.children[8].innerText;
+							var stock = otherRailwayTableRow.children[9].innerText;
+							var stock_mm = Math.round((stock / (aac / 12)) * 10) / 10;
+							otherRailwayTableRow.children[9].innerText = stock + " (" + stock_mm + ")";
+						}
 					}
 
 					var tableChildren = divShowHtml1.children[1].children;
 
-					for (var j = 3; j < tableChildren.length; j++) {
+					for (j = 3; j < tableChildren.length; j++) {
 						if (tableChildren[j].nextElementSibling != null) {
 							tableChildren[j].style.display = "none";
 						}
+					}
+				}
+
+				if (
+					e.target.name == "BTN_Report_0" &&
+					divShowHtml1
+						.querySelectorAll("table")[0]
+						.querySelectorAll("tr")[0]
+						.innerText.startsWith("Item Position")
+				) {
+					var tables = divShowHtml1.querySelectorAll("table");
+
+					for (i = 0; i < tables.length; i++) {
+						tables[i].setAttribute("border", 1);
+						tables[i].style.borderCollapse = "collapse";
 					}
 				}
 			});
