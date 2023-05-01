@@ -407,6 +407,8 @@ window.addEventListener(
 			document.title == "Run Form - IMMIS/DEP/AIS"
 		) {
 			body.classList.add("ais");
+			var LovDiv = document.querySelectorAll("#LovDiv")[0];
+			var s__cnvs4 = document.querySelectorAll("#s__cnvs3")[0];
 
 			document.addEventListener("click", (e) => {
 				var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
