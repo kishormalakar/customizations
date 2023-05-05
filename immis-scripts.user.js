@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.16
+// @version      1.0.17
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -107,6 +107,8 @@ window.addEventListener(
 			body.classList.add("po_search");
 
 			var rlyName = document.querySelectorAll('input[name="RLYNM_0"]')[0];
+			var rlyButton = document.querySelectorAll('input[name="RLY_BTN_0"]')[0];
+			var LovDiv = document.querySelectorAll("#LovDiv")[0];
 			//rlyName.value = "IR";
 
 			var stockNS = document.querySelectorAll('select[name="STKNS_0"]')[0];
@@ -123,6 +125,14 @@ window.addEventListener(
 
 			var poFrom = poFromDay + "-" + poFromMonth + "-" + poFromYear;
 			document.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = poFrom;
+
+			document.addEventListener("click", (e) => {
+				if (e.target.id == "s_0_7") {
+					var table = LovDiv.querySelectorAll("#_LovTable")[0].querySelectorAll("tbody")[0];
+					var lastRow = table.lastChild.cloneNode(true);
+					table.prepend(lastRow);
+				}
+			});
 		}
 
 		if (document.title == "Depot Transfer Transactions" || document.title == "Run Form - IMMIS/DEP/DTBT") {
@@ -507,6 +517,7 @@ window.addEventListener(
 
 		if (document.title == "Vendor Performance" || document.title == "Run Form - IMMIS/PUR/VENDPOS") {
 			body.classList.add("vendor_performance");
+			var vendorNameInput = document.querySelectorAll("input[name='VNAME_0']")[0];
 
 			document.addEventListener("click", (e) => {
 				if (e.target.name == "btn_Show_0") {
@@ -615,6 +626,12 @@ window.addEventListener(
 						.closest("tr")
 						.nextElementSibling.nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText =
 						numFCPO;
+				}
+			});
+
+			vendorNameInput.addEventListener("keydown", (e) => {
+				if (e.key === "Tab") {
+					e.target.nextElementSibling.click();
 				}
 			});
 		}
