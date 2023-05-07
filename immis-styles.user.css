@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.17
+@version      1.0.18
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -388,6 +388,7 @@
 		margin: 0 !important;
 		padding: 0 !important;
 	}
+
 	.rnote #s_6 > table td > div > table {
 		width: 100% !important;
 	}
@@ -566,5 +567,14 @@
 	.drr_registration #s_3,
 	.drr_registration #s_4 {
 		position: relative !important;
+	}
+
+	.inventory_assistant #s_4 {
+		position: relative !important;
+	}
+
+	.inventory_assistant #s_3 > div,
+	.inventory_assistant #s_4 > div {
+		width: 100% !important;
 	}
 }

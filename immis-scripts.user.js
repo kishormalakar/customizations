@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.17
+// @version      1.0.18
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -638,6 +638,46 @@ window.addEventListener(
 
 		if (document.title == "RR/Challan/DRR Registration" || document.title == "Run Form - IMMIS/DEP/DRR") {
 			body.classList.add("drr_registration");
+		}
+
+		if (document.title == "Inventory Assistant" || document.title == "Run Form - IMMIS/DEP/STKASSIST") {
+			body.classList.add("inventory_assistant");
+		}
+
+		if (document.title == "GeM Coverage PO Report" || document.title == "Run Form - IMMIS/PUR/GEMORDERS") {
+			body.classList.add("gem_orders");
+
+			document.addEventListener("click", (e) => {
+				if (e.target.name == "BTN_SHOW_0") {
+					var s_3 = document.querySelectorAll("#s_3")[0];
+					var table = s_3.querySelectorAll("div")[0].querySelectorAll("tbody")[0];
+
+					var tr1 = document.createElement("tr");
+					var td1 = document.createElement("td");
+					var td2 = document.createElement("td");
+					var td3 = document.createElement("td");
+					var td4 = document.createElement("td");
+					var td5 = document.createElement("td");
+					var text1 = document.createTextNode("Total Value");
+					td4.appendChild(text1);
+					tr1.appendChild(td1);
+					tr1.appendChild(td2);
+					tr1.appendChild(td3);
+					tr1.appendChild(td4);
+					tr1.appendChild(td5);
+					table.querySelectorAll("tr")[0].insertAdjacentElement("afterend", tr1);
+
+					var total = 0;
+
+					for (var i = 2; i < table.children.length; i++) {
+						var orderValue = table.children[i].querySelectorAll("td")[4].innerText;
+						total += +orderValue;
+					}
+
+					table.querySelectorAll("tr")[1].querySelectorAll("td")[4].innerText = total.toFixed(2);
+					table.querySelectorAll("tr")[1].querySelectorAll("td")[4].style.textAlign = "right";
+				}
+			});
 		}
 	},
 	false
