@@ -294,12 +294,12 @@
 		top: 45px !important;
 	}
 
-	.po_generation #s_8 {
+	/* .po_generation #s_8 {
 		top: 45px !important;
 		right: 0 !important;
 		left: auto !important;
 		max-width: 600px !important;
-	}
+	} */
 
 	.po_generation #s_18 {
 		width: 800px !important;
@@ -489,7 +489,8 @@
 	.book_transfer #s_2,
 	.book_transfer #s_3,
 	.book_transfer #s_4,
-	.book_transfer #s_5 {
+	.book_transfer #s_5,
+	.book_transfer #s_7 {
 		position: relative !important;
 		top: unset !important;
 	}
