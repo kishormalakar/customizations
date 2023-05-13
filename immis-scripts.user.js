@@ -292,6 +292,11 @@ window.addEventListener(
 				) {
 					var otherRailwayTable = divShowHtml1.children[1].lastElementChild;
 					var otherRailwayTableRows = otherRailwayTable.querySelectorAll("tr");
+					var pl = divShowHtml1
+						.querySelectorAll("table")[0]
+						.querySelectorAll("tr")[0]
+						.innerText.trim()
+						.slice(-8);
 
 					for (i = 3; i < otherRailwayTableRows.length; i++) {
 						var otherRailwayTableRow = otherRailwayTableRows[i];
@@ -314,6 +319,22 @@ window.addEventListener(
 							var stock = otherRailwayTableRow.children[9].innerText;
 							var stock_mm = Math.round((stock / (aac / 12)) * 10) / 10;
 							otherRailwayTableRow.children[9].innerText = stock + " (" + stock_mm + ")";
+						}
+
+						if (otherRailwayTableRow.children.length == 2) {
+							var rly = otherRailwayTableRow.children[0].innerText;
+							var rlyCode = rly.substring(0, rly.indexOf("-"));
+
+							var link = document.createElement("a");
+							var linkText = document.createTextNode(rly);
+							link.appendChild(linkText);
+							link.title = "Item position for " + rly;
+							// link.href =
+							// "https://ireps.gov.in/iMMS/depot/itempos/gethistsheet?rly=" + rlyCode + "&plno=" + pl;
+							link.href = "javascript:void(FORM.PLPosition('" + rlyCode + "','" + pl + "','Y'));";
+							// link.target = "_blank";
+							// link.onclick = "FORM.PLPosition('" + rlyCode + "','90701057','Y')";
+							otherRailwayTableRow.children[0].appendChild(link);
 						}
 					}
 
