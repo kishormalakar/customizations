@@ -443,6 +443,16 @@ javascript: (() => {
 					9771426504,
 					"jayanti.kashyap83@gov.in",
 				],
+				[
+					"ROH/BRWD",
+					"CDMS/Receipt/BRWD",
+					7858800977,
+					"cdmsbrwd@gmail.com",
+					"Store Depot, ROH Barwadih, Near Barwadih Railway Station, Latehar, Jharkhand, 822111",
+					"ADFM/1/DHN",
+					9771426103,
+					"naustopno.2502@gov.in",
+				],
 			];
 
 			addButton.click();

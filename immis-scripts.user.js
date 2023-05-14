@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.18
+// @version      1.0.19
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -329,11 +329,8 @@ window.addEventListener(
 							var linkText = document.createTextNode(rly);
 							link.appendChild(linkText);
 							link.title = "Item position for " + rly;
-							// link.href =
-							// "https://ireps.gov.in/iMMS/depot/itempos/gethistsheet?rly=" + rlyCode + "&plno=" + pl;
 							link.href = "javascript:void(FORM.PLPosition('" + rlyCode + "','" + pl + "','Y'));";
-							// link.target = "_blank";
-							// link.onclick = "FORM.PLPosition('" + rlyCode + "','90701057','Y')";
+							otherRailwayTableRow.children[0].innerText = "";
 							otherRailwayTableRow.children[0].appendChild(link);
 						}
 					}
