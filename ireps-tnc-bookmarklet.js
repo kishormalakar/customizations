@@ -481,7 +481,7 @@ javascript: (() => {
 			contactDetails.value = contactDetailsString;
 			contactDetails.style.height = contactDetails.scrollHeight;
 			contactDetailsLabel.value = 1;
-			contactDetailsType.value = "Consignee Details";
+			contactDetailsType.value = "Consignee Details:";
 			contactDetailsType.style.display = "block";
 
 			addButton.click();
@@ -513,7 +513,7 @@ javascript: (() => {
 			makeDetails.value = makeDetailsString;
 			makeDetails.style.height = makeDetails.scrollHeight;
 			makeDetailsLabel.value = 1;
-			makeDetailsType.value = "Make/Brand";
+			makeDetailsType.value = "Make/Brand:";
 			makeDetailsType.style.display = "block";
 
 			addButton.click();
@@ -531,7 +531,7 @@ javascript: (() => {
 				"Firm should carefully examine the purchase order and immediately inform the purchaser in case of any corrections. Firm should raise PO Modification/Amendment requests in IREPS only. Requests received through other means shall not be entertained.";
 			poModificationDetails.style.height = poModificationDetails.scrollHeight;
 			poModificationLabel.value = 1;
-			poModificationType.value = "Amendment Request";
+			poModificationType.value = "Amendment Request:";
 			poModificationType.style.display = "block";
 		});
 	}
