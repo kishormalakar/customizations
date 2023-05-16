@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.19
+// @version      1.0.20
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -131,6 +131,62 @@ window.addEventListener(
 					var table = LovDiv.querySelectorAll("#_LovTable")[0].querySelectorAll("tbody")[0];
 					var lastRow = table.lastChild.cloneNode(true);
 					table.prepend(lastRow);
+				}
+				if (
+					e.target.id == "s_0_40" ||
+					e.target.id == "s_0_49" ||
+					e.target.id == "s_0_50" ||
+					e.target.id == "s_0_51" ||
+					e.target.id == "s_0_52"
+				) {
+					var poTable = document.querySelectorAll("#s_3")[0].querySelectorAll("table")[2];
+
+					var td1 = document.createElement("td");
+					var text1 = document.createTextNode("Bill Details");
+					td1.appendChild(text1);
+					poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].appendChild(td1);
+					poTable
+						.querySelectorAll("thead")[0]
+						.querySelectorAll("tr")[0]
+						.children[2].setAttribute("width", "5%");
+					poTable
+						.querySelectorAll("thead")[0]
+						.querySelectorAll("tr")[0]
+						.children[5].setAttribute("width", "5%");
+					poTable
+						.querySelectorAll("thead")[0]
+						.querySelectorAll("tr")[0]
+						.children[6].setAttribute("width", "10%");
+					poTable
+						.querySelectorAll("thead")[0]
+						.querySelectorAll("tr")[0]
+						.children[12].setAttribute("width", "7%");
+
+					var poRows = poTable.querySelectorAll("tbody")[1].children;
+					for (var i = 0; i < poRows.length - 1; i++) {
+						var poRow = poRows[i];
+
+						var poNo = poRow.children[1].innerText.split(" ")[0];
+						var poSerial = poRow.children[5].innerText;
+						var purchaseType = poNo.substring(8, 1) == 2 ? "GM" : "TN";
+
+						var td2 = document.createElement("td");
+						var link = document.createElement("a");
+						var linkText = document.createTextNode("Check");
+						link.appendChild(linkText);
+						link.title = "Check Bill Status";
+						link.href =
+							"https://ireps.gov.in/iMMS/caseHistoryBillPOPopUp?poNumber=" +
+							poNo +
+							"&poSr=" +
+							poSerial +
+							"&rly=10&purType=" +
+							purchaseType;
+						link.target = "_blank";
+						td2.appendChild(link);
+						td2.setAttribute("align", "right");
+						poRow.appendChild(td2);
+					}
 				}
 			});
 		}
