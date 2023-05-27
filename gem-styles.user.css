@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         GeM
 @namespace    github.com/openstyles/stylus
-@version      1.0.0
+@version      1.0.1
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document domain("gem.gov.in") {
@@ -15,5 +15,11 @@
 
 	#flox-chat-iframe-wrapper-outer {
 		display: none !important;
+	}
+
+	.p-checkouts-address_new #simple_purchase_delivery_instructions {
+		height: 200px !important;
+		max-width: 700px !important;
+		line-height: 30px !important;
 	}
 }
