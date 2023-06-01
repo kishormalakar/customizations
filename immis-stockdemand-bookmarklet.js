@@ -63,9 +63,10 @@ javascript: (() => {
 				parseFloat(cov_dues) -
 				parseFloat(uncov_dues)
 		);
+		var net_value_amount = net_requirement_qty * parseFloat(bar);
 
 		net_requirement.innerText = net_requirement_qty;
-		net_value.innerText = net_requirement_qty * parseFloat(bar);
+		net_value.innerText = net_value_amount.toFixed(2);
 
 		var uncoveredDuesTable = divShowHtml1.children[1]
 			.querySelectorAll("table")[6]
