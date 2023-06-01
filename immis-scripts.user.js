@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.20
+// @version      1.0.21
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -752,6 +752,10 @@ window.addEventListener(
 					table.querySelectorAll("tr")[1].querySelectorAll("td")[4].style.textAlign = "right";
 				}
 			});
+		}
+
+		if (document.title == "Generate Gate Pass" || document.title == "Run Form - IMMIS/DEP/GATEPASS") {
+			body.classList.add("gen_gate_pass");
 		}
 	},
 	false

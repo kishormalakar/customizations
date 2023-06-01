@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.19
+@version      1.0.20
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -566,8 +566,22 @@
 
 	.drr_registration #s_2,
 	.drr_registration #s_3,
-	.drr_registration #s_4 {
+	.drr_registration #s_4,
+	.drr_registration #s_13 {
 		position: relative !important;
+	}
+
+	.drr_registration #s_12 {
+		width: 100% !important;
+		height: auto !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.drr_registration #s_3 > table,
+	.drr_registration #s_4 > table,
+	.drr_registration #s_13 > table {
+		width: 1200px;
 	}
 
 	.inventory_assistant #s_4 {
@@ -576,6 +590,36 @@
 
 	.inventory_assistant #s_3 > div,
 	.inventory_assistant #s_4 > div {
+		width: 100% !important;
+	}
+
+	.gen_gate_pass #s_2,
+	.gen_gate_pass #s_3,
+	.gen_gate_pass #s_4 {
+		position: relative !important;
+	}
+
+	.gen_gate_pass #s_3,
+	.gen_gate_pass #s_4 {
+		width: 50% !important;
+		border: 1px solid black !important;
+		display: inline-block !important;
+		vertical-align: top !important;
+	}
+
+	.gen_gate_pass #s_5 {
+		width: 800px !important;
+		left: calc(50% - 400px) !important;
+		border: 1px solid black !important;
+		padding: 20px !important;
+	}
+
+	.gen_gate_pass #divShowHtml1 {
+		width: 1024px !important;
+		left: calc(50% - 512px) !important;
+	}
+
+	.gen_gate_pass #divShowHtml1 > div {
 		width: 100% !important;
 	}
 }
