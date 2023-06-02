@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.20
+@version      1.0.22
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -44,6 +44,10 @@
 	#sub17,
 	#sub40 {
 		display: block !important;
+	}
+
+	#DashBoardTd > #DashBoardDiv div {
+		margin: 0 !important;
 	}
 
 	#TitleBar,
@@ -154,6 +158,7 @@
 	.depot_transfer #s_6 {
 		width: calc(100% - 500px) !important;
 		left: auto !important;
+		top: 13px !important;
 		right: 0 !important;
 		display: flex !important;
 		flex-direction: column;
@@ -621,5 +626,10 @@
 
 	.gen_gate_pass #divShowHtml1 > div {
 		width: 100% !important;
+	}
+	.e_gate_entry #s_2,
+	.e_gate_entry #s_3,
+	.e_gate_entry #s_4 {
+		position: relative !important;
 	}
 }
