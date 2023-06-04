@@ -632,4 +632,23 @@
 	.e_gate_entry #s_4 {
 		position: relative !important;
 	}
+
+	.sale_issue_note #CanvassHolder {
+		display: flex !important;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-content: flex-start;
+	}
+
+	.sale_issue_note #s_2,
+	.sale_issue_note #s_3,
+	.sale_issue_note #s_4 {
+		position: relative !important;
+		top: unset !important;
+	}
+
+	.sale_issue_note #s_3,
+	.sale_issue_note #s_4 {
+		flex-basis: 50%;
+	}
 }

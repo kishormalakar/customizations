@@ -761,6 +761,10 @@ window.addEventListener(
 		if (document.title == "E-Gate Entry" || document.title == "Run Form - IMMIS/DEP/EGATE_ENTRY") {
 			body.classList.add("e_gate_entry");
 		}
+
+		if (document.title == "Sale Issue Note" || document.title == "Run Form - IMMIS/DEP/SALEISSUE") {
+			body.classList.add("sale_issue_note");
+		}
 	},
 	false
 );
