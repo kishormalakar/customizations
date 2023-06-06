@@ -28,7 +28,7 @@
 
 	#nabbar_open {
 		position: fixed !important;
-		z-index: 10 !important;
+		z-index: 12 !important;
 	}
 
 	#nabbar_close {
