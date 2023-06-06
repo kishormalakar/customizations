@@ -1,25 +1,95 @@
 /* ==UserStyle==
-@name         GeM
+@name         UDM
 @namespace    github.com/openstyles/stylus
 @version      1.0.1
+@license      unlicense
+@preprocessor default
 @var color link-color "Link Color" red
 ==/UserStyle== */
-@-moz-document domain("gem.gov.in") {
-	.buyer-flags-notification {
-		overflow-wrap: break-word;
+
+@-moz-document url-prefix("https://ireps.gov.in/iMMS/")
+{
+	* {
+		box-sizing: border-box !important;
 	}
 
-	.flox-chat-img {
-		display: none !important;
+	body,
+	html {
+		width: 100% !important;
+		max-width: 100% !important;
 	}
 
-	#flox-chat-iframe-wrapper-outer {
-		display: none !important;
+	#sidenavbar {
+		position: absolute;
+		z-index: 10;
+		opacity: 1 !important;
+		margin-left: -250px;
 	}
 
-	.p-checkouts-address_new #simple_purchase_delivery_instructions {
-		height: 250px !important;
-		max-width: 700px !important;
-		line-height: 30px !important;
+	#nabbar_open {
+		position: fixed !important;
+		z-index: 10 !important;
+	}
+
+	#nabbar_close {
+		position: fixed !important;
+		z-index: 11 !important;
+	}
+
+	#sidenavbar #side-navbar .list-group-item {
+		padding-left: 15px !important;
+		padding-right: 0 !important;
+	}
+
+	#sidenavbar .sidebar-user {
+		padding: 50px 0 !important;
+	}
+
+	#main_content_col {
+		height: auto !important;
+		overflow: unset !important;
+		padding-left: 50px !important;
+	}
+
+	.container-fluid {
+		margin: 0 !important;
+	}
+
+	#purchaseOrderDetailsForm {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	#purchaseOrderDetailsForm .dataTable thead > tr > th,
+	#purchaseOrderDetailsForm .dataTable tbody > tr > td {
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
+
+	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(5),
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(5),
+	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(13),
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(13) {
+		display: none;
+	}
+
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(14) {
+		display: flex;
+	}
+
+	#purchaseOrderDetailsForm .dataTable thead .hdrrow th:nth-of-type(7) {
+		min-width: 350px;
+	}
+
+	#purchaseOrderDetailsForm > div:not(.dataTables_wrapper) {
+		/*         display: flex !important; */
+		/*         flex-shrink: 0; */
+		width: 1000px !important;
+	}
+
+	#purchaseOrderDetailsForm .row {
+		margin-left: 0;
+		margin-right: 0;
 	}
 }
