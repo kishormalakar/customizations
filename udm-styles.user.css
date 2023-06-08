@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         UDM
 @namespace    github.com/openstyles/stylus
-@version      1.0.1
+@version      1.0.2
 @license      unlicense
 @preprocessor default
 @var color link-color "Link Color" red
@@ -10,49 +10,152 @@
 @-moz-document url-prefix("https://ireps.gov.in/iMMS/")
 {
 	* {
-		box-sizing: border-box !important;
+		box-sizing: border-box;
 	}
 
-	body,
-	html {
-		width: 100% !important;
-		max-width: 100% !important;
+	.wrapper {
+		flex-direction: column !important;
 	}
 
 	#sidenavbar {
-		position: absolute;
-		z-index: 10;
-		opacity: 1 !important;
-		margin-left: -250px;
-	}
-
-	#nabbar_open {
-		position: fixed !important;
-		z-index: 12 !important;
+		position: relative !important;
+		flex-direction: row !important;
+		width: 100% !important;
+		min-width: 100% !important;
 	}
 
 	#nabbar_close {
-		position: fixed !important;
-		z-index: 11 !important;
+		display: none !important;
 	}
 
-	#sidenavbar #side-navbar .list-group-item {
-		padding-left: 15px !important;
-		padding-right: 0 !important;
+	#side-navbar-div {
+		flex-grow: 1 !important;
+		margin: 0 !important;
+		overflow: hidden !important;
 	}
 
-	#sidenavbar .sidebar-user {
-		padding: 50px 0 !important;
+	#side-navbar-div #side-navbar {
+		flex-direction: row !important;
+	}
+
+	#side-navbar-div #side-navbar > li {
+		padding: 0 !important;
+		display: flex;
+		flex-direction: row !important;
+	}
+
+	#side-navbar-div #side-navbar li ul {
+		flex-direction: row !important;
+		flex-wrap: wrap;
+		list-style: none;
+	}
+
+	#side-navbar-div #side-navbar li ul li {
+		padding: 10px !important;
+		flex-grow: 1;
+		border: 1px solid #17a2b8 !important;
+		margin: 0;
+		text-align: center;
+	}
+
+	#side-navbar-div #side-navbar li ul li a {
+		display: inline-block;
+	}
+
+	#side-navbar-div #side-navbar li ul li a:hover {
+		font-weight: normal;
+	}
+
+	#side-navbar-div #side-navbar li ul li::before {
+		display: none;
+	}
+
+	#side-navbar-div #side-navbar li ul li:hover {
+		background-color: #17a2b8;
+		cursor: pointer;
+	}
+
+	#side-navbar-div #side-navbar li ul li:hover a {
+		color: white;
+	}
+
+	#side-navbar-div #side-navbar li ul li img {
+		display: none;
+	}
+
+	#side-navbar-div #side-navbar > li:nth-of-type(1) > i,
+	#side-navbar-div #side-navbar > li:nth-of-type(1) > a {
+		display: none;
+	}
+
+	#navbar_actions .d-flex .p-2 {
+		display: flex;
+		justify-content: center;
+	}
+
+	#navbar_actions .sidebar-user {
+		padding: 2px !important;
+		height: auto !important;
 	}
 
 	#main_content_col {
 		height: auto !important;
 		overflow: unset !important;
-		padding-left: 50px !important;
 	}
 
-	.container-fluid {
+	#main_content_col > .navbar {
+		position: relative !important;
+		padding: 0 !important;
+	}
+
+	#main_content_col hr,
+	#main_content_col br {
+		display: none;
+	}
+
+	#main_content_col > .container-fluid {
+		margin: 0;
+		padding: 0;
+		/* 		margin-top: -23px; */
+	}
+
+	#main_content_col > .container-fluid > .row {
 		margin: 0 !important;
+	}
+
+	#main_content_col > .container-fluid > .row > div {
+		padding: 0;
+	}
+
+	#main_content_col > .container-fluid > .row .navbar {
+		padding: 0;
+		margin-bottom: 40px;
+	}
+
+	#main_content_col > .container-fluid > .row .navbar ul {
+		margin: 0;
+	}
+
+	#main_content_col > .container-fluid > .row .navbar li {
+		flex-grow: 1;
+		margin: 0;
+	}
+
+	#main_content_col > .container-fluid > .row .navbar li a {
+		color: #fff;
+		background-color: #17a2b8;
+		border-radius: 0;
+		display: block;
+		border-color: hsla(188, 78%, 30%, 1);
+		cursor: pointer;
+	}
+
+	#main_content_col > .container-fluid > .row .navbar li a.active,
+	#main_content_col > .container-fluid > .row .navbar li a:hover {
+		/* 		color: #17a2b8; */
+		/* 		background-color: white; */
+		box-shadow: inset 0px 0px 15px rgb(0, 0, 0, 0.2);
+		background-color: hsla(188, 78%, 30%, 1);
 	}
 
 	#purchaseOrderDetailsForm {
