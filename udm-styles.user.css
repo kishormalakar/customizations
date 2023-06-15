@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         UDM
 @namespace    github.com/openstyles/stylus
-@version      1.0.2
+@version      1.0.1
 @license      unlicense
 @preprocessor default
 @var color link-color "Link Color" red
@@ -170,6 +170,8 @@
 		padding-right: 0px !important;
 	}
 
+	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(1),
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(1),
 	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(5),
 	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(5),
 	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(13),
@@ -179,6 +181,15 @@
 
 	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(14) {
 		display: flex;
+		justify-content: end;
+	}
+
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(10),
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(11),
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(12) {
+		text-align: right;
+		padding-right: 5px !important;
+		min-width: 80px;
 	}
 
 	#purchaseOrderDetailsForm .dataTable thead .hdrrow th:nth-of-type(7) {
