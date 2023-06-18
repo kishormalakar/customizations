@@ -168,7 +168,7 @@ window.addEventListener(
 
 						var poNo = poRow.children[1].innerText.split(" ")[0];
 						var poSerial = poRow.children[5].innerText;
-						var purchaseType = poNo.substring(8, 1) == 2 ? "GM" : "TN";
+						var purchaseType = poNo.substring(8, 9) == "2" ? "GM" : "TN";
 
 						var td2 = document.createElement("td");
 						var link = document.createElement("a");
