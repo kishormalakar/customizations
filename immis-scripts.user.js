@@ -12,6 +12,8 @@
 window.addEventListener(
     "load",
     function () {
+        'use strict';
+
         if (document.title.startsWith("Run Form - ")) {
             var titleBar = document.querySelectorAll("#TitleBar")[0];
             var title = titleBar.querySelectorAll("td")[1].innerText;

@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         UDM
 @namespace    github.com/openstyles/stylus
-@version      1.0.1
+@version      1.0.2
 @license      unlicense
 @preprocessor default
 @var color link-color "Link Color" red
@@ -205,5 +205,9 @@
 	#purchaseOrderDetailsForm .row {
 		margin-left: 0;
 		margin-right: 0;
+	}
+
+    .btn-outline{
+		border: 1px solid rgba(0,0,0,0.5);
 	}
 }

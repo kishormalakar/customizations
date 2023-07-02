@@ -1,50 +1,76 @@
 /* ==UserStyle==
 @name         GeM
 @namespace    github.com/openstyles/stylus
-@version      1.0.1
+@version      1.0.2
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document domain("gem.gov.in") {
 	.buyer-flags-notification {
 		overflow-wrap: break-word;
 	}
-
-	.flox-chat-img {
-		display: none !important;
-	}
-
-	#flox-chat-iframe-wrapper-outer {
-		display: none !important;
-	}
-
-	.p-checkouts-address_new #simple_purchase_delivery_instructions {
-		height: 200px !important;
-		max-width: 700px !important;
-		line-height: 30px !important;
-	}
-
-	.dsc_sign .div-form {
+    
+    .flox-chat-img{
+        display: none !important;
+    }
+    
+    #flox-chat-iframe-wrapper-outer{
+        display: none !important;
+    }
+    
+    .p-checkouts-address_new #simple_purchase_delivery_instructions{
+        height: 250px !important;
+        max-width: 700px !important;
+        line-height: 30px !important;
+    }
+	
+	.dsc_sign .div-form{
 		display: flex;
 		flex-direction: column;
 	}
-
-	.dsc_sign .div-form div:nth-of-type(1) {
+	
+	.dsc_sign .div-form div:nth-of-type(1){
 		order: 1;
 	}
-
-	.dsc_sign .div-form div:nth-of-type(2) {
+	
+	.dsc_sign .div-form div:nth-of-type(2){
 		order: 2;
 	}
-
-	.dsc_sign .div-form div:nth-of-type(3) {
+	
+	.dsc_sign .div-form div:nth-of-type(3){
 		order: 4;
 	}
-
-	.dsc_sign .div-form div:nth-of-type(4) {
+	
+	.dsc_sign .div-form div:nth-of-type(4){
 		order: 3;
 	}
-
-	.dsc_sign .div-form div:nth-of-type(5) {
+	
+	.dsc_sign .div-form div:nth-of-type(5){
 		order: 5;
 	}
+	
+	@media (min-width: 1200px){
+		.container {
+			width: 1400px !important;
+		}
+
+		.container .sellers_form th:nth-of-type(3),
+		.container .sellers_form td:nth-of-type(3){
+			width: 25% !important;
+		}
+		
+		.container .sellers_form th:nth-of-type(4),
+		.container .sellers_form td:nth-of-type(4){
+			width: 10% !important;
+			max-width: 100px !important;
+			word-break: break-word;
+		}
+		
+		.container .sellers_form th:nth-of-type(5),
+		.container .sellers_form td:nth-of-type(5){
+			width: 10% !important;
+			max-width: 100px !important;
+		}
+		
+	}
+		
 }
