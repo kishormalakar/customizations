@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.24
+// @version      1.0.25
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -223,6 +223,33 @@ window.addEventListener(
 
         if (document.title == "IMMIS Proposal GeM PO Mapping" || document.title == "Run Form - IMMIS/PUR/GEM_PO_MAP") {
             body.classList.add("gem_po_mapping");
+
+            document.addEventListener("click", (e) => {
+                var id = e.target.id;
+                if (id.includes("s_0_73")) {
+
+                    var s_9 = document.querySelectorAll("#s_9")[0];
+
+                    var poNo = s_9.querySelectorAll("table")[4].querySelectorAll("tr")[2].querySelectorAll("td")[0];
+                    var poYear = s_9.querySelectorAll("table")[4].querySelectorAll("tr")[2].querySelectorAll("td")[1].innerText.split("-")[2];
+
+                    var link = document.createElement("a");
+                    var linkText = document.createTextNode(poNo.innerText);
+                    link.appendChild(linkText);
+                    link.title = poNo.innerText;
+                    link.href =
+                        "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/20" +
+                        poYear +
+                        "/" +
+                        zoneJson["ECR"] +
+                        "/" +
+                        poNo.innerText +
+                        ".pdf";
+                    link.target = "_blank";
+                    poNo.innerHTML = "";
+                    poNo.appendChild(link);
+                }
+            });
         }
 
         if (document.title == "Demand Registration (Non-Stock)" || document.title == "Run Form - IMMIS/PUR/DMDREGNS") {
