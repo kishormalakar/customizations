@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.25
+// @version      1.0.27
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -824,6 +824,35 @@ window.addEventListener(
 
         if (document.title == "Sale Issue Note" || document.title == "Run Form - IMMIS/DEP/SALEISSUE") {
             body.classList.add("sale_issue_note");
+        }
+
+        if (document.title == "E-Gate Entry" || document.title == "Run Form - IMMIS/DEP/EGATE_ENTRY") {
+            body.classList.add("egate_entry");
+
+            document.addEventListener("click", (e) => {
+                if (e.target.name == "SHOW_EDISP_0") {
+
+                    var titleBar = document.querySelectorAll("#TitleBar")[0];
+                    var depotCode = titleBar.querySelectorAll("td")[0].innerText.split(":")[2].substring(3, 5);
+
+                    var s_3 = document.querySelectorAll("#s_3")[0];
+                    var rows = s_3.querySelectorAll("div")[0].querySelectorAll("tbody")[0].children;
+
+                    for (var i = 1; i < rows.length; i++) {
+
+                        var row = rows[i];
+                        var eDispatchNo = row.querySelectorAll("td")[1].innerText;
+                        var eDispatchDepot = eDispatchNo.split("/")[1];
+
+                        if (eDispatchDepot != "00" + depotCode + "00") {
+
+                            row.style.display = "none";
+
+                        }
+
+                    }
+                }
+            });
         }
     },
     false
