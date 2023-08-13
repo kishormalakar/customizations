@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.27
+// @version      1.0.28
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -858,10 +858,6 @@ window.addEventListener(
             body.classList.add("gen_gate_pass");
         }
 
-        if (document.title == "E-Gate Entry" || document.title == "Run Form - IMMIS/DEP/EGATE_ENTRY") {
-            body.classList.add("e_gate_entry");
-        }
-
         if (document.title == "Sale Issue Note" || document.title == "Run Form - IMMIS/DEP/SALEISSUE") {
             body.classList.add("sale_issue_note");
         }
@@ -874,6 +870,7 @@ window.addEventListener(
 
                     var titleBar = document.querySelectorAll("#TitleBar")[0];
                     var depotCode = titleBar.querySelectorAll("td")[0].innerText.split(":")[2].substring(3, 5);
+                    var zoneCode = titleBar.querySelectorAll("td")[0].innerText.split(":")[0].substring(1, 3);
 
                     var s_3 = document.querySelectorAll("#s_3")[0];
                     var rows = s_3.querySelectorAll("div")[0].querySelectorAll("tbody")[0].children;
@@ -889,6 +886,26 @@ window.addEventListener(
                             row.style.display = "none";
 
                         }
+
+                        var poNo = row.querySelectorAll("td")[7].innerText;
+                        var poDate = row.querySelectorAll("td")[8].innerText;
+                        var poYear = "20" + poDate.split("-")[2];
+
+                        var link = document.createElement("a");
+                        var linkText = document.createTextNode(poNo);
+                        link.appendChild(linkText);
+                        link.title = poNo;
+                        link.href =
+                            "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
+                            poYear +
+                            "/" +
+                            zoneCode +
+                            "/" +
+                            poNo +
+                            ".pdf";
+                        link.target = "_blank";
+                        row.children[7].innerHTML = "";
+                        row.children[7].appendChild(link);
 
                     }
                 }
