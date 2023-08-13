@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.28
+// @version      1.0.29
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -129,21 +129,33 @@ window.addEventListener(
 
                     for (var j = 1; j < listContainer.children.length; j++) {
 
-                        if (j != menuIndex) {
+                        if (j != menuIndex && j < +menuContainer.children.length - 2) {
                             listContainer.children[j].querySelectorAll("span")[0].style.display = "none";
                         }
 
                     }
 
                     var listOffsetTop;
-                    if (+e.target.offset < 33) {
+                    var listOffsetLeft;
+
+                    if (+e.target.offsetTop == 0 && +e.target.offsetLeft == 0) {
+                        listOffsetTop = 50;
+                        listOffsetLeft = +e.clientX;
+                    }
+                    else if (+e.target.offsetTop > 0 && +e.target.offsetTop < 25) {
                         listOffsetTop = +e.target.offsetTop + 49;
+                        listOffsetLeft = +e.target.offsetLeft;
                     }
                     else {
                         listOffsetTop = +e.target.offsetTop + 24;
+                        listOffsetLeft = +e.target.offsetLeft;
                     }
 
-                    listContainer.children[menuIndex].style.cssText = "position: absolute !important; width: 500px; left: " + e.target.offsetLeft + "px !important; top: " + listOffsetTop + "px !important"
+                    if (menuIndex < +menuContainer.children.length - 2) {
+
+                        listContainer.children[menuIndex].style.cssText = "position: absolute !important; left: " + listOffsetLeft + "px !important; top: " + listOffsetTop + "px !important"
+
+                    }
 
                 }
             });
