@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UDM
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.0.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/iMMS/*
@@ -60,7 +60,9 @@
     if (pathname.startsWith("/iMMS/searchPurchaseOrders")) {
         var purchaseOrderDetailsForm = document.querySelectorAll("#purchaseOrderDetailsForm")[0];
         var buttonRow = purchaseOrderDetailsForm.lastChild.previousElementSibling.previousElementSibling.previousElementSibling.querySelectorAll("div")[0];
-        window.console.log(buttonRow);
+
+        var descriptionDiv = purchaseOrderDetailsForm.querySelectorAll(":scope > div")[3];
+        descriptionDiv.querySelectorAll("select")[0].value = "AND";
 
         buttonRow.classList.add("offset-md-12", "offset-sm-12", "col-md-12", "cos-sm-12");
         buttonRow.classList.remove("offset-md-6", "offset-sm-6", "col-md-6", "cos-sm-6");

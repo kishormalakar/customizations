@@ -1,12 +1,9 @@
 /* ==UserStyle==
 @name         UDM
 @namespace    github.com/openstyles/stylus
-@version      1.0.2
-@license      unlicense
-@preprocessor default
+@version      1.0.3
 @var color link-color "Link Color" red
 ==/UserStyle== */
-
 @-moz-document url-prefix("https://ireps.gov.in/iMMS/")
 {
 	* {
@@ -166,16 +163,19 @@
 
 	#purchaseOrderDetailsForm .dataTable thead > tr > th,
 	#purchaseOrderDetailsForm .dataTable tbody > tr > td {
-		padding-left: 0px !important;
-		padding-right: 0px !important;
+		padding-left: 5px !important;
+		padding-right: 5px !important;
 	}
 
 	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(1),
 	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(1),
+	#purchaseOrderDetailsForm .dataTable tfoot tr th:nth-of-type(1),
 	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(5),
 	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(5),
+	#purchaseOrderDetailsForm .dataTable tfoot tr th:nth-of-type(5),
 	#purchaseOrderDetailsForm .dataTable thead tr:nth-of-type(2) th:nth-of-type(13),
-	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(13) {
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(13),
+	#purchaseOrderDetailsForm .dataTable tfoot tr th:nth-of-type(13) {
 		display: none;
 	}
 
@@ -195,6 +195,15 @@
 	#purchaseOrderDetailsForm .dataTable thead .hdrrow th:nth-of-type(7) {
 		min-width: 350px;
 	}
+	
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(3) br{
+		display: block;
+	}
+	
+	#purchaseOrderDetailsForm .dataTable tbody tr td:nth-of-type(7){
+		border-right: 1px solid #ccc;
+		border-left: 1px solid #ccc;
+	}
 
 	#purchaseOrderDetailsForm > div:not(.dataTables_wrapper) {
 		/*         display: flex !important; */
@@ -209,5 +218,9 @@
 
     .btn-outline{
 		border: 1px solid rgba(0,0,0,0.5);
+	}
+	
+	#purchaseOrderDetailsForm .pagination li.active{
+		background-color: #B7E9F7;
 	}
 }
