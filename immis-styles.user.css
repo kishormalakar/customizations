@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.23
+@version      1.0.24
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -37,7 +37,34 @@
 
 	#MenuBar {
 		height: 25px;
+        width: 100% !important;
 	}
+    
+    #MenuBar tr{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    #MenuBar > table > tbody > tr:nth-of-type(1) > td{
+        flex-grow: 1;
+        border: 1px solid #646060;
+        text-align: center;
+        min-width: fit-content;
+        height: 25px;
+        background-color: #c0c0c0;
+        line-height: 0%;
+    }
+    
+    #MenuBar > table > tbody > tr:nth-of-type(1) > td a{
+        display: block;
+        padding: 5px;
+        line-height: 100%;
+    }
+    
+    #MenuBar > table > tbody > tr > td:nth-of-type(1){
+        display: none;
+    }
 
 	.Options,
 	#sub16,

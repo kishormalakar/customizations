@@ -109,6 +109,46 @@ window.addEventListener(
             });
         }
 
+        if (document.title == "System Start Page") {
+
+            document.addEventListener("click", (e) => {
+                if (e.target.id.startsWith("Menu")) {
+
+                    var menuId = e.target.id;
+                    var menuContainer = e.target.closest("tr");
+                    var listContainer = menuContainer.nextElementSibling;
+
+                    var menuIndex;
+                    for (var i = 1; i < menuContainer.children.length; i++) {
+
+                        if (menuContainer.children[i].children[0] === e.target) {
+                            menuIndex = i;
+                        }
+
+                    }
+
+                    for (var j = 1; j < listContainer.children.length; j++) {
+
+                        if (j != menuIndex) {
+                            listContainer.children[j].querySelectorAll("span")[0].style.display = "none";
+                        }
+
+                    }
+
+                    var listOffsetTop;
+                    if (+e.target.offset < 33) {
+                        listOffsetTop = +e.target.offsetTop + 49;
+                    }
+                    else {
+                        listOffsetTop = +e.target.offsetTop + 24;
+                    }
+
+                    listContainer.children[menuIndex].style.cssText = "position: absolute !important; width: 500px; left: " + e.target.offsetLeft + "px !important; top: " + listOffsetTop + "px !important"
+
+                }
+            });
+        }
+
         if (document.title == "Search Purchase Orders" || document.title == "Run Form - IMMIS/PUR/POSEARCH") {
             body.classList.add("po_search");
 
