@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.29
+// @version      1.0.30
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -336,32 +336,41 @@ window.addEventListener(
         if (document.title == "PO Modification" || document.title == "Run Form - IMMIS/PUR/POMA") {
             body.classList.add("po_modification");
 
-            var s_6 = body.querySelectorAll("#s_6")[0];
-            var maList = s_6.querySelectorAll("[id^=TrMAList_]");
+            let poLinking = () => {
+                var s_6 = body.querySelectorAll("#s_6")[0];
+                var maList = s_6.querySelectorAll("[id^=TrMAList_]");
 
-            for (i = 0; i < maList.length; i++) {
+                for (i = 0; i < maList.length; i++) {
 
-                var maRow = maList[i];
-                var poNo = maRow.children[5].innerText;
-                var poYear = currentYear;
-                var poZone = currentZone;
+                    var maRow = maList[i];
+                    var poNo = maRow.children[5].innerText;
+                    var poYear = currentYear;
+                    var poZone = currentZone;
 
-                var link = document.createElement("a");
-                var linkText = document.createTextNode(poNo);
-                link.appendChild(linkText);
-                link.title = poNo;
-                link.href = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
-                    poYear +
-                    "/" +
-                    zoneJson[poZone] +
-                    "/" +
-                    poNo +
-                    ".pdf";
-                link.target = "_blank";
-                maRow.children[5].innerText = "";
-                maRow.children[5].appendChild(link);
+                    var link = document.createElement("a");
+                    var linkText = document.createTextNode(poNo);
+                    link.appendChild(linkText);
+                    link.title = poNo;
+                    link.href = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
+                        poYear +
+                        "/" +
+                        zoneJson[poZone] +
+                        "/" +
+                        poNo +
+                        ".pdf";
+                    link.target = "_blank";
+                    maRow.children[5].innerText = "";
+                    maRow.children[5].appendChild(link);
 
+                }
             }
+
+            poLinking();
+            document.addEventListener("click", (e) => {
+                if (e.target.name == "btn_Refresh_0") {
+                    poLinking();
+                }
+            });
         }
 
         if (
@@ -922,6 +931,10 @@ window.addEventListener(
                     }
                 }
             });
+        }
+
+        if (document.title == "Issue of Stores against Registered Requisitions" || document.title == "Run Form - IMMIS/DEP/REQNISSUE") {
+            body.classList.add("reqn_issue");
         }
     },
     false
