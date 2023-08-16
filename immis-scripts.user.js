@@ -137,17 +137,15 @@ window.addEventListener(
 
                     var listOffsetTop;
                     var listOffsetLeft;
+                    listOffsetTop = e.target.closest("tr").offsetHeight;
 
                     if (+e.target.offsetTop == 0 && +e.target.offsetLeft == 0) {
-                        listOffsetTop = 50;
                         listOffsetLeft = +e.clientX;
                     }
                     else if (+e.target.offsetTop > 0 && +e.target.offsetTop < 25) {
-                        listOffsetTop = +e.target.offsetTop + 49;
                         listOffsetLeft = +e.target.offsetLeft;
                     }
                     else {
-                        listOffsetTop = +e.target.offsetTop + 24;
                         listOffsetLeft = +e.target.offsetLeft;
                     }
 

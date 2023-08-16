@@ -36,7 +36,6 @@
 	}
 
 	#MenuBar {
-		height: 25px;
         width: 100% !important;
 	}
     
@@ -603,6 +602,10 @@
 	.vendor_performance p {
 		text-indent: 0 !important;
 	}
+    
+    .vendor_performance #s_3 td > div{
+        margin: 0 !important;
+    }
 
 	.drr_registration #s_2,
 	.drr_registration #s_3,
