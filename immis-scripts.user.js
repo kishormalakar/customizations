@@ -7,6 +7,7 @@
 // @match        https://ireps.gov.in/fcgi/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gov.in
 // @grant        none
+// @run-at       document-end
 // ==/UserScript==
 
 window.addEventListener(
