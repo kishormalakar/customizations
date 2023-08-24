@@ -15,6 +15,21 @@ window.addEventListener(
     function () {
         var pathname = location.pathname;
 
+        if (pathname.startsWith("/HRMS/login")) {
+
+            var loginForm = document.querySelectorAll("#loginForm")[0];
+            var username = loginForm.querySelectorAll("input#username")[0];
+            var password = loginForm.querySelectorAll("input#password")[0];
+            var captcha = loginForm.querySelectorAll("input#captcha")[0];
+            var loginButton = loginForm.querySelectorAll("input#loginButton")[0];
+
+            username.tabIndex = 1;
+            password.tabIndex = 2;
+            captcha.tabIndex = 3;
+            loginButton.tabIndex = 4;
+
+        }
+
         if (pathname.startsWith("/HRMS/leave-management/get-leave-application")) {
 
             var leaveAction = document.querySelectorAll("select#leaveAction")[0];
