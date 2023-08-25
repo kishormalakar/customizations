@@ -17,4 +17,8 @@
 		border-color: red;
 	}
 	
+	#accordionPassApplication #headingPassApp h6{
+		display: inline-block;
+	}
+	
 }

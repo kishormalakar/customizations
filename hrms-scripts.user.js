@@ -30,6 +30,18 @@ window.addEventListener(
 
         }
 
+        if (pathname.startsWith("/HRMS/leave-management/leave-applications")) {
+            var accordionPassApplication = document.querySelectorAll("#accordionPassApplication")[0];
+            var headingPassApp = accordionPassApplication.querySelectorAll("#headingPassApp")[0];
+            var leaveAppnListBody = accordionPassApplication.querySelectorAll("#leaveAppnListBody")[0];
+
+            var h6 = document.createElement("h6");
+            var text = document.createTextNode("(" + leaveAppnListBody.children.length + ")");
+            h6.appendChild(text);
+            h6.style.color = "red";
+            headingPassApp.appendChild(h6);
+        }
+
         if (pathname.startsWith("/HRMS/leave-management/get-leave-application")) {
 
             var leaveAction = document.querySelectorAll("select#leaveAction")[0];
