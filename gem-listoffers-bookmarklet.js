@@ -1,7 +1,7 @@
 javascript: (() => {
 
     var style = document.createElement("style");
-    style.innerHTML = "@media print {body {visibility: hidden} #leave-details {visibility: visible; position: absolute; left: 0; top: 0; margin: 0 !important; padding: 0 !important} #leave-details > div {display: flex; margin: 0 !important; padding: 0 !important; width: 100%; max-width: 1400px} #leave-details .modal-content {visibility: visible; position: absolute; left: 0; top: 0; margin: 0 !important; padding: 0 !important} #leave-details .modal-header div:nth-of-type(2){display: none} #leave-details .modal-title{font-size: 20px} #leave-details .the-fieldset > .row > div > .row > div{display: flex; width: 40%} #leave-details .the-fieldset > .row > div > .row > label{display: flex; width: 60%} #leave-details .the-fieldset:nth-of-type(n+2){margin-top: 20px} #leave-details .the-fieldset .the-legend b{font-size: 18px}}";
+    style.innerHTML = "@media print{body{visibility: hidden;} #content{visibility: visible;position: absolute;top: 0;left: 0;margin: 0;width: 100%;} #content .container{width: 100% !important;padding: 0;} #content .container .panel-group .panel:nth-of-type(1){display: none;} #content .container .panel-group .panel:nth-of-type(2){visibility: visible;position: relative;top: 0;left: 0;margin: 0;width: 100%;} #content .container .progress-indicator{display: none;} #content .container #sellers_form > .technical_eligible > .table-responsive > p{display: none;} #content .container #create_order_area{display: none !important;}}";
     document.head.append(style);
 
 })();

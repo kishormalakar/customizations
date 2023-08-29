@@ -457,6 +457,17 @@ window.addEventListener(
                             uncoveredDues[i].children[8].innerText = dueDate + " (" + dateDiff + " days)";
                         }
                     }
+
+                    var button = document.createElement("button");
+                    var buttonText = document.createTextNode("Demand Review");
+                    button.setAttribute("id", "SHOW_DR");
+                    button.appendChild(buttonText);
+                    button.style.marginRight = "17px";
+                    divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("td")[1].insertBefore(button, divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("td")[1].firstChild);
+                }
+
+                if (e.target.id == "SHOW_DR") {
+                    alert("Demand Review");
                 }
 
                 if (
