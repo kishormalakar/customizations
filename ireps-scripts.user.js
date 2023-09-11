@@ -91,9 +91,36 @@ window.addEventListener(
             }
         }
 
-        if (pathname.startsWith("/epsn/supply/rfq/finBidSupplyTabulation.do")) {
-            var bidId = 15686436;
-            var tabulationId = 106132333;
+        if (pathname.startsWith("/epsn/supply/tds/tenderDecisionTab.do")) {
+
+            var TenderDecisionForm = document.querySelectorAll("form[name='TenderDecisionForm']")[0];
+            var TnCHref = TenderDecisionForm.querySelectorAll("a[href='#tab80']")[0];
+
+            TnCHref.addEventListener("click", (e) => {
+
+                alert("TNC Tab clicked");
+                var tncFinalPageDiv = TenderDecisionForm.querySelectorAll("#tncFinalPageDiv")[0];
+                var industryDetailsRows = tncFinalPageDiv.querySelectorAll("[id^=firmIndDtlRow]");
+                for (var i = 0; i < industryDetailsRows.length; i++) {
+
+                    var industryDetailsRow = industryDetailsRows[i];
+                    window.console.log(industryDetailsRow);
+                    var mseFormLink = industryDetailsRow.previousElementSibling.previousElementSibling.children[1].querySelectorAll("a")[0];
+                    var mseFormUrl = "https://ireps.gov.in/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp?bidId=15704458";
+                    mseFormLink.setAttribute("href", mseFormUrl);
+                    mseFormLink.setAttribute("target", "_blank");
+
+                }
+
+            })
+        }
+
+        if (pathname.startsWith("/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp")) {
+            var href = window.location.href;
+            var url = new URL(href);
+            var bidId = url.searchParams.get("bidId");
+
+            var tabulationId = prompt("Tabulation ID");
 
             var req = new XMLHttpRequest();
             req.open("GET", "https://ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
@@ -123,7 +150,7 @@ window.addEventListener(
                         cloneNode = industryTable[n];
 
                         var technoCommercialScript = technoCommercialTabulation.querySelectorAll("body")[0].querySelectorAll("script")[0];
-                        document.querySelectorAll("head")[0].appendChild(technoCommercialScript);
+                        //document.querySelectorAll("head")[0].appendChild(technoCommercialScript);
 
                         var mseDocumentLink = cloneNode.children[2].querySelectorAll("a")[0];
                         var mseDocumentParams = mseDocumentLink.getAttribute("onclick").toString().trim().split("(")[1].split(")")[0];

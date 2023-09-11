@@ -80,50 +80,61 @@ javascript: (() => {
         var tncDivs = document.querySelectorAll("[id^=othTNCDiv]");
 
         tncDivs.forEach((tncDiv) => {
-            var bidderDetailsHeader =
-                tncDiv.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling
-                    .previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling
-                    .previousElementSibling;
+            var tncDivId = tncDiv.id.substring(9);
+
+            var bidderDetailsDivId = "bidderDetailDiv" + tncDivId;
+            var bidderDetailsHeader = tncDiv.parentElement.querySelectorAll("#" + bidderDetailsDivId)[0];
             var bidderAccount = bidderDetailsHeader.querySelectorAll("[id^=bidderAcctName]")[0].innerText;
             var bidderId = bidderAccount.split("[Bid Id : ")[1].split("]")[0];
             var bidderName = bidderAccount.split("[Bid Id : ")[0].split(",")[0];
 
-            var tncHeader =
-                tncDiv.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.querySelectorAll(
-                    ".tableHdrTnc"
-                )[0];
-            var consignee = tncHeader.querySelectorAll("tr")[4].querySelectorAll("span")[0].innerText;
-            var consigneeTrimmed = consignee.split(",")[0].trim();
-
             var plConsigneeArray = [];
-            var tncHeaderRows = tncHeader.querySelectorAll("tr");
+            var consignee, consigneeTrimmed;
+            var recommendationDivs = tncDiv.parentElement.querySelectorAll("div[id^=reccOf]");
+            recommendationDivs.forEach((recommendationDiv) => {
 
-            for (var i = 0; i < tncHeaderRows.length; i += 5) {
-                var pl = tncHeaderRows[i].querySelectorAll("b")[0].innerText;
-                var plConsignee = tncHeaderRows[i + 4].querySelectorAll("span")[0].innerText;
+                var recommendationDivId = recommendationDiv.id.slice(-8);
+                if (recommendationDivId == tncDivId) {
 
-                plConsigneeArray.push([pl, plConsignee]);
-            }
+                    consignee = recommendationDiv.querySelectorAll("tr")[4].querySelectorAll("span")[0].innerText;
+                    consigneeTrimmed = consignee.split(",")[0].trim();
 
-            var inspectionDiv = tncDiv.previousElementSibling.previousElementSibling.previousElementSibling;
-            var inspectionRows = inspectionDiv.querySelectorAll("table")[1].querySelectorAll("tbody")[0].children;
+                    var recommendationDivRows = recommendationDiv.querySelectorAll("tr");
 
-            for (var j = 1; j < inspectionRows.length; j++) {
-                var pl = inspectionRows[j].children[0].querySelectorAll("span")[0].innerText;
-                var plInspection = inspectionRows[j].children[1].querySelectorAll("select")[0].value;
+                    for (var i = 0; i < recommendationDivRows.length; i += 5) {
+                        var pl = recommendationDivRows[i].querySelectorAll("b")[0].innerText;
+                        var plConsignee = recommendationDivRows[i + 4].querySelectorAll("span")[0].innerText;
 
-                if (plInspection == 10) {
-                    plConsigneeArray.forEach((plConsignee) => {
-                        if (plConsignee[0] == pl) {
-                            inspectionRows[j].children[2].querySelectorAll("input")[0].value = plConsignee[1];
-                        }
-                    });
+                        plConsigneeArray.push([pl, plConsignee]);
+                    }
+
                 }
 
-                if (plInspection == 50) {
-                    inspectionRows[j].children[2].querySelectorAll("input")[0].value = "At manufacturer's premises";
+            });
+
+            var inspectionDivs = tncDiv.parentElement.querySelectorAll("[id^=inspTNCDiv]");
+
+            inspectionDivs.forEach(inspectionDiv => {
+                var inspectionRows = inspectionDiv.querySelectorAll("table")[1].querySelectorAll("tbody")[0].children;
+
+                for (var j = 1; j < inspectionRows.length; j++) {
+                    var pl = inspectionRows[j].children[0].querySelectorAll("span")[0].innerText;
+                    var plInspection = inspectionRows[j].children[1].querySelectorAll("select")[0].value;
+
+                    if (plInspection == 10) {
+                        plConsigneeArray.forEach((plConsignee) => {
+
+                            if (plConsignee[0] == pl) {
+                                inspectionRows[j].children[2].querySelectorAll("input")[0].value = plConsignee[1];
+                            }
+                        });
+                    }
+
+                    if (plInspection == 50) {
+                        inspectionRows[j].children[2].querySelectorAll("input")[0].value = "At manufacturer's premises";
+                    }
                 }
-            }
+            });
 
             var securityMoney = tncDiv.querySelectorAll("[id^=securityMoney]")[0];
             var modeOfDispatch = tncDiv.querySelectorAll("[id^=modeOfDispatch]")[0];
