@@ -87,6 +87,8 @@ javascript: (() => {
             var bidderAccount = bidderDetailsHeader.querySelectorAll("[id^=bidderAcctName]")[0].innerText;
             var bidderId = bidderAccount.split("[Bid Id : ")[1].split("]")[0];
             var bidderName = bidderAccount.split("[Bid Id : ")[0].split(",")[0];
+            var bidderIndustryFormLink = bidderDetailsHeader.querySelectorAll("a")[0];
+            bidderIndustryFormUrl = "https://ireps.gov.in/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp?bidId=" + tncDivId + "&tabulationId=" + tabulationId;
 
             var plConsigneeArray = [];
             var consignee, consigneeTrimmed;

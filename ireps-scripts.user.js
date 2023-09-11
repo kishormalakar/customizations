@@ -91,35 +91,11 @@ window.addEventListener(
             }
         }
 
-        if (pathname.startsWith("/epsn/supply/tds/tenderDecisionTab.do")) {
-
-            var TenderDecisionForm = document.querySelectorAll("form[name='TenderDecisionForm']")[0];
-            var TnCHref = TenderDecisionForm.querySelectorAll("a[href='#tab80']")[0];
-
-            TnCHref.addEventListener("click", (e) => {
-
-                alert("TNC Tab clicked");
-                var tncFinalPageDiv = TenderDecisionForm.querySelectorAll("#tncFinalPageDiv")[0];
-                var industryDetailsRows = tncFinalPageDiv.querySelectorAll("[id^=firmIndDtlRow]");
-                for (var i = 0; i < industryDetailsRows.length; i++) {
-
-                    var industryDetailsRow = industryDetailsRows[i];
-                    window.console.log(industryDetailsRow);
-                    var mseFormLink = industryDetailsRow.previousElementSibling.previousElementSibling.children[1].querySelectorAll("a")[0];
-                    var mseFormUrl = "https://ireps.gov.in/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp?bidId=15704458";
-                    mseFormLink.setAttribute("href", mseFormUrl);
-                    mseFormLink.setAttribute("target", "_blank");
-
-                }
-
-            })
-        }
-
         if (pathname.startsWith("/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp")) {
             var href = window.location.href;
             var url = new URL(href);
             var bidId = url.searchParams.get("bidId");
-
+            // var tabulationId = url.searchParams.get("tabulationId");
             var tabulationId = prompt("Tabulation ID");
 
             var req = new XMLHttpRequest();
@@ -185,11 +161,24 @@ window.addEventListener(
                         tbody1.appendChild(industryTable[0]);
                         tbody1.appendChild(cloneNode);
                         table1.appendChild(tbody1);
+                        table1.classList.add("advSearch");
+                        table1.style.width = "98%";
                         document.querySelectorAll("body")[0].appendChild(table1);
 
                     }
                 }
             }
+        }
+
+        if (pathname.startsWith("/epsn/jsp/supply/tds/fillDeliveryPeriodPage.jsp")) {
+
+            var dateCommenceRadio = document.querySelectorAll("#dlvCommRd1")[0];
+            var dateCommenceValue = document.querySelectorAll("#dlvCommRng")[0];
+            var dateCompleteRadio = document.querySelectorAll("#dlvCompRd1")[0];
+            dateCommenceRadio.checked = true;
+            dateCompleteRadio.checked = true;
+            dateCommenceValue.value = 0;
+
         }
     },
     false
