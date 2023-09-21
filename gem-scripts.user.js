@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeM
 // @namespace    http://tampermonkey.net/
-// @version      1.0.5
+// @version      1.0.6
 // @description  try to take over the world!
 // @author       You
 // @match        https://*.gem.gov.in/*
@@ -14,6 +14,13 @@ window.addEventListener(
     "load",
     function () {
         var pathname = location.pathname;
+
+        var cartWrapper = document.querySelectorAll(".advanced-header-widget")[0].querySelectorAll(".cart-wrapper")[0];
+        var cartLink = cartWrapper.querySelectorAll("a")[0];
+        cartLink.setAttribute("href", "/my_save_list/shopping_cart");
+        var cartLinkNew = cartLink.cloneNode(true);
+        cartWrapper.appendChild(cartLinkNew);
+        cartWrapper.removeChild(cartLink);
 
         if (pathname.startsWith("/finance")) {
             var searchContract = document.querySelectorAll(".search_contract")[0].querySelectorAll("input")[0];

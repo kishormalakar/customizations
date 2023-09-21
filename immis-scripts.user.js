@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.30
+// @version      1.0.31
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -946,6 +946,11 @@ window.addEventListener(
         if (document.title == "Issue of Stores against Registered Requisitions" || document.title == "Run Form - IMMIS/DEP/REQNISSUE") {
             body.classList.add("reqn_issue");
         }
+
+        if (document.title == "Stock Balance Report" || document.title == "Run Form - IMMIS/DEP/STOCKMASTER") {
+            body.classList.add("stockmaster");
+        }
+
     },
     false
 );
