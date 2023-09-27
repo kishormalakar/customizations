@@ -1,9 +1,10 @@
 /* ==UserStyle==
 @name         GeM
 @namespace    github.com/openstyles/stylus
-@version      1.0.3
+@version      1.0.4
 @var color link-color "Link Color" red
 ==/UserStyle== */
+
 @-moz-document domain("gem.gov.in") {
 	.buyer-flags-notification {
 		overflow-wrap: break-word;
@@ -54,24 +55,24 @@
 	}
 	
 	@media (min-width: 1200px){
-		.container {
+		.bid-evaluation .container {
 			width: 1400px !important;
 		}
 
-		.container .sellers_form th:nth-of-type(3),
-		.container .sellers_form td:nth-of-type(3){
+		.bid-evaluation .container .sellers_form th:nth-of-type(3),
+		.bid-evaluation .container .sellers_form td:nth-of-type(3){
 			width: 25% !important;
 		}
 		
-		.container .sellers_form th:nth-of-type(4),
-		.container .sellers_form td:nth-of-type(4){
+		.bid-evaluation .container .sellers_form th:nth-of-type(4),
+		.bid-evaluation .container .sellers_form td:nth-of-type(4){
 			width: 10% !important;
 			max-width: 100px !important;
 			word-break: break-word;
 		}
 		
-		.container .sellers_form th:nth-of-type(5),
-		.container .sellers_form td:nth-of-type(5){
+		.bid-evaluation .container .sellers_form th:nth-of-type(5),
+		.bid-evaluation .container .sellers_form td:nth-of-type(5){
 			width: 10% !important;
 			max-width: 100px !important;
 		}

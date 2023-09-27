@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeM
 // @namespace    http://tampermonkey.net/
-// @version      1.0.6
+// @version      1.0.8
 // @description  try to take over the world!
 // @author       You
 // @match        https://*.gem.gov.in/*
@@ -14,13 +14,16 @@ window.addEventListener(
     "load",
     function () {
         var pathname = location.pathname;
+        var body = document.querySelectorAll("body")[0];
 
-        var cartWrapper = document.querySelectorAll(".advanced-header-widget")[0].querySelectorAll(".cart-wrapper")[0];
-        var cartLink = cartWrapper.querySelectorAll("a")[0];
-        cartLink.setAttribute("href", "/my_save_list/shopping_cart");
-        var cartLinkNew = cartLink.cloneNode(true);
-        cartWrapper.appendChild(cartLinkNew);
-        cartWrapper.removeChild(cartLink);
+        if (document.querySelectorAll(".advanced-header-widget")[0]) {
+            var cartWrapper = document.querySelectorAll(".advanced-header-widget")[0].querySelectorAll(".cart-wrapper")[0];
+            var cartLink = cartWrapper.querySelectorAll("a")[0];
+            cartLink.setAttribute("href", "/my_save_list/shopping_cart");
+            var cartLinkNew = cartLink.cloneNode(true);
+            cartWrapper.appendChild(cartLinkNew);
+            cartWrapper.removeChild(cartLink);
+        }
 
         if (pathname.startsWith("/finance")) {
             var searchContract = document.querySelectorAll(".search_contract")[0].querySelectorAll("input")[0];
@@ -39,8 +42,18 @@ window.addEventListener(
 
             var gstConsignee = form.querySelectorAll("#pi_details_gst_invoice_owner_consignee")[0];
             gstConsignee.checked = true;
+            var billProcessConsigneeNo = form.querySelectorAll("#pi_details_is_consignee_a_bill_processor_false")[0];
+            billProcessConsigneeNo.checked = true;
             var tdsIT = form.querySelectorAll("#pi_details_tds_details_in_checkout_deducted_under_income_tax")[0];
             tdsIT.checked = false;
+            var hodApproval = form.querySelectorAll("#pi_details_ifd_concurrence_rqd_0")[0];
+            hodApproval.checked = true;
+
+            var ifdDiaryNo = form.querySelectorAll("#pi_details_ifd_diary_no")[0];
+            ifdDiaryNo.disabled = true;
+            var ifdDiaryDate = form.querySelectorAll(".pi_details_ifd_diary_date")[0];
+            ifdDiaryDate.disabled = true;
+
             var accountingUnit = form.querySelectorAll("#accounting-unit-dropdown")[0];
             accountingUnit.value = 3003;
             var accountingUnitConfirm = form.querySelectorAll("#accounting-unit-confirm-dropdown")[0];
@@ -48,6 +61,9 @@ window.addEventListener(
         }
 
         if (pathname.startsWith("/buyer-bid-tech-finance-evaluation/")) {
+
+            body.classList.add("bid-evaluation");
+
             document.addEventListener("click", (e) => {
                 if (e.target.classList.contains("mse_prefer_allow") && e.target.value == 1) {
                     document.querySelectorAll("textarea#comment_msepp")[0].value =
@@ -72,7 +88,7 @@ window.addEventListener(
         }
 
         if (pathname.startsWith("/esignservice/api/esignresponse/dscredirect")) {
-            document.querySelectorAll("body")[0].classList.add("dsc_sign");
+            body.classList.add("dsc_sign");
         }
     },
     false
