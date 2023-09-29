@@ -40,7 +40,7 @@ window.addEventListener(
                 financeApproval.value = adminApproval.value;
             });
 
-            var gstConsignee = form.querySelectorAll("#pi_details_gst_invoice_owner_consignee")[0];
+            var gstConsignee = form.querySelectorAll("#pi_details_gst_invoice_owner_Consignee")[0];
             gstConsignee.checked = true;
             var billProcessConsigneeNo = form.querySelectorAll("#pi_details_is_consignee_a_bill_processor_false")[0];
             billProcessConsigneeNo.checked = true;
