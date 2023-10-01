@@ -338,6 +338,7 @@ window.addEventListener(
             let poLinking = () => {
                 var s_6 = body.querySelectorAll("#s_6")[0];
                 var maList = s_6.querySelectorAll("[id^=TrMAList_]");
+                var maNum = maList.length;
 
                 for (i = 0; i < maList.length; i++) {
 
@@ -362,6 +363,11 @@ window.addEventListener(
                     maRow.children[5].appendChild(link);
 
                 }
+
+                var maNumP = document.createElement("h3");
+                var maNumText = document.createTextNode("PO Modification Requests Pending : " + maNum);
+                maNumP.appendChild(maNumText);
+                maList[0].closest("div").insertBefore(maNumP, maList[0].closest("div").children[0]);
             }
 
             poLinking();
@@ -467,7 +473,19 @@ window.addEventListener(
                 }
 
                 if (e.target.id == "SHOW_DR") {
-                    alert("Demand Review");
+
+                    var plHeader = divShowHtml1.querySelectorAll("div")[1].children[0];
+                    var depotDetails = divShowHtml1.querySelectorAll("div")[1].children[1];
+                    var uncoveredDuesDetails = divShowHtml1.querySelectorAll("div")[1].children[4];
+                    var coveredDuesDetails = divShowHtml1.querySelectorAll("div")[1].children[6];
+
+                    var plNo = plHeader.querySelectorAll("tr")[2].children[0].innerText;
+                    var purchaseSection = plHeader.querySelectorAll("tr")[2].children[4].innerText;
+                    var cpMonth = plHeader.querySelectorAll("tr")[2].children[6].innerText;
+                    var nature = plHeader.querySelectorAll("tr")[2].children[8].innerText;
+                    var category = plHeader.querySelectorAll("tr")[2].children[9].innerText;
+                    var itemDescription = plHeader.querySelectorAll("tr")[3].children[0].innerText;
+
                 }
 
                 if (

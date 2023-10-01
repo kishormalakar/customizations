@@ -268,6 +268,12 @@
 		left: calc(50% - 480px) !important;
 	}
 
+    .po_modification #s_6 h3{
+        text-align: center;
+        margin: 5px;
+        color: red;
+    }
+
 	.po_modification #s_6 table td > div {
 		width: 1024px !important;
 		margin-left: calc(50% - 512px) !important;
