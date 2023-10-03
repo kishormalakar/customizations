@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.33
+// @version      1.0.34
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1220,10 +1220,24 @@ window.addEventListener(
 
                     var table6 = row5.querySelectorAll("table")[0];
                     var table6Rows = table6.querySelectorAll("tbody")[0].children;
+                    var cummulativeConsumptionCY = 0;
+                    var cummulativeConsumptionLY = 0;
 
                     for (var q = 0; q < table6Rows.length; q++) {
 
                         var row6 = table6Rows[q];
+
+                        if (row6.children[4]) {
+                            row6.insertBefore(row6.children[4], row6.children[3]);
+
+                            if (!isNaN(parseInt(row6.children[3].innerText))) {
+                                cummulativeConsumptionCY = cummulativeConsumptionCY + parseInt(row6.children[3].innerText);
+                            }
+                            if (!isNaN(parseInt(row6.children[4].innerText))) {
+                                cummulativeConsumptionLY = cummulativeConsumptionLY + parseInt(row6.children[4].innerText);
+                            }
+
+                        }
 
                         if (q == 0) {
 
@@ -1277,8 +1291,6 @@ window.addEventListener(
 
                                 }
                                 if (coveragePO.substring(17, 18) != 8 && coveragePO === coveragePOPrev) {
-                                    console.log(coveragePONo);
-
                                     var tdText1 = document.createTextNode(coverageDepot + ": " + coverageQty + "; DP: " + coverageDP);
                                     var br = document.createElement("br");
                                     var tdNum = row6.lastChild.children[0].querySelectorAll("td").length;
@@ -1290,7 +1302,62 @@ window.addEventListener(
                             row5.nextElementSibling.style.display = "none";
 
                             var uncoveredDuesTable = row5.children[1].querySelectorAll("table")[0];
+                            var uncoveredRows = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
+                            var uncoveredTenderNoArray = [];
 
+                            if (uncoveredRows.length > 1) {
+                                for (var r = 1; r < uncoveredRows.length; r++) {
+                                    var uncoveredDepotArray = uncoveredRows[r].children[0].innerText.split("\n");
+                                    var uncoveredQtyArray = uncoveredRows[r].children[1].innerText.split("\n");
+                                    var uncoveredTender = uncoveredRows[r].children[2].innerText;
+                                    var uncoveredTenderNo = uncoveredTender.split(" ")[1].substring(0, 8);
+
+                                    if (uncoveredTender.startsWith("T/No.") && !uncoveredTenderNoArray.includes(uncoveredTenderNo)) {
+                                        uncoveredTenderNoArray.push(uncoveredTenderNo);
+
+                                        var tr1 = document.createElement("tr");
+                                        var td1 = document.createElement("td");
+                                        var tdText1 = document.createTextNode(uncoveredTender);
+                                        td1.appendChild(tdText1);
+
+                                        uncoveredDepotArray.forEach((uncoveredDepot, s) => {
+                                            var br = document.createElement("br");
+                                            td1.appendChild(br);
+                                            var tdText2 = document.createTextNode(uncoveredDepotArray[s] + ": " + uncoveredQtyArray[s] + "; ");
+                                            td1.appendChild(tdText2);
+                                        });
+
+                                        td1.style.border = "1px solid black";
+                                        tr1.appendChild(td1);
+                                        row6.lastChild.children[0].children[0].appendChild(tr1);
+
+                                    }
+
+                                }
+
+                            }
+
+                            var td1 = document.createElement("td");
+                            td1.setAttribute("rowspan", table6Rows.length - 3);
+                            row6.appendChild(td1);
+
+                            uncoveredDuesTable.style.display = "none";
+                            row5.children[0].setAttribute("width", "100%");
+                            row5.previousElementSibling.querySelectorAll("td")[0].style.border = "1px solid black";
+                            row5.previousElementSibling.querySelectorAll("td")[0].setAttribute("bgcolor", "lightYellow");
+                            row5.previousElementSibling.querySelectorAll("td")[0].setAttribute("colspan", "1");
+
+                        }
+
+                        if (q == table6Rows.length - 1) {
+                            var td1 = document.createElement("td");
+                            var tdText1 = document.createTextNode(cummulativeConsumptionCY);
+                            td1.appendChild(tdText1);
+                            row6.appendChild(td1);
+                            var td2 = document.createElement("td");
+                            var tdText2 = document.createTextNode(cummulativeConsumptionLY);
+                            td2.appendChild(tdText2);
+                            row6.appendChild(td2);
                         }
                     }
                 }
