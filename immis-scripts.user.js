@@ -1259,6 +1259,7 @@ window.addEventListener(
                             var table = document.createElement("table");
                             var tbody = document.createElement("tbody");
                             table.style.borderCollapse = "collapse";
+                            table.setAttribute("width", "100%");
                             table.appendChild(tbody);
                             td0.appendChild(table);
                             td0.setAttribute("rowspan", table6Rows.length - 3);
@@ -1350,18 +1351,31 @@ window.addEventListener(
                         }
 
                         if (q == table6Rows.length - 1) {
-                            var td1 = document.createElement("td");
-                            var tdText1 = document.createTextNode(cummulativeConsumptionCY);
-                            td1.appendChild(tdText1);
-                            row6.appendChild(td1);
-                            var td2 = document.createElement("td");
-                            var tdText2 = document.createTextNode(cummulativeConsumptionLY);
-                            td2.appendChild(tdText2);
-                            row6.appendChild(td2);
+                            var th1 = document.createElement("th");
+                            var thText1 = document.createTextNode(cummulativeConsumptionCY);
+                            th1.appendChild(thText1);
+                            row6.appendChild(th1);
+                            var th2 = document.createElement("th");
+                            var thText2 = document.createTextNode(cummulativeConsumptionLY);
+                            th2.appendChild(thText2);
+                            row6.appendChild(th2);
                         }
                     }
                 }
             }
+        }
+
+        if (document.title == "Manage List Groups for Reports" || document.title == "Run Form - IMMIS/LISTGROUPS") {
+            body.classList.add("manage_list");
+
+            var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_44")[0];
+            plInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab") {
+
+                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_53")[0].focus();
+
+                }
+            });
         }
 
     },
