@@ -53,6 +53,10 @@
 		display: block !important;
 		height: auto !important;
 	}
+    
+	#reviewRejectionModal #challenge_reject{
+		background-color: #f44336;
+	}
 	
 	@media (min-width: 1200px){
 		.bid-evaluation .container {

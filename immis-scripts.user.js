@@ -811,11 +811,21 @@ window.addEventListener(
                         tr3.appendChild(td5);
                         tr3.appendChild(td6);
                         table.appendChild(tr3);
+
+                        var tr4 = document.createElement("tr");
+                        var td7 = document.createElement("td");
+                        var text4 = document.createTextNode("Cancelled Orders");
+                        td7.appendChild(text4);
+                        var td8 = document.createElement("td");
+                        tr4.appendChild(td7);
+                        tr4.appendChild(td8);
+                        table.appendChild(tr4);
                     }
 
                     var numTotalPO = 0;
                     var numPCPO = 0;
                     var numFCPO = 0;
+                    var numCancelledPO = 0;
 
                     var poQty = 0;
                     var cancelledQty = 0;
@@ -870,22 +880,27 @@ window.addEventListener(
                             suppliedQty = row.children[4].innerText == "-" ? 0 : row.children[4].innerText;
                         }
 
-                        if (+suppliedQty > 0 && +suppliedQty < 0.95 * +poQty) {
+                        if (+suppliedQty > 0 && +suppliedQty < 0.95 * +poQty && cancelledQty < 0.50 * poQty) {
                             numPCPO++;
                         }
 
                         if (+suppliedQty >= 0.95 * +poQty) {
                             numFCPO++;
                         }
+
+                        if (cancelledQty >= 0.50 * +poQty) {
+                            numCancelledPO++;
+                        }
                     }
 
                     e.target.closest("tr").nextElementSibling.querySelectorAll("td")[1].innerText = numTotalPO;
-                    e.target.closest("tr").nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText =
-                        numPCPO;
+                    e.target.closest("tr").nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText = numPCPO;
                     e.target
                         .closest("tr")
-                        .nextElementSibling.nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText =
-                        numFCPO;
+                        .nextElementSibling.nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText = numFCPO;
+                    e.target
+                        .closest("tr")
+                        .nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText = numCancelledPO;
                 }
             });
 
