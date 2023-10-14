@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.34
+// @version      1.0.35
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -784,52 +784,64 @@ window.addEventListener(
                     var s_2 = document.querySelectorAll("#s_2")[0];
                     var table = s_2.querySelectorAll("tbody")[0];
 
-                    if (!e.target.closest("tr").nextSibling) {
+                    if (!e.target.closest("table").nextSibling) {
+                        var table1 = document.createElement("table");
+                        var tbody1 = document.createElement("tbody");
+
                         var tr1 = document.createElement("tr");
-                        var td1 = document.createElement("td");
+                        var td1 = document.createElement("th");
                         var text1 = document.createTextNode("Total Orders");
+                        var td2 = document.createElement("th");
+                        var text2 = document.createTextNode("Fully Completed");
+                        var td3 = document.createElement("th");
+                        var text3 = document.createTextNode("Partly Completed");
+                        var td4 = document.createElement("th");
+                        var text4 = document.createTextNode("Cancelled");
+                        var td5 = document.createElement("th");
+                        var text5 = document.createTextNode("Failed");
+
                         td1.appendChild(text1);
-                        var td2 = document.createElement("td");
+                        td2.appendChild(text2);
+                        td3.appendChild(text3);
+                        td4.appendChild(text4);
+                        td5.appendChild(text5);
                         tr1.appendChild(td1);
                         tr1.appendChild(td2);
-                        table.appendChild(tr1);
+                        tr1.appendChild(td3);
+                        tr1.appendChild(td4);
+                        tr1.appendChild(td5);
 
                         var tr2 = document.createElement("tr");
-                        var td3 = document.createElement("td");
-                        var text2 = document.createTextNode("Partly Supplied");
-                        td3.appendChild(text2);
-                        var td4 = document.createElement("td");
-                        tr2.appendChild(td3);
-                        tr2.appendChild(td4);
-                        table.appendChild(tr2);
-
-                        var tr3 = document.createElement("tr");
-                        var td5 = document.createElement("td");
-                        var text3 = document.createTextNode("Fully Supplied");
-                        td5.appendChild(text3);
                         var td6 = document.createElement("td");
-                        tr3.appendChild(td5);
-                        tr3.appendChild(td6);
-                        table.appendChild(tr3);
-
-                        var tr4 = document.createElement("tr");
                         var td7 = document.createElement("td");
-                        var text4 = document.createTextNode("Cancelled Orders");
-                        td7.appendChild(text4);
                         var td8 = document.createElement("td");
-                        tr4.appendChild(td7);
-                        tr4.appendChild(td8);
-                        table.appendChild(tr4);
+                        var td9 = document.createElement("td");
+                        var td10 = document.createElement("td");
+
+                        tr2.appendChild(td6);
+                        tr2.appendChild(td7);
+                        tr2.appendChild(td8);
+                        tr2.appendChild(td9);
+                        tr2.appendChild(td10);
+
+                        tbody1.appendChild(tr1);
+                        tbody1.appendChild(tr2);
+                        table1.appendChild(tbody1);
+                        table1.setAttribute("border", "1");
+
+                        e.target.closest("table").parentElement.appendChild(table1);
                     }
 
                     var numTotalPO = 0;
                     var numPCPO = 0;
                     var numFCPO = 0;
                     var numCancelledPO = 0;
+                    var numFailedPO = 0;
 
                     var poQty = 0;
                     var cancelledQty = 0;
                     var suppliedQty = 0;
+                    var poStatus = "";
 
                     var s_3 = document.querySelectorAll("#s_3")[0];
                     var rows =
@@ -843,6 +855,7 @@ window.addEventListener(
                             poQty = row.children[3].innerText.split(" ")[0];
                             cancelledQty = row.children[4].innerText == "-" ? 0 : row.children[4].innerText;
                             suppliedQty = row.children[5].innerText == "-" ? 0 : row.children[5].innerText;
+                            poStatus = row.children[8].innerText;
 
                             var poZone = row.children[0].innerHTML.split("<hr>")[0];
                             var poNo = row.children[0].querySelectorAll("b")[0].innerText;
@@ -878,6 +891,8 @@ window.addEventListener(
                             poQty = row.children[2].innerText.split(" ")[0];
                             cancelledQty = row.children[3].innerText == "-" ? 0 : row.children[3].innerText;
                             suppliedQty = row.children[4].innerText == "-" ? 0 : row.children[4].innerText;
+                            poStatus = row.children[7].innerText;
+
                         }
 
                         if (+suppliedQty > 0 && +suppliedQty < 0.95 * +poQty && cancelledQty < 0.50 * poQty) {
@@ -891,16 +906,17 @@ window.addEventListener(
                         if (cancelledQty >= 0.50 * +poQty) {
                             numCancelledPO++;
                         }
+
+                        if (cancelledQty == 0 && suppliedQty == 0 && poStatus == "D/P Expired") {
+                            numFailedPO++;
+                        }
                     }
 
-                    e.target.closest("tr").nextElementSibling.querySelectorAll("td")[1].innerText = numTotalPO;
-                    e.target.closest("tr").nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText = numPCPO;
-                    e.target
-                        .closest("tr")
-                        .nextElementSibling.nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText = numFCPO;
-                    e.target
-                        .closest("tr")
-                        .nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.querySelectorAll("td")[1].innerText = numCancelledPO;
+                    e.target.closest("table").nextElementSibling.querySelectorAll("td")[0].innerText = numTotalPO;
+                    e.target.closest("table").nextElementSibling.querySelectorAll("td")[1].innerText = numFCPO + " ( " + Math.round(numFCPO / numTotalPO * 100) + "% )";
+                    e.target.closest("table").nextElementSibling.querySelectorAll("td")[2].innerText = numPCPO + " ( " + Math.round(numPCPO / numTotalPO * 100) + "% )";
+                    e.target.closest("table").nextElementSibling.querySelectorAll("td")[3].innerText = numCancelledPO + " ( " + Math.round(numCancelledPO / numTotalPO * 100) + "% )";
+                    e.target.closest("table").nextElementSibling.querySelectorAll("td")[4].innerText = numFailedPO + " ( " + Math.round(numFailedPO / numTotalPO * 100) + "% )";
                 }
             });
 
