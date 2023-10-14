@@ -180,6 +180,82 @@ window.addEventListener(
             dateCommenceValue.value = 0;
 
         }
+
+        if (pathname.startsWith("/epsn/reports/viewTenders.do")) {
+
+            var tenderTable = document.querySelectorAll("table")[0].querySelectorAll("tr")[1].querySelectorAll("table")[0];
+            var tenderRows = tenderTable.querySelectorAll("tbody")[0].children;
+
+            var numTotalTenders = 0;
+            var numTotalOrders = 0;
+            var numTotalRetenders = 0;
+            var valueTotalTenders = 0;
+
+            for (var i = 1; i < tenderRows.length; i++) {
+
+                var tenderRow = tenderRows[i];
+                var tenderDecision = tenderRow.querySelectorAll("td")[9].innerText;
+                numTotalTenders++;
+                valueTotalTenders = valueTotalTenders + parseInt(tenderRow.children[6].innerText);
+
+                if (tenderDecision.includes("Ord.") || tenderDecision.includes("COA")) {
+                    numTotalOrders++;
+                }
+                else {
+                    numTotalRetenders++;
+                }
+            }
+
+            var table1 = document.createElement("table");
+            var tbody1 = document.createElement("tbody");
+
+            var tr1 = document.createElement("tr");
+            var td1 = document.createElement("th");
+            var text1 = document.createTextNode("Total Tenders");
+            var td2 = document.createElement("th");
+            var text2 = document.createTextNode("Total Tender Value");
+            var td3 = document.createElement("th");
+            var text3 = document.createTextNode("Successful Tenders");
+            var td4 = document.createElement("th");
+            var text4 = document.createTextNode("Retender/Discharge");
+            td1.appendChild(text1);
+            td2.appendChild(text2);
+            td3.appendChild(text3);
+            td4.appendChild(text4);
+            tr1.appendChild(td1);
+            tr1.appendChild(td2);
+            tr1.appendChild(td3);
+            tr1.appendChild(td4);
+
+            var tr2 = document.createElement("tr");
+            var td5 = document.createElement("td");
+            var text5 = document.createTextNode(numTotalTenders);
+            var td6 = document.createElement("td");
+            var text6 = document.createTextNode(valueTotalTenders);
+            var td7 = document.createElement("td");
+            var text7 = document.createTextNode(numTotalOrders + " ( " + Math.round(numTotalOrders / numTotalTenders * 100) + "% )");
+            var td8 = document.createElement("td");
+            var text8 = document.createTextNode(numTotalRetenders + " ( " + Math.round(numTotalRetenders / numTotalTenders * 100) + "% )");
+            td5.appendChild(text5);
+            td6.appendChild(text6);
+            td7.appendChild(text7);
+            td8.appendChild(text8);
+            tr2.appendChild(td5);
+            tr2.appendChild(td6);
+            tr2.appendChild(td7);
+            tr2.appendChild(td8);
+
+            tbody1.appendChild(tr1);
+            tbody1.appendChild(tr2);
+            table1.appendChild(tbody1);
+            table1.style.border = "1px solid black";
+            table1.style.borderCollapse = "collapse";
+            table1.setAttribute("border", "1");
+            tr1.style.backgroundColor = "#25A6E1";
+            tr1.style.color = "white";
+
+            tenderTable.parentElement.insertBefore(table1, tenderTable);
+        }
     },
     false
 );
