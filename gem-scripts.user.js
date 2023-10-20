@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeM
 // @namespace    http://tampermonkey.net/
-// @version      1.0.8
+// @version      1.0.9
 // @description  try to take over the world!
 // @author       You
 // @match        https://*.gem.gov.in/*
@@ -89,6 +89,17 @@ window.addEventListener(
 
         if (pathname.startsWith("/esignservice/api/esignresponse/dscredirect")) {
             body.classList.add("dsc_sign");
+
+            var tokenSelect = body.querySelectorAll("#tokenSelect")[0];
+            var certSelect = body.querySelectorAll("#certSelect")[0];
+            var passwordInput = body.querySelectorAll("#password")[0];
+            var signButton = body.querySelectorAll("#signButton")[0];
+
+            tokenSelect.tabIndex = 1;
+            certSelect.tabIndex = 2;
+            passwordInput.tabIndex = 3;
+            signButton.tabIndex = 4;
+
         }
     },
     false

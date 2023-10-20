@@ -61,6 +61,9 @@
         var purchaseOrderDetailsForm = document.querySelectorAll("#purchaseOrderDetailsForm")[0];
         var buttonRow = purchaseOrderDetailsForm.lastChild.previousElementSibling.previousElementSibling.previousElementSibling.querySelectorAll("div")[0];
 
+        var departmentSelect = purchaseOrderDetailsForm.querySelectorAll("select#department")[0];
+        departmentSelect.selectedIndex = 0;
+
         var descriptionDiv = purchaseOrderDetailsForm.querySelectorAll(":scope > div")[3];
         descriptionDiv.querySelectorAll("select")[0].value = "AND";
 

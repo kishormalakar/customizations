@@ -138,7 +138,7 @@ window.addEventListener(
 
                     var listOffsetTop;
                     var listOffsetLeft;
-                    listOffsetTop = e.target.closest("tr").offsetHeight;
+                    listOffsetTop = e.target.closest("tr").offsetHeight + 5;
 
                     if (+e.target.offsetTop == 0 && +e.target.offsetLeft == 0) {
                         listOffsetLeft = +e.clientX;
