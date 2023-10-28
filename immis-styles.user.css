@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.28
+@version      1.0.29
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -736,7 +736,9 @@
     .list_position > table > tbody > tr > td > table > tbody > tr > th:nth-of-type(4),
     .list_position > table > tbody > tr > td > table > tbody > tr > td:nth-of-type(4),
     .list_position > table > tbody > tr > td > table > tbody > tr > th:nth-of-type(5),
-    .list_position > table > tbody > tr > td > table > tbody > tr > td:nth-of-type(5){
+    .list_position > table > tbody > tr > td > table > tbody > tr > td:nth-of-type(5),
+    .list_position > table > tbody > tr > td > table > tbody > tr > th:nth-of-type(6),
+    .list_position > table > tbody > tr > td > table > tbody > tr > td:nth-of-type(6){
         width: 100px;
         text-align: center;
     }
@@ -746,8 +748,8 @@
         text-align: left;
     }
     
-    .list_position > table > tbody > tr > td > table > tbody > tr > th:nth-of-type(7),
-    .list_position > table > tbody > tr > td > table > tbody > tr > td:nth-of-type(7){
+    .list_position > table > tbody > tr > td > table > tbody > tr > th:nth-of-type(8),
+    .list_position > table > tbody > tr > td > table > tbody > tr > td:nth-of-type(88){
         width: 200px;
     }
 }

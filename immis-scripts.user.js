@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.35
+// @version      1.0.36
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1096,10 +1096,11 @@ window.addEventListener(
                         for (var j = 1; j < table2Rows.length; j++) {
 
                             var row2 = table2Rows[j];
-                            row2.children[7].remove();
+                            /*row2.children[7].remove();
+                            row2.children[6].remove();
                             row2.children[5].remove();
                             row2.children[3].remove();
-                            row2.children[1].remove();
+                            row2.children[1].remove();*/
 
                         }
                     }
@@ -1201,8 +1202,11 @@ window.addEventListener(
                             if (row6.children[0].querySelectorAll("br")) {
 
                                 var depotArray = row6.children[0].innerText.split("\n");
-                                var dueQtyArray = row6.children[1].innerText.split("\n");
-                                var dpArray = row6.children[2].innerText.split("\n");
+                                var poQtyArray = row6.children[1].innerText.split("\n");
+                                var dueQtyArray = row6.children[2].innerText.split("\n");
+                                var rateArray = row6.children[3].innerText.split("\n");
+                                var dpArray = row6.children[4].innerText.split("\n");
+                                var poSerialArray = row6.children[5].innerText.split("\n");
 
                                 for (var n = 0; n < depotArray.length; n++) {
 
@@ -1214,27 +1218,124 @@ window.addEventListener(
                                     tr.appendChild(td1);
 
                                     var td2 = document.createElement("td");
-                                    var tdText2 = document.createTextNode(dueQtyArray[n]);
+                                    var tdText2 = document.createTextNode(poQtyArray[n]);
                                     td2.appendChild(tdText2);
                                     tr.appendChild(td2);
 
                                     var td3 = document.createElement("td");
-                                    var tdText3 = document.createTextNode(dpArray[n]);
+                                    var tdText3 = document.createTextNode(dueQtyArray[n]);
                                     td3.appendChild(tdText3);
                                     tr.appendChild(td3);
 
                                     var td4 = document.createElement("td");
-                                    var tdText4 = document.createTextNode(row6.children[3].innerText);
+                                    var tdText4 = document.createTextNode(rateArray[n]);
                                     td4.appendChild(tdText4);
                                     tr.appendChild(td4);
 
+                                    var td5 = document.createElement("td");
+                                    var tdText5 = document.createTextNode(dpArray[n]);
+                                    td5.appendChild(tdText5);
+                                    tr.appendChild(td5);
+
+                                    var td6 = document.createElement("td");
+                                    var tdText6 = document.createTextNode(poSerialArray[n]);
+                                    td6.appendChild(tdText6);
+                                    tr.appendChild(td6);
+
+                                    var td7 = document.createElement("td");
+                                    var tdText7 = document.createTextNode(row6.children[6].innerText);
+                                    td7.appendChild(tdText7);
+                                    tr.appendChild(td7);
+
                                     row6.parentElement.insertBefore(tr, row6);
 
-                                    if (n == depotArray.length - 1) {
-                                        row6.remove();
-                                    }
+                                }
+
+                                if (row6.children[7] && (row6.children[7].innerText.includes("DRR") || row6.children[7].innerText.includes("ISL"))) {
+
+                                    var accountalArray = row6.children[7].innerText.split(/DRR:|ISL:|R\/N:|Rej:/);
+
+                                    for (var i = 1; i < accountalArray.length; i++) {
+
+                                        var accountalRow = accountalArray[i];
+
+                                        var tr2 = document.createElement("tr");
+
+                                        var td1 = document.createElement("td");
+                                        var tdText1 = document.createTextNode("Material under accountal at " + accountalRow.substring(0, accountalRow.indexOf(" ") - 9));
+                                        td1.appendChild(tdText1);
+                                        tr2.appendChild(td1);
+
+                                        var td2 = document.createElement("td");
+                                        var tdText2 = document.createTextNode("NA");
+                                        td2.appendChild(tdText2);
+                                        tr2.appendChild(td2);
+
+                                        var td3 = document.createElement("td");
+                                        var tdText3 = document.createTextNode(accountalRow.substring(accountalRow.indexOf("for") + 4));
+                                        td3.appendChild(tdText3);
+                                        tr2.appendChild(td3);
+
+                                        var td4 = document.createElement("td");
+                                        var tdText4 = document.createTextNode("NA");
+                                        td4.appendChild(tdText4);
+                                        tr2.appendChild(td4);
+
+                                        var td5 = document.createElement("td");
+                                        var tdText5 = document.createTextNode(accountalRow.substring(accountalRow.indexOf("dt.") + 3, accountalRow.indexOf("dt.") + 11));
+                                        td5.appendChild(tdText5);
+                                        tr2.appendChild(td5);
+
+                                        var td6 = document.createElement("td");
+                                        var tdText6 = document.createTextNode("NA");
+                                        td6.appendChild(tdText6);
+                                        tr2.appendChild(td6);
+
+                                        var td7 = document.createElement("td");
+                                        var tdText7 = document.createTextNode(row6.children[6].innerText);
+                                        /*var tdText7 = document.createTextNode(row6.children[7].innerText.substring(row6.children[7].innerText.indexOf("for")+4));*/
+                                        td7.appendChild(tdText7);
+                                        tr2.appendChild(td7);
+
+                                        row6.parentElement.insertBefore(tr2, row6);
+
+                                    };
 
                                 }
+
+                                row6.remove();
+
+                            }
+
+                            else {
+
+                                var depot = row6.children[0].innerText;
+                                var dueQty = row6.children[2].innerText;
+                                var dp = row6.children[4].innerText;
+
+                                var tr = document.createElement("tr");
+
+                                var td1 = document.createElement("td");
+                                var tdText1 = document.createTextNode(depot);
+                                td1.appendChild(tdText1);
+                                tr.appendChild(td1);
+
+                                var td2 = document.createElement("td");
+                                var tdText2 = document.createTextNode(dueQty);
+                                td2.appendChild(tdText2);
+                                tr.appendChild(td2);
+
+                                var td3 = document.createElement("td");
+                                var tdText3 = document.createTextNode(dp);
+                                td3.appendChild(tdText3);
+                                tr.appendChild(td3);
+
+                                var td4 = document.createElement("td");
+                                var tdText4 = document.createTextNode(row6.children[6].innerText);
+                                td4.appendChild(tdText4);
+                                tr.appendChild(td4);
+
+                                row6.parentElement.insertBefore(tr, row6);
 
                             }
 
@@ -1251,6 +1352,8 @@ window.addEventListener(
 
                     var table6 = row5.querySelectorAll("table")[0];
                     var table6Rows = table6.querySelectorAll("tbody")[0].children;
+                    var coverageTable = row5.nextElementSibling.querySelectorAll("table")[0];
+                    var coverageRows = coverageTable.querySelectorAll("tbody")[0].children;
                     var cummulativeConsumptionCY = 0;
                     var cummulativeConsumptionLY = 0;
 
@@ -1270,8 +1373,33 @@ window.addEventListener(
 
                         }
 
+                        if (q >= 2 && q < table6Rows.length - 1) {
+
+                            var depotName = row6.children[0].innerText;
+                            var totalCoverageQty = 0;
+                            for (var r = 2; r < coverageRows.length; r++) {
+                                var coverageDepot = coverageRows[r].children[0].innerText;
+                                var coverageQty = coverageRows[r].children[2].innerText;
+                                var coveragePO = coverageRows[r].children[6].innerText;
+
+                                if (coverageDepot == depotName && coveragePO.substring(17, 18) != 8) {
+                                    totalCoverageQty = +totalCoverageQty + +coverageQty;
+                                }
+                            }
+                            var td = document.createElement("td");
+                            var tdText = document.createTextNode(Math.round(totalCoverageQty * 100) / 100);
+                            td.appendChild(tdText);
+                            td.style.border = "1px solid black";
+                            row6.appendChild(td);
+
+                        }
+
                         if (q == 0) {
 
+                            var th0 = document.createElement("th");
+                            var thText0 = document.createTextNode("Dues");
+                            th0.appendChild(thText0);
+                            row6.appendChild(th0);
                             var th1 = document.createElement("th");
                             var thText1 = document.createTextNode("Coverage");
                             th1.appendChild(thText1);
@@ -1296,15 +1424,12 @@ window.addEventListener(
                             td0.setAttribute("rowspan", table6Rows.length - 3);
                             row6.appendChild(td0);
 
-                            var coverageTable = row5.nextElementSibling.querySelectorAll("table")[0];
-                            var coverageRows = coverageTable.querySelectorAll("tbody")[0].children;
-
                             for (var r = 2; r < coverageRows.length; r++) {
                                 var coverageDepot = coverageRows[r].children[0].innerText;
-                                var coverageQty = coverageRows[r].children[1].innerText;
-                                var coverageDP = coverageRows[r].children[2].innerText;
-                                var coveragePO = coverageRows[r].children[3].innerText;
-                                var coveragePOPrev = coverageRows[r - 1].children[3].innerText;
+                                var coverageQty = coverageRows[r].children[2].innerText;
+                                var coverageDP = coverageRows[r].children[4].innerText;
+                                var coveragePO = coverageRows[r].children[6].innerText;
+                                var coveragePOPrev = coverageRows[r - 1].children[6].innerText;
                                 var coveragePONo = coveragePO.substring(9, 23);
                                 var coveragePOPrevNo = coveragePOPrev.substring(9, 23);
 
@@ -1312,7 +1437,13 @@ window.addEventListener(
                                     var tr1 = document.createElement("tr");
                                     var td1 = document.createElement("td");
                                     var tdText1 = document.createTextNode(coveragePO);
-                                    var tdText2 = document.createTextNode(coverageDepot + ": " + coverageQty + "; DP: " + coverageDP);
+                                    var tdText2;
+                                    if (coverageDepot.startsWith("Material under accountal")) {
+                                        tdText2 = document.createTextNode(coverageDepot + ": " + coverageQty + "; Date: " + coverageDP);
+                                    }
+                                    else {
+                                        tdText2 = document.createTextNode(coverageDepot + ": " + coverageQty + "; DP: " + coverageDP);
+                                    }
                                     var br = document.createElement("br");
                                     td1.style.border = "1px solid black";
                                     td1.appendChild(tdText1);
@@ -1323,7 +1454,13 @@ window.addEventListener(
 
                                 }
                                 if (coveragePO.substring(17, 18) != 8 && coveragePO === coveragePOPrev) {
-                                    var tdText1 = document.createTextNode(coverageDepot + ": " + coverageQty + "; DP: " + coverageDP);
+                                    var tdText1;
+                                    if (coverageDepot.startsWith("Material under accountal")) {
+                                        tdText1 = document.createTextNode(coverageDepot + ": " + coverageQty + "; Date: " + coverageDP);
+                                    }
+                                    else {
+                                        tdText1 = document.createTextNode(coverageDepot + ": " + coverageQty + "; DP: " + coverageDP);
+                                    }
                                     var br = document.createElement("br");
                                     var tdNum = row6.lastChild.children[0].querySelectorAll("td").length;
                                     row6.lastChild.children[0].querySelectorAll("td")[tdNum - 1].appendChild(br);
@@ -1391,7 +1528,9 @@ window.addEventListener(
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
                         }
+
                     }
+
                 }
             }
         }
