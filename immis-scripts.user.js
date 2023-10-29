@@ -340,10 +340,16 @@ window.addEventListener(
                 var maList = s_6.querySelectorAll("[id^=TrMAList_]");
                 var maNum = maList.length;
 
+                var th = document.createElement("th");
+                var thText = document.createTextNode("Officer");
+                th.appendChild(thText);
+                maList[0].previousElementSibling.insertBefore(th, maList[0].previousElementSibling.children[6]);
+
                 for (i = 0; i < maList.length; i++) {
 
                     var maRow = maList[i];
-                    var poNo = maRow.children[5].innerText;
+                    var poNo = maRow.children[5].innerText.substring(0, 15);
+                    var officer = maRow.children[5].innerText.substring(15);
                     var poYear = "20" + poNo.substring(2, 4);
                     var poZone = currentZone;
 
@@ -362,6 +368,11 @@ window.addEventListener(
                     link.target = "_blank";
                     maRow.children[5].innerText = "";
                     maRow.children[5].appendChild(link);
+
+                    var td = document.createElement("td");
+                    var tdText = document.createTextNode(officer);
+                    td.appendChild(tdText);
+                    maRow.insertBefore(td, maRow.children[6]);
 
                 }
 
