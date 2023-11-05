@@ -771,7 +771,24 @@
     }
     
     .qty_review_div table td:nth-child(1){
-        width: 150px;    
+        width: 120px;    
+    }
+    
+    .qty_review_div table:nth-child(1) td{
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .qty_review_div table:nth-child(3) tr:nth-child(1),
+    .qty_review_div table:nth-child(3) tr:nth-child(2){
+        font-weight: bold;
+    }
+    
+    .qty_review_div table:nth-child(4) tbody > tr:nth-child(1),
+    .qty_review_div table:nth-child(4) tbody > tr:nth-child(2),
+    .qty_review_div table:nth-child(5) tbody > tr:nth-child(1),
+    .qty_review_div table:nth-child(5) tbody > tr:nth-child(2){
+        font-weight: bold;
     }
     
     .qty_review_div table:nth-child(4) td:nth-child(2) tr,
@@ -801,5 +818,51 @@
     
     .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(4){
         width: 100px;
+    }
+    
+    .qty_review_div table:nth-child(3) td:nth-child(n+2){
+        text-align: center;    
+        width: calc((960px - 120px)/5)
+    }
+    
+    .qty_review_div table:nth-child(4) td:nth-child(3){
+        text-align: center; 
+        width: 80px;
+    }
+    
+    .qty_review_div table:nth-child(4) td:nth-child(2) td:nth-child(2){
+        text-align: center;    
+    }
+    
+    .qty_review_div table:nth-child(5) tbody > tr > td:nth-child(3){
+        text-align: center;  
+        width: 80px;
+    }
+    
+    .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(4){
+        text-align: center;    
+    }
+    
+    .qty_review_div table:nth-child(6) tr:nth-child(1){
+        font-weight: bold;
+    }
+    
+    .qty_review_div table:nth-child(6) td:nth-child(n+3){
+        text-align: center;    
+    }
+    
+    .qty_review_div table:nth-child(7) tr:nth-child(1),
+    .qty_review_div table:nth-child(7) tr:nth-child(2),
+    .qty_review_div table:nth-child(7) tr:last-child{
+        font-weight: bold;
+    }
+    
+    .qty_review_div table:nth-child(7) td:last-child{
+        font-weight: bold;
+    }
+    
+    .qty_review_div table:nth-child(7) td:nth-child(n+2){
+        text-align: center;
+        width: calc((100% - 100px)/9);
     }
 }

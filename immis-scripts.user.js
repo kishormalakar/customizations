@@ -391,7 +391,7 @@ window.addEventListener(
 
             var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_34")[0];
             maKeyInput.addEventListener("keydown", (e) => {
-                if (e.key === "Tab") {
+                if (e.key === "Tab" || e.key === "Enter") {
 
                     document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_54")[0].focus();
 
@@ -408,7 +408,7 @@ window.addEventListener(
 
             var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
             poKeyInput.addEventListener("keydown", (e) => {
-                if (e.key === "Tab") {
+                if (e.key === "Tab" || e.key === "Enter") {
 
                     document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_27")[0].focus();
 
@@ -615,7 +615,7 @@ window.addEventListener(
 
             var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_11")[0];
             plInput.addEventListener("keydown", (e) => {
-                if (e.key === "Tab") {
+                if (e.key === "Tab" || e.key === "Enter") {
 
                     document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_15")[0].focus();
 
@@ -628,7 +628,7 @@ window.addEventListener(
 
             var ppInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_111")[0];
             ppInput.addEventListener("keydown", (e) => {
-                if (e.key === "Tab") {
+                if (e.key === "Tab" || e.key === "Enter") {
 
                     document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_187")[0].focus();
 
@@ -934,7 +934,7 @@ window.addEventListener(
             });
 
             vendorNameInput.addEventListener("keydown", (e) => {
-                if (e.key === "Tab") {
+                if (e.key === "Tab" || e.key === "Enter") {
                     e.target.nextElementSibling.click();
                 }
             });
@@ -1553,7 +1553,7 @@ window.addEventListener(
 
             var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_44")[0];
             plInput.addEventListener("keydown", (e) => {
-                if (e.key === "Tab") {
+                if (e.key === "Tab" || e.key === "Enter") {
 
                     document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_53")[0].focus();
 
@@ -1567,7 +1567,7 @@ window.addEventListener(
             let getData = () => {
 
                 var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
-                var date = divShowHtml1.children[1].querySelectorAll(":scope > table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[1].innerText.substring(6, 14);
+                var date = divShowHtml1.children[1].querySelectorAll(":scope > table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[1].innerText.substring(7, 15);
                 var plNo = divShowHtml1.children[1].querySelectorAll(":scope > table")[0].querySelectorAll("tr")[1].querySelectorAll("td")[0].querySelectorAll("b")[0].innerText.substring(7);
                 var itemDescription = divShowHtml1.children[1].querySelectorAll(":scope > table")[0].querySelectorAll("tr")[1].querySelectorAll("td")[1].innerText;
                 var descriptionText = divShowHtml1.children[1].querySelectorAll(":scope > table")[0].querySelectorAll("tr")[2].querySelectorAll("td")[0].innerText;
@@ -1881,6 +1881,9 @@ window.addEventListener(
                     var optionQ62 = document.createElement("option");
                     optionQ62.value = "Consider";
                     optionQ62.innerHTML = "Consider";
+                    if (uncoveredDuesArray[i][0].substring(0, 1) == uncoveredDuesArray[i][4].substring(0, 1)) {
+                        optionQ62.setAttribute("selected", "selected");
+                    }
                     selectQ6.appendChild(optionQ62);
                     tdQ6.appendChild(selectQ6);
                     trQ.appendChild(tdQ1);
@@ -2003,10 +2006,17 @@ window.addEventListener(
                 var tbody1 = document.createElement("tbody");
                 var tr1 = document.createElement("tr");
                 var td1 = document.createElement("td");
-                var text1 = document.createTextNode("Quantity Review Sheet");
+                var text1 = document.createTextNode("QUANTITY REVIEW SHEET");
                 td1.appendChild(text1);
                 tr1.appendChild(td1);
                 tbody1.appendChild(tr1);
+                var tr2 = document.createElement("tr");
+                var td2 = document.createElement("td");
+                var text2 = document.createTextNode("Date: " + date);
+                td2.appendChild(text2);
+                tr2.appendChild(td2);
+                tbody1.appendChild(tr1);
+                tbody1.appendChild(tr2);
                 table1.appendChild(tbody1);
                 div.appendChild(table1);
 
@@ -2058,6 +2068,7 @@ window.addEventListener(
                 var td1 = document.createElement("td");
                 var text1 = document.createTextNode("Stock and Consumption History");
                 td1.appendChild(text1);
+                td1.setAttribute("colspan", 6);
                 tr1.appendChild(td1);
                 var tr2 = document.createElement("tr");
                 var td2 = document.createElement("td");
@@ -2127,6 +2138,7 @@ window.addEventListener(
                 var td1 = document.createElement("td");
                 var text1 = document.createTextNode("Covered Dues");
                 td1.appendChild(text1);
+                td1.setAttribute("colspan", 3);
                 tr1.appendChild(td1);
                 var tr2 = document.createElement("tr");
                 var td2 = document.createElement("td");
@@ -2212,6 +2224,7 @@ window.addEventListener(
                 var td11 = document.createElement("td");
                 var text11 = document.createTextNode("Uncovered Dues");
                 td11.appendChild(text11);
+                td11.setAttribute("colspan", 3);
                 tr1.appendChild(td11);
                 var tr2 = document.createElement("tr");
                 var td21 = document.createElement("td");
@@ -2312,8 +2325,9 @@ window.addEventListener(
                 var tbody1 = document.createElement("tbody");
                 var tr1 = document.createElement("tr");
                 var td1 = document.createElement("td");
-                var text1 = document.createTextNode("Calculation");
+                var text1 = document.createTextNode("Period Under Consideration");
                 td1.appendChild(text1);
+                td1.setAttribute("colspan", 3);
                 tr1.appendChild(td1);
 
                 var tr2 = document.createElement("tr");
@@ -2367,6 +2381,12 @@ window.addEventListener(
 
                 var table1 = document.createElement("table");
                 var tbody1 = document.createElement("tbody");
+                var tr1 = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var text1 = document.createTextNode("Net Requirements");
+                td1.appendChild(text1);
+                td1.setAttribute("colspan", 10);
+                tr1.appendChild(td1);
                 var tr2 = document.createElement("tr");
                 var td2 = document.createElement("td");
                 var text2 = document.createTextNode("Depot");
@@ -2408,6 +2428,7 @@ window.addEventListener(
                 tr2.appendChild(td9);
                 tr2.appendChild(td10);
                 tr2.appendChild(td11);
+                tbody1.appendChild(tr1);
                 tbody1.appendChild(tr2);
 
                 for (var i = 0; i <= depotArray.length; i++) {
@@ -2562,6 +2583,15 @@ window.addEventListener(
                     a.document.write('</body></html>');
                     a.document.close();
                     a.print();
+                }
+            });
+
+            var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_7")[0];
+            plInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab" || e.key === "Enter") {
+
+                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_13")[0].focus();
+
                 }
             });
         }
