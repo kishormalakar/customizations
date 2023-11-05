@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.29
+@version      1.0.30
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -275,8 +275,8 @@
     }
 
 	.po_modification #s_6 table td > div {
-		width: 1024px !important;
-		margin-left: calc(50% - 512px) !important;
+		width: 1200px !important;
+		margin-left: calc(50% - 600px) !important;
 		height: auto !important;
 	}
 
@@ -300,10 +300,6 @@
 	.po_modification #s_6 > table:nth-of-type(2) {
 		width: unset !important;
 		min-height: 300px;
-	}
-
-	.po_modification #s_6 table th:nth-of-type(8) {
-		width: 300px !important;
 	}
 
 	.po_modification #s_6 div > table td {
@@ -751,5 +747,59 @@
     .list_position > table > tbody > tr > td > table > tbody > tr > th:nth-of-type(8),
     .list_position > table > tbody > tr > td > table > tbody > tr > td:nth-of-type(88){
         width: 200px;
+    }
+    
+    .qty_review_div{
+        max-width: 960px;
+    }
+    
+    .qty_review_div table,
+    .qty_review_div tr,
+    .qty_review_div td{
+        border-collapse: collapse;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .qty_review_div > table{
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .qty_review_div table td{
+        border: 1px solid black;
+    }
+    
+    .qty_review_div table td:nth-child(1){
+        width: 150px;    
+    }
+    
+    .qty_review_div table:nth-child(4) td:nth-child(2) tr,
+    .qty_review_div table:nth-child(5) td:nth-child(2) tr{
+        display: flex;
+    }
+    
+    .qty_review_div table:nth-child(4) td:nth-child(2) td:nth-child(1){
+        width: 80%;
+    }
+    
+    .qty_review_div table:nth-child(4) td:nth-child(2) td:nth-child(2){
+        width: 20%;
+    }
+    
+    .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(1){
+        width: 150px;
+    }
+    
+    .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(2){
+        width: 100px;
+    }
+    
+    .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(3){
+        width: calc(100% - 350px)
+    }
+    
+    .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(4){
+        width: 100px;
     }
 }
