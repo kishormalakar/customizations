@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.30
+@version      1.0.31
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -749,6 +749,11 @@
         width: 200px;
     }
     
+    .quantity_review #divShowHtml1{
+        background-color: white !important;
+        border-color: black !important;
+    }
+    
     .qty_review_div{
         max-width: 960px;
     }
@@ -759,6 +764,10 @@
         border-collapse: collapse;
         padding: 0;
         box-sizing: border-box;
+    }
+    
+    .qty_review_div td{
+        padding: 2px;
     }
     
     .qty_review_div > table{
@@ -791,6 +800,11 @@
         font-weight: bold;
     }
     
+    .qty_review_div table:nth-child(4) td:nth-child(2),
+    .qty_review_div table:nth-child(5) td:nth-child(2){
+        padding: 0;
+    }
+    
     .qty_review_div table:nth-child(4) td:nth-child(2) tr,
     .qty_review_div table:nth-child(5) td:nth-child(2) tr{
         display: flex;
@@ -802,6 +816,8 @@
     
     .qty_review_div table:nth-child(4) td:nth-child(2) td:nth-child(2){
         width: 20%;
+        text-align: center;
+        vertical-align: middle;
     }
     
     .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(1){
@@ -818,6 +834,7 @@
     
     .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(4){
         width: 100px;
+        text-align: center;    
     }
     
     .qty_review_div table:nth-child(3) td:nth-child(n+2){
@@ -830,18 +847,11 @@
         width: 80px;
     }
     
-    .qty_review_div table:nth-child(4) td:nth-child(2) td:nth-child(2){
-        text-align: center;    
-    }
-    
     .qty_review_div table:nth-child(5) tbody > tr > td:nth-child(3){
         text-align: center;  
         width: 80px;
     }
-    
-    .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(4){
-        text-align: center;    
-    }
+
     
     .qty_review_div table:nth-child(6) tr:nth-child(1){
         font-weight: bold;
@@ -864,5 +874,19 @@
     .qty_review_div table:nth-child(7) td:nth-child(n+2){
         text-align: center;
         width: calc((100% - 100px)/9);
+    }
+    
+    .item_position #s_2 #s_0_13{
+        width: 500px;
+    }
+    
+    @media print{
+        
+        .quantity_review #CanvassHolder,
+        .quantity_review #TitleBar,
+        .quantity_review #divShowHtml1 > div:nth-child(1){
+            display: none !important;
+        }
+        
     }
 }

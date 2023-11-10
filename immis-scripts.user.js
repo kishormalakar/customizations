@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.37
+// @version      1.0.38
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1421,6 +1421,7 @@ window.addEventListener(
                             var thText2 = document.createTextNode("Remarks");
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
+                            row6.setAttribute("bgcolor", "lightBlue");
 
                         }
 
@@ -1526,7 +1527,7 @@ window.addEventListener(
                             uncoveredDuesTable.style.display = "none";
                             row5.children[0].setAttribute("width", "100%");
                             row5.previousElementSibling.querySelectorAll("td")[0].style.border = "1px solid black";
-                            row5.previousElementSibling.querySelectorAll("td")[0].setAttribute("bgcolor", "lightYellow");
+                            row5.previousElementSibling.querySelectorAll("td")[0].setAttribute("bgcolor", "lightBlue");
                             row5.previousElementSibling.querySelectorAll("td")[0].setAttribute("colspan", "1");
 
                         }
@@ -1587,7 +1588,7 @@ window.addEventListener(
                 var bpRequirementsArray = [];
                 var netRequirementsArray = [];
 
-                for (var i = 2; i < consumptionRows.length - 1; i++) {
+                for (var i = 2; i < Math.max((consumptionRows.length - 1), 3); i++) {
 
                     var row1 = consumptionRows[i];
                     depotArray.push(row1.querySelectorAll("td")[0].innerText);
@@ -1605,6 +1606,7 @@ window.addEventListener(
                 var coveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[0].querySelectorAll("table")[0];
                 var coveredRows = coveredDuesTable.querySelectorAll("tbody")[0].children;
                 var coveredDuesArray = [];
+                var array2 = [];
 
                 if (coveredRows.length > 1) {
 
@@ -1612,17 +1614,17 @@ window.addEventListener(
 
                         var row2 = coveredRows[i];
 
-                        if (row2.children[0].querySelectorAll("br")) {
+                        if (row2.children[0].innerHTML.search("<br>")) {
 
-                            var coveredDepotArray = row2.children[0].innerText.split("\n");
-                            var coveredPOQtyArray = row2.children[1].innerText.split("\n");
-                            var coveredDueQtyArray = row2.children[2].innerText.split("\n");
-                            var coveredDPArray = row2.children[4].innerText.split("\n");
+                            var coveredDepotArray = row2.children[0].innerHTML.split("<br>");
+                            var coveredPOQtyArray = row2.children[1].innerHTML.split("<br>");
+                            var coveredDueQtyArray = row2.children[2].innerHTML.split("<br>");
+                            var coveredDPArray = row2.children[4].innerHTML.split("<br>");
                             var coveredPO = row2.children[5].innerText ? row2.children[5].innerText : "";
 
                             for (var j = 0; j < coveredDepotArray.length; j++) {
 
-                                var array2 = [];
+                                array2 = [];
                                 array2.push(coveredDepotArray[j]);
                                 array2.push(+coveredPOQtyArray[j]);
                                 array2.push(+coveredDueQtyArray[j]);
@@ -1636,19 +1638,13 @@ window.addEventListener(
 
                         else {
 
-                            var coveredDepot = row2.children[0].innerText.split("\n");
-                            var coveredPOQty = +row2.children[1].innerText.split("\n");
-                            var coveredDueQty = +row2.children[2].innerText.split("\n");
-                            var coveredDP = row2.children[4].innerText.split("\n");
-                            var coveredPO;
-                            if (row2.children[5]) {
-                                coveredPO = row2.children[5].innerText;
-                            }
-                            else {
-                                coveredPO = "";
-                            }
+                            var coveredDepot = row2.children[0].innerText;
+                            var coveredPOQty = +row2.children[1].innerText;
+                            var coveredDueQty = +row2.children[2].innerText;
+                            var coveredDP = row2.children[4].innerText;
+                            var coveredPO = row2.children[5].innerText ? row2.children[5].innerText : "";
 
-                            var array2 = [];
+                            array2 = [];
                             array2.push(coveredDepot);
                             array2.push(+coveredPOQty);
                             array2.push(+coveredDueQty);
@@ -2015,6 +2011,7 @@ window.addEventListener(
                 var text2 = document.createTextNode("Date: " + date);
                 td2.appendChild(text2);
                 tr2.appendChild(td2);
+                tr1.setAttribute("bgcolor", "lightBlue");
                 tbody1.appendChild(tr1);
                 tbody1.appendChild(tr2);
                 table1.appendChild(tbody1);
@@ -2095,6 +2092,8 @@ window.addEventListener(
                 tr2.appendChild(td5);
                 tr2.appendChild(td6);
                 tr2.appendChild(td7);
+                tr1.setAttribute("bgcolor", "lightBlue");
+                tr2.setAttribute("bgcolor", "lightBlue");
                 tbody1.appendChild(tr1);
                 tbody1.appendChild(tr2);
 
@@ -2161,6 +2160,8 @@ window.addEventListener(
                 td30.appendChild(tr33);
                 tr2.appendChild(td30);
                 tr2.appendChild(td5);
+                tr1.setAttribute("bgcolor", "lightBlue");
+                tr2.setAttribute("bgcolor", "lightBlue");
                 tbody1.appendChild(tr1);
                 tbody1.appendChild(tr2);
 
@@ -2255,6 +2256,8 @@ window.addEventListener(
                 tr2.appendChild(td21);
                 tr2.appendChild(td22);
                 tr2.appendChild(td23);
+                tr1.setAttribute("bgcolor", "lightBlue");
+                tr2.setAttribute("bgcolor", "lightBlue");
                 tbody1.appendChild(tr1);
                 tbody1.appendChild(tr2);
 
@@ -2329,6 +2332,7 @@ window.addEventListener(
                 td1.appendChild(text1);
                 td1.setAttribute("colspan", 3);
                 tr1.appendChild(td1);
+                tr1.setAttribute("bgcolor", "lightBlue");
 
                 var tr2 = document.createElement("tr");
                 var td21 = document.createElement("td");
@@ -2428,6 +2432,8 @@ window.addEventListener(
                 tr2.appendChild(td9);
                 tr2.appendChild(td10);
                 tr2.appendChild(td11);
+                tr1.setAttribute("bgcolor", "lightBlue");
+                tr2.setAttribute("bgcolor", "lightBlue");
                 tbody1.appendChild(tr1);
                 tbody1.appendChild(tr2);
 
