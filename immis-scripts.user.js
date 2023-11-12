@@ -190,6 +190,7 @@ window.addEventListener(
                     table.prepend(lastRow);
                 }
                 if (
+                    e.target.id == "s_0_29" ||
                     e.target.id == "s_0_40" ||
                     e.target.id == "s_0_49" ||
                     e.target.id == "s_0_50" ||
@@ -2065,33 +2066,41 @@ window.addEventListener(
                 var td1 = document.createElement("td");
                 var text1 = document.createTextNode("Stock and Consumption History");
                 td1.appendChild(text1);
-                td1.setAttribute("colspan", 6);
+                td1.setAttribute("colspan", 8);
                 tr1.appendChild(td1);
                 var tr2 = document.createElement("tr");
                 var td2 = document.createElement("td");
                 var text2 = document.createTextNode("Depot");
                 td2.appendChild(text2);
                 var td3 = document.createElement("td");
-                var text3 = document.createTextNode("Cons 21-22");
+                var text3 = document.createTextNode("Cons 20-21");
                 td3.appendChild(text3);
                 var td4 = document.createElement("td");
-                var text4 = document.createTextNode("Cons 22-23");
+                var text4 = document.createTextNode("Cons 21-22");
                 td4.appendChild(text4);
                 var td5 = document.createElement("td");
-                var text5 = document.createTextNode("Cons 23-24");
+                var text5 = document.createTextNode("Cons 22-23");
                 td5.appendChild(text5);
                 var td6 = document.createElement("td");
-                var text6 = document.createTextNode("AAC");
+                var text6 = document.createTextNode("Cons 23-24");
                 td6.appendChild(text6);
                 var td7 = document.createElement("td");
-                var text7 = document.createTextNode("Stock");
+                var text7 = document.createTextNode("Weighted Avg Consumption");
                 td7.appendChild(text7);
+                var td8 = document.createElement("td");
+                var text8 = document.createTextNode("AAC");
+                td8.appendChild(text8);
+                var td9 = document.createElement("td");
+                var text9 = document.createTextNode("Stock");
+                td9.appendChild(text9);
                 tr2.appendChild(td2);
                 tr2.appendChild(td3);
                 tr2.appendChild(td4);
                 tr2.appendChild(td5);
                 tr2.appendChild(td6);
                 tr2.appendChild(td7);
+                tr2.appendChild(td8);
+                tr2.appendChild(td9);
                 tr1.setAttribute("bgcolor", "lightBlue");
                 tr2.setAttribute("bgcolor", "lightBlue");
                 tbody1.appendChild(tr1);
@@ -2104,26 +2113,37 @@ window.addEventListener(
                     var texti1 = document.createTextNode(depotArray[i]);
                     tdi1.appendChild(texti1);
                     var tdi2 = document.createElement("td");
-                    var texti2 = document.createTextNode(consumptionArray[i][1]);
+                    var texti2 = document.createTextNode(consumptionArray[i][0]);
                     tdi2.appendChild(texti2);
                     var tdi3 = document.createElement("td");
-                    var texti3 = document.createTextNode(consumptionArray[i][2]);
+                    var texti3 = document.createTextNode(consumptionArray[i][1]);
                     tdi3.appendChild(texti3);
                     var tdi4 = document.createElement("td");
-                    var texti4 = document.createTextNode(consumptionArray[i][3]);
+                    var texti4 = document.createTextNode(consumptionArray[i][2]);
                     tdi4.appendChild(texti4);
                     var tdi5 = document.createElement("td");
-                    var texti5 = document.createTextNode(aacArray[i]);
+                    var texti5 = document.createTextNode(consumptionArray[i][3]);
                     tdi5.appendChild(texti5);
+                    var dateArray = date.split("/");
+                    var numMonths = +dateArray[1] - 4 + +dateArray[0] / 30;
+                    var avgConsumption = Math.round((+consumptionArray[i][0] * 1 + +consumptionArray[i][1] * 2 + +consumptionArray[i][2] * 3 + +consumptionArray[i][3] * 3) / (6 + 3 * numMonths / 12) * 100) / 100;
                     var tdi6 = document.createElement("td");
-                    var texti6 = document.createTextNode(stockArray[i]);
+                    var texti6 = document.createTextNode(avgConsumption);
                     tdi6.appendChild(texti6);
+                    var tdi7 = document.createElement("td");
+                    var texti7 = document.createTextNode(aacArray[i]);
+                    tdi7.appendChild(texti7);
+                    var tdi8 = document.createElement("td");
+                    var texti8 = document.createTextNode(stockArray[i]);
+                    tdi8.appendChild(texti8);
                     tri.appendChild(tdi1);
                     tri.appendChild(tdi2);
                     tri.appendChild(tdi3);
                     tri.appendChild(tdi4);
                     tri.appendChild(tdi5);
                     tri.appendChild(tdi6);
+                    tri.appendChild(tdi7);
+                    tri.appendChild(tdi8);
                     tbody1.appendChild(tri);
 
                 }
