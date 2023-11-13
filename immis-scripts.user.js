@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.38
+// @version      1.0.39
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -65,6 +65,25 @@ window.addEventListener(
             NAIR: "55",
             CRIS: "98",
         };
+
+        var zoneDepotArray = [
+            ["PD/DDU", "22"],
+            ["DSD/DDU", "23"],
+            ["DSL/PTRU", "26"],
+            ["TRS/GMO", "30"],
+            ["TRS/DDU", "31"],
+            ["DSL/DDU", "32"],
+            ["BOXNDDU", "33"],
+            ["GSDGHZ", "34"],
+            ["MEMU JAJ", "35"],
+            ["CRW/HRT", "37"],
+            ["DEMU SEE", "38"],
+            ["GSD/DHN", "41"],
+            ["RNCC/PATNA", "42"],
+            ["ROH/BRWD", "43"],
+            ["GSD/SPJ", "70"],
+            ["DSL/SPJ", "71"],
+        ];
 
         let setRelativePositioning = () => {
             var childElements = document.querySelectorAll("#CanvassHolder")[0].children;
@@ -2617,6 +2636,65 @@ window.addEventListener(
                 if (e.key === "Tab" || e.key === "Enter") {
 
                     document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_13")[0].focus();
+
+                }
+            });
+        }
+
+        if (document.title == "Auto DRR Status Report" || document.title == "Run Form - IMMIS/DEP/AUTODRR") {
+            body.classList.add("auto_drr_report");
+
+            document.addEventListener("click", (e) => {
+                if (e.target.name == "SHOW_EDISP_0") {
+
+                    var depotInput = document.querySelectorAll("#s_0_11")[0].value;
+                    var titleBar = document.querySelectorAll("#TitleBar")[0];
+                    var depotCode;
+                    zoneDepotArray.forEach((depot) => {
+
+                        if (depot[0] == depotInput) {
+                            depotCode = depot[1];
+                        }
+                    })
+
+                    var zoneCode = titleBar.querySelectorAll("td")[0].innerText.split(":")[0].substring(1, 3);
+
+                    var s_3 = document.querySelectorAll("#s_3")[0];
+                    var rows = s_3.querySelectorAll("div")[0].querySelectorAll("tbody")[0].children;
+
+                    for (var i = 1; i < rows.length; i++) {
+
+                        var row = rows[i];
+                        var eDispatchNo = row.querySelectorAll("td")[1].innerText;
+                        var eDispatchDepot = eDispatchNo.split("/")[1];
+
+                        if (eDispatchDepot != "00" + depotCode + "00") {
+
+                            row.style.display = "none";
+
+                        }
+
+                        var poNo = row.querySelectorAll("td")[7].innerText;
+                        var poDate = row.querySelectorAll("td")[8].innerText;
+                        var poYear = "20" + poDate.split("-")[2];
+
+                        var link = document.createElement("a");
+                        var linkText = document.createTextNode(poNo);
+                        link.appendChild(linkText);
+                        link.title = poNo;
+                        link.href =
+                            "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
+                            poYear +
+                            "/" +
+                            zoneCode +
+                            "/" +
+                            poNo +
+                            ".pdf";
+                        link.target = "_blank";
+                        row.children[7].innerHTML = "";
+                        row.children[7].appendChild(link);
+
+                    }
 
                 }
             });
