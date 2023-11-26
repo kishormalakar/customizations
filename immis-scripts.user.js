@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.39
+// @version      1.0.40
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1389,6 +1389,7 @@ window.addEventListener(
                     var coverageRows = coverageTable.querySelectorAll("tbody")[0].children;
                     var cummulativeConsumptionCY = 0;
                     var cummulativeConsumptionLY = 0;
+                    var cummulativeCoverage = 0;
 
                     for (var q = 0; q < table6Rows.length; q++) {
 
@@ -1418,6 +1419,7 @@ window.addEventListener(
                                 if (coverageDepot == depotName && coveragePO.substring(17, 18) != 8) {
                                     totalCoverageQty = +totalCoverageQty + +coverageQty;
                                 }
+
                             }
                             var td = document.createElement("td");
                             var tdText = document.createTextNode(Math.round(totalCoverageQty * 100) / 100);
@@ -1486,6 +1488,8 @@ window.addEventListener(
                                     tr1.appendChild(td1);
                                     row6.lastChild.children[0].children[0].appendChild(tr1);
 
+                                    cummulativeCoverage += +coverageQty;
+
                                 }
                                 if (coveragePO.substring(17, 18) != 8 && coveragePO === coveragePOPrev) {
                                     var tdText1;
@@ -1499,6 +1503,9 @@ window.addEventListener(
                                     var tdNum = row6.lastChild.children[0].querySelectorAll("td").length;
                                     row6.lastChild.children[0].querySelectorAll("td")[tdNum - 1].appendChild(br);
                                     row6.lastChild.children[0].querySelectorAll("td")[tdNum - 1].appendChild(tdText1);
+
+                                    cummulativeCoverage += +coverageQty;
+
                                 }
                             }
 
@@ -1507,16 +1514,21 @@ window.addEventListener(
                             var uncoveredDuesTable = row5.children[1].querySelectorAll("table")[0];
                             var uncoveredRows = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
                             var uncoveredTenderNoArray = [];
+                            var uncoveredTenderDateArray = [];
+                            var uncoveredTenderTextArray = [];
 
                             if (uncoveredRows.length > 1) {
                                 for (var r = 1; r < uncoveredRows.length; r++) {
                                     var uncoveredDepotArray = uncoveredRows[r].children[0].innerText.split("\n");
                                     var uncoveredQtyArray = uncoveredRows[r].children[1].innerText.split("\n");
                                     var uncoveredTender = uncoveredRows[r].children[2].innerText;
+                                    var uncoveredTenderDateText = uncoveredTender.substring(uncoveredTender.indexOf("due on ") + 7, uncoveredTender.indexOf("due on ") + 15);
+                                    var uncoveredTenderDate = new Date("20" + uncoveredTenderDateText.split("/")[2] + "-" + uncoveredTenderDateText.split("/")[1] + "-" + uncoveredTenderDateText.split("/")[0]);
                                     var uncoveredTenderNo = uncoveredTender.split(" ")[1].substring(0, 8);
 
                                     if (uncoveredTender.startsWith("T/No.") && !uncoveredTenderNoArray.includes(uncoveredTenderNo)) {
                                         uncoveredTenderNoArray.push(uncoveredTenderNo);
+                                        uncoveredTenderDateArray.push(uncoveredTenderDate);
 
                                         var tr1 = document.createElement("tr");
                                         var td1 = document.createElement("td");
@@ -1532,13 +1544,44 @@ window.addEventListener(
 
                                         td1.style.border = "1px solid black";
                                         tr1.appendChild(td1);
-                                        row6.lastChild.children[0].children[0].appendChild(tr1);
+
+                                        uncoveredTenderTextArray.push(tr1);
+                                    }
+                                    if (uncoveredTender.startsWith("T/No.") && uncoveredTenderNoArray.includes(uncoveredTenderNo)) {
+
+                                        var x = uncoveredTenderNoArray.indexOf(uncoveredTenderNo);
+                                        if (uncoveredTenderDate > uncoveredTenderDateArray[x]) {
+
+                                            uncoveredTenderDateArray[x] = uncoveredTenderDate;
+
+                                            var tr1 = document.createElement("tr");
+                                            var td1 = document.createElement("td");
+                                            var tdText1 = document.createTextNode(uncoveredTender);
+                                            td1.appendChild(tdText1);
+
+                                            uncoveredDepotArray.forEach((uncoveredDepot, s) => {
+                                                var br = document.createElement("br");
+                                                td1.appendChild(br);
+                                                var tdText2 = document.createTextNode(uncoveredDepotArray[s] + ": " + uncoveredQtyArray[s] + "; ");
+                                                td1.appendChild(tdText2);
+                                            });
+
+                                            td1.style.border = "1px solid black";
+                                            tr1.appendChild(td1);
+
+                                            uncoveredTenderTextArray[x] = tr1;
+
+                                        }
 
                                     }
 
                                 }
 
                             }
+
+                            uncoveredTenderTextArray.forEach((uncoveredText) => {
+                                row6.lastChild.children[0].children[0].appendChild(uncoveredText);
+                            })
 
                             var td1 = document.createElement("td");
                             td1.setAttribute("rowspan", table6Rows.length - 3);
@@ -1561,6 +1604,10 @@ window.addEventListener(
                             var thText2 = document.createTextNode(cummulativeConsumptionLY);
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
+                            var th3 = document.createElement("th");
+                            var thText3 = document.createTextNode(cummulativeCoverage);
+                            th3.appendChild(thText3);
+                            row6.appendChild(th3);
                         }
 
                     }
