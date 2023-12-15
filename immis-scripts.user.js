@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.40
+// @version      1.0.41
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -2743,6 +2743,20 @@ window.addEventListener(
 
                     }
 
+                }
+            });
+        }
+
+        if (document.title == "Consignee Wise AAC Master" || document.title == "Run Form - IMMIS/PUR/CONSAAC") {
+            body.classList.add("consignee_aac");
+
+            document.addEventListener("click", (e) => {
+                if (e.target.title == "View Added Cons. AAC.") {
+                    var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+                    var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
+                    scrollTop += 150;
+
+                    divShowHtml1.style.top = scrollTop + "px";
                 }
             });
         }
