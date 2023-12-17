@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.41
+// @version      1.0.42
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -409,7 +409,7 @@ window.addEventListener(
                 }
             });
 
-            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_34")[0];
+            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_35")[0];
             maKeyInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
@@ -2757,6 +2757,39 @@ window.addEventListener(
                     scrollTop += 150;
 
                     divShowHtml1.style.top = scrollTop + "px";
+                }
+            });
+        }
+
+        if (document.title == "TPI Status" || document.title == "Run Form - IMMIS/PUR/TPINSP") {
+            body.classList.add("tpi_status");
+
+            document.addEventListener("click", (e) => {
+                if (e.target.id == "s_0_15") {
+
+                    var s_2 = body.querySelectorAll("#s_2")[0];
+                    var s_3 = body.querySelectorAll("#s_3")[0];
+
+                    if (s_2.querySelectorAll(":scope > table").length == 1) {
+
+                        var tableHeader = s_3.querySelectorAll("div")[0].querySelectorAll("tr")[0];
+                        var tableHeaderClone = tableHeader.cloneNode(true);
+
+                        var tableHeaderCloneChildren = tableHeaderClone.children;
+                        for (var i = 0; i < tableHeaderCloneChildren.length; i++) {
+
+                            var tableHeaderCloneChild = tableHeaderCloneChildren[i];
+                            tableHeaderCloneChild.style.width = window.getComputedStyle(tableHeader.querySelectorAll("td")[i]).getPropertyValue("width");
+                        }
+
+                        var table1 = document.createElement("table");
+                        var tbody1 = document.createElement("tbody");
+                        tbody1.appendChild(tableHeaderClone);
+                        table1.appendChild(tbody1);
+                        s_2.appendChild(table1);
+
+                    }
+
                 }
             });
         }
