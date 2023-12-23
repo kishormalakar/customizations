@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.42
+// @version      1.0.43
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -185,10 +185,9 @@ window.addEventListener(
             var rlyName = document.querySelectorAll('input[name="RLYNM_0"]')[0];
             var rlyButton = document.querySelectorAll('input[name="RLY_BTN_0"]')[0];
             var LovDiv = document.querySelectorAll("#LovDiv")[0];
-            //rlyName.value = "IR";
 
             var stockNS = document.querySelectorAll('select[name="STKNS_0"]')[0];
-            stockNS.value = "N";
+            stockNS.value = "%";
 
             var poTo = document.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
             var poToArray = poTo.split("-");
@@ -202,6 +201,47 @@ window.addEventListener(
             var poFrom = poFromDay + "-" + poFromMonth + "-" + poFromYear;
             document.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = poFrom;
 
+            var buttonRow = body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].querySelectorAll("td")[0];
+
+            var button1 = document.createElement("button");
+            var text1 = document.createTextNode("Backward 1 Year");
+            button1.appendChild(text1);
+
+            var button2 = document.createElement("button");
+            var text2 = document.createTextNode("Forward 1 Year");
+            button2.appendChild(text2);
+
+            buttonRow.insertBefore(button2, buttonRow.children[0]);
+            buttonRow.insertBefore(button1, buttonRow.children[0]);
+
+            button1.addEventListener('click', function (event) {
+                var dateFrom = body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value;
+                var dateTo = body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
+
+                var dateFromArray = dateFrom.split("-");
+                var dateFromNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] - 1);
+                var dateToArray = dateTo.split("-");
+                var dateToNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+ dateToArray[2] - 1);
+
+                body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = dateFromNew;
+                body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value = dateToNew;
+                buttonRow.parentElement.previousElementSibling.previousElementSibling.lastChild.querySelectorAll("input")[0].click();
+            });
+
+            button2.addEventListener('click', function (event) {
+                var dateFrom = body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value;
+                var dateTo = body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
+
+                var dateFromArray = dateFrom.split("-");
+                var dateFromNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] + 1);
+                var dateToArray = dateTo.split("-");
+                var dateToNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+ dateToArray[2] + 1);
+
+                body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = dateFromNew;
+                body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value = dateToNew;
+                buttonRow.parentElement.previousElementSibling.previousElementSibling.lastChild.querySelectorAll("input")[0].click();
+            });
+
             document.addEventListener("click", (e) => {
                 if (e.target.id == "s_0_7") {
                     var table = LovDiv.querySelectorAll("#_LovTable")[0].querySelectorAll("tbody")[0];
@@ -210,11 +250,10 @@ window.addEventListener(
                 }
                 if (
                     e.target.id == "s_0_29" ||
-                    e.target.id == "s_0_40" ||
-                    e.target.id == "s_0_49" ||
-                    e.target.id == "s_0_50" ||
-                    e.target.id == "s_0_51" ||
-                    e.target.id == "s_0_52"
+                    e.target.id == "s_0_52" ||
+                    e.target.id == "s_0_53" ||
+                    e.target.id == "s_0_54" ||
+                    e.target.id == "s_0_55"
                 ) {
                     var poTable = document.querySelectorAll("#s_3")[0].querySelectorAll("table")[2];
 
@@ -242,23 +281,48 @@ window.addEventListener(
                     var poRows = poTable.querySelectorAll("tbody")[1].children;
                     for (var i = 0; i < poRows.length - 1; i++) {
                         var poRow = poRows[i];
+                        var poNo;
+                        var poSerial;
+                        var purchaseType;
+                        var linkHref;
 
-                        var poNo = poRow.children[1].innerText.split(" ")[0];
-                        var poSerial = poRow.children[5].innerText;
-                        var purchaseType = poNo.substring(8, 9) == "2" ? "GM" : "TN";
+                        if (poRow.children.length == 13) {
+                            poNo = poRow.children[1].innerText.split(" ")[0];
+                            poSerial = poRow.children[5].innerText;
+                            purchaseType = poNo.substring(8, 9) == "2" ? "GM" : "TN";
+
+                            linkHref = "https://ireps.gov.in/iMMS/caseHistoryBillPOPopUp?poNumber=" +
+                                poNo +
+                                "&poSr=" +
+                                poSerial +
+                                "&rly=10&purType=" +
+                                purchaseType;
+                        }
+
+                        if (poRow.children.length == 10) {
+                            var url = poRow.previousElementSibling.lastChild.querySelectorAll("a")[0].getAttribute("href");
+                            var urlPart1 = url.substring(0, url.search("&poSr=") + 6);
+                            var urlPart2 = url.substring(url.search("&rly="));
+                            poSerial = poRow.children[2].innerText;
+
+                            linkHref = urlPart1 + poSerial + urlPart2;
+                        }
+
+                        if (poRow.children.length == 8) {
+                            var url = poRow.previousElementSibling.lastChild.querySelectorAll("a")[0].getAttribute("href");
+                            var urlPart1 = url.substring(0, url.search("&poSr=") + 6);
+                            var urlPart2 = url.substring(url.search("&rly="));
+                            poSerial = poRow.children[0].innerText;
+
+                            linkHref = urlPart1 + poSerial + urlPart2;
+                        }
 
                         var td2 = document.createElement("td");
                         var link = document.createElement("a");
-                        var linkText = document.createTextNode("Check");
+                        var linkText = document.createTextNode("Bill Status");
                         link.appendChild(linkText);
                         link.title = "Check Bill Status";
-                        link.href =
-                            "https://ireps.gov.in/iMMS/caseHistoryBillPOPopUp?poNumber=" +
-                            poNo +
-                            "&poSr=" +
-                            poSerial +
-                            "&rly=10&purType=" +
-                            purchaseType;
+                        link.href = linkHref;
                         link.target = "_blank";
                         td2.appendChild(link);
                         td2.setAttribute("align", "right");
@@ -266,6 +330,8 @@ window.addEventListener(
                     }
                 }
             });
+
+
         }
 
         if (document.title == "Depot Transfer Transactions" || document.title == "Run Form - IMMIS/DEP/DTBT") {
