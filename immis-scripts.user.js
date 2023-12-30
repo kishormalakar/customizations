@@ -1509,7 +1509,7 @@ window.addEventListener(
                             var thText2 = document.createTextNode("Remarks");
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
-                            row6.setAttribute("bgcolor", "lightBlue");
+                            row6.setAttribute("bgcolor", "LightGrey");
 
                         }
 
@@ -1653,11 +1653,86 @@ window.addEventListener(
                             td1.setAttribute("rowspan", table6Rows.length - 3);
                             row6.appendChild(td1);
 
+                            var descriptionText = row5.previousElementSibling.querySelectorAll("td")[0].innerText;
+                            var pl = descriptionText.split(" ")[1].split("-")[0];
+                            var itemDescription = descriptionText.substring(descriptionText.indexOf("-") + 1, descriptionText.indexOf("(CP-Start"));
+                            var cp = descriptionText.substring(descriptionText.indexOf("(CP-Start") + 11, descriptionText.indexOf("Pur.Sec:") - 2);
+                            var purchaseSection = descriptionText.substr(descriptionText.indexOf("Pur.Sec: ") + 9, 2);
+
+                            var td0 = document.createElement("td");
+                            var table1 = document.createElement("table");
+                            var tbody1 = document.createElement("tbody");
+                            var tr1 = document.createElement("tr");
+                            var th11 = document.createElement("th");
+                            var text11 = document.createTextNode(pl);
+                            th11.appendChild(text11);
+                            th11.style.border = "1px solid black";
+                            th11.setAttribute("bgcolor", "lightBlue");
+                            var th12 = document.createElement("th");
+                            var text12 = document.createTextNode(itemDescription);
+                            th12.appendChild(text12);
+                            th12.style.textAlign = "left";
+                            th12.style.border = "1px solid black";
+                            th12.setAttribute("bgcolor", "lightBlue");
+                            th12.setAttribute("colspan", "5");
+                            tr1.appendChild(th11);
+                            tr1.appendChild(th12);
+
+                            var tr2 = document.createElement("tr");
+                            var td21 = document.createElement("td");
+                            var text21 = document.createTextNode("Vital/Safety");
+                            td21.appendChild(text21);
+                            td21.style.border = "1px solid black";
+                            td21.style.width = "100px";
+                            var td22 = document.createElement("td");
+                            var text22 = document.createTextNode("Category");
+                            td22.appendChild(text22);
+                            td22.style.border = "1px solid black";
+                            td22.style.width = "100px";
+                            var td23 = document.createElement("td");
+                            var text23 = document.createTextNode("Pur Section");
+                            td23.appendChild(text23);
+                            td23.style.border = "1px solid black";
+                            td23.style.width = "100px";
+                            var td24 = document.createElement("td");
+                            var text24 = document.createTextNode("CP");
+                            td24.appendChild(text24);
+                            td24.style.border = "1px solid black";
+                            td24.style.width = "100px";
+                            tr2.appendChild(td21);
+                            tr2.appendChild(td22);
+                            tr2.appendChild(td23);
+                            tr2.appendChild(td24);
+
+                            var tr3 = document.createElement("tr");
+                            var td31 = document.createElement("td");
+                            td31.style.border = "1px solid black";
+                            var td32 = document.createElement("td");
+                            td32.style.border = "1px solid black";
+                            var td33 = document.createElement("td");
+                            var text33 = document.createTextNode(purchaseSection);
+                            td33.appendChild(text33);
+                            td33.style.border = "1px solid black";
+                            var td34 = document.createElement("td");
+                            var text34 = document.createTextNode(cp);
+                            td34.style.border = "1px solid black";
+                            td34.appendChild(text34);
+                            tr3.appendChild(td31);
+                            tr3.appendChild(td32);
+                            tr3.appendChild(td33);
+                            tr3.appendChild(td34);
+
+                            tbody1.appendChild(tr1);
+                            tbody1.appendChild(tr2);
+                            tbody1.appendChild(tr3);
+                            table1.appendChild(tbody1);
+                            table1.style.borderCollapse = "collapse";
+                            td0.appendChild(table1);
+                            row5.previousElementSibling.appendChild(td0);
+
                             uncoveredDuesTable.style.display = "none";
                             row5.children[0].setAttribute("width", "100%");
-                            row5.previousElementSibling.querySelectorAll("td")[0].style.border = "1px solid black";
-                            row5.previousElementSibling.querySelectorAll("td")[0].setAttribute("bgcolor", "lightBlue");
-                            row5.previousElementSibling.querySelectorAll("td")[0].setAttribute("colspan", "1");
+                            row5.previousElementSibling.querySelectorAll("td")[0].remove();
 
                         }
 
