@@ -1717,7 +1717,7 @@ window.addEventListener(
                             var text22 = document.createTextNode(itemDescription);
                             td22.appendChild(text22);
                             td22.style.border = "1px solid black";
-                            td22.style.width = "300px";
+                            td22.style.width = "310px";
                             td22.setAttribute("bgcolor", "lightBlue");
                             td22.setAttribute("colspan", "3");
                             var td23 = document.createElement("td");
