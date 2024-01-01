@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.43
+// @version      1.0.44
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1509,8 +1509,12 @@ window.addEventListener(
                             var thText2 = document.createTextNode("Remarks");
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
-                            row6.setAttribute("bgcolor", "LightGrey");
+                            row6.setAttribute("bgcolor", "lightBlue");
 
+                        }
+
+                        if (q == 1) {
+                            row6.style.display = "none";
                         }
 
                         if (q == 2) {
@@ -1664,47 +1668,90 @@ window.addEventListener(
                             var tbody1 = document.createElement("tbody");
                             var tr1 = document.createElement("tr");
                             var th11 = document.createElement("th");
-                            var text11 = document.createTextNode(pl);
+                            var text11 = document.createTextNode("PL No");
                             th11.appendChild(text11);
                             th11.style.border = "1px solid black";
                             th11.setAttribute("bgcolor", "lightBlue");
                             var th12 = document.createElement("th");
-                            var text12 = document.createTextNode(itemDescription);
+                            var text12 = document.createTextNode("Item Description");
                             th12.appendChild(text12);
                             th12.style.textAlign = "left";
                             th12.style.border = "1px solid black";
                             th12.setAttribute("bgcolor", "lightBlue");
-                            th12.setAttribute("colspan", "5");
+                            th12.setAttribute("colspan", "3");
+                            var th13 = document.createElement("th");
+                            var text13 = document.createTextNode("Vital/Safety");
+                            th13.appendChild(text13);
+                            th13.style.border = "1px solid black";
+                            th13.setAttribute("bgcolor", "lightBlue");
+                            var th14 = document.createElement("th");
+                            var text14 = document.createTextNode("Category");
+                            th14.appendChild(text14);
+                            th14.style.border = "1px solid black";
+                            th14.setAttribute("bgcolor", "lightBlue");
+                            var th15 = document.createElement("th");
+                            var text15 = document.createTextNode("CP");
+                            th15.appendChild(text15);
+                            th15.style.border = "1px solid black";
+                            th15.setAttribute("bgcolor", "lightBlue");
+                            var th16 = document.createElement("th");
+                            var text16 = document.createTextNode("Pur. Section");
+                            th16.appendChild(text16);
+                            th16.style.border = "1px solid black";
+                            th16.setAttribute("bgcolor", "lightBlue");
                             tr1.appendChild(th11);
                             tr1.appendChild(th12);
+                            tr1.appendChild(th13);
+                            tr1.appendChild(th14);
+                            tr1.appendChild(th15);
+                            tr1.appendChild(th16);
 
                             var tr2 = document.createElement("tr");
                             var td21 = document.createElement("td");
-                            var text21 = document.createTextNode("Vital/Safety");
+                            var text21 = document.createTextNode(pl);
                             td21.appendChild(text21);
                             td21.style.border = "1px solid black";
                             td21.style.width = "100px";
+                            td21.setAttribute("bgcolor", "lightBlue");
                             var td22 = document.createElement("td");
-                            var text22 = document.createTextNode("Category");
+                            var text22 = document.createTextNode(itemDescription);
                             td22.appendChild(text22);
                             td22.style.border = "1px solid black";
-                            td22.style.width = "100px";
+                            td22.style.width = "300px";
+                            td22.setAttribute("bgcolor", "lightBlue");
+                            td22.setAttribute("colspan", "3");
                             var td23 = document.createElement("td");
-                            var text23 = document.createTextNode("Pur Section");
+                            var text23 = document.createTextNode("");
                             td23.appendChild(text23);
                             td23.style.border = "1px solid black";
                             td23.style.width = "100px";
+                            td23.setAttribute("bgcolor", "lightBlue");
                             var td24 = document.createElement("td");
-                            var text24 = document.createTextNode("CP");
+                            var text24 = document.createTextNode("");
                             td24.appendChild(text24);
                             td24.style.border = "1px solid black";
                             td24.style.width = "100px";
+                            td24.setAttribute("bgcolor", "lightBlue");
+                            var td25 = document.createElement("td");
+                            var text25 = document.createTextNode(cp);
+                            td25.appendChild(text25);
+                            td25.style.border = "1px solid black";
+                            td25.style.width = "100px";
+                            td25.setAttribute("bgcolor", "lightBlue");
+                            var td26 = document.createElement("td");
+                            var text26 = document.createTextNode(purchaseSection);
+                            td26.appendChild(text26);
+                            td26.style.border = "1px solid black";
+                            td26.style.width = "100px";
+                            td26.setAttribute("bgcolor", "lightBlue");
                             tr2.appendChild(td21);
                             tr2.appendChild(td22);
                             tr2.appendChild(td23);
                             tr2.appendChild(td24);
+                            tr2.appendChild(td25);
+                            tr2.appendChild(td26);
 
-                            var tr3 = document.createElement("tr");
+                            /*var tr3 = document.createElement("tr");
                             var td31 = document.createElement("td");
                             td31.style.border = "1px solid black";
                             var td32 = document.createElement("td");
@@ -1720,11 +1767,10 @@ window.addEventListener(
                             tr3.appendChild(td31);
                             tr3.appendChild(td32);
                             tr3.appendChild(td33);
-                            tr3.appendChild(td34);
+                            tr3.appendChild(td34);*/
 
                             tbody1.appendChild(tr1);
                             tbody1.appendChild(tr2);
-                            tbody1.appendChild(tr3);
                             table1.appendChild(tbody1);
                             table1.style.borderCollapse = "collapse";
                             td0.appendChild(table1);
