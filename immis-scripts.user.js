@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.44
+// @version      1.0.45
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -201,7 +201,7 @@ window.addEventListener(
             var poFrom = poFromDay + "-" + poFromMonth + "-" + poFromYear;
             document.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = poFrom;
 
-            var buttonRow = body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].querySelectorAll("td")[0];
+            var buttonRow = body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].querySelectorAll("td")[3];
 
             var button1 = document.createElement("button");
             var text1 = document.createTextNode("Backward 1 Year");

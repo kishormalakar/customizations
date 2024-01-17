@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         GeM
 @namespace    github.com/openstyles/stylus
-@version      1.0.4
+@version      1.0.5
 @var color link-color "Link Color" red
 ==/UserStyle== */
 
@@ -81,6 +81,16 @@
 			max-width: 100px !important;
 		}
 		
+	}
+    
+	
+	.process_bill .modal-dialog{
+		display: none;
+	}
+	
+	.modal.seller-rating-iframe-popup.fade.in,
+	.modal-backdrop.fade.in{
+		display: none !important;
 	}
 		
 }
