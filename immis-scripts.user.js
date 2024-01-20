@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.45
+// @version      1.0.46
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -120,6 +120,18 @@ window.addEventListener(
                 }
             }
         };
+
+        let checkUrl = (url) => {
+            fetch(url, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                })
+                .catch(error => alert('Error:' + error));
+        }
 
         if (document.title != "System Start Page" && document.title != "Output of Report - LISTPOS") {
             setRelativePositioning();
@@ -439,10 +451,6 @@ window.addEventListener(
                     var poYear = "20" + poNo.substring(2, 4);
                     var poZone = currentZone;
 
-                    var link = document.createElement("a");
-                    var linkText = document.createTextNode(poNo);
-                    link.appendChild(linkText);
-                    link.title = poNo;
                     var url = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
                         poYear +
                         "/" +
@@ -450,6 +458,22 @@ window.addEventListener(
                         "/" +
                         poNo +
                         ".pdf";
+
+                    if (!checkUrl(url)) {
+                        poYear = +poYear + 1;
+                        url = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
+                            poYear +
+                            "/" +
+                            zoneJson[poZone] +
+                            "/" +
+                            poNo +
+                            ".pdf";
+                    }
+
+                    var link = document.createElement("a");
+                    var linkText = document.createTextNode(poNo);
+                    link.appendChild(linkText);
+                    link.title = poNo;
                     link.href = url;
                     link.target = "_blank";
                     maRow.children[5].innerText = "";
