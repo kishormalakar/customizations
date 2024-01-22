@@ -3013,22 +3013,22 @@ window.addEventListener(
                     var inspectionTable = s_3.querySelectorAll("table")[1];
                     var inspectionTableRows = inspectionTable.querySelectorAll("tbody")[0].children;
 
-                    for (var j = 0; j < inspectionTableRows.length; j++) {
+                    for (var j = 1; j < inspectionTableRows.length; j++) {
 
                         var inspectionRow = inspectionTableRows[j];
                         var poNo = inspectionRow.children[6].innerText;
 
                         var p = document.createElement("p");
-                        var pText = document.createTextNode("Get PO URL");
+                        var pText = document.createTextNode("Get PO");
                         p.appendChild(pText);
-                        p.setAttribute("id", "get_po_url");
+                        p.className = "get_po_url";
                         inspectionRow.children[6].appendChild(p);
 
                     }
 
                 }
 
-                if (e.target.id == "get_po_url") {
+                if (e.target.classList.contains("get_po_url")) {
 
                     async function getPOUrl() {
 
