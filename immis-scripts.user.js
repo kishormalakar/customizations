@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.46
+// @version      1.0.47
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -121,16 +121,18 @@ window.addEventListener(
             }
         };
 
-        let checkUrl = (url) => {
-            fetch(url, { method: 'HEAD' })
-                .then(response => {
-                    if (response.ok) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                })
-                .catch(error => alert('Error:' + error));
+        async function checkUrl(url) {
+            try {
+                const response = await fetch(url, { method: 'HEAD' });
+
+                if (response.ok) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (error) {
+                return false;
+            }
         }
 
         if (document.title != "System Start Page" && document.title != "Output of Report - LISTPOS") {
@@ -433,7 +435,7 @@ window.addEventListener(
         if (document.title == "PO Modification" || document.title == "Run Form - IMMIS/PUR/POMA") {
             body.classList.add("po_modification");
 
-            let poLinking = () => {
+            async function poLinking() {
                 var s_6 = body.querySelectorAll("#s_6")[0];
                 var maList = s_6.querySelectorAll("[id^=TrMAList_]");
                 var maNum = maList.length;
@@ -459,25 +461,31 @@ window.addEventListener(
                         poNo +
                         ".pdf";
 
-                    if (!checkUrl(url)) {
-                        poYear = +poYear + 1;
-                        url = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
-                            poYear +
-                            "/" +
-                            zoneJson[poZone] +
-                            "/" +
-                            poNo +
-                            ".pdf";
-                    }
+                    try {
+                        const urlExists = await checkUrl(url);
+                        if (!urlExists) {
+                            poYear = +poYear + 1;
+                            url = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
+                                poYear +
+                                "/" +
+                                zoneJson[poZone] +
+                                "/" +
+                                poNo +
+                                ".pdf";
+                        }
 
-                    var link = document.createElement("a");
-                    var linkText = document.createTextNode(poNo);
-                    link.appendChild(linkText);
-                    link.title = poNo;
-                    link.href = url;
-                    link.target = "_blank";
-                    maRow.children[5].innerText = "";
-                    maRow.children[5].appendChild(link);
+                        var link = document.createElement("a");
+                        var linkText = document.createTextNode(poNo);
+                        link.appendChild(linkText);
+                        link.title = poNo;
+                        link.href = url;
+                        link.target = "_blank";
+                        maRow.children[5].innerText = "";
+                        maRow.children[5].appendChild(link);
+
+                    } catch (error) {
+                        console.error(`Error in exampleUsage: ${error.message}`);
+                    }
 
                     var td = document.createElement("td");
                     var tdText = document.createTextNode(officer);
@@ -3001,6 +3009,68 @@ window.addEventListener(
                         s_2.appendChild(table1);
 
                     }
+
+                    var inspectionTable = s_3.querySelectorAll("table")[1];
+                    var inspectionTableRows = inspectionTable.querySelectorAll("tbody")[0].children;
+
+                    for (var j = 0; j < inspectionTableRows.length; j++) {
+
+                        var inspectionRow = inspectionTableRows[j];
+                        var poNo = inspectionRow.children[6].innerText;
+
+                        var p = document.createElement("p");
+                        var pText = document.createTextNode("Get PO URL");
+                        p.appendChild(pText);
+                        p.setAttribute("id", "get_po_url");
+                        inspectionRow.children[6].appendChild(p);
+
+                    }
+
+                }
+
+                if (e.target.id == "get_po_url") {
+
+                    async function getPOUrl() {
+
+                        var poNo = e.target.parentElement.innerText.substring(0, 15);
+                        var poYear = "20" + poNo.substring(2, 4);
+                        var poZone = currentZone;
+
+                        var url = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
+                            poYear +
+                            "/" +
+                            zoneJson[poZone] +
+                            "/" +
+                            poNo +
+                            ".pdf";
+
+                        try {
+                            const urlExists = await checkUrl(url);
+                            if (!urlExists) {
+                                poYear = +poYear + 1;
+                                url = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
+                                    poYear +
+                                    "/" +
+                                    zoneJson[poZone] +
+                                    "/" +
+                                    poNo +
+                                    ".pdf";
+                            }
+
+                            var link = document.createElement("a");
+                            var linkText = document.createTextNode(poNo);
+                            link.appendChild(linkText);
+                            link.title = poNo;
+                            link.href = url;
+                            link.target = "_blank";
+                            e.target.parentElement.appendChild(link);
+                        } catch (error) {
+                            console.error(`Error in exampleUsage: ${error.message}`);
+                        }
+
+                    }
+
+                    getPOUrl();
 
                 }
             });
