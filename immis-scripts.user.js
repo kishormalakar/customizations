@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.47
+// @version      1.0.48
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -2979,6 +2979,10 @@ window.addEventListener(
                     divShowHtml1.style.top = scrollTop + "px";
                 }
             });
+        }
+
+        if (document.title == "Map Consignee in Depot" || document.title == "Run Form - IMMIS/DEP/DOCONSMAP") {
+            body.classList.add("depot_consignee_mapping");
         }
 
         if (document.title == "TPI Status" || document.title == "Run Form - IMMIS/PUR/TPINSP") {

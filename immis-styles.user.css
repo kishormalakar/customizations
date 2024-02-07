@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.34
+@version      1.0.35
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -913,6 +913,15 @@
 
     .consignee_aac #s_4 > table{
         width: 100% !important;
+    }
+    
+    .depot_consignee_mapping #s_3,
+    .depot_consignee_mapping #s_4{
+        position: relative !important;
+        width: 50% !important;
+        display: inline-block !important;
+        vertical-align: top !important;
+        top: 52px !important;
     }
     
     .tpi_status #s_2{
