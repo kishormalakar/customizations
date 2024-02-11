@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.48
+// @version      1.0.49
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -507,11 +507,11 @@ window.addEventListener(
                 }
             });
 
-            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_35")[0];
+            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_36")[0];
             maKeyInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
-                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_54")[0].focus();
+                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_56")[0].focus();
 
                 }
             });
@@ -3078,6 +3078,17 @@ window.addEventListener(
 
                 }
             });
+        }
+
+        if (document.title == "Spare Stock Entry" || document.title == "Run Form - IMMIS/DEP/SPARESTKENTRY") {
+            body.classList.add("spare_stock_entry");
+
+            var CanvassHolder = document.querySelectorAll("#CanvassHolder")[0];
+            var s_3 = document.querySelectorAll("#s_3")[0];
+            var div = s_3.querySelectorAll("tr")[1].querySelectorAll("div")[0];
+            var divCssText = div.style.cssText;
+            var divCssTextNew = divCssText.slice(0, divCssText.indexOf("overflow:") - 2) + " !important" + divCssText.slice(divCssText.indexOf("overflow:") - 2);
+            div.style.cssText = divCssTextNew;
         }
     },
     false
