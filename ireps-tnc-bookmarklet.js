@@ -178,8 +178,8 @@ javascript: (() => {
                 ["SSE/TRD/S&W/ECR/DHN", "SSE/TRD/S&W/ECR/DHN", 9771426583, "srsetrddhn@gmail.com", "Office of SSE/TRD/S&W/DHN, Near Gaya Bridge, Rangatand, Dhanbad, Jharkhand, 826001", "DEE/TRD/DHN", 9771426304, "uttam.maiti@gov.in"],
                 ["Sr.DSC/DHN", "IPF/DQM", 9771426717, "dhn.dqm@gmail.com", "Office of RPF Divisional Store Dhanbad, Near Dhanbad Railway Station, Dhanbad, Jharkhand, 826001", "ASC/DHN", 9771426701, "ascrpfecrdhn@gmail.com"],
                 ["J.E./TELE-1/G/DHN", "SSE/TELE/STORE/DHN", 9771445859, "prakashkrmandalecr@gmail.com", "Office of SSE/TELE/Store, DRM Office, Dhanbad, Jharkhand, 826001", "DSTE/TELE/DHN", 9771426807, "rajeev.ext.bit@gmail.com"],
-                ["SSE/E/PTRU", "SSE/E/ECR/PTRU", 7002551224, "pranabkumar.1304@gov.in", "Office of the Sr. Section Engineer (Electrical), Patratu, Ramgarh, Jharkhand, 829118", "AEE/G/DHN", 9771426308, "abhishek.0812@gov.in"],
-                ["SSE/E/CPU", "SSE/E/ECR/CPU", 9794849694, "chandankumar.0779@gov.in", "Office of the Sr. Section Engineer (Electrical), Chopan, Sonebhadra,  UP, 231205", "AEE/G/DHN", 9771426308, "abhishek.0812@gov.in"],
+                ["SSE/E/PTRU", "SSE/E/PTRU", 7002551224, "pranabkumar.1304@gov.in", "Office of the Sr. Section Engineer (Electrical), Patratu, Ramgarh, Jharkhand, 829118", "AEE/G/DHN", 9771426308, "abhishek.0812@gov.in"],
+                ["SSE/E/CPU", "SSE/E/CPU", 9794849694, "chandankumar.0779@gov.in", "Office of the Sr. Section Engineer (Electrical), Chopan, Sonebhadra,  UP, 231205", "AEE/G/DHN", 9771426308, "abhishek.0812@gov.in"],
                 ["SSE/E/PEH", "SSE/E/PEH", 9771468627, "malmin.7008@gov.in", "Office of the Sr. Section Engineer (Electrical), Pathardih (PEH), Loco Bazar Power House, Jharkhand, 828119", "AEE/G/DHN", 9771426308, "abhishek.0812@gov.in"],
                 ["P.W.I./T.D/DHN", "SSE/TD/DHN", 9771426240, "dhnssetd@gmail.com", "Office of the Sr. Section Engineer (PWI), Track Depot, Near Gaya Bridge, Dhanbad, Jharkhand, 826001", "DEN/HQ/DHN", 7781016676, "ram.071964@gov.in"],
                 ["I.O.W-I/DHN", "SSE/W-I/DHN", 9794849684, "sshankar2008@gmail.com", "Office of the Sr. Section Engineer (Works-I), IOW-1, Near Dhanbad Rly. Station, Dhanbad, Jharkhand, 826001", "DEN/HQ/DHN", 7781016676, "ram.071964@gov.in"],
@@ -188,7 +188,7 @@ javascript: (() => {
                 ["SSE/TRS/GMO", "SSE/TRS/GMO", 7004190621, "akhilesh.1411@gov.in", "Office of the Sr. Section Engineer (TRS), Gomoh, Jharkhand, 828401 ", "DEE/TRS", 9771426307, "sudhakar.kumar01@gov.in"],
                 ["SSE/S/W/DHN", "SSE/S/W/DHN", 9771425829, "bislamecr4570@gmail.com", "Office of the Sr. Section Engineer/Signal/Works. Under Dy. CSTE/Works/DHN, 2nd Floor, DRM Office, Dhanbad, Jharkhand, 826001", "Dy.CSTE/Works/DHN", 9771426806, "rajnishkumar.0806@gov.in"],
                 ["Sr.DEE/DHN", "SSE/E/DHN", 9771426318, "dilip.0172@gov.in", "Office of the Sr. Section Engineer (Electrical),Power House, Near Bharat Petroleum Depot, Dhanbad, Jharkhand, 826001", "AEE/G/DHN", 9771426308, "abhishek.0812@gov.in"],
-                ["Sr.SE/D/PTRU", "SSE/STORE/PTRU", 9065516802, "pushpitapriti@gmail.com", "Diesel Loco Shed, Patratu, Jharkhand", "DME/DSL", 9771426911, "anurag.scra1203@gov.in"],
+                ["Sr.SE/D/PTRU", "CMS/PTRU", 9771445158, "elsptru@gmail.com", "Office of the Sr. Section Engineer (Store), Diesel Loco Shed, Patratu, Jharkhand, 829118", "DEE/TRS/PTRU", 9771445153, "amit.191993@gov.in"],
                 ["Sr.DPO/DHN", "OS/Personnel", 9771445166, "gautam3tiwary@gmail.com", "Office of Sr. DPO, Inside DRM Office, Dhanbad, Jharkhand, 826001", "DPO/DHN", 9771426625, "nirajk.2612@gov.in"],
                 ["Sr.DCM/DHN", "Ch.OS/Commercial", 9771445925, "dhiraj.4444ravi@gmail.com", "Office of Sr. DCM, Inside DRM Office, Dhanbad, Jharkhand, 826001", "ACM/DHN", 9771426953, "acm2dhn@gmail.com"],
                 ["C.A.SUPDT/DHN", "Coal Area Superintendent", 7091092303, "rajuneha365@gmail.com", "Coal Area Superintendent, Office of Coal Area Manager, DRM Office, Dhanbad, Jharkhand, 826001", "CAM/DHN", 9771426905, "camecrdhn@gmail.com"],
@@ -201,7 +201,11 @@ javascript: (() => {
                 ["ROH/BRWD", "CDMS/Receipt/BRWD", 7858800977, "cdmsbrwd@gmail.com", "Store Depot Barwadih, Near Barwadih Railway Station, Latehar, Jharkhand, 822111", "ADFM/1/DHN", 9771426103, "naustopno.2502@gov.in"],
                 ["Divisional Store Depot Dhanbad", "DMS/Receipt/DHN", 7542022562, "dmssunilrai@gmail.com", "Divisional Store Depot Dhanbad, Near Dhanbad Railway Station (VIP Siding), Jharkhand, 826001", "ADFM/1/DHN", 9771426103, "naustopno.2502@gov.in"],
                 ["SSE/TELE/GS/DHN", "SSE/TELE/GS/DHN", 9771445860, "bikramsum@gmail.com", "Office of Sr. Section Engineer (Telecom - Gati Shakti), Near DRM Office, Dhanbad, Jharkhand, 826001", "Sr. DSTE/GS/DHN", 9771426819, "srdstegsdhn@gmail.com"],
-                ["COMOFF/108N/RPSF/DHN", "ASC/RPSF/DHN", 9771426725, "surendrapratapmishra3@gmail.com", "10 Battalion RPSF, Near Railway Hospital, Hill colony, Dhanbad, Jharkhand, 826001", "ASC/RPSF/DHN", 9771426725, "surendrapratapmishra3@gmail.com"]];
+                ["COMOFF/108N/RPSF/DHN", "ASC/RPSF/DHN", 9771426725, "surendrapratapmishra3@gmail.com", "10 Battalion RPSF, Near Railway Hospital, Hill colony, Dhanbad, Jharkhand, 826001", "ASC/RPSF/DHN", 9771426725, "surendrapratapmishra3@gmail.com"],
+                ["DEN/1/ECR/DHN", "SSE/PW/COMP/DHN", 9123252811, "pankajkantigupta64@gmail.com", "Office of SSE/PW/COMP/DHN, Engineering Store, Near DRM Office, Dhanbad, Jharkhand, 826001", "Sr. DEN/3/DHN", 9771426204, "sden3dhnireps@gmail.com"],
+                ["DSL/PTRU", "CDMS/Receipt/PTRU", 8340274149, "", "Stores Depot, Diesel Loco Shed Patratu, Patratu, Jharkhand, 829118", "ADFM/1/DHN", 9771426103, "naustopno.2502@gov.in"],
+                ["", "", "", "", "", "", "", ""]
+            ]
 
             addButton.click();
             var contactDetails =
