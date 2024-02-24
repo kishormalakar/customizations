@@ -205,7 +205,7 @@ javascript: (() => {
                 ["DEN/1/ECR/DHN", "SSE/PW/COMP/DHN", 9123252811, "pankajkantigupta64@gmail.com", "Office of SSE/PW/COMP/DHN, Engineering Store, Near DRM Office, Dhanbad, Jharkhand, 826001", "Sr. DEN/3/DHN", 9771426204, "sden3dhnireps@gmail.com"],
                 ["DSL/PTRU", "CDMS/Receipt/PTRU", 8340274149, "", "Stores Depot, Diesel Loco Shed Patratu, Patratu, Jharkhand, 829118", "ADFM/1/DHN", 9771426103, "naustopno.2502@gov.in"],
                 ["", "", "", "", "", "", "", ""]
-            ]
+            ];
 
             addButton.click();
             var contactDetails =
