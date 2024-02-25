@@ -38,15 +38,17 @@ window.addEventListener(
             ["ZFZDRI", "Upendra Yadav", "BRWD"],
             ["CKPZGS", "Pravindra Sinha", "BRWD"],
             ["QRSXQW", "Deepak Kumar", "PTRU"],
-            ["", "Sandeep Kumar", "PTRU"],
-            ["", "Rajesh Munda", "PTRU"],
+            ["XBSKWD", "Sandeep Kumar", "PTRU"],
+            ["AKJYIB", "Rajesh Munda", "PTRU"],
             ["KHJBNH", "Shiv Ch. Paswan", "PTRU"],
-            ["", "Munna Rajak", "PTRU"],
+            ["GYGFRW", "Munna Rajak", "PTRU"],
             ["KJYJDZ", "Ranjit Kumar", "PTRU"],
             ["CAXGYW", "Dhananjay Kumar", "PTRU"],
-            ["", "Nirmal Kumar Ravi", "PTRU"],
+            ["INASGF", "Nirmal Kumar Ravi", "PTRU"],
             ["SYPZTP", "Pankaj Kumar Gupta", "PTRU"],
-            ["", "Shivranjan Choudhary", "PTRU"],
+            ["TTMTTP", "Shivranjan Choudhary", "PTRU"],
+            ["IQIITQ", "Mukesh Kumar", "PTRU"],
+            ["GKAWKF", "Rohit Raj", "PTRU"],
         ];
 
         if (pathname.startsWith("/HRMS/login")) {
