@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.49
+// @version      1.0.50
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -22,9 +22,11 @@ window.addEventListener(
             titleBar.style.width = "100%";
         }
 
-        var currentZone = "ECR";
-        var currentZoneCode = "10";
-        var currentYear = "2023";
+        var titleBar = "";
+        var currentDepotCode = "";
+        var currentZoneCode = "";
+        var currentZone = "";
+        var currentYear = "";
 
         var body = document.querySelectorAll("body")[0];
 
@@ -141,6 +143,12 @@ window.addEventListener(
             document.addEventListener("click", (e) => {
                 setRelativePositioning();
             });
+
+            titleBar = document.querySelectorAll("#TitleBar")[0];
+            currentDepotCode = titleBar.querySelectorAll("td")[0].innerText.split(":")[2].substring(3, 5);
+            currentZoneCode = titleBar.querySelectorAll("td")[0].innerText.split(":")[0].substring(1, 3);
+            currentZone = "ECR";
+            currentYear = new Date().getFullYear().toString();
         }
 
         if (document.title == "System Start Page") {
@@ -612,12 +620,6 @@ window.addEventListener(
                         }
                     }
 
-                    var button = document.createElement("button");
-                    var buttonText = document.createTextNode("Demand Review");
-                    button.setAttribute("id", "SHOW_DR");
-                    button.appendChild(buttonText);
-                    button.style.marginRight = "17px";
-                    divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("td")[1].insertBefore(button, divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("td")[1].firstChild);
                 }
 
                 if (e.target.id == "SHOW_DR") {
@@ -2988,6 +2990,9 @@ window.addEventListener(
         if (document.title == "TPI Status" || document.title == "Run Form - IMMIS/PUR/TPINSP") {
             body.classList.add("tpi_status");
 
+            var monthSelect = document.querySelectorAll("#s_0_10")[0];
+            monthSelect.selectedIndex = new Date().getMonth();
+
             document.addEventListener("click", (e) => {
                 if (e.target.id == "s_0_15") {
 
@@ -3089,6 +3094,50 @@ window.addEventListener(
             var divCssText = div.style.cssText;
             var divCssTextNew = divCssText.slice(0, divCssText.indexOf("overflow:") - 2) + " !important" + divCssText.slice(divCssText.indexOf("overflow:") - 2);
             div.style.cssText = divCssTextNew;
+        }
+
+        if (document.title == "BIN CARD" || document.title == "Run Form - IMMIS/DEP/BINCARD") {
+            body.classList.add("bin_card");
+
+            var plInput = document.querySelectorAll("#s_0_8")[0];
+            var monthFromInput = document.querySelectorAll("#s_0_15")[0];
+            var yyCode = "";
+
+            if (new Date().getMonth() < 3) {
+                yyCode = +currentYear.substring(2, 4) - 1;
+            }
+            else {
+                yyCode = currentYear.substring(2, 4)
+            }
+
+            monthFromInput.value = yyCode + "04";
+
+            plInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab" || e.key === "Enter") {
+                    e.target.parentElement.nextElementSibling.nextElementSibling.querySelectorAll("select")[0].value = currentDepotCode;
+                    e.target.parentElement.nextElementSibling.nextElementSibling.querySelectorAll("select")[0].dispatchEvent(new Event('change', { bubbles: true }));
+                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_19")[0].focus();
+                }
+            });
+        }
+
+        if (document.title == "Status of Receipt Accountal" || document.title == "Run Form - IMMIS/DEP/DRRSTAT") {
+            body.classList.add("drr_status");
+
+            var dateFromInput = document.querySelectorAll("#s_0_11")[0];
+            var yyCode = "";
+
+            if (new Date().getMonth() < 3) {
+                yyCode = +currentYear.substring(2, 4) - 1;
+            }
+            else {
+                yyCode = currentYear.substring(2, 4)
+            }
+
+            dateFromInput.value = "01-APR-" + yyCode;
+
+            var statisticsButton = document.querySelectorAll("#s_0_29")[0];
+            statisticsButton.click();
         }
     },
     false
