@@ -525,13 +525,11 @@ window.addEventListener(
             });
         }
 
-        if (
-            document.title == "Purchase Order Generation" ||
-            document.title == "Run Form - IMMIS/PUR/ORDER" ||
-            document.title == "Run Form - IMMIS/PUR/ORDERGEN"
-        ) {
+        if (document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER" || document.title == "Run Form - IMMIS/PUR/ORDERGEN") {
             body.classList.add("po_generation");
+        }
 
+        if (document.title == "Run Form - IMMIS/PUR/ORDER") {
             var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
             poKeyInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
