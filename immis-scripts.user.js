@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.50
+// @version      1.0.51
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -764,6 +764,15 @@ window.addEventListener(
 
         if (document.title == "Receipt Inspection Report" || document.title == "Run Form - IMMIS/DEP/RI") {
             body.classList.add("isl");
+
+            var wardSelectButton = body.querySelectorAll("#s_0_13")[0];
+            wardSelectButton.click();
+
+            var LovTable = body.querySelectorAll("#_LovTable")[0];
+            LovTable.querySelectorAll("a")[0].click();
+
+            var refreshButton = body.querySelectorAll("#s_0_18")[0];
+            refreshButton.click();
         }
 
         if (document.title == "DRR Status Update" || document.title == "Run Form - IMMIS/DEP/DRRDEL") {

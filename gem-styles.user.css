@@ -23,6 +23,11 @@
         max-width: 700px !important;
         line-height: 30px !important;
     }
+
+    .p-checkouts-address_new .purchase-req-table,
+    .p-checkouts-address_new #update_order_details{
+        display: none;
+    }
 	
 	.dsc_sign .div-form{
 		display: flex;
