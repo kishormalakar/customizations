@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.51
+// @version      1.0.52
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -542,6 +542,44 @@ window.addEventListener(
 
         if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
             body.classList.add("tender_publishing");
+
+            document.addEventListener("click", (e) => {
+
+                if (e.target.id == "s_0_581") {
+
+                    var tenderNo = body.querySelectorAll("#s_0_30")[0].value;
+                    var tenderValue = body.querySelectorAll("#s_0_38")[0].value;
+                    var tod = body.querySelectorAll("#s_0_39")[0].value;
+                    var tenderType = "";
+
+                    if (+tenderValue > 0 && +tenderValue <= 1000000) {
+                        tenderType = "SS DA";
+                    }
+                    else if (+tenderValue > 1000000 && +tenderValue <= 5000000) {
+                        tenderType = "JAG DA";
+                    }
+                    else if (+tenderValue > 5000000 && +tenderValue <= 10000000) {
+                        tenderType = "SS TC";
+                    }
+                    else if (+tenderValue > 10000000 && +tenderValue <= 50000000) {
+                        tenderType = "JAG TC";
+                    }
+                    if (+tenderValue > 50000000 && +tenderValue <= 100000000) {
+                        tenderType = "SAG TC";
+                    }
+
+                    window.open(
+                        "https://docs.google.com/forms/d/e/1FAIpQLSeSB2VCLhfFfGZSD0IsNxH8D95gvPLLQLiwmC7Njal4JfbFGw/formResponse?usp=pp_url&entry.2080103744="
+                        + tenderNo +
+                        "&entry.1346647636="
+                        + tenderType +
+                        "&entry.668519944="
+                        + tod +
+                        "&submit=Submit", '_blank');
+
+                }
+
+            });
         }
 
         if (
@@ -561,6 +599,7 @@ window.addEventListener(
         if (document.title == "Position of Items" || document.title == "Run Form - IMMIS/PUR/ITEMPOS") {
             body.classList.add("item_position");
             var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
+            var divShowHtml2 = document.querySelectorAll("#divShowHtml2")[0];
 
             var consigneeArray = [
                 "C&W/SUPDT/OBRADAM",
@@ -617,23 +656,6 @@ window.addEventListener(
                             uncoveredDues[i].children[8].innerText = dueDate + " (" + dateDiff + " days)";
                         }
                     }
-
-                }
-
-                if (e.target.id == "SHOW_DR") {
-
-                    var plHeader = divShowHtml1.querySelectorAll("div")[1].children[0];
-                    var depotDetails = divShowHtml1.querySelectorAll("div")[1].children[1];
-                    var uncoveredDuesDetails = divShowHtml1.querySelectorAll("div")[1].children[4];
-                    var coveredDuesDetails = divShowHtml1.querySelectorAll("div")[1].children[6];
-
-                    var plNo = plHeader.querySelectorAll("tr")[2].children[0].innerText;
-                    var purchaseSection = plHeader.querySelectorAll("tr")[2].children[4].innerText;
-                    var cpMonth = plHeader.querySelectorAll("tr")[2].children[6].innerText;
-                    var nature = plHeader.querySelectorAll("tr")[2].children[8].innerText;
-                    var category = plHeader.querySelectorAll("tr")[2].children[9].innerText;
-                    var itemDescription = plHeader.querySelectorAll("tr")[3].children[0].innerText;
-
                 }
 
                 if (
@@ -710,6 +732,36 @@ window.addEventListener(
                         tables[i].setAttribute("border", 1);
                         tables[i].style.borderCollapse = "collapse";
                     }
+                }
+
+                if (e.target.title == "view consignee wise breakup of this AAC") {
+
+                    var aacTable = divShowHtml2.querySelectorAll("table")[3];
+                    var aacRows = aacTable.querySelectorAll("tbody")[0].children;
+                    var totalAAC = 0;
+
+                    for (var i = 3; i < aacRows.length; i++) {
+
+                        var aacRow = aacRows[i];
+                        var consigneeAAC = aacRow.children[2].innerText;
+                        totalAAC += +consigneeAAC;
+                    }
+
+                    var tr = document.createElement("tr");
+                    var td1 = document.createElement("td");
+                    var text1 = document.createTextNode("TOTAL");
+                    td1.appendChild(text1);
+                    td1.setAttribute("colspan", "2");
+                    td1.style.textAlign = "right";
+                    tr.setAttribute("bgcolor", aacRows[0].getAttribute("bgcolor"));
+                    var td2 = document.createElement("td");
+                    var text2 = document.createTextNode(totalAAC);
+                    td2.appendChild(text2);
+                    td2.style.textAlign = "right";
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    aacTable.querySelectorAll("tbody")[0].appendChild(tr);
+
                 }
             });
 
