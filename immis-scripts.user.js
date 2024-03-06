@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.52
+// @version      1.0.53
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -868,7 +868,7 @@ window.addEventListener(
         ) {
             body.classList.add("ais");
             var LovDiv = document.querySelectorAll("#LovDiv")[0];
-            var s__cnvs4 = document.querySelectorAll("#s__cnvs3")[0];
+            var s__cnvs4 = document.querySelectorAll("#s__cnvs5")[0];
 
             document.addEventListener("click", (e) => {
                 var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
@@ -3038,6 +3038,51 @@ window.addEventListener(
                     scrollTop += 150;
 
                     divShowHtml1.style.top = scrollTop + "px";
+                }
+                if (e.target.title == "Select This PL." && e.target.closest("table").id == "tab_fwd_aislist") {
+                    var s_4 = body.querySelectorAll("#s_4")[0];
+                    var consumptionTable = s_4.querySelectorAll("fieldset")[1].querySelectorAll("tbody")[0];
+
+                    var consumption1st = 0;
+                    var consumption2nd = 0;
+
+                    for (var i = 1; i < consumptionTable.children.length; i++) {
+                        var consigneeRow = consumptionTable.children[i];
+                        var consigneeConsumption1st = 0;
+                        var consigneeConsumption2nd = 0;
+
+                        if (typeof (consigneeRow.children[3]) != "undefined" || consigneeRow.children[3] != null) {
+                            consigneeConsumption1st = consigneeRow.children[3].innerText;
+                        }
+                        if (typeof (consigneeRow.children[4]) != "undefined" || consigneeRow.children[4] != null) {
+                            consigneeConsumption2nd = consigneeRow.children[4].innerText;
+                        }
+
+                        consumption1st += +consigneeConsumption1st;
+                        consumption2nd += +consigneeConsumption2nd;
+                    }
+
+                    var tr = document.createElement("tr");
+                    var td1 = document.createElement("td");
+                    var text1 = document.createTextNode("Total consumption");
+                    td1.appendChild(text1);
+                    td1.setAttribute("colspan", 3);
+                    td1.style.textAlign = "center";
+                    var td2 = document.createElement("td");
+                    var text2 = document.createTextNode(consumption1st);
+                    td2.appendChild(text2);
+                    td2.style.textAlign = "center";
+                    var td3 = document.createElement("td");
+                    var text3 = document.createTextNode(consumption2nd);
+                    td3.appendChild(text3);
+                    td3.style.textAlign = "center";
+                    var td4 = document.createElement("td");
+                    td4.setAttribute("colspan", 2);
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+                    consumptionTable.appendChild(tr);
                 }
             });
         }

@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.38
+@version      1.0.39
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -973,6 +973,10 @@
     
     .spare_stock_entry #s_4 > table{
         width: 100%;
+    }
+    
+    .spare_stock_entry #s_3 #tab_plstklist tr:nth-of-type(n+2) td:nth-of-type(10){
+        text-align: left;
     }
     
     .drr_status div:has(> div#DrrStatId){
