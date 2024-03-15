@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.39
+@version      1.0.40
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -409,7 +409,8 @@
 		width: 1024px !important;
 	}
     
-    .demand_generation #s_2 table.mceLayout{
+    .demand_generation #s_2 table.mceLayout,
+    .demand_generation #s_2 table.mceLayout iframe{
         height: 30px !important;
     }
     
@@ -774,13 +775,17 @@
     
     .qty_review_div table,
     .qty_review_div tr,
-    .qty_review_div td{
+    .qty_review_div td,
+    .data_review table,
+    .data_review tr,
+    .data_review td{
         border-collapse: collapse;
         padding: 0;
         box-sizing: border-box;
     }
     
-    .qty_review_div td{
+    .qty_review_div td,
+    .data_review td{
         padding: 2px;
     }
     
@@ -789,7 +794,8 @@
         margin-top: 20px;
     }
     
-    .qty_review_div table td{
+    .qty_review_div table td,
+    .data_review table td{
         border: 1px solid black;
     }
     
@@ -837,19 +843,27 @@
     
     .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(1){
         width: 150px;
+        display: flex;
+        align-items: center;
     }
     
     .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(2){
         width: 100px;
+        display: flex;
+        align-items: center;
     }
     
     .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(3){
-        width: calc(100% - 350px)
+        width: calc(100% - 350px);
+        display: flex;
+        align-items: center;
     }
     
     .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(4){
         width: 100px;
-        text-align: center;    
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .qty_review_div table:nth-child(3) td:nth-child(n+2){
@@ -891,6 +905,59 @@
         width: calc((100% - 100px)/9);
     }
     
+    .quantity_review .data_review > table{
+        width: 800px;
+        margin-top: 20px;
+    }
+    
+    .quantity_review .data_review > table tr:nth-of-type(1) td:nth-of-type(1){
+        text-align: center;
+    }
+    
+    .quantity_review .data_review > table tr:nth-of-type(n+2) td:nth-of-type(1){
+        width: 180px;
+    }
+    
+    .quantity_review .data_review > table tr:nth-of-type(n+2) td:nth-of-type(2),
+    .quantity_review .data_review > table tr:nth-of-type(n+2) td:nth-of-type(3),
+    .quantity_review .data_review > table tr:nth-of-type(n+2) td:nth-of-type(4),
+    .quantity_review .data_review > table tr:nth-of-type(n+2) td:nth-of-type(6){
+        width: 100px;
+    }
+    
+    .quantity_review .data_review > table input,
+    .quantity_review .data_review > table select{
+        width: 95px;
+        height: 25px;
+    }
+    
+    .quantity_review .data_review > table select.considered{
+        background-color: darkgray;
+        font-weight: bold;
+    }
+    
+    .quantity_review .data_review > table select.considered option{
+        font-weight: normal;
+    }
+    
+    .quantity_review .data_review > button{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 80px;
+        height: 34px;
+        margin-left: calc((50% - 40px)/2);
+    }
+    
+    @media print{
+        
+        .quantity_review #CanvassHolder,
+        .quantity_review #TitleBar,
+        .quantity_review #divShowHtml1 > div:nth-child(1){
+            display: none !important;
+        }
+        
+    }
+    
     .item_position #s_2 #s_0_13{
         width: 500px;
     }
@@ -902,16 +969,6 @@
         box-shadow: 0px 0px 125px #000;
         padding: 10px !important;
         border-radius: 5px;
-    }
-    
-    @media print{
-        
-        .quantity_review #CanvassHolder,
-        .quantity_review #TitleBar,
-        .quantity_review #divShowHtml1 > div:nth-child(1){
-            display: none !important;
-        }
-        
     }
     
     .consignee_aac #s_2,

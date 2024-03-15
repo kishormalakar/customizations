@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.53
+// @version      1.0.54
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -2130,7 +2130,9 @@ window.addEventListener(
                 var td11 = document.createElement("td");
                 var text11 = document.createTextNode("Review AAC");
                 td11.appendChild(text11);
+                td11.setAttribute("colspan", "2");
                 tr1.appendChild(td11);
+                tr1.setAttribute("bgcolor", "lightGrey");
                 var tr2 = document.createElement("tr");
                 var td21 = document.createElement("td");
                 var text21 = document.createTextNode("Depot");
@@ -2168,7 +2170,9 @@ window.addEventListener(
                 var td11 = document.createElement("td");
                 var text11 = document.createTextNode("Review Uncovered Dues");
                 td11.appendChild(text11);
+                td11.setAttribute("colspan", "6");
                 tr1.appendChild(td11);
+                tr1.setAttribute("bgcolor", "lightGrey");
                 var tr2 = document.createElement("tr");
                 var td21 = document.createElement("td");
                 var text21 = document.createTextNode("Depot");
@@ -2218,6 +2222,7 @@ window.addEventListener(
                     tdQ5.appendChild(textQ5);
                     var tdQ6 = document.createElement("td");
                     var selectQ6 = document.createElement("select");
+                    selectQ6.classList.add("demand_consider");
                     var optionQ61 = document.createElement("option");
                     optionQ61.value = "Ignore";
                     optionQ61.innerHTML = "Ignore";
@@ -2227,6 +2232,7 @@ window.addEventListener(
                     optionQ62.innerHTML = "Consider";
                     if (uncoveredDuesArray[i][0].substring(0, 1) == uncoveredDuesArray[i][4].substring(0, 1)) {
                         optionQ62.setAttribute("selected", "selected");
+                        selectQ6.classList.add("considered");
                     }
                     selectQ6.appendChild(optionQ62);
                     tdQ6.appendChild(selectQ6);
@@ -2245,6 +2251,7 @@ window.addEventListener(
 
                 var button = document.createElement("button");
                 button.innerHTML = "Submit"
+                button.classList.add("submit_aac_and_dues");
                 button.onclick = () => {
 
                     var dataReviewDiv = document.querySelectorAll(".data_review")[0];
@@ -2956,6 +2963,17 @@ window.addEventListener(
                     a.document.write('</body></html>');
                     a.document.close();
                     a.print();
+                }
+            });
+
+            document.addEventListener("change", (e) => {
+                if (e.target.classList.contains("demand_consider")) {
+                    if (e.target.value == "Consider") {
+                        e.target.classList.add("considered");
+                    }
+                    else {
+                        e.target.classList.remove("considered");
+                    }
                 }
             });
 
