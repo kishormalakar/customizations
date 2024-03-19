@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.54
+// @version      1.0.55
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -20,6 +20,9 @@ window.addEventListener(
             var title = titleBar.querySelectorAll("td")[1].innerText;
             document.title = title;
             titleBar.style.width = "100%";
+
+            window.moveTo(0, 0);
+            window.resizeTo(window.screen.availWidth, window.screen.availHeight);
         }
 
         var titleBar = "";
@@ -509,13 +512,17 @@ window.addEventListener(
             }
 
             poLinking();
+            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_36")[0];
+
             document.addEventListener("click", (e) => {
                 if (e.target.name == "btn_Refresh_0") {
                     poLinking();
                 }
+                if (e.target.name == "btn_Hide_0") {
+                    maKeyInput.focus();
+                }
             });
 
-            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_36")[0];
             maKeyInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
@@ -527,17 +534,20 @@ window.addEventListener(
 
         if (document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER" || document.title == "Run Form - IMMIS/PUR/ORDERGEN") {
             body.classList.add("po_generation");
-        }
 
-        if (document.title == "Run Form - IMMIS/PUR/ORDER") {
             var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
-            poKeyInput.addEventListener("keydown", (e) => {
-                if (e.key === "Tab" || e.key === "Enter") {
 
-                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_27")[0].focus();
+            if (poKeyInput != null && poKeyInput != undefined) {
+                poKeyInput.focus();
+                poKeyInput.addEventListener("keydown", (e) => {
+                    if (e.key === "Tab" || e.key === "Enter") {
 
-                }
-            });
+                        document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_27")[0].focus();
+
+                    }
+                });
+            }
+
         }
 
         if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
@@ -580,6 +590,9 @@ window.addEventListener(
                 }
 
             });
+
+            var tenderNoInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_30")[0];
+            tenderNoInput.focus();
         }
 
         if (
@@ -797,6 +810,7 @@ window.addEventListener(
             body.classList.add("purchase_proposal");
 
             var ppInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_111")[0];
+            ppInput.focus();
             ppInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
@@ -945,6 +959,9 @@ window.addEventListener(
 
         if (document.title == "PO Cancellation" || document.title == "Run Form - IMMIS/PUR/POCA") {
             body.classList.add("po_cancellation");
+
+            var caKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_15")[0];
+            caKeyInput.focus();
         }
 
         if (document.title == "Search / View NIT and Tabulations" || document.title == "Run Form - IMMIS/NITSEARCH") {
@@ -1219,6 +1236,9 @@ window.addEventListener(
                     }
                 }
             });
+
+            var eDispatchButton = body.querySelectorAll("#s_0_12")[0];
+            eDispatchButton.click();
         }
 
         if (document.title == "Issue of Stores against Registered Requisitions" || document.title == "Run Form - IMMIS/DEP/REQNISSUE") {
@@ -2560,7 +2580,7 @@ window.addEventListener(
 
                             var trK1 = document.createElement("tr");
                             var tdK1 = document.createElement("td");
-                            var textK1 = document.createTextNode(row4[4]);
+                            var textK1 = document.createTextNode(row4[4].slice(0, 35) + " " + row4[4].slice(35));
                             var br = document.createElement("br");
                             var textK2 = document.createTextNode("DP: " + row4[3]);
                             tdK1.appendChild(textK1);
@@ -2978,6 +2998,7 @@ window.addEventListener(
             });
 
             var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_7")[0];
+            plInput.focus();
             plInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 

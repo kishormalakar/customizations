@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.40
+@version      1.0.41
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -728,9 +728,23 @@
 	.sale_issue_note #s_4 {
 		flex-basis: 50%;
 	}
+    
+    .reqn_issue #divShowHtml2 > div{
+        width: 100% !important;
+    }
 
-    .reqn_issue #divShowHtml2 > div:nth-of-type(2) > table{
+    .reqn_issue #divShowHtml2 > div:nth-of-type(2) table{
         max-width: 100% !important;
+        font-size: 12px !important;
+    }
+    
+    .reqn_issue #divShowHtml2 > div:nth-of-type(2) table font{
+        font-size: 12px !important;
+    }
+    
+    .reqn_issue #divShowHtml2 > div:nth-of-type(2) table b,
+    .reqn_issue #divShowHtml2 > div:nth-of-type(2) table b font{
+        font-size: 16px !important;
     }
 
     .stockmaster #s_0_29,
@@ -799,8 +813,9 @@
         border: 1px solid black;
     }
     
-    .qty_review_div table td:nth-child(1){
-        width: 120px;    
+    .qty_review_div table > tbody > tr > td:nth-child(1){
+        width: 120px;
+        min-width: 120px;
     }
     
     .qty_review_div table:nth-child(1) td{
@@ -811,6 +826,11 @@
     .qty_review_div table:nth-child(3) tr:nth-child(1),
     .qty_review_div table:nth-child(3) tr:nth-child(2){
         font-weight: bold;
+    }
+    
+    .qty_review_div table:nth-child(3) td:nth-child(n+2){
+        text-align: center;    
+        width: calc((960px - 120px)/7)
     }
     
     .qty_review_div table:nth-child(4) tbody > tr:nth-child(1),
@@ -841,6 +861,11 @@
         align-items: center;
     }
     
+    .qty_review_div table:nth-child(4) td:nth-child(3){
+        text-align: center; 
+        width: 80px;
+    }
+    
     .qty_review_div table:nth-child(5) td:nth-child(2) td:nth-child(1){
         width: 150px;
         display: flex;
@@ -864,16 +889,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-    
-    .qty_review_div table:nth-child(3) td:nth-child(n+2){
-        text-align: center;    
-        width: calc((960px - 120px)/7)
-    }
-    
-    .qty_review_div table:nth-child(4) td:nth-child(3){
-        text-align: center; 
-        width: 80px;
     }
     
     .qty_review_div table:nth-child(5) tbody > tr > td:nth-child(3){

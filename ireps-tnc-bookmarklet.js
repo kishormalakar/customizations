@@ -203,7 +203,7 @@ javascript: (() => {
                 ["SSE/TELE/GS/DHN", "SSE/TELE/GS/DHN", 9771445860, "bikramsum@gmail.com", "Office of Sr. Section Engineer (Telecom - Gati Shakti), Near DRM Office, Dhanbad, Jharkhand, 826001", "Sr. DSTE/GS/DHN", 9771426819, "srdstegsdhn@gmail.com"],
                 ["COMOFF/108N/RPSF/DHN", "ASC/RPSF/DHN", 9771426725, "surendrapratapmishra3@gmail.com", "10 Battalion RPSF, Near Railway Hospital, Hill colony, Dhanbad, Jharkhand, 826001", "ASC/RPSF/DHN", 9771426725, "surendrapratapmishra3@gmail.com"],
                 ["DEN/1/ECR/DHN", "SSE/PW/COMP/DHN", 9123252811, "pankajkantigupta64@gmail.com", "Office of SSE/PW/COMP/DHN, Engineering Store, Near DRM Office, Dhanbad, Jharkhand, 826001", "Sr. DEN/3/DHN", 9771426204, "sden3dhnireps@gmail.com"],
-                ["DSL/PTRU", "CDMS/Receipt/PTRU", 8340274149, "", "Stores Depot, Diesel Loco Shed Patratu, Patratu, Jharkhand, 829118", "ADFM/1/DHN", 9771426103, "naustopno.2502@gov.in"],
+                ["DSL Depot Patratu", "CDMS/Receipt/PTRU", 8340274149, "deepakdsl82@gmail.com", "Stores Depot, Diesel Loco Shed Patratu, Patratu, Jharkhand, 829118", "ADFM/1/DHN", 9771426103, "naustopno.2502@gov.in"],
                 ["", "", "", "", "", "", "", ""]
             ];
 
