@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.55
+// @version      1.0.56
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -20,9 +20,6 @@ window.addEventListener(
             var title = titleBar.querySelectorAll("td")[1].innerText;
             document.title = title;
             titleBar.style.width = "100%";
-
-            window.moveTo(0, 0);
-            window.resizeTo(window.screen.availWidth, window.screen.availHeight);
         }
 
         var titleBar = "";
@@ -980,6 +977,14 @@ window.addEventListener(
                         "px !important; border: 2px solid black; padding: 5px; background-color: #66ffff;";
                 }
             });
+
+            var s_0_14 = body.querySelectorAll("#s_0_14")[0];
+            var s_0_16 = body.querySelectorAll("#s_0_16")[0];
+            var s_0_17 = body.querySelectorAll("#s_0_17")[0];
+
+            var dateFrom = s_0_16.value.split("-")[0] + "-" + s_0_16.value.split("-")[1] + "-" + (+s_0_16.value.split("-")[2] - 1);
+            s_0_16.value = dateFrom;
+            s_0_14.selectedIndex = 4;
         }
 
         if (document.title == "Vendor Performance" || document.title == "Run Form - IMMIS/PUR/VENDPOS") {
@@ -3142,25 +3147,27 @@ window.addEventListener(
                     var s_2 = body.querySelectorAll("#s_2")[0];
                     var s_3 = body.querySelectorAll("#s_3")[0];
 
-                    if (s_2.querySelectorAll(":scope > table").length == 1) {
+                    if (s_2.querySelectorAll(":scope > table").length > 1) {
 
-                        var tableHeader = s_3.querySelectorAll("div")[0].querySelectorAll("tr")[0];
-                        var tableHeaderClone = tableHeader.cloneNode(true);
-
-                        var tableHeaderCloneChildren = tableHeaderClone.children;
-                        for (var i = 0; i < tableHeaderCloneChildren.length; i++) {
-
-                            var tableHeaderCloneChild = tableHeaderCloneChildren[i];
-                            tableHeaderCloneChild.style.width = window.getComputedStyle(tableHeader.querySelectorAll("td")[i]).getPropertyValue("width");
-                        }
-
-                        var table1 = document.createElement("table");
-                        var tbody1 = document.createElement("tbody");
-                        tbody1.appendChild(tableHeaderClone);
-                        table1.appendChild(tbody1);
-                        s_2.appendChild(table1);
+                        s_2.querySelectorAll(":scope > table")[1].remove();
 
                     }
+
+                    var tableHeader = s_3.querySelectorAll("div")[0].querySelectorAll("tr")[0];
+                    var tableHeaderClone = tableHeader.cloneNode(true);
+
+                    var tableHeaderCloneChildren = tableHeaderClone.children;
+                    for (var i = 0; i < tableHeaderCloneChildren.length; i++) {
+
+                        var tableHeaderCloneChild = tableHeaderCloneChildren[i];
+                        tableHeaderCloneChild.style.width = window.getComputedStyle(tableHeader.querySelectorAll("td")[i]).getPropertyValue("width");
+                    }
+
+                    var table1 = document.createElement("table");
+                    var tbody1 = document.createElement("tbody");
+                    tbody1.appendChild(tableHeaderClone);
+                    table1.appendChild(tbody1);
+                    s_2.appendChild(table1);
 
                     var inspectionTable = s_3.querySelectorAll("table")[1];
                     var inspectionTableRows = inspectionTable.querySelectorAll("tbody")[0].children;
