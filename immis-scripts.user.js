@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.56
+// @version      1.0.57
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -794,6 +794,7 @@ window.addEventListener(
             });
 
             var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_11")[0];
+            plInput.focus();
             plInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
@@ -1954,6 +1955,7 @@ window.addEventListener(
                 var depotArray = [];
                 var stockArray = [];
                 var consumptionArray = [];
+                var consumptionYearsArray = [];
                 var aacArray = [];
                 var mcArray = [];
                 var ipRequirementsArray = [];
@@ -1975,6 +1977,11 @@ window.addEventListener(
                     aacArray.push(+row1.querySelectorAll("td")[13].innerText);
                     mcArray.push(+Math.round(+row1.querySelectorAll("td")[13].innerText / 12));
                 }
+
+                consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[0].innerText);
+                consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[1].innerText);
+                consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[2].innerText);
+                consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[3].innerText);
 
                 var coveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[0].querySelectorAll("table")[0];
                 var coveredRows = coveredDuesTable.querySelectorAll("tbody")[0].children;
@@ -2087,6 +2094,7 @@ window.addEventListener(
                 data.depotArray = depotArray;
                 data.stockArray = stockArray;
                 data.consumptionArray = consumptionArray;
+                data.consumptionYearsArray = consumptionYearsArray;
                 data.aacArray = aacArray;
                 data.mcArray = mcArray;
                 data.coveredDuesArray = coveredDuesArray;
@@ -2119,6 +2127,7 @@ window.addEventListener(
                 var depotArray = data.depotArray;
                 var stockArray = data.stockArray;
                 var consumptionArray = data.consumptionArray;
+                var consumptionYearsArray = data.consumptionYearsArray;
                 var aacArray = data.aacArray;
                 var mcArray = data.mcArray;
                 var coveredDuesArray = data.coveredDuesArray;
@@ -2349,6 +2358,7 @@ window.addEventListener(
                 var depotArray = data.depotArray;
                 var stockArray = data.stockArray;
                 var consumptionArray = data.consumptionArray;
+                var consumptionYearsArray = data.consumptionYearsArray;
                 var aacArray = data.aacArray;
                 var mcArray = data.mcArray;
                 var coveredDuesArray = data.coveredDuesArray;
@@ -2452,16 +2462,16 @@ window.addEventListener(
                 var text2 = document.createTextNode("Depot");
                 td2.appendChild(text2);
                 var td3 = document.createElement("td");
-                var text3 = document.createTextNode("Cons 20-21");
+                var text3 = document.createTextNode("Cons " + consumptionYearsArray[0]);
                 td3.appendChild(text3);
                 var td4 = document.createElement("td");
-                var text4 = document.createTextNode("Cons 21-22");
+                var text4 = document.createTextNode("Cons " + consumptionYearsArray[1]);
                 td4.appendChild(text4);
                 var td5 = document.createElement("td");
-                var text5 = document.createTextNode("Cons 22-23");
+                var text5 = document.createTextNode("Cons " + consumptionYearsArray[2]);
                 td5.appendChild(text5);
                 var td6 = document.createElement("td");
-                var text6 = document.createTextNode("Cons 23-24");
+                var text6 = document.createTextNode("Cons " + consumptionYearsArray[3]);
                 td6.appendChild(text6);
                 var td7 = document.createElement("td");
                 var text7 = document.createTextNode("Weighted Avg Consumption");
