@@ -39,7 +39,7 @@ window.addEventListener(
             ["CKPZGS", "Pravindra Sinha", "BRWD"],
             ["QRSXQW", "Deepak Kumar", "PTRU"],
             ["XBSKWD", "Sandeep Kumar", "PTRU"],
-            ["AKJYIB", "Rajesh Munda", "PTRU"],
+            ["AKJIYB", "Rajesh Munda", "PTRU"],
             ["KHJBNH", "Shiv Ch. Paswan", "PTRU"],
             ["GYGFRW", "Munna Rajak", "PTRU"],
             ["KJYJDZ", "Ranjit Kumar", "PTRU"],

@@ -228,10 +228,14 @@ window.addEventListener(
             var button1 = document.createElement("button");
             var text1 = document.createTextNode("Backward 1 Year");
             button1.appendChild(text1);
+            button1.classList.add("button");
+            button1.classList.add("btnSunflower");
 
             var button2 = document.createElement("button");
             var text2 = document.createTextNode("Forward 1 Year");
             button2.appendChild(text2);
+            button2.classList.add("button");
+            button2.classList.add("btnSunflower");
 
             buttonRow.insertBefore(button2, buttonRow.children[0]);
             buttonRow.insertBefore(button1, buttonRow.children[0]);
@@ -2591,7 +2595,7 @@ window.addEventListener(
 
                         var row4 = coveredDuesArray[j];
 
-                        if ((row4[0] == depotArray[i].substring(0, 2)) && (row4[4].substring(16, 17) != "8")) {
+                        if ((row4[0] == depotArray[i].substring(0, 2)) && (row4[4].substring(16, 17) != "8") && (row4[4].substring(16, 17) != "7")) {
 
                             var trK1 = document.createElement("tr");
                             var tdK1 = document.createElement("td");
