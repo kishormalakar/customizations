@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.57
+// @version      1.0.58
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -3190,12 +3190,23 @@ window.addEventListener(
 
                         var inspectionRow = inspectionTableRows[j];
                         var poNo = inspectionRow.children[6].innerText;
+                        var qtyRejected = inspectionRow.children[14].innerText;
+                        var qtyPassed = inspectionRow.children[12].innerText;
 
                         var p = document.createElement("p");
                         var pText = document.createTextNode("Get PO");
                         p.appendChild(pText);
                         p.className = "get_po_url";
                         inspectionRow.children[6].appendChild(p);
+
+                        if (+qtyRejected > +qtyPassed) {
+                            var br = document.createElement("br");
+                            var rText = document.createTextNode("Rejected");
+                            inspectionRow.children[16].appendChild(br);
+                            inspectionRow.children[16].appendChild(rText);
+                            inspectionRow.children[16].style.color = "red";
+
+                        }
 
                     }
 

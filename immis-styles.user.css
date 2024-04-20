@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.42
+@version      1.0.43
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -1043,6 +1043,16 @@
         text-decoration: underline;
         margin-top: 5px;
         cursor: pointer;
+    }
+    
+    .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(13){
+        color: green;
+        font-weight: bold;
+    }
+    
+    .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(15){
+        color: red;
+        font-weight: bold;
     }
     
     .spare_stock_entry #s_4 > table{
