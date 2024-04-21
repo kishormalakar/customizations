@@ -343,16 +343,21 @@ window.addEventListener(
                             linkHref = urlPart1 + poSerial + urlPart2;
                         }
 
-                        var td2 = document.createElement("td");
-                        var link = document.createElement("a");
-                        var linkText = document.createTextNode("Bill Status");
-                        link.appendChild(linkText);
-                        link.title = "Check Bill Status";
-                        link.href = linkHref;
-                        link.target = "_blank";
-                        td2.appendChild(link);
-                        td2.setAttribute("align", "right");
-                        poRow.appendChild(td2);
+                        if (poRow.children.length == 13 || poRow.children.length == 10 || poRow.children.length == 8) {
+
+                            var td2 = document.createElement("td");
+                            var link = document.createElement("a");
+                            var linkText = document.createTextNode("Bill Status");
+                            link.appendChild(linkText);
+                            link.title = "Check Bill Status";
+                            link.href = linkHref;
+                            link.target = "_blank";
+                            td2.appendChild(link);
+                            td2.setAttribute("align", "right");
+                            poRow.appendChild(td2);
+
+                        }
+
                     }
                 }
             });
@@ -1979,7 +1984,7 @@ window.addEventListener(
                     array1.push(+row1.querySelectorAll("td")[10].innerText);
                     consumptionArray.push(array1);
                     aacArray.push(+row1.querySelectorAll("td")[13].innerText);
-                    mcArray.push(+Math.round(+row1.querySelectorAll("td")[13].innerText / 12));
+                    mcArray.push(+row1.querySelectorAll("td")[13].innerText / 12);
                 }
 
                 consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[0].innerText);
@@ -2876,46 +2881,46 @@ window.addEventListener(
                     var tdM3 = document.createElement("td");
                     var textM3;
                     if (i == depotArray.length) {
-                        textM3 = document.createTextNode(mcArray.reduce((a, b) => a + b, 0));
+                        textM3 = document.createTextNode(Math.round(mcArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        textM3 = document.createTextNode(mcArray[i]);
+                        textM3 = document.createTextNode(Math.round(mcArray[i] * 100) / 100);
                     }
                     tdM3.appendChild(textM3);
 
                     var tdM4 = document.createElement("td");
                     var textM4;
                     if (i == depotArray.length) {
-                        textM4 = document.createTextNode(ipRequirementsArray.reduce((a, b) => a + b, 0));
+                        textM4 = document.createTextNode(Math.round(ipRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
                         var ipRequirement = mcArray[i] * ipMM;
                         ipRequirementsArray.push(+ipRequirement);
-                        textM4 = document.createTextNode(ipRequirement);
+                        textM4 = document.createTextNode(Math.round(ipRequirement * 100) / 100);
                     }
                     tdM4.appendChild(textM4);
 
                     var tdM5 = document.createElement("td");
                     var textM5;
                     if (i == depotArray.length) {
-                        textM5 = document.createTextNode(cpRequirementsArray.reduce((a, b) => a + b, 0));
+                        textM5 = document.createTextNode(Math.round(cpRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
                         var cpRequirement = aacArray[i];
                         cpRequirementsArray.push(+cpRequirement);
-                        textM5 = document.createTextNode(cpRequirement);
+                        textM5 = document.createTextNode(Math.round(cpRequirement * 100) / 100);
                     }
                     tdM5.appendChild(textM5);
 
                     var tdM6 = document.createElement("td");
                     var textM6;
                     if (i == depotArray.length) {
-                        textM6 = document.createTextNode(bpRequirementsArray.reduce((a, b) => a + b, 0));
+                        textM6 = document.createTextNode(Math.round(bpRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
                         var bpRequirement = mcArray[i] * bpMM;
                         bpRequirementsArray.push(+bpRequirement);
-                        textM6 = document.createTextNode(bpRequirement);
+                        textM6 = document.createTextNode(Math.round(bpRequirement * 100) / 100);
                     }
                     tdM6.appendChild(textM6);
 
@@ -2952,12 +2957,12 @@ window.addEventListener(
                     var tdM10 = document.createElement("td");
                     var textM10;
                     if (i == depotArray.length) {
-                        textM10 = document.createTextNode(netRequirementsArray.reduce((a, b) => a + b, 0));
+                        textM10 = document.createTextNode(Math.round(netRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
                         var netRequirement = ipRequirement + cpRequirement + bpRequirement - totalCoveredDuesArray[i] - totalUncoveredDuesArray[i] - stockArray[i];
                         netRequirementsArray.push(+netRequirement);
-                        textM10 = document.createTextNode(netRequirement);
+                        textM10 = document.createTextNode(Math.round(netRequirement * 100) / 100);
                     }
                     tdM10.appendChild(textM10);
 
