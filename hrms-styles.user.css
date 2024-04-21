@@ -1,15 +1,67 @@
 /* ==UserStyle==
 @name           HRMS
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.0.2
 @description    A new userstyle
 @author         Me
 ==/UserStyle== */
 
 @-moz-document url-prefix("https://hrms.indianrail.gov.in/HRMS/") {
 
-    .navbar-brand{
+    .app-header .navbar-brand{
         margin-top: -11px;
+    }
+	
+    @media screen and (max-width: 600px){
+		
+		.app-header{
+			height: 100px !important;
+			align-items: start;
+			justify-content: space-between;
+		}
+		
+		.app-header .navbar-brand{
+			display: block;
+			margin: 0;
+		}
+		
+		.app-header .navbar-nav{
+			width: 100%;
+			align-items: center;
+			justify-content: center;
+			top: 50px !important;
+			left: unset !important;
+			margin: unset !important;
+		}
+		
+		.app-header .aside-menu-toggler{
+			display: none;
+		}
+		
+		.app-header .navbar-nav .nav-item:nth-of-type(1),
+		.app-header .navbar-nav .nav-item:nth-of-type(2),
+		.app-header .navbar-nav .nav-item:nth-of-type(4),
+		.app-header .navbar-nav .nav-item:nth-of-type(5),
+		.app-header .navbar-nav .nav-item:nth-of-type(6){
+			display: none;
+		}
+		
+		.app-body{
+			margin-top: 100px !important;
+		}
+		
+		#breadcrumb{
+			margin: 0 !important;
+		}
+		
+		.container-fluid{
+			padding: 5px !important;
+		}
+		
+		.card-body{
+			padding: 5px !important;
+		}
+		
     }
     
 	#leaveApplicationForm select[id^="leaveNature"]{
@@ -20,5 +72,4 @@
 	#accordionPassApplication #headingPassApp h6{
 		display: inline-block;
 	}
-	
 }

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeM
 // @namespace    http://tampermonkey.net/
-// @version      1.0.9
+// @version      1.0.10
 // @description  try to take over the world!
 // @author       You
 // @match        https://*.gem.gov.in/*
@@ -100,6 +100,16 @@ window.addEventListener(
             passwordInput.tabIndex = 3;
             signButton.tabIndex = 4;
 
+        }
+
+        if (pathname.endsWith("/oauth/login")) {
+            document.addEventListener("input", (e) => {
+                if (e.target.id == "captcha_math") {
+                    var captcha = document.querySelectorAll("#captcha_math")[0];
+                    var captchaValue = captcha.value;
+                    captcha.value = captchaValue.toUpperCase();
+                }
+            });
         }
     },
     false
