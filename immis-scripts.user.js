@@ -660,20 +660,24 @@ window.addEventListener(
                     var uncoveredDues = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
                     for (i = 2; i < uncoveredDues.length; i++) {
-                        var dueDate = uncoveredDues[i].children[8].innerText;
 
-                        if (dueDate != "") {
-                            var tenderDueDate = new Date(
-                                "20" + dueDate.split("/")[2],
-                                dueDate.split("/")[1] - 1,
-                                dueDate.split("/")[0]
-                            );
-                            var today = new Date();
+                        if (uncoveredDues[i].children[8]) {
+                            var dueDate = uncoveredDues[i].children[8].innerText;
 
-                            var dateDiff = Math.floor((today - tenderDueDate) / 86400000);
+                            if (dueDate != "") {
+                                var tenderDueDate = new Date(
+                                    "20" + dueDate.split("/")[2],
+                                    dueDate.split("/")[1] - 1,
+                                    dueDate.split("/")[0]
+                                );
+                                var today = new Date();
 
-                            uncoveredDues[i].children[8].innerText = dueDate + " (" + dateDiff + " days)";
+                                var dateDiff = Math.floor((today - tenderDueDate) / 86400000);
+
+                                uncoveredDues[i].children[8].innerText = dueDate + " (" + dateDiff + " days)";
+                            }
                         }
+
                     }
                 }
 
@@ -1351,12 +1355,12 @@ window.addEventListener(
 
                         if (k == 0) {
                             var th2 = document.createElement("th");
-                            var thText2 = document.createTextNode("Consumption LY");
+                            var thText2 = document.createTextNode("Cons LY");
                             th2.appendChild(thText2);
                             rowTh.parentElement.insertBefore(th2, rowTh);
 
                             var th3 = document.createElement("th");
-                            var thText3 = document.createTextNode("Consumption CY");
+                            var thText3 = document.createTextNode("Cons CY");
                             th3.appendChild(thText3);
                             rowTh.parentElement.insertBefore(th3, rowTh);
 
@@ -1575,7 +1579,7 @@ window.addEventListener(
             for (var p = 0; p < table5Rows.length; p++) {
                 var row5 = table5Rows[p];
 
-                if (row5.querySelectorAll("th")[4] && row5.querySelectorAll("th")[4].innerText == "Consumption CY") {
+                if (row5.querySelectorAll("th")[4] && row5.querySelectorAll("th")[4].innerText == "Cons CY") {
 
                     var table6 = row5.querySelectorAll("table")[0];
                     var table6Rows = table6.querySelectorAll("tbody")[0].children;
@@ -1632,11 +1636,16 @@ window.addEventListener(
                             var th1 = document.createElement("th");
                             var thText1 = document.createTextNode("Coverage");
                             th1.appendChild(thText1);
+                            th1.setAttribute("colspan", "3");
                             row6.appendChild(th1);
                             var th2 = document.createElement("th");
                             var thText2 = document.createTextNode("Remarks");
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
+                            var th3 = document.createElement("th");
+                            var thText3 = document.createTextNode("Remarks of Previous Meeting");
+                            th3.appendChild(thText3);
+                            row6.appendChild(th3);
                             row6.setAttribute("bgcolor", "lightBlue");
 
                         }
@@ -1656,6 +1665,7 @@ window.addEventListener(
                             table.appendChild(tbody);
                             td0.appendChild(table);
                             td0.setAttribute("rowspan", table6Rows.length - 3);
+                            td0.setAttribute("colspan", "3");
                             row6.appendChild(td0);
 
                             for (var r = 2; r < coverageRows.length; r++) {
@@ -1679,6 +1689,7 @@ window.addEventListener(
                                         tdText2 = document.createTextNode(coverageDepot + ": " + coverageQty + "; DP: " + coverageDP);
                                     }
                                     var br = document.createElement("br");
+                                    td1.setAttribute("colspan", "3");
                                     td1.style.border = "1px solid black";
                                     td1.appendChild(tdText1);
                                     td1.appendChild(br);
@@ -1741,6 +1752,7 @@ window.addEventListener(
                                         });
 
                                         td1.style.border = "1px solid black";
+                                        td1.setAttribute("colspan", "3");
                                         tr1.appendChild(td1);
 
                                         uncoveredTenderTextArray.push(tr1);
@@ -1765,6 +1777,7 @@ window.addEventListener(
                                             });
 
                                             td1.style.border = "1px solid black";
+                                            td1.setAttribute("colspan", "3");
                                             tr1.appendChild(td1);
 
                                             uncoveredTenderTextArray[x] = tr1;
@@ -1785,7 +1798,12 @@ window.addEventListener(
                             td1.setAttribute("rowspan", table6Rows.length - 3);
                             row6.appendChild(td1);
 
+                            var td2 = document.createElement("td");
+                            td2.setAttribute("rowspan", table6Rows.length - 3);
+                            row6.appendChild(td2);
+
                             var descriptionText = row5.previousElementSibling.querySelectorAll("td")[0].innerText;
+                            var slNo = descriptionText.split(" ")[0].split(".")[0];
                             var pl = descriptionText.split(" ")[1].split("-")[0];
                             var itemDescription = descriptionText.substring(descriptionText.indexOf("-") + 1, descriptionText.indexOf("(CP-Start"));
                             var cp = descriptionText.substring(descriptionText.indexOf("(CP-Start") + 11, descriptionText.indexOf("Pur.Sec:") - 2);
@@ -1795,6 +1813,11 @@ window.addEventListener(
                             var table1 = document.createElement("table");
                             var tbody1 = document.createElement("tbody");
                             var tr1 = document.createElement("tr");
+                            var th10 = document.createElement("th");
+                            var text10 = document.createTextNode("Sl No");
+                            th10.appendChild(text10);
+                            th10.style.border = "1px solid black";
+                            th10.setAttribute("bgcolor", "lightBlue");
                             var th11 = document.createElement("th");
                             var text11 = document.createTextNode("PL No");
                             th11.appendChild(text11);
@@ -1827,6 +1850,7 @@ window.addEventListener(
                             th16.appendChild(text16);
                             th16.style.border = "1px solid black";
                             th16.setAttribute("bgcolor", "lightBlue");
+                            tr1.appendChild(th10);
                             tr1.appendChild(th11);
                             tr1.appendChild(th12);
                             tr1.appendChild(th13);
@@ -1835,6 +1859,12 @@ window.addEventListener(
                             tr1.appendChild(th16);
 
                             var tr2 = document.createElement("tr");
+                            var td20 = document.createElement("td");
+                            var text20 = document.createTextNode(slNo);
+                            td20.appendChild(text20);
+                            td20.style.border = "1px solid black";
+                            td20.style.width = "100px";
+                            td20.setAttribute("bgcolor", "lightBlue");
                             var td21 = document.createElement("td");
                             var text21 = document.createTextNode(pl);
                             td21.appendChild(text21);
@@ -1873,6 +1903,7 @@ window.addEventListener(
                             td26.style.border = "1px solid black";
                             td26.style.width = "100px";
                             td26.setAttribute("bgcolor", "lightBlue");
+                            tr2.appendChild(td20);
                             tr2.appendChild(td21);
                             tr2.appendChild(td22);
                             tr2.appendChild(td23);
