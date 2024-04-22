@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.58
+// @version      1.0.59
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -87,6 +87,22 @@ window.addEventListener(
             ["DSL/SPJ", "71"],
         ];
 
+        var dealerPlArray = [
+            ["1000", "1999", "Sanjay Verma"],
+            ["2000", "2999", "Sanjay Verma"],
+            ["3000", "3999", "Neeraj Nikhil"],
+            ["4000", "4699", "Sujeet Kumar"],
+            ["5000", "5999", "Dilip Kumar Sinha"],
+            ["6000", "6099", "Rajeev Kumar"],
+            ["6100", "6999", "Sanjay Verma"],
+            ["7100", "7399", "Rajeev Kumar"],
+            ["7400", "7999", "Sanjay Verma"],
+            ["8000", "8199", "Sanjay Verma"],
+            ["8200", "8299", "Dilip Kumar Sinha"],
+            ["8300", "8999", "Sanjay Verma"],
+            ["9000", "9399", "Dilip Kumar Sinha"],
+        ];
+
         let setRelativePositioning = () => {
             var childElements = document.querySelectorAll("#CanvassHolder")[0].children;
             var numVisibleElements = 0;
@@ -135,6 +151,28 @@ window.addEventListener(
             } catch (error) {
                 return false;
             }
+        }
+
+        let getDealerByPl = (pl) => {
+
+            var plTrimmed = pl.substring(0, 4);
+            var dealerName = "-";
+            dealerPlArray.every((dealerPl) => {
+
+                var plStart = dealerPl[0];
+                var plEnd = dealerPl[1];
+
+                if ((+plStart - +plTrimmed) * (+plEnd - +plTrimmed) < 0) {
+                    dealerName = dealerPl[2];
+                    return false;
+                }
+                else {
+                    return true;
+                }
+
+            });
+
+            return dealerName;
         }
 
         if (document.title != "System Start Page" && document.title != "Output of Report - LISTPOS") {
@@ -466,7 +504,8 @@ window.addEventListener(
 
                     var maRow = maList[i];
                     var poNo = maRow.children[5].innerText.substring(0, 15);
-                    var officer = maRow.children[5].innerText.substring(15);
+                    var plNo = maRow.children[7].innerText.split("[")[1].split("]")[0];
+                    var officer = getDealerByPl(plNo);
                     var poYear = "20" + poNo.substring(2, 4);
                     var poZone = currentZone;
 
