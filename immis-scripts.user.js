@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.59
+// @version      1.0.60
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -490,73 +490,35 @@ window.addEventListener(
         if (document.title == "PO Modification" || document.title == "Run Form - IMMIS/PUR/POMA") {
             body.classList.add("po_modification");
 
-            async function poLinking() {
-                var s_6 = body.querySelectorAll("#s_6")[0];
-                var maList = s_6.querySelectorAll("[id^=TrMAList_]");
-                var maNum = maList.length;
+            var s_6 = body.querySelectorAll("#s_6")[0];
+            var maList = s_6.querySelectorAll("[id^=TrMAList_]");
+            var maNum = maList.length;
 
-                var th = document.createElement("th");
-                var thText = document.createTextNode("Officer");
-                th.appendChild(thText);
-                maList[0].previousElementSibling.insertBefore(th, maList[0].previousElementSibling.children[6]);
+            var th = document.createElement("th");
+            var thText = document.createTextNode("Officer");
+            th.appendChild(thText);
+            th.style.textAlign = "left";
+            maList[0].previousElementSibling.insertBefore(th, maList[0].previousElementSibling.children[6]);
 
-                for (i = 0; i < maList.length; i++) {
+            for (i = 0; i < maList.length; i++) {
 
-                    var maRow = maList[i];
-                    var poNo = maRow.children[5].innerText.substring(0, 15);
-                    var plNo = maRow.children[7].innerText.split("[")[1].split("]")[0];
-                    var officer = getDealerByPl(plNo);
-                    var poYear = "20" + poNo.substring(2, 4);
-                    var poZone = currentZone;
+                var maRow = maList[i];
+                var poNo = maRow.children[5].innerText.substring(0, 15);
+                var plNo = maRow.children[7].innerText.split("[")[1].split("]")[0];
+                var dealer = getDealerByPl(plNo);
 
-                    var url = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
-                        poYear +
-                        "/" +
-                        zoneJson[poZone] +
-                        "/" +
-                        poNo +
-                        ".pdf";
+                var td = document.createElement("td");
+                var tdText = document.createTextNode(dealer);
+                td.appendChild(tdText);
+                maRow.insertBefore(td, maRow.children[6]);
 
-                    try {
-                        const urlExists = await checkUrl(url);
-                        if (!urlExists) {
-                            poYear = +poYear + 1;
-                            url = "https://ireps.gov.in/ireps/etender/pdfdocs/MMIS/PO/" +
-                                poYear +
-                                "/" +
-                                zoneJson[poZone] +
-                                "/" +
-                                poNo +
-                                ".pdf";
-                        }
-
-                        var link = document.createElement("a");
-                        var linkText = document.createTextNode(poNo);
-                        link.appendChild(linkText);
-                        link.title = poNo;
-                        link.href = url;
-                        link.target = "_blank";
-                        maRow.children[5].innerText = "";
-                        maRow.children[5].appendChild(link);
-
-                    } catch (error) {
-                        console.error(`Error in exampleUsage: ${error.message}`);
-                    }
-
-                    var td = document.createElement("td");
-                    var tdText = document.createTextNode(officer);
-                    td.appendChild(tdText);
-                    maRow.insertBefore(td, maRow.children[6]);
-
-                }
-
-                var maNumP = document.createElement("h3");
-                var maNumText = document.createTextNode("PO Modification Requests Pending : " + maNum);
-                maNumP.appendChild(maNumText);
-                maList[0].closest("div").insertBefore(maNumP, maList[0].closest("div").children[0]);
             }
 
-            poLinking();
+            var maNumP = document.createElement("h3");
+            var maNumText = document.createTextNode("PO Modification Requests Pending : " + maNum);
+            maNumP.appendChild(maNumText);
+            maList[0].closest("div").insertBefore(maNumP, maList[0].closest("div").children[0]);
+
             var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_36")[0];
 
             document.addEventListener("click", (e) => {
