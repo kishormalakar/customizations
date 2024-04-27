@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.60
+// @version      1.0.61
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1386,6 +1386,7 @@ window.addEventListener(
                             row3.children[0].remove();
                         }
                         else if (k > 1 && k < table3Rows.length - 1) {
+                            row3.children[1].setAttribute("align", "center");
                             row3.children[9].remove();
                             row3.children[8].remove();
                             row3.children[5].remove();
@@ -1621,9 +1622,10 @@ window.addEventListener(
 
                             }
                             var td = document.createElement("td");
-                            var tdText = document.createTextNode(Math.round(totalCoverageQty * 100) / 100);
+                            var tdText = document.createTextNode(Math.round(+totalCoverageQty * 100) / 100);
                             td.appendChild(tdText);
                             td.style.border = "1px solid black";
+                            td.setAttribute("align", "center");
                             row6.appendChild(td);
 
                         }
@@ -1866,12 +1868,14 @@ window.addEventListener(
                             td20.style.border = "1px solid black";
                             td20.style.width = "100px";
                             td20.setAttribute("bgcolor", "lightBlue");
+                            td20.setAttribute("align", "center");
                             var td21 = document.createElement("td");
                             var text21 = document.createTextNode(pl);
                             td21.appendChild(text21);
                             td21.style.border = "1px solid black";
                             td21.style.width = "100px";
                             td21.setAttribute("bgcolor", "lightBlue");
+                            td21.setAttribute("align", "center");
                             var td22 = document.createElement("td");
                             var text22 = document.createTextNode(itemDescription);
                             td22.appendChild(text22);
@@ -1886,24 +1890,28 @@ window.addEventListener(
                             td23.style.border = "1px solid black";
                             td23.style.width = "100px";
                             td23.setAttribute("bgcolor", "lightBlue");
+                            td23.setAttribute("align", "center");
                             var td24 = document.createElement("td");
                             var text24 = document.createTextNode("");
                             td24.appendChild(text24);
                             td24.style.border = "1px solid black";
                             td24.style.width = "100px";
                             td24.setAttribute("bgcolor", "lightBlue");
+                            td24.setAttribute("align", "center");
                             var td25 = document.createElement("td");
                             var text25 = document.createTextNode(cp);
                             td25.appendChild(text25);
                             td25.style.border = "1px solid black";
                             td25.style.width = "100px";
                             td25.setAttribute("bgcolor", "lightBlue");
+                            td25.setAttribute("align", "center");
                             var td26 = document.createElement("td");
                             var text26 = document.createTextNode(purchaseSection);
                             td26.appendChild(text26);
                             td26.style.border = "1px solid black";
                             td26.style.width = "100px";
                             td26.setAttribute("bgcolor", "lightBlue");
+                            td26.setAttribute("align", "center");
                             tr2.appendChild(td20);
                             tr2.appendChild(td21);
                             tr2.appendChild(td22);
