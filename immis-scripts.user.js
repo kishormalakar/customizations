@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.61
+// @version      1.0.62
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -2032,6 +2032,8 @@ window.addEventListener(
                 consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[2].innerText);
                 consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[3].innerText);
 
+                var udmStockBalance = divShowHtml1.children[1].querySelectorAll(":scope > table")[2].querySelectorAll("td")[0].innerText;
+                var udmClone = divShowHtml1.children[1].querySelectorAll(":scope > table")[2].querySelectorAll("td")[0].querySelectorAll("a")[0].cloneNode(true);
                 var coveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[0].querySelectorAll("table")[0];
                 var coveredRows = coveredDuesTable.querySelectorAll("tbody")[0].children;
                 var coveredDuesArray = [];
@@ -2146,6 +2148,8 @@ window.addEventListener(
                 data.consumptionYearsArray = consumptionYearsArray;
                 data.aacArray = aacArray;
                 data.mcArray = mcArray;
+                data.udmStockBalance = udmStockBalance;
+                data.udmClone = udmClone;
                 data.coveredDuesArray = coveredDuesArray;
                 data.uncoveredDuesArray = uncoveredDuesArray;
 
@@ -2179,6 +2183,8 @@ window.addEventListener(
                 var consumptionYearsArray = data.consumptionYearsArray;
                 var aacArray = data.aacArray;
                 var mcArray = data.mcArray;
+                var udmStockBalance = data.udmStockBalance;
+                var udmClone = data.udmClone;
                 var coveredDuesArray = data.coveredDuesArray;
                 var uncoveredDuesArray = data.uncoveredDuesArray;
 
@@ -2410,6 +2416,8 @@ window.addEventListener(
                 var consumptionYearsArray = data.consumptionYearsArray;
                 var aacArray = data.aacArray;
                 var mcArray = data.mcArray;
+                var udmStockBalance = data.udmStockBalance;
+                var udmClone = data.udmClone;
                 var coveredDuesArray = data.coveredDuesArray;
                 var uncoveredDuesArray = data.uncoveredDuesArray;
 
@@ -2466,33 +2474,42 @@ window.addEventListener(
                 var text2 = document.createTextNode(plNo);
                 td2.appendChild(text2);
                 var td3 = document.createElement("td");
-                var text3 = document.createTextNode("Description");
+                var text3 = document.createTextNode("Nature");
                 td3.appendChild(text3);
                 var td4 = document.createElement("td");
-                var text4 = document.createTextNode(itemDescription);
+                var natureText = nature == "S" ? "Safety" : nature == "V" ? "Vital" : "Ordinary";
+                var text4 = document.createTextNode(natureText);
                 td4.appendChild(text4);
+                var td5 = document.createElement("td");
+                var text5 = document.createTextNode("Category");
+                td5.appendChild(text5);
+                var td6 = document.createElement("td");
+                var text6 = document.createTextNode(category);
+                td6.appendChild(text6);
+                var td7 = document.createElement("td");
+                var text7 = document.createTextNode("Unit");
+                td7.appendChild(text7);
+                var td8 = document.createElement("td");
+                var text8 = document.createTextNode(unit);
+                td8.appendChild(text8);
                 tr1.appendChild(td1);
                 tr1.appendChild(td2);
                 tr1.appendChild(td3);
                 tr1.appendChild(td4);
+                tr1.appendChild(td5);
+                tr1.appendChild(td6);
+                tr1.appendChild(td7);
+                tr1.appendChild(td8);
                 var tr2 = document.createElement("tr");
-                var td5 = document.createElement("td");
-                var text5 = document.createTextNode("Nature");
-                td5.appendChild(text5);
-                var td6 = document.createElement("td");
-                var natureText = nature == "S" ? "Safety" : nature == "V" ? "Vital" : "Ordinary";
-                var text6 = document.createTextNode(natureText);
-                td6.appendChild(text6);
-                var td7 = document.createElement("td");
-                var text7 = document.createTextNode("Category");
-                td7.appendChild(text7);
-                var td8 = document.createElement("td");
-                var text8 = document.createTextNode(category);
-                td8.appendChild(text8);
-                tr2.appendChild(td5);
-                tr2.appendChild(td6);
-                tr2.appendChild(td7);
-                tr2.appendChild(td8);
+                var td9 = document.createElement("td");
+                var text9 = document.createTextNode("Description");
+                td9.appendChild(text9);
+                var td10 = document.createElement("td");
+                var text10 = document.createTextNode(itemDescription);
+                td10.appendChild(text10);
+                td10.setAttribute("colspan", "7");
+                tr2.appendChild(td9);
+                tr2.appendChild(td10);
                 tbody1.appendChild(tr1);
                 tbody1.appendChild(tr2);
                 table1.appendChild(tbody1);
@@ -2585,6 +2602,41 @@ window.addEventListener(
                     tbody1.appendChild(tri);
 
                 }
+
+                var tri = document.createElement("tr");
+                var tdi1 = document.createElement("td");
+                var texti1 = document.createTextNode("UDM");
+                tdi1.appendChild(texti1);
+                var tdi2 = document.createElement("td");
+                var texti2 = document.createTextNode("-");
+                tdi2.appendChild(texti2);
+                var tdi3 = document.createElement("td");
+                var texti3 = document.createTextNode("-");
+                tdi3.appendChild(texti3);
+                var tdi4 = document.createElement("td");
+                var texti4 = document.createTextNode("-");
+                tdi4.appendChild(texti4);
+                var tdi5 = document.createElement("td");
+                var texti5 = document.createTextNode("-");
+                tdi5.appendChild(texti5);
+                var tdi6 = document.createElement("td");
+                var texti6 = document.createTextNode("-");
+                tdi6.appendChild(texti6);
+                var tdi7 = document.createElement("td");
+                var texti7 = document.createTextNode("-");
+                tdi7.appendChild(texti7);
+                var tdi8 = document.createElement("td");
+                var texti8 = document.createTextNode(udmStockBalance);
+                tdi8.appendChild(texti8);
+                tri.appendChild(tdi1);
+                tri.appendChild(tdi2);
+                tri.appendChild(tdi3);
+                tri.appendChild(tdi4);
+                tri.appendChild(tdi5);
+                tri.appendChild(tdi6);
+                tri.appendChild(tdi7);
+                tri.appendChild(tdi8);
+                tbody1.appendChild(tri);
 
                 table1.appendChild(tbody1);
                 div.appendChild(table1);

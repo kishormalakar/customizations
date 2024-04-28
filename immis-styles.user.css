@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.43
+@version      1.0.44
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -823,6 +823,10 @@
     .qty_review_div table:nth-child(1) td{
         font-weight: bold;
         text-align: center;
+    }
+    
+    .qty_review_div table:nth-child(2) td:nth-child(n+2){
+        width: calc((960px - 120px)/7)
     }
     
     .qty_review_div table:nth-child(3) tr:nth-child(1),
