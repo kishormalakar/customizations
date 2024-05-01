@@ -2037,7 +2037,7 @@ window.addEventListener(
                             var coveredPOQtyArray = row2.children[1].innerHTML.split("<br>");
                             var coveredDueQtyArray = row2.children[2].innerHTML.split("<br>");
                             var coveredDPArray = row2.children[4].innerHTML.split("<br>");
-                            var coveredPO = row2.children[5].innerText ? row2.children[5].innerText : "";
+                            var coveredPO = row2.children[5].innerText ? row2.children[5].innerText.split("Receipt under Accountal")[0] : "";
 
                             for (var j = 0; j < coveredDepotArray.length; j++) {
 
@@ -2059,7 +2059,7 @@ window.addEventListener(
                             var coveredPOQty = +row2.children[1].innerText;
                             var coveredDueQty = +row2.children[2].innerText;
                             var coveredDP = row2.children[4].innerText;
-                            var coveredPO = row2.children[5].innerText ? row2.children[5].innerText : "";
+                            var coveredPO = row2.children[5].innerText ? row2.children[5].innerText.split("Receipt under Accountal")[0] : "";
 
                             array2 = [];
                             array2.push(coveredDepot);
