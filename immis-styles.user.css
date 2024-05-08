@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.44
+@version      1.0.45
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -301,6 +301,7 @@
 	.po_modification #s_6 div > table td {
 		padding: 5px;
 		min-height: 40px;
+        font-size: 12px;
 	}
 
     .po_modification #s_18{
@@ -1058,6 +1059,15 @@
         width: 100% !important;
     }
     
+    .tpi_status #s_2 table:nth-of-type(2) tr td:nth-of-type(3),
+    .tpi_status #s_3 td > div > table tr td:nth-of-type(3),
+    .tpi_status #s_2 table:nth-of-type(2) tr td:nth-of-type(9),
+    .tpi_status #s_3 td > div > table tr td:nth-of-type(9),
+    .tpi_status #s_2 table:nth-of-type(2) tr td:nth-of-type(19),
+    .tpi_status #s_3 td > div > table tr td:nth-of-type(19){
+        display: none;
+    }
+    
     .tpi_status #s_3 td > div > table .get_po_url{
         font-size: 10px;
         text-decoration: underline;
@@ -1065,8 +1075,20 @@
         cursor: pointer;
     }
     
+    .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(5){
+        max-width: 155px;
+    }
+    
+    .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(6){
+        max-width: 200px;
+    }
+    
     .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(10){
-        max-width: 282px;
+        width: 300px;
+    }
+    
+    .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(10) span{
+        color: blue;
     }
     
     .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(13){
@@ -1077,6 +1099,14 @@
     .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(15){
         color: red;
         font-weight: bold;
+    }
+
+    .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(17){
+        width: 66px;
+    }
+
+    .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(18){
+        min-width: 66px;
     }
     
     .spare_stock_entry #s_4 > table{

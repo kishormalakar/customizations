@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.62
+// @version      1.0.63
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -252,7 +252,7 @@ window.addEventListener(
             var poTo = document.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
             var poToArray = poTo.split("-");
 
-            var poFromDay = +poToArray[0] + 1;
+            var poFromDay = +poToArray[0];
             var poFromMonth = poToArray[1];
             var poFromYear = +poToArray[2] - 1;
 
@@ -1476,7 +1476,7 @@ window.addEventListener(
                                     tr.appendChild(td6);
 
                                     var td7 = document.createElement("td");
-                                    var tdText7 = document.createTextNode(row6.children[6].innerText);
+                                    var tdText7 = row6.children[6].cloneNode(true);
                                     td7.appendChild(tdText7);
                                     tr.appendChild(td7);
 
@@ -1564,7 +1564,7 @@ window.addEventListener(
                                 tr.appendChild(td3);
 
                                 var td4 = document.createElement("td");
-                                var tdText4 = document.createTextNode(row6.children[6].innerText);
+                                var tdText4 = row6.children[6].cloneNode(true);
                                 td4.appendChild(tdText4);
                                 tr.appendChild(td4);
 
@@ -1675,15 +1675,15 @@ window.addEventListener(
                                 var coverageDepot = coverageRows[r].children[0].innerText;
                                 var coverageQty = coverageRows[r].children[2].innerText;
                                 var coverageDP = coverageRows[r].children[4].innerText;
-                                var coveragePO = coverageRows[r].children[6].innerText;
+                                var coveragePO = coverageRows[r].children[6];
+                                var coveragePOText = coverageRows[r].children[6].innerText;
                                 var coveragePOPrev = coverageRows[r - 1].children[6].innerText;
-                                var coveragePONo = coveragePO.substring(9, 23);
+                                var coveragePONo = coveragePOText.substring(9, 23);
                                 var coveragePOPrevNo = coveragePOPrev.substring(9, 23);
 
-                                if (coveragePO.substring(17, 18) != 8 && coveragePONo != coveragePOPrevNo) {
+                                if (coveragePOText.substring(17, 18) != 8 && coveragePONo != coveragePOPrevNo) {
                                     var tr1 = document.createElement("tr");
                                     var td1 = document.createElement("td");
-                                    var tdText1 = document.createTextNode(coveragePO);
                                     var tdText2;
                                     if (coverageDepot.startsWith("Material under accountal")) {
                                         tdText2 = document.createTextNode(coverageDepot + ": " + coverageQty + "; Date: " + coverageDP);
@@ -1694,7 +1694,7 @@ window.addEventListener(
                                     var br = document.createElement("br");
                                     td1.setAttribute("colspan", "3");
                                     td1.style.border = "1px solid black";
-                                    td1.appendChild(tdText1);
+                                    td1.innerHTML = coveragePO.innerHTML;
                                     td1.appendChild(br);
                                     td1.appendChild(tdText2);
                                     tr1.appendChild(td1);
@@ -1703,7 +1703,7 @@ window.addEventListener(
                                     cummulativeCoverage += +coverageQty;
 
                                 }
-                                if (coveragePO.substring(17, 18) != 8 && coveragePO === coveragePOPrev) {
+                                if (coveragePOText.substring(17, 18) != 8 && coveragePOText === coveragePOPrev) {
                                     var tdText1;
                                     if (coverageDepot.startsWith("Material under accountal")) {
                                         tdText1 = document.createTextNode(coverageDepot + ": " + coverageQty + "; Date: " + coverageDP);
@@ -2019,7 +2019,6 @@ window.addEventListener(
                 consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[3].innerText);
 
                 var udmStockBalance = divShowHtml1.children[1].querySelectorAll(":scope > table")[2].querySelectorAll("td")[0].innerText;
-                var udmClone = divShowHtml1.children[1].querySelectorAll(":scope > table")[2].querySelectorAll("td")[0].querySelectorAll("a")[0].cloneNode(true);
                 var coveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[0].querySelectorAll("table")[0];
                 var coveredRows = coveredDuesTable.querySelectorAll("tbody")[0].children;
                 var coveredDuesArray = [];
@@ -2135,7 +2134,6 @@ window.addEventListener(
                 data.aacArray = aacArray;
                 data.mcArray = mcArray;
                 data.udmStockBalance = udmStockBalance;
-                data.udmClone = udmClone;
                 data.coveredDuesArray = coveredDuesArray;
                 data.uncoveredDuesArray = uncoveredDuesArray;
 
@@ -2170,7 +2168,6 @@ window.addEventListener(
                 var aacArray = data.aacArray;
                 var mcArray = data.mcArray;
                 var udmStockBalance = data.udmStockBalance;
-                var udmClone = data.udmClone;
                 var coveredDuesArray = data.coveredDuesArray;
                 var uncoveredDuesArray = data.uncoveredDuesArray;
 
@@ -2403,7 +2400,6 @@ window.addEventListener(
                 var aacArray = data.aacArray;
                 var mcArray = data.mcArray;
                 var udmStockBalance = data.udmStockBalance;
-                var udmClone = data.udmClone;
                 var coveredDuesArray = data.coveredDuesArray;
                 var uncoveredDuesArray = data.uncoveredDuesArray;
 
@@ -3272,24 +3268,42 @@ window.addEventListener(
                     for (var j = 1; j < inspectionTableRows.length; j++) {
 
                         var inspectionRow = inspectionTableRows[j];
+                        var callID = inspectionRow.children[1].innerText;
+                        var callDate = inspectionRow.children[2].innerText;
                         var poNo = inspectionRow.children[6].innerText;
+                        var plNo = inspectionRow.children[8].innerText;
+                        var itemDescription = inspectionRow.children[9].innerText;
                         var qtyRejected = inspectionRow.children[14].innerText;
                         var qtyPassed = inspectionRow.children[12].innerText;
+                        var icNo = inspectionRow.children[17].innerText;
+                        var icDate = inspectionRow.children[18].innerText;
+
+                        var br1 = document.createElement("br");
+                        var text1 = document.createTextNode(callDate);
+                        inspectionRow.children[1].appendChild(br1);
+                        inspectionRow.children[1].appendChild(text1);
+
+                        inspectionRow.children[9].innerHTML = "<span>[" + plNo + "]</span> " + itemDescription;
 
                         var p = document.createElement("p");
-                        var pText = document.createTextNode("Get PO");
-                        p.appendChild(pText);
+                        var text2 = document.createTextNode("Get PO");
+                        p.appendChild(text2);
                         p.className = "get_po_url";
                         inspectionRow.children[6].appendChild(p);
 
                         if (+qtyRejected > +qtyPassed) {
-                            var br = document.createElement("br");
-                            var rText = document.createTextNode("Rejected");
-                            inspectionRow.children[16].appendChild(br);
-                            inspectionRow.children[16].appendChild(rText);
+                            var br3 = document.createElement("br");
+                            var text3 = document.createTextNode("Rejected");
+                            inspectionRow.children[16].appendChild(br3);
+                            inspectionRow.children[16].appendChild(text3);
                             inspectionRow.children[16].style.color = "red";
 
                         }
+
+                        var br4 = document.createElement("br");
+                        var text4 = document.createTextNode(icDate);
+                        inspectionRow.children[17].appendChild(br4);
+                        inspectionRow.children[17].appendChild(text4);
 
                     }
 
@@ -3394,7 +3408,7 @@ window.addEventListener(
 
             dateFromInput.value = "01-APR-" + yyCode;
 
-            var statisticsButton = document.querySelectorAll("#s_0_29")[0];
+            var statisticsButton = document.querySelectorAll("#s_0_28")[0];
             statisticsButton.click();
         }
     },
