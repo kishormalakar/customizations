@@ -1064,7 +1064,13 @@
     .tpi_status #s_2 table:nth-of-type(2) tr td:nth-of-type(9),
     .tpi_status #s_3 td > div > table tr td:nth-of-type(9),
     .tpi_status #s_2 table:nth-of-type(2) tr td:nth-of-type(19),
-    .tpi_status #s_3 td > div > table tr td:nth-of-type(19){
+    .tpi_status #s_3 td > div > table tr td:nth-of-type(19),
+    .tpi_status #s_2 table:nth-of-type(2) tr td:nth-of-type(20),
+    .tpi_status #s_3 td > div > table tr td:nth-of-type(20),
+    .tpi_status #s_2 table:nth-of-type(2) tr td:nth-of-type(21),
+    .tpi_status #s_3 td > div > table tr td:nth-of-type(21),
+    .tpi_status #s_2 table:nth-of-type(2) tr td:nth-of-type(22),
+    .tpi_status #s_3 td > div > table tr td:nth-of-type(22){
         display: none;
     }
     
