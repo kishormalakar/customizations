@@ -565,7 +565,7 @@ window.addEventListener(
                 if (e.target.id == "s_0_581") {
 
                     var tenderNo = body.querySelectorAll("#s_0_30")[0].value;
-                    var tenderValue = body.querySelectorAll("#s_0_38")[0].value;
+                    var tenderValue = +body.querySelectorAll("#s_0_38")[0].value * 1.05;
                     var tod = body.querySelectorAll("#s_0_39")[0].value;
                     var tenderType = "";
 

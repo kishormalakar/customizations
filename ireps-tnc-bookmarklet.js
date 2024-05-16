@@ -153,17 +153,6 @@ javascript: (() => {
             sgc.style.height = sgc.scrollHeight;
 
             var addButton = svc.parentElement.nextElementSibling.querySelectorAll("a")[1];
-            addButton.click();
-            var remarks = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
-            var remarksLabel = remarks.parentElement.previousElementSibling.querySelectorAll("select")[0];
-            var remarksType = remarks.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
-
-            remarks.value =
-                "1. Inspection by consignee or authorized representative of consignee. \n2. The firm shall provide products with drug standards printed such as IP/USP/BP/EURO/PHARMACOPOEIA standards at the time of supply to hospital stores.\n3. Each strip/packet/bottle that contains the tendered item should have a printing/stamping with indelible ink of Indian Railways - Not for sale. Firms are advised to put their hologram on their products/cartons also.\n4. The remaining shelf life of the offered product should not be less than 80% of total shelf life or it should not be older than 06 months from the date of manufacture (whichever is more) at the time of supply.";
-            remarks.style.height = remarks.scrollHeight;
-            remarksLabel.value = 1;
-            remarksType.value = "Remarks";
-            remarksType.style.display = "block";
 
             var contactsArray = [];
             contactsArray = [
@@ -208,9 +197,7 @@ javascript: (() => {
             ];
 
             addButton.click();
-            var contactDetails =
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
+            var contactDetails = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
             var contactDetailsLabel = contactDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
             var contactDetailsType =
                 contactDetails.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
@@ -237,10 +224,7 @@ javascript: (() => {
             contactDetailsType.style.display = "block";
 
             addButton.click();
-            var makeDetails =
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[3] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
+            var makeDetails = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2];
             var makeDetailsLabel = makeDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
             var makeDetailsType =
                 makeDetails.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
@@ -269,11 +253,19 @@ javascript: (() => {
             makeDetailsType.style.display = "block";
 
             addButton.click();
-            var poModificationDetails =
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[4] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[3] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
+            var markingClause = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[3];
+            var markingClauseLabel = markingClause.parentElement.previousElementSibling.querySelectorAll("select")[0];
+            var markingClauseType = markingClause.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
+
+            markingClause.value =
+                "The manufacturer will indicate their Name, Month Year of manufacturing by casting/stamping/etching/embossing at an appropriate place of each piece supplied, without affecting the functional utility and structural stability of the components/material or as per drawing/specification.";
+            markingClause.style.height = markingClause.scrollHeight;
+            markingClauseLabel.value = 1;
+            markingClauseType.value = "Marking Clause:";
+            markingClauseType.style.display = "block";
+
+            addButton.click();
+            var poModificationDetails = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[4];
             var poModificationLabel =
                 poModificationDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
             var poModificationType =
@@ -287,12 +279,7 @@ javascript: (() => {
             poModificationType.style.display = "block";
 
             addButton.click();
-            var gstDetails =
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[5] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[4] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[3] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
+            var gstDetails = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[5];
             var gstDetailsLabel = gstDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
             var gstDetailsType = gstDetails.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
 
@@ -304,13 +291,7 @@ javascript: (() => {
             gstDetailsType.style.display = "block";
 
             addButton.click();
-            var dispatchDetails =
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[6] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[5] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[4] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[3] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
+            var dispatchDetails = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[6];
             var dispatchDetailsLabel = dispatchDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
             var dispatchDetailsType = dispatchDetails.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
 
@@ -322,14 +303,7 @@ javascript: (() => {
             dispatchDetailsType.style.display = "block";
 
             addButton.click();
-            var firmContactDetails =
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[7] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[6] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[5] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[4] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[3] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[2] ||
-                tncDiv.querySelectorAll("textarea[id^=othrTNC]")[1];
+            var firmContactDetails = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[7];
             var firmContactDetailsLabel = firmContactDetails.parentElement.previousElementSibling.querySelectorAll("select")[0];
             var firmContactDetailsType = firmContactDetails.parentElement.previousElementSibling.querySelectorAll("input[id^=custom]")[0];
 

@@ -1091,6 +1091,7 @@
     
     .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(10){
         width: 300px;
+        max-width: 300px;
     }
     
     .tpi_status #s_3 td > div > table tr:nth-of-type(n+1) td:nth-of-type(10) span{
