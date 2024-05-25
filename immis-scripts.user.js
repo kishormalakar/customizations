@@ -1616,7 +1616,7 @@ window.addEventListener(
                                 var coverageQty = coverageRows[r].children[2].innerText;
                                 var coveragePO = coverageRows[r].children[6].innerText;
 
-                                if (coverageDepot == depotName && coveragePO.substring(17, 18) != 8) {
+                                if (coverageDepot == depotName && coveragePO.substring(17, 18) != 8 && !isNaN(coverageQty)) {
                                     totalCoverageQty = +totalCoverageQty + +coverageQty;
                                 }
 
@@ -1700,7 +1700,9 @@ window.addEventListener(
                                     tr1.appendChild(td1);
                                     row6.lastChild.children[0].children[0].appendChild(tr1);
 
-                                    cummulativeCoverage += +coverageQty;
+                                    if (!isNaN(coverageQty)) {
+                                        cummulativeCoverage += +coverageQty;
+                                    }
 
                                 }
                                 if (coveragePOText.substring(17, 18) != 8 && coveragePOText === coveragePOPrev) {
@@ -1716,7 +1718,9 @@ window.addEventListener(
                                     row6.lastChild.children[0].querySelectorAll("td")[tdNum - 1].appendChild(br);
                                     row6.lastChild.children[0].querySelectorAll("td")[tdNum - 1].appendChild(tdText1);
 
-                                    cummulativeCoverage += +coverageQty;
+                                    if (!isNaN(coverageQty)) {
+                                        cummulativeCoverage += +coverageQty;
+                                    }
 
                                 }
                             }
@@ -1860,21 +1864,21 @@ window.addEventListener(
                             var text20 = document.createTextNode(slNo);
                             td20.appendChild(text20);
                             td20.style.border = "1px solid black";
-                            td20.style.width = "101px";
+                            td20.style.width = "100px";
                             td20.setAttribute("bgcolor", "lightBlue");
                             td20.setAttribute("align", "center");
                             var td21 = document.createElement("td");
                             var text21 = document.createTextNode(pl);
                             td21.appendChild(text21);
                             td21.style.border = "1px solid black";
-                            td21.style.width = "101px";
+                            td21.style.width = "100px";
                             td21.setAttribute("bgcolor", "lightBlue");
                             td21.setAttribute("align", "center");
                             var td22 = document.createElement("td");
                             var text22 = document.createTextNode(itemDescription);
                             td22.appendChild(text22);
                             td22.style.border = "1px solid black";
-                            td22.style.width = "411px";
+                            td22.style.width = "400px";
                             td22.style.textAlign = "left";
                             td22.setAttribute("bgcolor", "lightBlue");
                             td22.setAttribute("colspan", "4");
