@@ -173,7 +173,7 @@ window.addEventListener(
                 var plStart = dealerPl[0];
                 var plEnd = dealerPl[1];
 
-                if ((+plStart - +plTrimmed) * (+plEnd - +plTrimmed) < 0) {
+                if ((+plStart - +plTrimmed) * (+plEnd - +plTrimmed) <= 0) {
                     dealerName = dealerPl[2];
                     return false;
                 }
