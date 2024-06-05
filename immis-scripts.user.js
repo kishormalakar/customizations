@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.63
+// @version      1.0.65
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -83,24 +83,35 @@ window.addEventListener(
             ["GSD/DHN", "41"],
             ["RNCC/PATNA", "42"],
             ["ROH/BRWD", "43"],
+            ["MEMU/Gaya", "44"],
             ["GSD/SPJ", "70"],
             ["DSL/SPJ", "71"],
         ];
 
         var dealerPlArray = [
-            ["1000", "1999", "Sanjay Verma"],
-            ["2000", "2999", "Sanjay Verma"],
-            ["3000", "3999", "Neeraj Nikhil"],
-            ["4000", "4699", "Sujeet Kumar"],
-            ["5000", "5999", "Dilip Kumar Sinha"],
-            ["6000", "6099", "Rajeev Kumar"],
-            ["6100", "6999", "Sanjay Verma"],
-            ["7100", "7399", "Rajeev Kumar"],
-            ["7400", "7999", "Sanjay Verma"],
-            ["8000", "8199", "Sanjay Verma"],
-            ["8200", "8299", "Dilip Kumar Sinha"],
-            ["8300", "8999", "Sanjay Verma"],
-            ["9000", "9399", "Dilip Kumar Sinha"],
+            ["3000", "3034", "Naveen"],
+            ["3035", "3099", "Purushottam"],
+            ["3100", "3199", "Pramod"],
+            ["3200", "3299", "Yogendra"],
+            ["3300", "3355", "Damodar"],
+            ["3356", "3399", "Dhiranjan"],
+            ["3600", "3799", "Yogendra"],
+            ["3800", "3810", "Shatrughan"],
+            ["3812", "3812", "Surendra Prasad"],
+            ["3813", "3813", "Shatrughan"],
+            ["3814", "3814", "Surendra Prasad"],
+            ["3816", "3899", "Pathak"],
+            ["6000", "6199", "Kavita Devi"],
+            ["6200", "6299", "Tousif Ahmed"],
+            ["7000", "7199", "Kavita Devi"],
+            ["7200", "7299", "Remond Indwar"],
+            ["7300", "7399", "Ankur Bhushan"],
+            ["7400", "7499", "Tousif Ahmed"],
+            ["7500", "7599", "Rambalak"],
+            ["7600", "7699", "Satyaprakash Choudhary"],
+            ["7700", "7999", "Rambalak"],
+            ["9000", "9199", "Ajit Kumar"],
+            ["9300", "9399", "Srikant"],
         ];
 
         let setRelativePositioning = () => {
@@ -499,10 +510,17 @@ window.addEventListener(
             th.appendChild(thText);
             th.style.textAlign = "left";
             maList[0].previousElementSibling.insertBefore(th, maList[0].previousElementSibling.children[6]);
+            var maArray = [];
+            var dealerArray = [];
 
             for (i = 0; i < maList.length; i++) {
 
                 var maRow = maList[i];
+                var maReqDateText = maRow.children[3].innerText;
+                var maReqDate = new Date("20" + maReqDateText.split("/")[2] + "-" + maReqDateText.split("/")[1] + "-" + maReqDateText.split("/")[0]);
+                var today = new Date();
+                var maDays = Math.floor((today - maReqDate) / 86400000);
+
                 var poNo = maRow.children[5].innerText.substring(0, 15);
                 var plNo = maRow.children[7].innerText.split("[")[1].split("]")[0];
                 var dealer = getDealerByPl(plNo);
@@ -512,14 +530,120 @@ window.addEventListener(
                 td.appendChild(tdText);
                 maRow.insertBefore(td, maRow.children[6]);
 
+                var maArray1 = [];
+                maArray1.push(dealer);
+                maArray1.push(maDays);
+                maArray.push(maArray1);
+
+                if (!dealerArray.includes(dealer)) {
+                    dealerArray.push(dealer);
+                }
+
             }
 
             var maNumP = document.createElement("h3");
             var maNumText = document.createTextNode("PO Modification Requests Pending : " + maNum);
             maNumP.appendChild(maNumText);
+            maNumP.addEventListener("click", (e) => {
+
+                s_6.querySelectorAll(".dealer_wise_ma")[0].classList.toggle("visible");
+
+            });
             maList[0].closest("div").insertBefore(maNumP, maList[0].closest("div").children[0]);
 
-            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_36")[0];
+            var table = document.createElement("table");
+            table.classList.add("dealer_wise_ma");
+            var tbody = document.createElement("tbody");
+            var tr1 = document.createElement("tr");
+            var th1 = document.createElement("th");
+            var th1Text = document.createTextNode("Name");
+            th1.appendChild(th1Text);
+            var th2 = document.createElement("th");
+            var th2Text = document.createTextNode("0 - 7 days");
+            th2.appendChild(th2Text);
+            var th3 = document.createElement("th");
+            var th3Text = document.createTextNode("8 - 14 days");
+            th3.appendChild(th3Text);
+            var th4 = document.createElement("th");
+            var th4Text = document.createTextNode("15 - 28 days");
+            th4.appendChild(th4Text);
+            var th5 = document.createElement("th");
+            var th5Text = document.createTextNode("> 28 days");
+            th5.appendChild(th5Text);
+            var th6 = document.createElement("th");
+            var th6Text = document.createTextNode("Total");
+            th6.appendChild(th6Text);
+            tr1.appendChild(th1);
+            tr1.appendChild(th2);
+            tr1.appendChild(th3);
+            tr1.appendChild(th4);
+            tr1.appendChild(th5);
+            tr1.appendChild(th6);
+            tbody.appendChild(tr1);
+
+            dealerArray.forEach((dealer) => {
+
+                var days0to7 = 0;
+                var days8to14 = 0;
+                var days15to28 = 0;
+                var daysAbove28 = 0;
+                var totalMAPending = 0;
+
+                maArray.forEach((ma) => {
+
+                    var maDealer = ma[0];
+                    var maDays = ma[1];
+
+                    if (maDealer == dealer) {
+
+                        if (maDays <= 7) {
+                            days0to7++;
+                        }
+                        if (maDays > 7 && maDays <= 14) {
+                            days8to14++;
+                        }
+                        if (maDays > 14 && maDays <= 28) {
+                            days15to28++;
+                        }
+                        if (maDays > 28) {
+                            daysAbove28++;
+                        }
+                        totalMAPending++;
+                    }
+                })
+
+                var tr2 = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var td1Text = document.createTextNode(dealer);
+                td1.appendChild(td1Text);
+                var td2 = document.createElement("td");
+                var td2Text = document.createTextNode(days0to7);
+                td2.appendChild(td2Text);
+                var td3 = document.createElement("td");
+                var td3Text = document.createTextNode(days8to14);
+                td3.appendChild(td3Text);
+                var td4 = document.createElement("td");
+                var td4Text = document.createTextNode(days15to28);
+                td4.appendChild(td4Text);
+                var td5 = document.createElement("td");
+                var td5Text = document.createTextNode(daysAbove28);
+                td5.appendChild(td5Text);
+                var td6 = document.createElement("td");
+                var td6Text = document.createTextNode(totalMAPending);
+                td6.appendChild(td6Text);
+                tr2.appendChild(td1);
+                tr2.appendChild(td2);
+                tr2.appendChild(td3);
+                tr2.appendChild(td4);
+                tr2.appendChild(td5);
+                tr2.appendChild(td6);
+                tbody.appendChild(tr2);
+
+            })
+            table.appendChild(tbody);
+            maList[0].closest("div").insertBefore(table, maList[0].closest("div").children[1]);
+
+            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_37")[0];
 
             document.addEventListener("click", (e) => {
                 if (e.target.name == "btn_Refresh_0") {
@@ -562,11 +686,11 @@ window.addEventListener(
 
             document.addEventListener("click", (e) => {
 
-                if (e.target.id == "s_0_581") {
+                if (e.target.id == "s_0_587") {
 
                     var tenderNo = body.querySelectorAll("#s_0_30")[0].value;
                     var tenderValue = +body.querySelectorAll("#s_0_38")[0].value * 1.05;
-                    var tod = body.querySelectorAll("#s_0_39")[0].value;
+                    var tod = body.querySelectorAll("#s_0_40")[0].value;
                     var tenderType = "";
 
                     if (+tenderValue > 0 && +tenderValue <= 1000000) {
@@ -578,19 +702,19 @@ window.addEventListener(
                     else if (+tenderValue > 5000000 && +tenderValue <= 10000000) {
                         tenderType = "SS TC";
                     }
-                    else if (+tenderValue > 10000000 && +tenderValue <= 50000000) {
+                    else if (+tenderValue > 10000000 && +tenderValue <= 100000000) {
                         tenderType = "JAG TC";
                     }
-                    if (+tenderValue > 50000000 && +tenderValue <= 100000000) {
+                    else if (+tenderValue > 100000000 && +tenderValue <= 500000000) {
                         tenderType = "SAG TC";
                     }
 
                     window.open(
-                        "https://docs.google.com/forms/d/e/1FAIpQLSeSB2VCLhfFfGZSD0IsNxH8D95gvPLLQLiwmC7Njal4JfbFGw/formResponse?usp=pp_url&entry.2080103744="
+                        "https://docs.google.com/forms/d/e/1FAIpQLSerWA27snuLdU5MPDlW_NFkQuWm7lNONd9VBOfkOOiF8k13dw/formResponse?usp=pp_url&entry.735724294="
                         + tenderNo +
-                        "&entry.1346647636="
+                        "&entry.801071618="
                         + tenderType +
-                        "&entry.668519944="
+                        "&entry.252628659="
                         + tod +
                         "&submit=Submit", '_blank');
 
@@ -598,7 +722,7 @@ window.addEventListener(
 
             });
 
-            var tenderNoInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_30")[0];
+            var tenderNoInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_31")[0];
             tenderNoInput.focus();
         }
 
@@ -643,9 +767,9 @@ window.addEventListener(
                         var consignee = consigneeRow.querySelectorAll("td")[0].innerText;
                         var consigneeName = consignee.split(" ")[2];
 
-                        if (!consigneeArray.includes(consigneeName)) {
+                        /*if (!consigneeArray.includes(consigneeName)) {
                             consigneeRow.style.display = "none";
-                        }
+                        }*/
                     }
                 }
 
@@ -1966,12 +2090,16 @@ window.addEventListener(
             body.classList.add("manage_list");
 
             var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_44")[0];
+            var plSubmit = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_53")[0];
             plInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
                     document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_53")[0].focus();
 
                 }
+            });
+            plSubmit.addEventListener("click", (e) => {
+                plInput.focus();
             });
         }
 

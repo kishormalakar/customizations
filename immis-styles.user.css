@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.45
+@version      1.0.46
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -269,6 +269,12 @@
         margin: 5px;
         color: red;
     }
+    
+    .po_modification #s_6 h3:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    
 
 	.po_modification #s_6 table td > div {
 		width: 1200px !important;
@@ -303,6 +309,27 @@
 		min-height: 40px;
         font-size: 12px;
 	}
+    
+    .po_modification #s_6 .dealer_wise_ma{
+        display: none;
+        border-collapse: collapse;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 800px;
+        margin-left: calc(50% - 400px);
+    }
+    
+    .po_modification #s_6 .dealer_wise_ma.visible{
+        display: table;
+    }
+    
+	.po_modification #s_6 .dealer_wise_ma td,
+    .po_modification #s_6 .dealer_wise_ma th{
+        border: 1px solid black;
+        height: 30px;
+        width: 16.66%;
+        text-align: center;
+    }
 
     .po_modification #s_18{
         display: none;
@@ -311,8 +338,9 @@
 	.po_modification #s_8,
 	.po_generation #s_13,
 	.po_generation #s_15,
-	.tender_publishing #s_15,
-	.tender_publishing #s_16 {
+	.tender_publishing #s_16,
+	.tender_publishing #s_17,
+	.tender_publishing #s_22 {
 		width: 800px !important;
 		left: calc(50% - 400px) !important;
 		padding: 20px !important;
@@ -363,11 +391,11 @@
 		max-width: 1024px;
 	}
 
-	.tender_publishing #s_15 div {
+	.tender_publishing #s_16 div {
 		height: auto !important;
 	}
 
-	.tender_publishing #s_16 {
+	.tender_publishing #s_17 {
 		top: 130px !important;
 	}
 
