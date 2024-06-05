@@ -506,7 +506,7 @@ window.addEventListener(
             var maNum = maList.length;
 
             var th = document.createElement("th");
-            var thText = document.createTextNode("Officer");
+            var thText = document.createTextNode("Dealer");
             th.appendChild(thText);
             th.style.textAlign = "left";
             maList[0].previousElementSibling.insertBefore(th, maList[0].previousElementSibling.children[6]);
