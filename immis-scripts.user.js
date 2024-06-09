@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.65
+// @version      1.0.66
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -581,6 +581,11 @@ window.addEventListener(
             tr1.appendChild(th6);
             tbody.appendChild(tr1);
 
+            var totalDays0to7 = 0;
+            var totalDays8to14 = 0;
+            var totalDays15to28 = 0;
+            var totalDaysAbove28 = 0;
+
             dealerArray.forEach((dealer) => {
 
                 var days0to7 = 0;
@@ -598,15 +603,19 @@ window.addEventListener(
 
                         if (maDays <= 7) {
                             days0to7++;
+                            totalDays0to7++;
                         }
                         if (maDays > 7 && maDays <= 14) {
                             days8to14++;
+                            totalDays8to14++;
                         }
                         if (maDays > 14 && maDays <= 28) {
                             days15to28++;
+                            totalDays15to28++;
                         }
                         if (maDays > 28) {
                             daysAbove28++;
+                            totalDaysAbove28++;
                         }
                         totalMAPending++;
                     }
@@ -640,6 +649,34 @@ window.addEventListener(
                 tbody.appendChild(tr2);
 
             })
+
+            var tr3 = document.createElement("tr");
+            var td1 = document.createElement("td");
+            var td1Text = document.createTextNode("Total");
+            td1.appendChild(td1Text);
+            var td2 = document.createElement("td");
+            var td2Text = document.createTextNode(totalDays0to7);
+            td2.appendChild(td2Text);
+            var td3 = document.createElement("td");
+            var td3Text = document.createTextNode(totalDays8to14);
+            td3.appendChild(td3Text);
+            var td4 = document.createElement("td");
+            var td4Text = document.createTextNode(totalDays15to28);
+            td4.appendChild(td4Text);
+            var td5 = document.createElement("td");
+            var td5Text = document.createTextNode(totalDaysAbove28);
+            td5.appendChild(td5Text);
+            var td6 = document.createElement("td");
+            var td6Text = document.createTextNode(maNum);
+            td6.appendChild(td6Text);
+            tr3.appendChild(td1);
+            tr3.appendChild(td2);
+            tr3.appendChild(td3);
+            tr3.appendChild(td4);
+            tr3.appendChild(td5);
+            tr3.appendChild(td6);
+            tbody.appendChild(tr3);
+
             table.appendChild(tbody);
             maList[0].closest("div").insertBefore(table, maList[0].closest("div").children[1]);
 
@@ -652,12 +689,22 @@ window.addEventListener(
                 if (e.target.name == "btn_Hide_0") {
                     maKeyInput.focus();
                 }
+                if (e.target.title == "View/Authorize M.A.") {
+                    var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+                    var s_7 = document.querySelectorAll("#s_7")[0];
+                    var s__cnvs23 = document.querySelectorAll("#s__cnvs23")[0];
+                    s_7.style.top = scrollTop + "px";
+                    s__cnvs23.style.top = scrollTop + "px";
+                    var s_7cssText = s_7.style.cssText;
+                    var s_7cssTextNew = s_7cssText.slice(0, s_7cssText.indexOf("width:") - 2) + " !important" + s_7cssText.slice(s_7cssText.indexOf("width:") - 2);
+                    s_7.style.cssText = s_7cssTextNew;
+                }
             });
 
             maKeyInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
-                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_56")[0].focus();
+                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_57")[0].focus();
 
                 }
             });
@@ -688,8 +735,8 @@ window.addEventListener(
 
                 if (e.target.id == "s_0_587") {
 
-                    var tenderNo = body.querySelectorAll("#s_0_30")[0].value;
-                    var tenderValue = +body.querySelectorAll("#s_0_38")[0].value * 1.05;
+                    var tenderNo = body.querySelectorAll("#s_0_31")[0].value;
+                    var tenderValue = +body.querySelectorAll("#s_0_39")[0].value * 1.05;
                     var tod = body.querySelectorAll("#s_0_40")[0].value;
                     var tenderType = "";
 

@@ -4,7 +4,7 @@ javascript: (() => {
     var tabulationId = url.searchParams.get("nitOId");
 
     var req = new XMLHttpRequest();
-    req.open("GET", "https://ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
+    req.open("GET", "https://www.ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
     req.send(null);
 
     if (req.status == 200) {
@@ -101,11 +101,15 @@ javascript: (() => {
                     consignee = recommendationDiv.querySelectorAll("tr")[4].querySelectorAll("span")[0].innerText;
                     consigneeTrimmed = consignee.split(",")[0].trim();
 
+                    var itemDescSpan = recommendationDiv.querySelectorAll("span")[0];
+
                     var recommendationDivRows = recommendationDiv.querySelectorAll("tr");
 
-                    for (var i = 0; i < recommendationDivRows.length; i += 5) {
-                        var pl = recommendationDivRows[i].querySelectorAll("b")[0].innerText;
-                        var plConsignee = recommendationDivRows[i + 4].querySelectorAll("span")[0].innerText;
+                    for (var i = 3; i < recommendationDivRows.length; i++) {
+
+                        if (recommendationDivRows[i].children.length == 3) {
+                            var plConsignee = recommendationDivRows[i].querySelectorAll("span")[0].innerText;
+                        }
 
                         plConsigneeArray.push([pl, plConsignee]);
                     }
@@ -127,7 +131,6 @@ javascript: (() => {
                         plConsigneeArray.forEach((plConsignee) => {
 
                             if (plConsignee[0] == pl) {
-                                inspectionRows[j].children[2].querySelectorAll("input")[0].value = plConsignee[1];
                             }
                         });
                     }
@@ -145,11 +148,11 @@ javascript: (() => {
             var sgc = tncDiv.querySelectorAll("table")[2].querySelectorAll("textarea")[0];
 
             securityMoney.value = "Not Applicable";
-            modeOfDispatch.value = "By Rail/Road";
+            modeOfDispatch.value = "By Road";
             svc.value = "Applicable";
             svcLabel.value = 3;
             sgc.value =
-                "This tender and the contract/purchase order placed against this tender shall be governed by all the terms and conditions mentioned in the schedule of tender, IRS conditions of contract (latest version), Integrated Bid Document (IBD) of ECR and the documents attached with this tender.";
+                "This tender and the contract/purchase order placed against this tender shall be governed by all the terms and conditions mentioned in the schedule of tender, IRS conditions of contract (latest version), Integrated Bid Document (IBD v3.0) of ECR and the documents attached with this tender.";
             sgc.style.height = sgc.scrollHeight;
 
             var addButton = svc.parentElement.nextElementSibling.querySelectorAll("a")[1];
@@ -238,7 +241,7 @@ javascript: (() => {
                 makes.forEach((make) => {
                     if (make.pl == plConsignee[0]) {
                         make.offers.forEach((makeOffered) => {
-                            if (makeOffered.firmId == bidderId) {
+                            if ((makeOffered.firmId == bidderId) && (makeDetailsString.indexOf("For " + plConsignee[0] + ": " + makeOffered.make) == -1)) {
                                 makeDetailsString += "For " + plConsignee[0] + ": " + makeOffered.make;
                             }
                         });
