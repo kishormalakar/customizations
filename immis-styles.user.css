@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.46
+@version      1.0.47
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -774,8 +774,8 @@
         font-size: 16px !important;
     }
 
-    .stockmaster #s_0_29,
-    .stockmaster #s_0_32{
+    .stockmaster #s_0_30,
+    .stockmaster #s_0_33{
         height: 400px;
     }
     
