@@ -4,7 +4,7 @@ javascript: (() => {
     var tabulationId = url.searchParams.get("nitOId");
 
     var req = new XMLHttpRequest();
-    req.open("GET", "https://www.ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
+    req.open("GET", "https://ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
     req.send(null);
 
     if (req.status == 200) {

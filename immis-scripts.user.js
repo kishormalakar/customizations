@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.66
+// @version      1.0.67
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -114,7 +114,7 @@ window.addEventListener(
             ["9300", "9399", "Srikant"],
         ];
 
-        var specialPlArray = ['33260011', 'Yogendra Chaudhary', '33260023', 'Yogendra Chaudhary', '33260035', 'Yogendra Chaudhary', '33500915', 'Yogendra Chaudhary', '33500964', 'Yogendra Chaudhary', '33501786', 'Yogendra Chaudhary', '33501830', 'Yogendra Chaudhary', '33503230', 'Yogendra Chaudhary', '33504817', 'Yogendra Chaudhary', '33504829', 'Yogendra Chaudhary', '33509165', 'Yogendra Chaudhary', '33510131', 'Yogendra Chaudhary', '33534639', 'Yogendra Chaudhary', '33580029', 'Yogendra Chaudhary', '33580042', 'Yogendra Chaudhary', '33582040', 'Yogendra Chaudhary', '33592044', 'Yogendra Chaudhary', '33598411', 'Yogendra Chaudhary', '33687006', 'Yogendra Chaudhary', '33597923', 'Yogendra Chaudhary', '30357007', 'Yogendra Chaudhary', '30317344', 'Yogendra Chaudhary', '30210598', 'Priyanka Kumari', '30210616', 'Priyanka Kumari', '30351480', 'Priyanka Kumari', '30726748', 'Priyanka Kumari', '33501610', 'Priyanka Kumari', '33501750', 'Priyanka Kumari', '33502699', 'Priyanka Kumari', '33502705', 'Priyanka Kumari', '33502717', 'Priyanka Kumari', '33507831', 'Priyanka Kumari', '33508355', 'Priyanka Kumari', '33509815', 'Priyanka Kumari', '33512360', 'Priyanka Kumari', '33553762', 'Priyanka Kumari', '33591337', 'Priyanka Kumari', '33591362', 'Priyanka Kumari', '33591374', 'Priyanka Kumari', '33614568', 'Priyanka Kumari', '33643362', 'Priyanka Kumari', '33500848', 'Sanjeev Kr Singh', '33500927', 'Sanjeev Kr Singh', '33500940', 'Sanjeev Kr Singh', '33500952', 'Sanjeev Kr Singh', '33501476', 'Sanjeev Kr Singh', '33501567', 'Sanjeev Kr Singh', '33501671', 'Sanjeev Kr Singh', '33501695', 'Sanjeev Kr Singh', '33502663', 'Sanjeev Kr Singh', '33502675', 'Sanjeev Kr Singh', '33502687', 'Sanjeev Kr Singh', '33503394', 'Sanjeev Kr Singh', '33505627', 'Sanjeev Kr Singh', '33507983', 'Sanjeev Kr Singh', '33510556', 'Sanjeev Kr Singh', '33550657', 'Sanjeev Kr Singh', '33580121', 'Sanjeev Kr Singh', '33580133', 'Sanjeev Kr Singh', '33580145', 'Sanjeev Kr Singh', '33591090', 'Sanjeev Kr Singh', '33591106', 'Sanjeev Kr Singh', '33591118', 'Sanjeev Kr Singh', '33591143', 'Sanjeev Kr Singh', '33591155', 'Sanjeev Kr Singh', '33591167', 'Sanjeev Kr Singh', '33591180', 'Sanjeev Kr Singh', '33591209', 'Sanjeev Kr Singh', '33591234', 'Sanjeev Kr Singh', '33591258', 'Sanjeev Kr Singh', '33591994', 'Sanjeev Kr Singh', '33592019', 'Sanjeev Kr Singh', '33599038', 'Sanjeev Kr Singh', '33599609', 'Sanjeev Kr Singh', '33599658', 'Sanjeev Kr Singh', '33680899', 'Sanjeev Kr Singh', '33691472', 'Sanjeev Kr Singh', '33691484', 'Sanjeev Kr Singh', '31867352', 'Sanjeev Kr Singh', '31877217', 'Sanjeev Kr Singh', '31877229', 'Sanjeev Kr Singh', '31892000', 'Sanjeev Kr Singh', '31892012', 'Sanjeev Kr Singh', '31892024', 'Sanjeev Kr Singh', '31892048', 'Sanjeev Kr Singh', '31892050', 'Sanjeev Kr Singh', '31892061', 'Sanjeev Kr Singh', '31892073', 'Sanjeev Kr Singh', '31892085', 'Sanjeev Kr Singh', '31892097', 'Sanjeev Kr Singh', '31892103', 'Sanjeev Kr Singh', '31892115', 'Sanjeev Kr Singh', '31892164', 'Sanjeev Kr Singh', '31892176', 'Sanjeev Kr Singh', '31892188', 'Sanjeev Kr Singh', '31892190', 'Sanjeev Kr Singh', '31897990', 'Sanjeev Kr Singh', '31910634', 'Sanjeev Kr Singh', '31910646', 'Sanjeev Kr Singh', '31910658', 'Sanjeev Kr Singh', '31910660', 'Sanjeev Kr Singh', '31910695', 'Sanjeev Kr Singh', '31910701', 'Sanjeev Kr Singh', '31910713', 'Sanjeev Kr Singh', '31910725', 'Sanjeev Kr Singh', '31912758', 'Sanjeev Kr Singh', '31912771', 'Sanjeev Kr Singh', '31912989', 'Sanjeev Kr Singh', '31914780', 'Sanjeev Kr Singh', '31915474', 'Sanjeev Kr Singh', '31915814', 'Sanjeev Kr Singh', '31916223', 'Sanjeev Kr Singh', '31916247', 'Sanjeev Kr Singh', '31916272', 'Sanjeev Kr Singh', '31916284', 'Sanjeev Kr Singh', '31921670', 'Sanjeev Kr Singh'];
+        var specialPlArray = ['33260011', 'Yogendra Chaudhary', '33260023', 'Yogendra Chaudhary', '33260035', 'Yogendra Chaudhary', '33500915', 'Yogendra Chaudhary', '33500964', 'Yogendra Chaudhary', '33501786', 'Yogendra Chaudhary', '33501830', 'Yogendra Chaudhary', '33503230', 'Yogendra Chaudhary', '33504817', 'Yogendra Chaudhary', '33504829', 'Yogendra Chaudhary', '33509165', 'Yogendra Chaudhary', '33510131', 'Yogendra Chaudhary', '33534639', 'Yogendra Chaudhary', '33580029', 'Yogendra Chaudhary', '33580042', 'Yogendra Chaudhary', '33582040', 'Yogendra Chaudhary', '33592044', 'Yogendra Chaudhary', '33598411', 'Yogendra Chaudhary', '33687006', 'Yogendra Chaudhary', '33597923', 'Yogendra Chaudhary', '30357007', 'Yogendra Chaudhary', '30317344', 'Yogendra Chaudhary', '30210598', 'Priyanka Kumari', '30210616', 'Priyanka Kumari', '30351480', 'Priyanka Kumari', '30726748', 'Priyanka Kumari', '33501610', 'Priyanka Kumari', '33501750', 'Priyanka Kumari', '33502699', 'Priyanka Kumari', '33502705', 'Priyanka Kumari', '33502717', 'Priyanka Kumari', '33507831', 'Priyanka Kumari', '33508355', 'Priyanka Kumari', '33509815', 'Priyanka Kumari', '33512360', 'Priyanka Kumari', '33553762', 'Priyanka Kumari', '33591337', 'Priyanka Kumari', '33591362', 'Priyanka Kumari', '33591374', 'Priyanka Kumari', '33614568', 'Priyanka Kumari', '33643362', 'Priyanka Kumari', '33500848', 'Sanjeev Kr Singh', '33500927', 'Sanjeev Kr Singh', '33500940', 'Sanjeev Kr Singh', '33500952', 'Sanjeev Kr Singh', '33501476', 'Sanjeev Kr Singh', '33501567', 'Sanjeev Kr Singh', '33501671', 'Sanjeev Kr Singh', '33501695', 'Sanjeev Kr Singh', '33502663', 'Sanjeev Kr Singh', '33502675', 'Sanjeev Kr Singh', '33502687', 'Sanjeev Kr Singh', '33503394', 'Sanjeev Kr Singh', '33505627', 'Sanjeev Kr Singh', '33507983', 'Sanjeev Kr Singh', '33510556', 'Sanjeev Kr Singh', '33550657', 'Sanjeev Kr Singh', '33580121', 'Sanjeev Kr Singh', '33580133', 'Sanjeev Kr Singh', '33580145', 'Sanjeev Kr Singh', '33591090', 'Sanjeev Kr Singh', '33591106', 'Sanjeev Kr Singh', '33591118', 'Sanjeev Kr Singh', '33591143', 'Sanjeev Kr Singh', '33591155', 'Sanjeev Kr Singh', '33591167', 'Sanjeev Kr Singh', '33591180', 'Sanjeev Kr Singh', '33591209', 'Sanjeev Kr Singh', '33591234', 'Sanjeev Kr Singh', '33591258', 'Sanjeev Kr Singh', '33591994', 'Sanjeev Kr Singh', '33592019', 'Sanjeev Kr Singh', '33599038', 'Sanjeev Kr Singh', '33599609', 'Sanjeev Kr Singh', '33599658', 'Sanjeev Kr Singh', '33680899', 'Sanjeev Kr Singh', '33691472', 'Sanjeev Kr Singh', '33691484', 'Sanjeev Kr Singh', '31867352', 'Sanjeev Kr Singh', '31877217', 'Sanjeev Kr Singh', '31877229', 'Sanjeev Kr Singh', '31892000', 'Sanjeev Kr Singh', '31892012', 'Sanjeev Kr Singh', '31892024', 'Sanjeev Kr Singh', '31892048', 'Sanjeev Kr Singh', '31892050', 'Sanjeev Kr Singh', '31892061', 'Sanjeev Kr Singh', '31892073', 'Sanjeev Kr Singh', '31892085', 'Sanjeev Kr Singh', '31892097', 'Sanjeev Kr Singh', '31892103', 'Sanjeev Kr Singh', '31892115', 'Sanjeev Kr Singh', '31892164', 'Sanjeev Kr Singh', '31892176', 'Sanjeev Kr Singh', '31892188', 'Sanjeev Kr Singh', '31892190', 'Sanjeev Kr Singh', '31897990', 'Sanjeev Kr Singh', '31910634', 'Sanjeev Kr Singh', '31910646', 'Sanjeev Kr Singh', '31910658', 'Sanjeev Kr Singh', '31910660', 'Sanjeev Kr Singh', '31910695', 'Sanjeev Kr Singh', '31910701', 'Sanjeev Kr Singh', '31910713', 'Sanjeev Kr Singh', '31910725', 'Sanjeev Kr Singh', '31912758', 'Sanjeev Kr Singh', '31912771', 'Sanjeev Kr Singh', '31912989', 'Sanjeev Kr Singh', '31914780', 'Sanjeev Kr Singh', '31915474', 'Sanjeev Kr Singh', '31915814', 'Sanjeev Kr Singh', '31916223', 'Sanjeev Kr Singh', '31916247', 'Sanjeev Kr Singh', '31916272', 'Sanjeev Kr Singh', '31916284', 'Sanjeev Kr Singh', '31921670', 'Sanjeev Kr Singh', '31050189', 'Sanjeev Kr Singh'];
 
         let setRelativePositioning = () => {
             var childElements = document.querySelectorAll("#CanvassHolder")[0].children;
@@ -171,23 +171,25 @@ window.addEventListener(
             var plTrimmed = pl.substring(0, 4);
             var dealerName = "-";
 
-            if (specialPlArray.includes(plTrimmed)) {
-                dealerName = specialPlArray[specialPlArray.indexOf(plTrimmed) + 1];
+            if (specialPlArray.includes(pl.substring(0, 8))) {
+                dealerName = specialPlArray[specialPlArray.indexOf(pl.substring(0, 8)) + 1];
             }
-            dealerPlArray.every((dealerPl) => {
+            else {
+                dealerPlArray.every((dealerPl) => {
 
-                var plStart = dealerPl[0];
-                var plEnd = dealerPl[1];
+                    var plStart = dealerPl[0];
+                    var plEnd = dealerPl[1];
 
-                if ((+plStart - +plTrimmed) * (+plEnd - +plTrimmed) <= 0) {
-                    dealerName = dealerPl[2];
-                    return false;
-                }
-                else {
-                    return true;
-                }
+                    if ((+plStart - +plTrimmed) * (+plEnd - +plTrimmed) <= 0) {
+                        dealerName = dealerPl[2];
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
 
-            });
+                });
+            }
 
             return dealerName;
         }
@@ -508,189 +510,196 @@ window.addEventListener(
             body.classList.add("po_modification");
 
             var s_6 = body.querySelectorAll("#s_6")[0];
-            var maList = s_6.querySelectorAll("[id^=TrMAList_]");
-            var maNum = maList.length;
 
-            var th = document.createElement("th");
-            var thText = document.createTextNode("Dealer");
-            th.appendChild(thText);
-            th.style.textAlign = "left";
-            maList[0].previousElementSibling.insertBefore(th, maList[0].previousElementSibling.children[6]);
-            var maArray = [];
-            var dealerArray = [];
+            let assignMAtoDealer = () => {
 
-            for (i = 0; i < maList.length; i++) {
+                var maList = s_6.querySelectorAll("[id^=TrMAList_]");
+                var maNum = maList.length;
 
-                var maRow = maList[i];
-                var maReqDateText = maRow.children[3].innerText;
-                var maReqDate = new Date("20" + maReqDateText.split("/")[2] + "-" + maReqDateText.split("/")[1] + "-" + maReqDateText.split("/")[0]);
-                var today = new Date();
-                var maDays = Math.floor((today - maReqDate) / 86400000);
+                var th = document.createElement("th");
+                var thText = document.createTextNode("Dealer");
+                th.appendChild(thText);
+                th.style.textAlign = "left";
+                maList[0].previousElementSibling.insertBefore(th, maList[0].previousElementSibling.children[6]);
+                var maArray = [];
+                var dealerArray = [];
 
-                var poNo = maRow.children[5].innerText.substring(0, 15);
-                var plNo = maRow.children[7].innerText.split("[")[1].split("]")[0];
-                var dealer = getDealerByPl(plNo);
+                for (i = 0; i < maList.length; i++) {
 
-                var td = document.createElement("td");
-                var tdText = document.createTextNode(dealer);
-                td.appendChild(tdText);
-                maRow.insertBefore(td, maRow.children[6]);
+                    var maRow = maList[i];
+                    var maReqDateText = maRow.children[3].innerText;
+                    var maReqDate = new Date("20" + maReqDateText.split("/")[2] + "-" + maReqDateText.split("/")[1] + "-" + maReqDateText.split("/")[0]);
+                    var today = new Date();
+                    var maDays = Math.floor((today - maReqDate) / 86400000);
 
-                var maArray1 = [];
-                maArray1.push(dealer);
-                maArray1.push(maDays);
-                maArray.push(maArray1);
+                    var poNo = maRow.children[5].innerText.substring(0, 15);
+                    var plNo = maRow.children[7].innerText.split("[")[1].split("]")[0];
+                    var dealer = getDealerByPl(plNo);
 
-                if (!dealerArray.includes(dealer)) {
-                    dealerArray.push(dealer);
+                    var td = document.createElement("td");
+                    var tdText = document.createTextNode(dealer);
+                    td.appendChild(tdText);
+                    maRow.insertBefore(td, maRow.children[6]);
+
+                    var maArray1 = [];
+                    maArray1.push(dealer);
+                    maArray1.push(maDays);
+                    maArray.push(maArray1);
+
+                    if (!dealerArray.includes(dealer)) {
+                        dealerArray.push(dealer);
+                    }
+
                 }
+
+                var maNumP = document.createElement("h3");
+                var maNumText = document.createTextNode("PO Modification Requests Pending : " + maNum);
+                maNumP.appendChild(maNumText);
+                maNumP.addEventListener("click", (e) => {
+
+                    s_6.querySelectorAll(".dealer_wise_ma")[0].classList.toggle("visible");
+
+                });
+                maList[0].closest("div").insertBefore(maNumP, maList[0].closest("div").children[0]);
+
+                var table = document.createElement("table");
+                table.classList.add("dealer_wise_ma");
+                var tbody = document.createElement("tbody");
+                var tr1 = document.createElement("tr");
+                var th1 = document.createElement("th");
+                var th1Text = document.createTextNode("Name");
+                th1.appendChild(th1Text);
+                var th2 = document.createElement("th");
+                var th2Text = document.createTextNode("0 - 7 days");
+                th2.appendChild(th2Text);
+                var th3 = document.createElement("th");
+                var th3Text = document.createTextNode("8 - 14 days");
+                th3.appendChild(th3Text);
+                var th4 = document.createElement("th");
+                var th4Text = document.createTextNode("15 - 28 days");
+                th4.appendChild(th4Text);
+                var th5 = document.createElement("th");
+                var th5Text = document.createTextNode("> 28 days");
+                th5.appendChild(th5Text);
+                var th6 = document.createElement("th");
+                var th6Text = document.createTextNode("Total");
+                th6.appendChild(th6Text);
+                tr1.appendChild(th1);
+                tr1.appendChild(th2);
+                tr1.appendChild(th3);
+                tr1.appendChild(th4);
+                tr1.appendChild(th5);
+                tr1.appendChild(th6);
+                tbody.appendChild(tr1);
+
+                var totalDays0to7 = 0;
+                var totalDays8to14 = 0;
+                var totalDays15to28 = 0;
+                var totalDaysAbove28 = 0;
+
+                dealerArray.forEach((dealer) => {
+
+                    var days0to7 = 0;
+                    var days8to14 = 0;
+                    var days15to28 = 0;
+                    var daysAbove28 = 0;
+                    var totalMAPending = 0;
+
+                    maArray.forEach((ma) => {
+
+                        var maDealer = ma[0];
+                        var maDays = ma[1];
+
+                        if (maDealer == dealer) {
+
+                            if (maDays <= 7) {
+                                days0to7++;
+                                totalDays0to7++;
+                            }
+                            if (maDays > 7 && maDays <= 14) {
+                                days8to14++;
+                                totalDays8to14++;
+                            }
+                            if (maDays > 14 && maDays <= 28) {
+                                days15to28++;
+                                totalDays15to28++;
+                            }
+                            if (maDays > 28) {
+                                daysAbove28++;
+                                totalDaysAbove28++;
+                            }
+                            totalMAPending++;
+                        }
+                    })
+
+                    var tr2 = document.createElement("tr");
+                    var td1 = document.createElement("td");
+                    var td1Text = document.createTextNode(dealer);
+                    td1.appendChild(td1Text);
+                    var td2 = document.createElement("td");
+                    var td2Text = document.createTextNode(days0to7);
+                    td2.appendChild(td2Text);
+                    var td3 = document.createElement("td");
+                    var td3Text = document.createTextNode(days8to14);
+                    td3.appendChild(td3Text);
+                    var td4 = document.createElement("td");
+                    var td4Text = document.createTextNode(days15to28);
+                    td4.appendChild(td4Text);
+                    var td5 = document.createElement("td");
+                    var td5Text = document.createTextNode(daysAbove28);
+                    td5.appendChild(td5Text);
+                    var td6 = document.createElement("td");
+                    var td6Text = document.createTextNode(totalMAPending);
+                    td6.appendChild(td6Text);
+                    tr2.appendChild(td1);
+                    tr2.appendChild(td2);
+                    tr2.appendChild(td3);
+                    tr2.appendChild(td4);
+                    tr2.appendChild(td5);
+                    tr2.appendChild(td6);
+                    tbody.appendChild(tr2);
+
+                })
+
+                var tr3 = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var td1Text = document.createTextNode("Total");
+                td1.appendChild(td1Text);
+                var td2 = document.createElement("td");
+                var td2Text = document.createTextNode(totalDays0to7);
+                td2.appendChild(td2Text);
+                var td3 = document.createElement("td");
+                var td3Text = document.createTextNode(totalDays8to14);
+                td3.appendChild(td3Text);
+                var td4 = document.createElement("td");
+                var td4Text = document.createTextNode(totalDays15to28);
+                td4.appendChild(td4Text);
+                var td5 = document.createElement("td");
+                var td5Text = document.createTextNode(totalDaysAbove28);
+                td5.appendChild(td5Text);
+                var td6 = document.createElement("td");
+                var td6Text = document.createTextNode(maNum);
+                td6.appendChild(td6Text);
+                tr3.appendChild(td1);
+                tr3.appendChild(td2);
+                tr3.appendChild(td3);
+                tr3.appendChild(td4);
+                tr3.appendChild(td5);
+                tr3.appendChild(td6);
+                tbody.appendChild(tr3);
+
+                table.appendChild(tbody);
+                maList[0].closest("div").insertBefore(table, maList[0].closest("div").children[1]);
 
             }
 
-            var maNumP = document.createElement("h3");
-            var maNumText = document.createTextNode("PO Modification Requests Pending : " + maNum);
-            maNumP.appendChild(maNumText);
-            maNumP.addEventListener("click", (e) => {
-
-                s_6.querySelectorAll(".dealer_wise_ma")[0].classList.toggle("visible");
-
-            });
-            maList[0].closest("div").insertBefore(maNumP, maList[0].closest("div").children[0]);
-
-            var table = document.createElement("table");
-            table.classList.add("dealer_wise_ma");
-            var tbody = document.createElement("tbody");
-            var tr1 = document.createElement("tr");
-            var th1 = document.createElement("th");
-            var th1Text = document.createTextNode("Name");
-            th1.appendChild(th1Text);
-            var th2 = document.createElement("th");
-            var th2Text = document.createTextNode("0 - 7 days");
-            th2.appendChild(th2Text);
-            var th3 = document.createElement("th");
-            var th3Text = document.createTextNode("8 - 14 days");
-            th3.appendChild(th3Text);
-            var th4 = document.createElement("th");
-            var th4Text = document.createTextNode("15 - 28 days");
-            th4.appendChild(th4Text);
-            var th5 = document.createElement("th");
-            var th5Text = document.createTextNode("> 28 days");
-            th5.appendChild(th5Text);
-            var th6 = document.createElement("th");
-            var th6Text = document.createTextNode("Total");
-            th6.appendChild(th6Text);
-            tr1.appendChild(th1);
-            tr1.appendChild(th2);
-            tr1.appendChild(th3);
-            tr1.appendChild(th4);
-            tr1.appendChild(th5);
-            tr1.appendChild(th6);
-            tbody.appendChild(tr1);
-
-            var totalDays0to7 = 0;
-            var totalDays8to14 = 0;
-            var totalDays15to28 = 0;
-            var totalDaysAbove28 = 0;
-
-            dealerArray.forEach((dealer) => {
-
-                var days0to7 = 0;
-                var days8to14 = 0;
-                var days15to28 = 0;
-                var daysAbove28 = 0;
-                var totalMAPending = 0;
-
-                maArray.forEach((ma) => {
-
-                    var maDealer = ma[0];
-                    var maDays = ma[1];
-
-                    if (maDealer == dealer) {
-
-                        if (maDays <= 7) {
-                            days0to7++;
-                            totalDays0to7++;
-                        }
-                        if (maDays > 7 && maDays <= 14) {
-                            days8to14++;
-                            totalDays8to14++;
-                        }
-                        if (maDays > 14 && maDays <= 28) {
-                            days15to28++;
-                            totalDays15to28++;
-                        }
-                        if (maDays > 28) {
-                            daysAbove28++;
-                            totalDaysAbove28++;
-                        }
-                        totalMAPending++;
-                    }
-                })
-
-                var tr2 = document.createElement("tr");
-                var td1 = document.createElement("td");
-                var td1Text = document.createTextNode(dealer);
-                td1.appendChild(td1Text);
-                var td2 = document.createElement("td");
-                var td2Text = document.createTextNode(days0to7);
-                td2.appendChild(td2Text);
-                var td3 = document.createElement("td");
-                var td3Text = document.createTextNode(days8to14);
-                td3.appendChild(td3Text);
-                var td4 = document.createElement("td");
-                var td4Text = document.createTextNode(days15to28);
-                td4.appendChild(td4Text);
-                var td5 = document.createElement("td");
-                var td5Text = document.createTextNode(daysAbove28);
-                td5.appendChild(td5Text);
-                var td6 = document.createElement("td");
-                var td6Text = document.createTextNode(totalMAPending);
-                td6.appendChild(td6Text);
-                tr2.appendChild(td1);
-                tr2.appendChild(td2);
-                tr2.appendChild(td3);
-                tr2.appendChild(td4);
-                tr2.appendChild(td5);
-                tr2.appendChild(td6);
-                tbody.appendChild(tr2);
-
-            })
-
-            var tr3 = document.createElement("tr");
-            var td1 = document.createElement("td");
-            var td1Text = document.createTextNode("Total");
-            td1.appendChild(td1Text);
-            var td2 = document.createElement("td");
-            var td2Text = document.createTextNode(totalDays0to7);
-            td2.appendChild(td2Text);
-            var td3 = document.createElement("td");
-            var td3Text = document.createTextNode(totalDays8to14);
-            td3.appendChild(td3Text);
-            var td4 = document.createElement("td");
-            var td4Text = document.createTextNode(totalDays15to28);
-            td4.appendChild(td4Text);
-            var td5 = document.createElement("td");
-            var td5Text = document.createTextNode(totalDaysAbove28);
-            td5.appendChild(td5Text);
-            var td6 = document.createElement("td");
-            var td6Text = document.createTextNode(maNum);
-            td6.appendChild(td6Text);
-            tr3.appendChild(td1);
-            tr3.appendChild(td2);
-            tr3.appendChild(td3);
-            tr3.appendChild(td4);
-            tr3.appendChild(td5);
-            tr3.appendChild(td6);
-            tbody.appendChild(tr3);
-
-            table.appendChild(tbody);
-            maList[0].closest("div").insertBefore(table, maList[0].closest("div").children[1]);
+            assignMAtoDealer();
 
             var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_37")[0];
 
             document.addEventListener("click", (e) => {
                 if (e.target.name == "btn_Refresh_0") {
-                    poLinking();
+                    assignMAtoDealer();
                 }
                 if (e.target.name == "btn_Hide_0") {
                     maKeyInput.focus();
