@@ -141,12 +141,15 @@ javascript: (() => {
                 }
             });
 
+            var paymentTerms = tncDiv.querySelectorAll("[id^=paymentTerms]")[0];
             var securityMoney = tncDiv.querySelectorAll("[id^=securityMoney]")[0];
             var modeOfDispatch = tncDiv.querySelectorAll("[id^=modeOfDispatch]")[0];
             var svc = tncDiv.querySelectorAll("textarea[id^=othrTNC]")[0];
             var svcLabel = svc.parentElement.previousElementSibling.querySelectorAll("select")[0];
             var sgc = tncDiv.querySelectorAll("table")[2].querySelectorAll("textarea")[0];
 
+            paymentTermsValue = paymentTerms.value;
+            paymentTerms.value = paymentTermsValue + " Part quantity inspection, supply and payment may be allowed.";
             securityMoney.value = "Not Applicable";
             modeOfDispatch.value = "By Road";
             svc.value = "Applicable";
