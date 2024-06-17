@@ -1332,6 +1332,10 @@ window.addEventListener(
                     e.target.closest("table").nextElementSibling.querySelectorAll("td")[2].innerText = numPCPO + " ( " + Math.round(numPCPO / numTotalPO * 100) + "% )";
                     e.target.closest("table").nextElementSibling.querySelectorAll("td")[3].innerText = numCancelledPO + " ( " + Math.round(numCancelledPO / numTotalPO * 100) + "% )";
                     e.target.closest("table").nextElementSibling.querySelectorAll("td")[4].innerText = numFailedPO + " ( " + Math.round(numFailedPO / numTotalPO * 100) + "% )";
+
+                    var printButton = s_3.querySelectorAll("table")[0].querySelectorAll("td")[1].querySelectorAll("a")[0];
+                    var vendorName = vendorNameInput.value;
+                    printButton.setAttribute("onclick", "PrintHtml(GLOBAL.HtmlPos, 'Performance - " + vendorName + "')");
                 }
             });
 
@@ -3296,6 +3300,15 @@ window.addEventListener(
 
                     document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_13")[0].focus();
 
+                }
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (divShowHtml1.style.display == "block") {
+                        divShowHtml1.style.display = "none";
+                        plInput.focus();
+                    }
                 }
             });
         }
