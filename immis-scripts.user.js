@@ -796,12 +796,25 @@ window.addEventListener(
                         span.appendChild(spanText);
                         span.style.marginLeft = "10px";
                         span.style.fontWeight = "bold";
+
+                        if (+tenderValue > 2500000) {
+                            span.style.color = "red";
+                        }
+                        else {
+                            span.style.color = "black";
+                        }
                         document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].parentElement.appendChild(span);
 
                     }
                     else {
-
                         document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.innerText = tenderType;
+
+                        if (+tenderValue > 2500000) {
+                            document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.style.color = "red";
+                        }
+                        else {
+                            document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.style.color = "black";
+                        }
 
                     }
 
