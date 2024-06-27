@@ -797,7 +797,7 @@ window.addEventListener(
                         span.style.marginLeft = "10px";
                         span.style.fontWeight = "bold";
 
-                        if (+tenderValue > 2500000) {
+                        if (+document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value > 2500000) {
                             span.style.color = "red";
                         }
                         else {
@@ -809,7 +809,7 @@ window.addEventListener(
                     else {
                         document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.innerText = tenderType;
 
-                        if (+tenderValue > 2500000) {
+                        if (+document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value > 2500000) {
                             document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.style.color = "red";
                         }
                         else {
