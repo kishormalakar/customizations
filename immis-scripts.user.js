@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.67
+// @version      1.0.68
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -767,6 +767,46 @@ window.addEventListener(
 
             var tenderNoInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_31")[0];
             tenderNoInput.focus();
+            tenderNoInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab" || e.key === "Enter") {
+
+                    var tenderValue = document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value;
+                    var tenderType = "";
+
+                    if (+tenderValue > 0 && +tenderValue <= 1000000) {
+                        tenderType = "SS DA";
+                    }
+                    else if (+tenderValue > 1000000 && +tenderValue <= 5000000) {
+                        tenderType = "JAG DA";
+                    }
+                    else if (+tenderValue > 5000000 && +tenderValue <= 10000000) {
+                        tenderType = "SS TC";
+                    }
+                    else if (+tenderValue > 10000000 && +tenderValue <= 100000000) {
+                        tenderType = "JAG TC";
+                    }
+                    else if (+tenderValue > 100000000 && +tenderValue <= 500000000) {
+                        tenderType = "SAG TC";
+                    }
+
+                    if (document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].parentElement.children.length == 1) {
+
+                        var span = document.createElement("span");
+                        var spanText = document.createTextNode(tenderType);
+                        span.appendChild(spanText);
+                        span.style.marginLeft = "10px";
+                        span.style.fontWeight = "bold";
+                        document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].parentElement.appendChild(span);
+
+                    }
+                    else {
+
+                        document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.innerText = tenderType;
+
+                    }
+
+                }
+            });
         }
 
         if (
