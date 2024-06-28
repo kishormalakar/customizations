@@ -763,6 +763,58 @@ window.addEventListener(
 
                 }
 
+                if (e.target.id.search("_LOV_TENDER") != -1) {
+
+                    var tenderValue = document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value;
+                    var tenderType = "";
+
+                    if (+tenderValue > 0 && +tenderValue <= 1000000) {
+                        tenderType = "SS DA";
+                    }
+                    else if (+tenderValue > 1000000 && +tenderValue <= 5000000) {
+                        tenderType = "JAG DA";
+                    }
+                    else if (+tenderValue > 5000000 && +tenderValue <= 10000000) {
+                        tenderType = "SS TC";
+                    }
+                    else if (+tenderValue > 10000000 && +tenderValue <= 100000000) {
+                        tenderType = "JAG TC";
+                    }
+                    else if (+tenderValue > 100000000 && +tenderValue <= 500000000) {
+                        tenderType = "SAG TC";
+                    }
+
+                    if (document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].parentElement.children.length == 1) {
+
+                        var span = document.createElement("span");
+                        var spanText = document.createTextNode(tenderType);
+                        span.appendChild(spanText);
+                        span.style.marginLeft = "10px";
+                        span.style.fontWeight = "bold";
+
+                        if (+document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value > 2500000) {
+                            span.style.color = "red";
+                        }
+                        else {
+                            span.style.color = "black";
+                        }
+                        document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].parentElement.appendChild(span);
+
+                    }
+                    else {
+                        document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.innerText = tenderType;
+
+                        if (+document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value > 2500000) {
+                            document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.style.color = "red";
+                        }
+                        else {
+                            document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.style.color = "black";
+                        }
+
+                    }
+
+                }
+
             });
 
             var tenderNoInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_31")[0];
