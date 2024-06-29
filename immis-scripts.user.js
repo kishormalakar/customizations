@@ -763,7 +763,7 @@ window.addEventListener(
 
                 }
 
-                if (e.target.id.search("_LOV_TENDER") != -1) {
+                if (e.target.id.search("_LOV_TENDER") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_TENDER") != -1)) {
 
                     var tenderValue = document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value;
                     var tenderType = "";
