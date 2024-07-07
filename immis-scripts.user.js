@@ -1061,6 +1061,16 @@ window.addEventListener(
                 }
             });
 
+            var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_11")[0];
+            plInput.focus();
+            plInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab" || e.key === "Enter") {
+
+                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_15")[0].focus();
+
+                }
+            });
+
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
                     if (
@@ -1073,19 +1083,13 @@ window.addEventListener(
                             .querySelectorAll("table")
                         [divShowHtml1.querySelectorAll("table").length - 1].querySelectorAll("input")[0]
                             .click();
+                        plInput.focus();
+
                     } else {
                         document.querySelectorAll("#divShowHtml1")[0].style.display = "none";
+                        plInput.focus();
+
                     }
-                }
-            });
-
-            var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_11")[0];
-            plInput.focus();
-            plInput.addEventListener("keydown", (e) => {
-                if (e.key === "Tab" || e.key === "Enter") {
-
-                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_15")[0].focus();
-
                 }
             });
         }
@@ -3353,6 +3357,8 @@ window.addEventListener(
                     confirmData();
 
                     divShowHtml1.children[1].style.display = "none";
+                    divShowHtml1.querySelectorAll(".data_review")[0].querySelectorAll(".submit_aac_and_dues")[0].focus();
+
                 }
                 if (e.target.value == "Print") {
 

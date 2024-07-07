@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IREPS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.4
+// @version      1.0.5
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/epsn/*
@@ -92,11 +92,8 @@ window.addEventListener(
         }
 
         if (pathname.startsWith("/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp")) {
-            var href = window.location.href;
-            var url = new URL(href);
-            var bidId = url.searchParams.get("bidId");
-            // var tabulationId = url.searchParams.get("tabulationId");
             var tabulationId = prompt("Tabulation ID");
+            var bidderName = document.querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[1].innerText.trim();
 
             var req = new XMLHttpRequest();
             req.open("GET", "https://ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
@@ -120,9 +117,9 @@ window.addEventListener(
 
                 for (var n = 1; n < industryTable.length; n++) {
 
-                    var firmId = industryTable[n].children[0].innerText.trim().split("[")[1].split("]")[0];
+                    var firmName = industryTable[n].children[0].innerText.trim().split(" [")[0];
 
-                    if (firmId == bidId) {
+                    if (firmName == bidderName) {
                         cloneNode = industryTable[n];
 
                         var technoCommercialScript = technoCommercialTabulation.querySelectorAll("body")[0].querySelectorAll("script")[0];
@@ -130,6 +127,7 @@ window.addEventListener(
 
                         var mseDocumentLink = cloneNode.children[2].querySelectorAll("a")[0];
                         var mseDocumentParams = mseDocumentLink.getAttribute("onclick").toString().trim().split("(")[1].split(")")[0];
+                        var bidId = mseDocumentParams.split(",")[0].split("'")[1].split("'")[0];
                         var mseDocumentId = mseDocumentParams.split(",")[1].split("'")[1].split("'")[0];
                         var mseDocumentName = mseDocumentParams.split(",")[2].split("'")[1].split("'")[0];
                         var mseDocumentUrl = "/ireps/upload/supply/files/" + tod + "/" + tabulationId + "/" + bidId + "/" + mseDocumentId + "-" + mseDocumentName;
@@ -255,6 +253,15 @@ window.addEventListener(
             tr1.style.color = "white";
 
             tenderTable.parentElement.insertBefore(table1, tenderTable);
+        }
+
+        if (pathname.startsWith("/epsn/supply/tds/tenderDecisionTab.do")) {
+
+            var tenderDecisionForm = document.querySelectorAll("form[name='TenderDecisionForm']")[0];
+
+            var tncTabButton = tenderDecisionForm.querySelectorAll("a[href='#tab80']")[0];
+            var tncTab = tenderDecisionForm.querySelectorAll("#tab80")[0];
+
         }
     },
     false
