@@ -400,6 +400,15 @@ window.addEventListener(
                 }
             });
 
+            var poNoInput = document.querySelectorAll("input[name='PO_NO_0']")[0];
+
+            poNoInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab" || e.key === "Enter") {
+
+                    document.querySelectorAll("input[name='SHOW_BTN_0']")[0].focus();
+
+                }
+            });
 
         }
 
