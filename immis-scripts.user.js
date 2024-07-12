@@ -738,7 +738,7 @@ window.addEventListener(
 
             document.addEventListener("click", (e) => {
 
-                if (e.target.id == "s_0_588") {
+                if (e.target.title == "Click OK to publish tender to IREPS") {
 
                     var tenderNo = body.querySelectorAll("#s_0_31")[0].value;
                     var tenderValue = +body.querySelectorAll("#s_0_39")[0].value * 1.05;
