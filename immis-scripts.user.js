@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.69
+// @version      1.0.70
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -239,9 +239,12 @@ window.addEventListener(
         if (document.title == "Search Purchase Orders" || document.title == "Run Form - IMMIS/PUR/POSEARCH") {
             body.classList.add("po_search");
 
-            var rlyName = document.querySelectorAll('input[name="RLYNM_0"]')[0];
-            var rlyButton = document.querySelectorAll('input[name="RLY_BTN_0"]')[0];
+            var rlyButton = body.querySelectorAll("input[name='RLY_BTN_0']")[0];
+            rlyButton.click();
+
             var LovDiv = document.querySelectorAll("#LovDiv")[0];
+            var LovTable = body.querySelectorAll("#_LovTable")[0];
+            LovTable.querySelectorAll("tbody")[0].lastChild.querySelectorAll("a")[0].click();
 
             var stockNS = document.querySelectorAll('select[name="STKNS_0"]')[0];
             stockNS.value = "%";
@@ -401,8 +404,17 @@ window.addEventListener(
             });
 
             var poNoInput = document.querySelectorAll("input[name='PO_NO_0']")[0];
+            var descInput2 = document.querySelectorAll("input[name='DESC2_0']")[0];
 
             poNoInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab" || e.key === "Enter") {
+
+                    document.querySelectorAll("input[name='SHOW_BTN_0']")[0].focus();
+
+                }
+            });
+
+            descInput2.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
                     document.querySelectorAll("input[name='SHOW_BTN_0']")[0].focus();
