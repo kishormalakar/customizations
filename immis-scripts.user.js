@@ -88,6 +88,8 @@ window.addEventListener(
             ["DSL/SPJ", "71"],
         ];
 
+        var monthArray = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
         var dealerPlArray = [
             ['3000', '3034', 'Navin Prakash'], ['3035', '3097', 'Prushottam Kumar'], ['3100', '3197', 'Pramod Kumar'], ['3200', '3297', 'Yogendra Chaudhary'], ['3300', '3355', 'Damodar Sah'], ['3356', '3397', 'Dhiranjan Kumar'], ['3500', '3597', 'Yogendra Chaudhary'], ['3600', '3799', 'Yogendra Chaudhary'], ['3800', '3810', 'Satrughan Singh'], ['3812', '3812', 'Surendra Prasad'], ['3813', '3813', 'Satrughan Singh'], ['3814', '3814', 'Surendra Prasad'], ['3816', '3899', 'SC Pathak'], ['6000', '6199', 'Kavita Devi'], ['6200', '6299', 'Tausif Ahmed'], ['7100', '7199', 'Tausif Ahmed'], ['7200', '7299', 'Remond Indwar'], ['7300', '7399', 'Ankur Bhushan'], ['7400', '7499', 'Tausif Ahmed'], ['7500', '7599', 'Dhananjay Kumar'], ['7600', '7699', 'Satyaprakash Choudhary'], ['7700', '7999', 'Dhananjay Kumar'], ['9000', '9199', 'Ajit Kumar'], ['9300', '9399', 'Srikant']
         ];
@@ -278,8 +280,15 @@ window.addEventListener(
             button2.classList.add("button");
             button2.classList.add("btnSunflower");
 
+            var button3 = document.createElement("button");
+            var text3 = document.createTextNode("Last 6 Months");
+            button3.appendChild(text3);
+            button3.classList.add("button");
+            button3.classList.add("btnSunflower");
+
             buttonRow.insertBefore(button2, buttonRow.children[0]);
             buttonRow.insertBefore(button1, buttonRow.children[0]);
+            buttonRow.insertBefore(button3, buttonRow.children[0]);
 
             button1.addEventListener('click', function (event) {
                 var dateFrom = body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value;
@@ -303,6 +312,28 @@ window.addEventListener(
                 var dateFromNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] + 1);
                 var dateToArray = dateTo.split("-");
                 var dateToNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+ dateToArray[2] + 1);
+
+                body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = dateFromNew;
+                body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value = dateToNew;
+                buttonRow.parentElement.previousElementSibling.previousElementSibling.lastChild.querySelectorAll("input")[0].click();
+            });
+
+            button3.addEventListener('click', function (event) {
+                var dateFrom = body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value;
+                var dateTo = body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
+
+                var today = new Date();
+                var currentDate = today.getDate();
+                var currentMonth = today.getMonth();
+                var currentYear = today.getFullYear().toString().substring(2, 4);
+                var currentMonthName = monthArray[currentMonth];
+
+                var newMonth = (currentMonth >= 6) ? (currentMonth - 6) : (12 + currentMonth - 6);
+                var newYear = (currentMonth >= 6) ? currentYear : (+currentYear - 1);
+                var newMonthName = monthArray[newMonth];
+
+                var dateFromNew = currentDate + "-" + newMonthName + "-" + newYear;
+                var dateToNew = currentDate + "-" + currentMonthName + "-" + currentYear;
 
                 body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = dateFromNew;
                 body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value = dateToNew;
