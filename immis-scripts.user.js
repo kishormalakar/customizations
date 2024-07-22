@@ -617,12 +617,16 @@ window.addEventListener(
                 var th6 = document.createElement("th");
                 var th6Text = document.createTextNode("Total");
                 th6.appendChild(th6Text);
+                var th7 = document.createElement("th");
+                var th7Text = document.createTextNode("Avg Pendency (in days)");
+                th7.appendChild(th7Text);
                 tr1.appendChild(th1);
                 tr1.appendChild(th2);
                 tr1.appendChild(th3);
                 tr1.appendChild(th4);
                 tr1.appendChild(th5);
                 tr1.appendChild(th6);
+                tr1.appendChild(th7);
                 tbody.appendChild(tr1);
 
                 var totalDays0to7 = 0;
@@ -637,6 +641,8 @@ window.addEventListener(
                     var days15to28 = 0;
                     var daysAbove28 = 0;
                     var totalMAPending = 0;
+                    var totalMADays = 0;
+                    var avgPendency = 0;
 
                     maArray.forEach((ma) => {
 
@@ -661,9 +667,12 @@ window.addEventListener(
                                 daysAbove28++;
                                 totalDaysAbove28++;
                             }
+                            totalMADays += maDays;
                             totalMAPending++;
                         }
                     })
+
+                    avgPendency = Math.round(totalMADays / totalMAPending);
 
                     var tr2 = document.createElement("tr");
                     var td1 = document.createElement("td");
@@ -684,12 +693,16 @@ window.addEventListener(
                     var td6 = document.createElement("td");
                     var td6Text = document.createTextNode(totalMAPending);
                     td6.appendChild(td6Text);
+                    var td7 = document.createElement("td");
+                    var td7Text = document.createTextNode(avgPendency);
+                    td7.appendChild(td7Text);
                     tr2.appendChild(td1);
                     tr2.appendChild(td2);
                     tr2.appendChild(td3);
                     tr2.appendChild(td4);
                     tr2.appendChild(td5);
                     tr2.appendChild(td6);
+                    tr2.appendChild(td7);
                     tbody.appendChild(tr2);
 
                 })
