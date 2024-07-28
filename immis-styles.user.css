@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.47
+@version      1.0.48
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -338,9 +338,9 @@
 	.po_modification #s_8,
 	.po_generation #s_13,
 	.po_generation #s_15,
-	.tender_publishing #s_16,
 	.tender_publishing #s_17,
-	.tender_publishing #s_22 {
+	.tender_publishing #s_18,
+	.tender_publishing #s_23 {
 		width: 800px !important;
 		left: calc(50% - 400px) !important;
 		padding: 20px !important;
@@ -391,13 +391,30 @@
 		max-width: 1024px;
 	}
 
-	.tender_publishing #s_16 div {
+	.tender_publishing #s_17 div {
 		height: auto !important;
 	}
 
-	.tender_publishing #s_17 {
-		top: 130px !important;
+	.tender_publishing #s_18 {
+		top: 120px !important;
+		min-height: 140px !important;
 	}
+    
+    .tender_publishing #s_25 {
+        width: 1024px !important;
+        margin: 0 !important;
+        height: auto !important;
+        top: 100px !important;
+        left: calc(50% - 512px) !important;
+	}
+    
+    .tender_publishing #s_25 > table{
+        width: 100%;
+    }
+    
+    .tender_publishing #s_25 .enter_standard_details{
+        width: 140px;
+    }
 
 	.review_process_demand #s_5 {
 		position: absolute !important;

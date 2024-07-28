@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.70
+// @version      1.0.71
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -796,9 +796,9 @@ window.addEventListener(
 
                 if (e.target.title == "Click OK to publish tender to IREPS") {
 
-                    var tenderNo = body.querySelectorAll("#s_0_31")[0].value;
-                    var tenderValue = +body.querySelectorAll("#s_0_39")[0].value * 1.05;
-                    var tod = body.querySelectorAll("#s_0_40")[0].value;
+                    var tenderNo = body.querySelectorAll("input[name='TENDER_NO_0']")[0].value;
+                    var tenderValue = +body.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value * 1.05;
+                    var tod = body.querySelectorAll("input[name='DUE_DATE_0']")[0].value;
                     var tenderType = "";
 
                     if (+tenderValue > 0 && +tenderValue <= 1000000) {
@@ -880,9 +880,37 @@ window.addEventListener(
 
                 }
 
+                if (e.target.classList.contains("enter_standard_details")) {
+
+                    var insp_agency_0 = document.querySelectorAll("select[name='INSP_AGENCY_0']")[0];
+                    insp_agency_0.selectedIndex = 0;
+
+                    var insp_type_0 = document.querySelectorAll("select[name='INSP_TYPE_0']")[0];
+                    insp_type_0.selectedIndex = 0;
+
+                    var prod_cat_0 = document.querySelectorAll("select[name='PROD_CAT_0']")[0];
+                    prod_cat_0.selectedIndex = 0;
+
+                    var stage_yn_0 = document.querySelectorAll("select[name='STAGE_YN_0']")[0];
+                    stage_yn_0.selectedIndex = 0;
+
+                    var stage_no_0 = document.querySelectorAll("select[name='STAGE_NO_0']")[0];
+                    stage_no_0.selectedIndex = 0;
+
+                    var qty_tol_aplcbl_0 = document.querySelectorAll("select[name='QTY_TOL_APLCBL_0']")[0];
+                    qty_tol_aplcbl_0.selectedIndex = 0;
+
+                    var qty_tol_itemcat_0 = document.querySelectorAll("select[name='QTY_TOL_ITEMCAT_0']")[0];
+                    qty_tol_itemcat_0.selectedIndex = 0;
+
+                    var qty_tol_prnct_0 = document.querySelectorAll("input[name='QTY_TOL_PRNCT_0']")[0];
+                    qty_tol_prnct_0.value = 5;
+
+                }
+
             });
 
-            var tenderNoInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_31")[0];
+            var tenderNoInput = document.querySelectorAll("input[name='TENDER_NO_0']")[0];
             tenderNoInput.focus();
             tenderNoInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
@@ -937,6 +965,17 @@ window.addEventListener(
 
                 }
             });
+
+            var s_25 = document.querySelectorAll("#s_25")[0];
+            var buttonSave = s_25.querySelectorAll("input[name='BTN_SAVE_0']")[0];
+
+            var button1 = document.createElement("button");
+            var text1 = document.createTextNode("Enter Standard Details");
+            button1.appendChild(text1);
+            button1.classList.add("button");
+            button1.classList.add("btnSunflower");
+            button1.classList.add("enter_standard_details");
+            buttonSave.parentElement.insertBefore(button1, buttonSave);
         }
 
         if (
