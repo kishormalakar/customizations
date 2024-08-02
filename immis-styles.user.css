@@ -96,6 +96,14 @@
 		left: 0 !important;
 		top: 0 !important;
 	}
+    
+    .button{
+        border-width: 2px 2px 2px !important;
+        border-radius: 5px !important;
+        height: 25px !important;
+        padding: 5px !important;
+        opacity: 1 !important;
+    }
 
 	#s_2,
 	#s_3,
@@ -174,6 +182,20 @@
 	#_LovTable {
 		height: auto !important;
 	}
+    
+    #_LovTable td{
+		height: 20px;
+        vertical-align: middle;
+	}
+    
+    #_LovTable td a{
+        text-decoration: none;
+	}
+    
+    #_LovTable td a:hover{
+        text-decoration: underline;
+        font-weight: bold;
+    }
 
 	.depot_transfer #s_2,
 	.depot_transfer #s_3 {
@@ -552,6 +574,10 @@
 	.nit_search #s_3 #s_0_33 {
 		display: none !important;
 	}
+    
+    .nit_search #s_3 div{
+        text-align: left;
+    }
 
 	.ns_demand_status #s_3 {
 		position: absolute !important;

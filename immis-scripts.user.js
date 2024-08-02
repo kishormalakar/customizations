@@ -792,6 +792,9 @@ window.addEventListener(
         if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
             body.classList.add("tender_publishing");
 
+            var s_2 = document.querySelectorAll("#s_2")[0];
+            var s_23 = document.querySelectorAll("#s_23")[0];
+
             document.addEventListener("click", (e) => {
 
                 if (e.target.title == "Click OK to publish tender to IREPS") {
@@ -878,6 +881,12 @@ window.addEventListener(
 
                     }
 
+                    var accountingUnitSelect = s_2.querySelectorAll("input[name='BTN_AUCODE_0']")[0];
+                    accountingUnitSelect.click();
+                    document.querySelectorAll("#LovDiv")[0].querySelectorAll("a")[0].click();
+                    var buttonAuthorization = s_2.querySelectorAll("input[name='btn_ViewAuth_0']")[0];
+                    buttonAuthorization.focus();
+
                 }
 
                 if (e.target.classList.contains("enter_standard_details")) {
@@ -963,6 +972,12 @@ window.addEventListener(
 
                     }
 
+                    var accountingUnitSelect = s_2.querySelectorAll("input[name='BTN_AUCODE_0']")[0];
+                    accountingUnitSelect.click();
+                    document.querySelectorAll("#LovDiv")[0].querySelectorAll("a")[0].click();
+                    var buttonAuthorization = s_2.querySelectorAll("input[name='btn_ViewAuth_0']")[0];
+                    buttonAuthorization.focus();
+
                 }
             });
 
@@ -976,6 +991,21 @@ window.addEventListener(
             button1.classList.add("btnSunflower");
             button1.classList.add("enter_standard_details");
             buttonSave.parentElement.insertBefore(button1, buttonSave);
+
+            var s_13 = document.querySelectorAll("#s_13")[0];
+            var buttonExit = s_2.querySelectorAll("input[name='btn_Exit_0']")[0];
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (s_13.style.display == "block") {
+                        s_13.style.display = "none";
+                        s_23.style.display = "none";
+                    }
+                    else {
+                        buttonExit.click();
+                        tenderNoInput.focus();
+                    }
+                }
+            });
         }
 
         if (
@@ -1201,6 +1231,9 @@ window.addEventListener(
         if (document.title == "Purchase Proposal" || document.title == "Run Form - IMMIS/PUR/PURPROP") {
             body.classList.add("purchase_proposal");
 
+            var s_3 = document.querySelectorAll("#s_3")[0];
+            var s_16 = document.querySelectorAll("#s_16")[0];
+
             var ppInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_111")[0];
             ppInput.focus();
             ppInput.addEventListener("keydown", (e) => {
@@ -1208,6 +1241,50 @@ window.addEventListener(
 
                     document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_187")[0].focus();
 
+                }
+            });
+
+            var buttonView = s_3.querySelectorAll("input[name='btn_Auth_0']")[0];
+            var buttonAuthorization = s_16.querySelectorAll("input[name='btn_Auth_0']")[0];
+            var divShowHtml2 = document.querySelectorAll("#divShowHtml2")[0];
+
+            buttonView.addEventListener("click", (e) => {
+
+                divShowHtml2.querySelectorAll("input[value='Hide']")[0].focus();
+
+            });
+
+            document.addEventListener("click", (e) => {
+
+                if (e.target.value == "Hide") {
+                    s_16.querySelectorAll("input[name='btn_Auth_0']")[0].focus();
+                }
+
+            });
+
+
+            buttonAuthorization.addEventListener("click", (e) => {
+
+                var ppValue = s_3.querySelectorAll("input[name='PROP_VALUE_0']")[0].value.trim();
+
+                if (+ppValue >= 1000000) {
+
+                    document.querySelectorAll("#DivAlertBox")[0].querySelectorAll("input[value='A']")[0].disabled = "true";
+
+                }
+
+            });
+
+            var buttonExit = s_3.querySelectorAll("input[name='btn_Exit1_0']")[0];
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (s_16.style.display == "block") {
+                        s_16.style.display = "none";
+                    }
+                    else {
+                        buttonExit.click();
+                        ppInput.focus();
+                    }
                 }
             });
         }
