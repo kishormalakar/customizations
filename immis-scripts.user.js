@@ -295,8 +295,8 @@ window.addEventListener(
                 var dateTo = body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
 
                 var dateFromArray = dateFrom.split("-");
-                var dateFromNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] - 1);
                 var dateToArray = dateTo.split("-");
+                var dateFromNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+dateToArray[2] - 2);
                 var dateToNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+ dateToArray[2] - 1);
 
                 body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = dateFromNew;
@@ -309,9 +309,9 @@ window.addEventListener(
                 var dateTo = body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
 
                 var dateFromArray = dateFrom.split("-");
-                var dateFromNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] + 1);
                 var dateToArray = dateTo.split("-");
-                var dateToNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+ dateToArray[2] + 1);
+                var dateFromNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] + 1);
+                var dateToNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] + 2);
 
                 body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = dateFromNew;
                 body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value = dateToNew;
@@ -542,7 +542,10 @@ window.addEventListener(
         if (document.title == "PO Modification" || document.title == "Run Form - IMMIS/PUR/POMA") {
             body.classList.add("po_modification");
 
-            var s_6 = body.querySelectorAll("#s_6")[0];
+            var s_2 = document.querySelectorAll("#s_2")[0];
+            var s_3 = document.querySelectorAll("#s_3")[0];
+            var s_4 = document.querySelectorAll("#s_4")[0];
+            var s_6 = document.querySelectorAll("#s_6")[0];
 
             let assignMAtoDealer = () => {
 
@@ -568,6 +571,8 @@ window.addEventListener(
                     var poNo = maRow.children[5].innerText.substring(0, 15);
                     var plNo = maRow.children[7].innerText.split("[")[1].split("]")[0];
                     var dealer = getDealerByPl(plNo);
+
+                    maRow.children[5].querySelectorAll("a")[0].setAttribute("target", "_blank");
 
                     var td = document.createElement("td");
                     var tdText = document.createTextNode(dealer);
@@ -741,7 +746,7 @@ window.addEventListener(
 
             assignMAtoDealer();
 
-            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_37")[0];
+            var maKeyInput = document.querySelectorAll("#s_2")[0].querySelectorAll("input[name='MAKEY_0']")[0];
 
             document.addEventListener("click", (e) => {
                 if (e.target.name == "btn_Refresh_0") {
@@ -764,9 +769,23 @@ window.addEventListener(
 
             maKeyInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
-
                     document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_57")[0].focus();
+                }
+            });
 
+            var buttonExit = s_2.querySelectorAll("input[name='btn_Exit_0']")[0];
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (s_4.style.display == "block") {
+                        s_4.style.display = "none";
+                    }
+                    else if (s_6.style.display == "block") {
+                        s_6.style.display = "none";
+                    }
+                    else {
+                        buttonExit.click();
+                        maKeyInput.focus();
+                    }
                 }
             });
         }
@@ -972,11 +991,13 @@ window.addEventListener(
 
                     }
 
-                    var accountingUnitSelect = s_2.querySelectorAll("input[name='BTN_AUCODE_0']")[0];
-                    accountingUnitSelect.click();
-                    document.querySelectorAll("#LovDiv")[0].querySelectorAll("a")[0].click();
-                    var buttonAuthorization = s_2.querySelectorAll("input[name='btn_ViewAuth_0']")[0];
-                    buttonAuthorization.focus();
+                    if (tenderValue > 0) {
+                        var accountingUnitSelect = s_2.querySelectorAll("input[name='BTN_AUCODE_0']")[0];
+                        accountingUnitSelect.click();
+                        document.querySelectorAll("#LovDiv")[0].querySelectorAll("a")[0].click();
+                        var buttonAuthorization = s_2.querySelectorAll("input[name='btn_ViewAuth_0']")[0];
+                        buttonAuthorization.focus();
+                    }
 
                 }
             });

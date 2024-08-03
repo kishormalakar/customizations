@@ -34,6 +34,11 @@
 		align-items: center;
 		padding: 5px;
 	}
+    
+    .Option1,
+    .Option2{
+        border-bottom: 1px solid #69b8e7;
+    }
 
 	#MenuBar {
         width: 100% !important;
@@ -1124,6 +1129,7 @@
     
     .tpi_status #s_3 td > div{
         margin: 0 !important;
+        margin-top: 8px !important;
     }
     
     .tpi_status #s_3 td > div > table{
