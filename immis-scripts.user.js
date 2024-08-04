@@ -230,7 +230,10 @@ window.addEventListener(
 
                     if (menuIndex < +menuContainer.children.length - 2) {
 
-                        listContainer.children[menuIndex].style.cssText = "position: absolute !important; left: " + listOffsetLeft + "px !important; top: " + listOffsetTop + "px !important"
+                        listContainer.children[menuIndex].style.cssText = "position: absolute !important; left: " + listOffsetLeft + "px !important; top: " + listOffsetTop + "px !important";
+                        listContainer.children[menuIndex].querySelectorAll("table")[0].removeAttribute("border");
+                        listContainer.children[menuIndex].querySelectorAll("table")[0].removeAttribute("cellpadding");
+                        listContainer.children[menuIndex].querySelectorAll("table")[0].removeAttribute("cellspacing");
 
                     }
 
