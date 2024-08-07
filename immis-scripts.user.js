@@ -549,6 +549,7 @@ window.addEventListener(
             var s_3 = document.querySelectorAll("#s_3")[0];
             var s_4 = document.querySelectorAll("#s_4")[0];
             var s_6 = document.querySelectorAll("#s_6")[0];
+            var s_8 = document.querySelectorAll("#s_8")[0];
 
             let assignMAtoDealer = () => {
 
@@ -781,6 +782,7 @@ window.addEventListener(
                 if (e.key === "Escape") {
                     if (s_4.style.display == "block") {
                         s_4.style.display = "none";
+                        s_8.style.display = "none";
                     }
                     else if (s_6.style.display == "block") {
                         s_6.style.display = "none";
@@ -796,6 +798,10 @@ window.addEventListener(
         if (document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER" || document.title == "Run Form - IMMIS/PUR/ORDERGEN") {
             body.classList.add("po_generation");
 
+            var s_4 = document.querySelectorAll("#s_4")[0];
+            var s_10 = document.querySelectorAll("#s_3")[0];
+            var s_15 = document.querySelectorAll("#s_3")[0];
+
             var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
 
             if (poKeyInput != null && poKeyInput != undefined) {
@@ -808,6 +814,20 @@ window.addEventListener(
                     }
                 });
             }
+
+            var buttonExit = s_4.querySelectorAll("input[name='EXIT_BTN_0']")[0];
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (s_10.style.display == "block") {
+                        s_10.style.display = "none";
+                        s_15.style.display = "none";
+                        buttonExit.click();
+                    }
+                    else {
+                        buttonExit.click();
+                    }
+                }
+            });
 
         }
 
@@ -1258,17 +1278,17 @@ window.addEventListener(
             var s_3 = document.querySelectorAll("#s_3")[0];
             var s_16 = document.querySelectorAll("#s_16")[0];
 
-            var ppInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_111")[0];
+            var ppInput = s_3.querySelectorAll("input[name='PROPOSAL_NO_0']")[0];
+            var buttonView = s_3.querySelectorAll("input[name='btn_Auth_0']")[0];
             ppInput.focus();
             ppInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
-                    document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_187")[0].focus();
+                    buttonView.focus();
 
                 }
             });
 
-            var buttonView = s_3.querySelectorAll("input[name='btn_Auth_0']")[0];
             var buttonAuthorization = s_16.querySelectorAll("input[name='btn_Auth_0']")[0];
             var divShowHtml2 = document.querySelectorAll("#divShowHtml2")[0];
 
@@ -1291,7 +1311,7 @@ window.addEventListener(
 
                 var ppValue = s_3.querySelectorAll("input[name='PROP_VALUE_0']")[0].value.trim();
 
-                if (+ppValue >= 1000000) {
+                if (+ppValue >= 1000000 && document.querySelectorAll("#DivAlertBox")[0].querySelectorAll("input[value='A']")[0] != null) {
 
                     document.querySelectorAll("#DivAlertBox")[0].querySelectorAll("input[value='A']")[0].disabled = "true";
 
