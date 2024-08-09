@@ -799,8 +799,8 @@ window.addEventListener(
             body.classList.add("po_generation");
 
             var s_4 = document.querySelectorAll("#s_4")[0];
-            var s_10 = document.querySelectorAll("#s_3")[0];
-            var s_15 = document.querySelectorAll("#s_3")[0];
+            var s_10 = document.querySelectorAll("#s_10")[0];
+            var s_15 = document.querySelectorAll("#s_15")[0];
 
             var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
 
@@ -816,6 +816,9 @@ window.addEventListener(
             }
 
             var buttonExit = s_4.querySelectorAll("input[name='EXIT_BTN_0']")[0];
+            var buttonView = s_4.querySelectorAll("input[name='NUM_BTN_0']")[0];
+            var buttonAuthorization = s_10.querySelectorAll("input[name='btn_PoNumber_0']")[0];
+
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
                     if (s_10.style.display == "block") {
@@ -829,12 +832,30 @@ window.addEventListener(
                 }
             });
 
+            document.addEventListener("click", (e) => {
+
+                if (e.target.id.search("_LOV_PO") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_PO") != -1)) {
+                    buttonView.focus();
+                }
+
+            });
+
+            buttonView.addEventListener("click", (e) => {
+                buttonAuthorization.focus();
+            });
+
+            buttonAuthorization.addEventListener("click", (e) => {
+                s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
+            });
+
         }
 
         if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
             body.classList.add("tender_publishing");
 
             var s_2 = document.querySelectorAll("#s_2")[0];
+            var s_13 = document.querySelectorAll("#s_13")[0];
+            var s_17 = document.querySelectorAll("#s_17")[0];
             var s_23 = document.querySelectorAll("#s_23")[0];
 
             document.addEventListener("click", (e) => {
@@ -956,6 +977,27 @@ window.addEventListener(
 
                     var qty_tol_prnct_0 = document.querySelectorAll("input[name='QTY_TOL_PRNCT_0']")[0];
                     qty_tol_prnct_0.value = 5;
+
+                }
+
+                if (e.target.getAttribute("name") == "btn_ViewAuth_0") {
+
+                    s_13.querySelectorAll("input[name='btn_Auth_0']")[0].focus();
+
+                }
+
+                if (e.target.getAttribute("name") == "btn_Auth_0") {
+
+                    var div1 = document.createElement("div");
+                    var span1 = document.createElement("span");
+                    var span1Text = document.createTextNode("Tender Value: Rs " + document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value);
+                    span1.appendChild(span1Text);
+                    var span2 = document.querySelectorAll("input[name='ESTD_VALUE_0']")[0].nextElementSibling.cloneNode(true);
+                    div1.appendChild(span1);
+                    div1.appendChild(span2);
+                    div1.style.paddingTop = "15px";
+                    div1.style.textAlign = "center";
+                    s_17.querySelectorAll("#optTable1")[0].parentElement.appendChild(div1);
 
                 }
 
