@@ -716,6 +716,13 @@
     .vendor_performance #s_2 > table:nth-of-type(2) td{
         padding: 0px 30px;
     }
+    
+    .vendor_performance #s_3 table:nth-of-type(2) td:nth-of-type(7),
+    .vendor_performance #s_3 table:nth-of-type(2) td:nth-of-type(8),
+    .vendor_performance #s_3 table:nth-of-type(2) td:nth-of-type(9),
+    .vendor_performance #s_3 table:nth-of-type(2) td:nth-of-type(10){
+        width: 80px;
+    }
 
 	.drr_registration #s_2,
 	.drr_registration #s_3,

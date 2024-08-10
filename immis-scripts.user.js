@@ -1548,10 +1548,21 @@ window.addEventListener(
         if (document.title == "Vendor Performance" || document.title == "Run Form - IMMIS/PUR/VENDPOS") {
             body.classList.add("vendor_performance");
             var vendorNameInput = document.querySelectorAll("input[name='VNAME_0']")[0];
+            vendorNameInput.focus();
+
+            var s_2 = document.querySelectorAll("#s_2")[0];
+            var s_3 = document.querySelectorAll("#s_3")[0];
 
             document.addEventListener("click", (e) => {
+
+                if (e.target.id.search("_LOV_VEND") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_VEND") != -1)) {
+
+                    s_2.querySelectorAll("#LBL_B1_SCOPE")[0].nextElementSibling.querySelectorAll("input[value='A']")[0].click();
+                    s_2.querySelectorAll("input[name='btn_Show_0']")[0].click();
+
+                }
+
                 if (e.target.name == "btn_Show_0") {
-                    var s_2 = document.querySelectorAll("#s_2")[0];
                     var table = s_2.querySelectorAll("tbody")[0];
 
                     if (!e.target.closest("table").nextSibling) {
@@ -1613,25 +1624,19 @@ window.addEventListener(
                     var suppliedQty = 0;
                     var poStatus = "";
 
-                    var s_3 = document.querySelectorAll("#s_3")[0];
                     var rows =
                         s_3.children[2].children[0].children[1].querySelectorAll("table")[1].children[0].children;
 
-                    for (var i = 1; i < rows.length; i = i + 2) {
+                    for (var i = 1; i < rows.length; i++) {
                         var row = rows[i];
                         numTotalPO++;
 
-                        if (row.children.length == 9) {
-                            poQty = row.children[3].innerText.split(" ")[0];
-                            cancelledQty = row.children[4].innerText == "-" ? 0 : row.children[4].innerText;
-                            row.children[4].style.color = "red";
-                            suppliedQty = row.children[5].innerText == "-" ? 0 : row.children[5].innerText;
-                            poStatus = row.children[8].innerText;
+                        if (row.children[0].innerHTML != "<br>") {
 
-                            var poZone = row.children[0].innerHTML.split("<hr>")[0];
-                            var poNo = row.children[0].querySelectorAll("b")[0].innerText;
-                            var poDate = row.children[0].innerText.split("dt. ")[1];
-                            var poYear = "20" + poDate.split("/")[2];
+                            var poZone = row.children[0].innerText.split(":")[0];
+                            var poNo = row.children[0].innerText.split(":")[1].split(" ")[0];
+                            var poDate = row.children[0].innerText.split("dt.")[1];
+                            var poYear = "20" + poDate.split("-")[2];
 
                             var p1 = document.createElement("p");
                             p1.innerText = poZone;
@@ -1656,16 +1661,14 @@ window.addEventListener(
                             var p2 = document.createElement("p");
                             p2.innerText = "dt. " + poDate;
                             row.children[0].appendChild(p2);
-                        }
-
-                        if (row.children.length == 8) {
-                            poQty = row.children[2].innerText.split(" ")[0];
-                            cancelledQty = row.children[3].innerText == "-" ? 0 : row.children[3].innerText;
-                            row.children[3].style.color = "red";
-                            suppliedQty = row.children[4].innerText == "-" ? 0 : row.children[4].innerText;
-                            poStatus = row.children[7].innerText;
 
                         }
+
+                        poQty = row.children[6].innerText.split(" ")[0];
+                        cancelledQty = row.children[7].innerText == "-" ? 0 : row.children[7].innerText;
+                        row.children[7].style.color = "red";
+                        suppliedQty = row.children[8].innerText == "-" ? 0 : row.children[8].innerText;
+                        poStatus = row.children[12].innerText;
 
                         if (+suppliedQty > 0 && +suppliedQty < 0.95 * +poQty && cancelledQty < 0.50 * poQty) {
                             numPCPO++;
@@ -1691,7 +1694,7 @@ window.addEventListener(
                     e.target.closest("table").nextElementSibling.querySelectorAll("td")[4].innerText = numFailedPO + " ( " + Math.round(numFailedPO / numTotalPO * 100) + "% )";
 
                     var printButton = s_3.querySelectorAll("table")[0].querySelectorAll("td")[1].querySelectorAll("a")[0];
-                    var vendorName = vendorNameInput.value;
+                    var vendorName = vendorNameInput.value.substring(0, 36);
                     printButton.setAttribute("onclick", "PrintHtml(GLOBAL.HtmlPos, 'Performance - " + vendorName + "')");
                 }
             });
