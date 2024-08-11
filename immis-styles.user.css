@@ -113,7 +113,19 @@
         height: 25px !important;
         padding: 5px !important;
         opacity: 1 !important;
+		margin-left: 2px !important;
+		margin-right: 2px !important;
+		margin-top: 2px !important;
+		margin-bottom: 2px !important;
     }
+	
+	.button:active,
+	.btn:active{
+		margin-left: 2px !important;
+		margin-right: 2px !important;
+		margin-top: 2px !important;
+		margin-bottom: 2px !important;
+	}
 
 	#s_2,
 	#s_3,
