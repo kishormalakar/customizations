@@ -126,6 +126,22 @@
 		margin-top: 2px !important;
 		margin-bottom: 2px !important;
 	}
+	
+	input[type='text']{
+		height: 22px;
+		margin-left: 2px !important;
+		margin-right: 2px !important;
+		margin-top: 2px !important;
+		margin-bottom: 2px !important;
+	}
+	
+	select{
+		height: 22px;
+		margin-left: 2px !important;
+		margin-right: 2px !important;
+		margin-top: 2px !important;
+		margin-bottom: 2px !important;
+	}
 
 	#s_2,
 	#s_3,
@@ -352,6 +368,21 @@
 		padding: 5px;
 		min-height: 40px;
         font-size: 12px;
+	}
+	
+	.po_modification #s_6 > table:nth-of-type(2) table:nth-of-type(2) :nth-child(5),
+	.po_modification #s_6 > table:nth-of-type(2) table:nth-of-type(2) :nth-child(10),
+	.po_modification #s_6 > table:nth-of-type(2) table:nth-of-type(2) :nth-child(11),
+	.po_modification #s_6 > table:nth-of-type(2) table:nth-of-type(2) :nth-child(13){
+		display: none;
+	}
+	
+	.po_modification #s_6 > table:nth-of-type(2) table:nth-of-type(2) td:last-child{
+		display: flex;
+  		flex-direction: column;
+  		justify-content: center;
+  		align-items: center;
+  		font-size: 0;
 	}
     
     .po_modification #s_6 .dealer_wise_ma{
