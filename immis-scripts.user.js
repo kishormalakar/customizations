@@ -2404,12 +2404,20 @@ window.addEventListener(
                             th15.appendChild(text15);
                             th15.style.border = "1px solid black";
                             th15.setAttribute("bgcolor", "lightBlue");
+                            var th16 = document.createElement("th");
+                            var text16 = document.createTextNode("Dealer");
+                            th16.appendChild(text16);
+                            th16.style.border = "1px solid black";
+                            th16.setAttribute("bgcolor", "lightBlue");
                             tr1.appendChild(th10);
                             tr1.appendChild(th11);
                             tr1.appendChild(th12);
                             tr1.appendChild(th13);
                             tr1.appendChild(th14);
                             tr1.appendChild(th15);
+                            tr1.appendChild(th16);
+
+                            var dealerName = getDealerByPl(pl);
 
                             var tr2 = document.createElement("tr");
                             var td20 = document.createElement("td");
@@ -2455,12 +2463,20 @@ window.addEventListener(
                             td25.style.width = "100px";
                             td25.setAttribute("bgcolor", "lightBlue");
                             td25.setAttribute("align", "center");
+                            var td26 = document.createElement("td");
+                            var text26 = document.createTextNode(dealerName);
+                            td26.appendChild(text26);
+                            td26.style.border = "1px solid black";
+                            td26.style.width = "100px";
+                            td26.setAttribute("bgcolor", "lightBlue");
+                            td26.setAttribute("align", "center");
                             tr2.appendChild(td20);
                             tr2.appendChild(td21);
                             tr2.appendChild(td22);
                             tr2.appendChild(td23);
                             tr2.appendChild(td24);
                             tr2.appendChild(td25);
+                            tr2.appendChild(td26);
 
                             /*var tr3 = document.createElement("tr");
                             var td31 = document.createElement("td");
@@ -2503,7 +2519,7 @@ window.addEventListener(
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
                             var th3 = document.createElement("th");
-                            var thText3 = document.createTextNode(cummulativeCoverage);
+                            var thText3 = document.createTextNode(Math.round(cummulativeCoverage));
                             th3.appendChild(thText3);
                             row6.appendChild(th3);
                         }
