@@ -132,7 +132,8 @@
 		margin-bottom: 2px !important;
 	}
 	
-	input[type='text']{
+	input[type='text'],
+	input[type='password']{
 		height: 22px;
 		margin-left: 2px !important;
 		margin-right: 2px !important;
@@ -282,7 +283,7 @@
 		width: 600px !important;
 		left: calc(50% - 300px) !important;
 		padding: 20px !important;
-		top: 170px !important;
+		top: 183px !important;
 	}
 
 	#divShowHtml1,

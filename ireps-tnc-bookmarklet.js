@@ -68,9 +68,10 @@ javascript: (() => {
 
         let firmContacts = [];
 
+
         for (var i = 1; i < firmContactsArray.length; i++) {
             var firm = firmContactsArray[i];
-            var firmName = firm.querySelectorAll("td")[0].querySelectorAll("a")[0].innerText.trim().replace(/\n/g, "").replace(/\t/g, "");
+            var firmName = firm.querySelectorAll("td")[0].querySelectorAll("a")[0].innerText.trim().replace(/\n/g, "").replace(/\t/g, "").replace(/\s\s+/g, ' ');;
             var firmContact = firm.querySelectorAll("td")[1].innerText.trim().replace(/\n/g, "").replace(/\t/g, "");
 
             firmContacts.push({ "firmName": firmName, "firmContact": firmContact });
@@ -87,12 +88,12 @@ javascript: (() => {
             var bidderAccount = bidderDetailsHeader.querySelectorAll("[id^=bidderAcctName]")[0].innerText;
             var bidderId = bidderAccount.split("[Bid Id : ")[1].split("]")[0];
             var bidderName = bidderAccount.split("[Bid Id : ")[0].split(",")[0];
-            var bidderIndustryFormLink = bidderDetailsHeader.querySelectorAll("a")[0];
-            bidderIndustryFormUrl = "https://ireps.gov.in/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp?bidId=" + tncDivId + "&tabulationId=" + tabulationId;
 
             var plConsigneeArray = [];
             var consignee, consigneeTrimmed;
             var recommendationDivs = tncDiv.parentElement.querySelectorAll("div[id^=reccOf]");
+            var purchaseValue;
+
             recommendationDivs.forEach((recommendationDiv) => {
 
                 var recommendationDivId = recommendationDiv.id.slice(-8);
@@ -114,9 +115,12 @@ javascript: (() => {
                         plConsigneeArray.push([pl, plConsignee]);
                     }
 
+                    purchaseValue = recommendationDiv.nextElementSibling.querySelectorAll("span[id^=odrPurchaseValSpan]")[0].innerText;
+
                 }
 
             });
+
 
             var inspectionDivs = tncDiv.parentElement.querySelectorAll("[id^=inspTNCDiv]");
 
@@ -150,7 +154,11 @@ javascript: (() => {
 
             paymentTermsValue = paymentTerms.value;
             paymentTerms.value = paymentTermsValue + " Part quantity inspection, supply and payment may be allowed.";
-            securityMoney.value = "Not Applicable";
+
+            if (+purchaseValue <= 2500000) {
+                securityMoney.value = "Not Applicable for order value below 25 Lakh";
+            }
+
             modeOfDispatch.value = "By Road";
             svc.value = "Applicable";
             svcLabel.value = 3;
@@ -315,6 +323,7 @@ javascript: (() => {
 
             firmContacts.forEach(firmContact2 => {
                 if (firmContact2.firmName == bidderName) {
+
                     firmContactDetails.value = firmContact2.firmContact;
                 }
             });
