@@ -575,6 +575,10 @@ window.addEventListener(
             var s_6 = document.querySelectorAll("#s_6")[0];
             var s_8 = document.querySelectorAll("#s_8")[0];
 
+            var buttonExit = s_2.querySelectorAll("input[name='btn_Exit_0']")[0];
+            var buttonView = s_2.querySelectorAll("input[name='btn_ViewAuth_0']")[0];
+            var buttonAuthorization = s_4.querySelectorAll("input[name='btn_MaNumber_0']")[0];
+
             let assignMAtoDealer = () => {
 
                 var maList = s_6.querySelectorAll("[id^=TrMAList_]");
@@ -793,6 +797,9 @@ window.addEventListener(
                     var s_7cssTextNew = s_7cssText.slice(0, s_7cssText.indexOf("width:") - 2) + " !important" + s_7cssText.slice(s_7cssText.indexOf("width:") - 2);
                     s_7.style.cssText = s_7cssTextNew;
                 }
+                if (e.target.name == "btn_ViewAuth_0") {
+                    buttonAuthorization.focus();
+                }
             });
 
             maKeyInput.addEventListener("keydown", (e) => {
@@ -801,7 +808,6 @@ window.addEventListener(
                 }
             });
 
-            var buttonExit = s_2.querySelectorAll("input[name='btn_Exit_0']")[0];
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
                     if (s_4.style.display == "block") {
@@ -825,6 +831,7 @@ window.addEventListener(
             var s_4 = document.querySelectorAll("#s_4")[0];
             var s_10 = document.querySelectorAll("#s_10")[0];
             var s_15 = document.querySelectorAll("#s_15")[0];
+            var s_18 = document.querySelectorAll("#s_18")[0];
 
             var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
 
@@ -842,6 +849,7 @@ window.addEventListener(
             var buttonExit = s_4.querySelectorAll("input[name='EXIT_BTN_0']")[0];
             var buttonView = s_4.querySelectorAll("input[name='NUM_BTN_0']")[0];
             var buttonAuthorization = s_10.querySelectorAll("input[name='btn_PoNumber_0']")[0];
+            var buttonfundConfirmation = s_18.querySelectorAll("input[name='PROCEED_0']")[0];
 
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
@@ -869,6 +877,10 @@ window.addEventListener(
             });
 
             buttonAuthorization.addEventListener("click", (e) => {
+                s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
+            });
+
+            buttonfundConfirmation.addEventListener("click", (e) => {
                 s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
             });
 

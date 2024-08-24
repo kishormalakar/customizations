@@ -504,6 +504,33 @@
 		padding: 20px !important;
 	}
 
+	.purchase_proposal #s_4 > table {
+		width: 1024px;
+		margin-left: calc(50% - 512px) !important;
+	}
+	
+	.purchase_proposal #s_4 #TblCondListId{
+		width: 100%;
+	}
+	
+	.purchase_proposal #s_8{
+		position: absolute !important;
+		top: 175px !important;
+		width: 1024px !important;
+		left: calc(50% - 516px) !important;
+	}
+	
+	.purchase_proposal #s_20{
+		position: absolute !important;
+		top: 227px !important;
+		width: 800px !important;
+		left: calc(50% - 400px) !important;
+	}
+	
+	.purchase_proposal #s_8 table{
+		width: 100%;
+	}
+
 	.purchase_proposal #s_16 > table {
 		max-width: 1024px;
 	}
