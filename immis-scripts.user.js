@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.71
+// @version      1.0.72
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1588,6 +1588,16 @@ window.addEventListener(
 
             var s_2 = document.querySelectorAll("#s_2")[0];
             var s_3 = document.querySelectorAll("#s_3")[0];
+
+            var dateType = s_2.querySelectorAll("select[name='DATE_OPT_0']")[0];
+            dateType.selectedIndex = 1;
+
+            var dateFromInput = s_2.querySelectorAll("input[name='DtFrom_0']")[0];
+            var dateToInput = s_2.querySelectorAll("input[name='DT_TO_0']")[0];
+
+            var dateToArray = dateToInput.value.split("-");
+            var dateFrom = "01-APR-" + (+dateToArray[2] - 3);
+            dateFromInput.value = dateFrom;
 
             document.addEventListener("click", (e) => {
 
