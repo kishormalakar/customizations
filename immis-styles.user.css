@@ -222,6 +222,10 @@
 		width: 400px !important;
 		left: calc(50% - 200px) !important;
 	}
+	
+	#LovDiv > div:nth-child(1){
+		height: 30px !important;
+	}
 
 	#_LovTable {
 		height: auto !important;
