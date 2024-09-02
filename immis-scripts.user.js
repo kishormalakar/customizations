@@ -1590,11 +1590,11 @@ window.addEventListener(
             var s_3 = document.querySelectorAll("#s_3")[0];
 
             var dateType = s_2.querySelectorAll("select[name='DATE_OPT_0']")[0];
-            dateType.selectedIndex = 1;
 
             var dateFromInput = s_2.querySelectorAll("input[name='DtFrom_0']")[0];
             var dateToInput = s_2.querySelectorAll("input[name='DT_TO_0']")[0];
 
+            var dateTo = dateToInput.value;
             var dateToArray = dateToInput.value.split("-");
             var dateFrom = "01-APR-" + (+dateToArray[2] - 3);
             dateFromInput.value = dateFrom;
@@ -1742,6 +1742,15 @@ window.addEventListener(
                     var printButton = s_3.querySelectorAll("table")[0].querySelectorAll("td")[1].querySelectorAll("a")[0];
                     var vendorName = vendorNameInput.value.substring(0, 36);
                     printButton.setAttribute("onclick", "PrintHtml(GLOBAL.HtmlPos, 'Performance - " + vendorName + "')");
+                }
+
+                if (e.target.name == "btn_Exit_0") {
+
+                    dateType.selectedIndex = "0";
+                    var dateFrom = "01-APR-" + (+dateToArray[2] - 3);
+                    dateFromInput.value = dateFrom;
+                    dateToInput.value = dateTo;
+
                 }
             });
 

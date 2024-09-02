@@ -115,7 +115,7 @@ javascript: (() => {
                         plConsigneeArray.push([pl, plConsignee]);
                     }
 
-                    purchaseValue = recommendationDiv.nextElementSibling.querySelectorAll("span[id^=odrPurchaseValSpan]")[0].innerText;
+                    purchaseValue = recommendationDiv.nextElementSibling.querySelectorAll("span")[0].innerText;
 
                 }
 
