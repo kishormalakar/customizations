@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.72
+// @version      1.0.73
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -2833,7 +2833,7 @@ window.addEventListener(
                 var td11 = document.createElement("td");
                 var text11 = document.createTextNode("Review AAC");
                 td11.appendChild(text11);
-                td11.setAttribute("colspan", "2");
+                td11.setAttribute("colspan", "8");
                 tr1.appendChild(td11);
                 tr1.setAttribute("bgcolor", "lightGrey");
                 var tr2 = document.createElement("tr");
@@ -2841,10 +2841,34 @@ window.addEventListener(
                 var text21 = document.createTextNode("Depot");
                 td21.appendChild(text21);
                 var td22 = document.createElement("td");
-                var text22 = document.createTextNode("Revised AAC");
+                var text22 = document.createTextNode("Cons " + consumptionYearsArray[0]);
                 td22.appendChild(text22);
+                var td23 = document.createElement("td");
+                var text23 = document.createTextNode("Cons " + consumptionYearsArray[1]);
+                td23.appendChild(text23);
+                var td24 = document.createElement("td");
+                var text24 = document.createTextNode("Cons " + consumptionYearsArray[2]);
+                td24.appendChild(text24);
+                var td25 = document.createElement("td");
+                var text25 = document.createTextNode("Cons " + consumptionYearsArray[3]);
+                td25.appendChild(text25);
+                var td26 = document.createElement("td");
+                var text26 = document.createTextNode("Cons (Max)");
+                td26.appendChild(text26);
+                var td27 = document.createElement("td");
+                var text27 = document.createTextNode("AAC");
+                td27.appendChild(text27);
+                var td28 = document.createElement("td");
+                var text28 = document.createTextNode("Adjusted AAC");
+                td28.appendChild(text28);
                 tr2.appendChild(td21);
                 tr2.appendChild(td22);
+                tr2.appendChild(td23);
+                tr2.appendChild(td24);
+                tr2.appendChild(td25);
+                tr2.appendChild(td26);
+                tr2.appendChild(td27);
+                tr2.appendChild(td28);
                 tbody1.appendChild(tr1);
                 tbody1.appendChild(tr2);
 
@@ -2855,11 +2879,55 @@ window.addEventListener(
                     var textP1 = document.createTextNode(depotArray[i]);
                     tdP1.appendChild(textP1);
                     var tdP2 = document.createElement("td");
-                    var inputP2 = document.createElement("input");
-                    inputP2.value = aacArray[i];
-                    tdP2.appendChild(inputP2);
+                    var textP2 = document.createTextNode(consumptionArray[i][0]);
+                    tdP2.appendChild(textP2);
+                    var tdP3 = document.createElement("td");
+                    var textP3 = document.createTextNode(consumptionArray[i][1]);
+                    tdP3.appendChild(textP3);
+                    var tdP4 = document.createElement("td");
+                    var textP4 = document.createTextNode(consumptionArray[i][2]);
+                    tdP4.appendChild(textP4);
+                    var tdP5 = document.createElement("td");
+                    var textP5 = document.createTextNode(consumptionArray[i][3]);
+                    tdP5.appendChild(textP5);
+                    var date1 = new Date("20" + date.split("/")[2], +date.split("/")[1] - 1, +date.split("/")[0]);
+                    var date2 = new Date("20" + consumptionYearsArray[3].split("-")[0], 3, 1);
+                    var numDays = (date1 - date2) / (1000 * 60 * 60 * 24);
+                    var maxConsumption = Math.max(+consumptionArray[i][0], +consumptionArray[i][1], +consumptionArray[i][2], Math.round(+consumptionArray[i][3] * 365 / numDays));
+                    var tdP6 = document.createElement("td");
+                    var textP6 = document.createTextNode(maxConsumption);
+                    tdP6.appendChild(textP6);
+                    var tdP7 = document.createElement("td");
+                    var textP7 = document.createTextNode(aacArray[i]);
+                    tdP7.appendChild(textP7);
+
+                    var escalationLimit = 1;
+
+                    if (category == "A") {
+                        escalationLimit = 1.25;
+                    }
+                    else if (category = "B") {
+                        escalationLimit = 1.50;
+                    }
+                    else {
+                        escalationLimit = 2.00;
+                    }
+
+                    var tdP8 = document.createElement("td");
+                    var inputP8 = document.createElement("input");
+                    inputP8.value = Math.min(+aacArray[i], Math.round(escalationLimit * maxConsumption));
+                    if (aacArray[i] > escalationLimit * maxConsumption) {
+                        inputP8.style.color = "red";
+                    }
+                    tdP8.appendChild(inputP8);
                     trP.appendChild(tdP1);
                     trP.appendChild(tdP2);
+                    trP.appendChild(tdP3);
+                    trP.appendChild(tdP4);
+                    trP.appendChild(tdP5);
+                    trP.appendChild(tdP6);
+                    trP.appendChild(tdP7);
+                    trP.appendChild(tdP8);
                     tbody1.appendChild(trP);
 
                 }
@@ -2971,7 +3039,7 @@ window.addEventListener(
 
                             if (originalAacRows[i].children[0].innerText == aacRows[j].children[0].innerText) {
 
-                                originalAacRows[i].querySelectorAll("td")[13].innerText = aacRows[j].children[1].querySelectorAll("input")[0].value;
+                                originalAacRows[i].querySelectorAll("td")[13].innerText = aacRows[j].children[7].querySelectorAll("input")[0].value;
 
                             }
 
@@ -3701,7 +3769,6 @@ window.addEventListener(
 
                     divShowHtml1.children[1].style.display = "none";
                     divShowHtml1.querySelectorAll(".data_review")[0].querySelectorAll(".submit_aac_and_dues")[0].focus();
-
                 }
                 if (e.target.value == "Print") {
 

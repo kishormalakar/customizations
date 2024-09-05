@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IREPS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.6
+// @version      1.0.7
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/epsn/*
@@ -262,6 +262,36 @@ window.addEventListener(
 
             var tncTabButton = tenderDecisionForm.querySelectorAll("a[href='#tab80']")[0];
             var tncTab = tenderDecisionForm.querySelectorAll("#tab80")[0];
+
+        }
+
+        if (pathname.startsWith("/epsn/buyerInboxLink.do")) {
+
+            var buyerInboxLinkForm = document.querySelectorAll("form[name='buyerInboxLinkForm']")[0];
+            var tenderTable = buyerInboxLinkForm.querySelectorAll(".nit_summary")[0];
+            var tenderList = tenderTable.children[0].children;
+
+            for (var i = 1; i < tenderList.length; i++) {
+
+                var tenderRow = tenderList[i];
+                var todText = tenderRow.children[4].innerText;
+                var tod = new Date(+todText.split(" ")[0].split("/")[2], +todText.split(" ")[0].split("/")[1] - 1, +todText.split(" ")[0].split("/")[0]);
+                tod.setHours(11);
+                var today = new Date();
+                var numDays = Math.round((today - tod) / (1000 * 60 * 60 * 24));
+
+                var br = document.createElement("br");
+                var span = document.createElement("span");
+                var spanText = document.createTextNode(numDays + " days");
+                span.appendChild(spanText);
+                if (numDays > 12) {
+                    span.style.color = "red";
+                    span.style.fontWeight = "bold";
+                }
+                tenderRow.children[4].appendChild(br);
+                tenderRow.children[4].appendChild(span);
+
+            }
 
         }
     },
