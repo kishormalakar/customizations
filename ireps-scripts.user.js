@@ -284,9 +284,12 @@ window.addEventListener(
                 var span = document.createElement("span");
                 var spanText = document.createTextNode(numDays + " days");
                 span.appendChild(spanText);
-                if (numDays > 12) {
+                if (numDays >= 12) {
                     span.style.color = "red";
                     span.style.fontWeight = "bold";
+                }
+                if (numDays >= 10) {
+                    span.style.color = "red";
                 }
                 tenderRow.children[4].appendChild(br);
                 tenderRow.children[4].appendChild(span);
