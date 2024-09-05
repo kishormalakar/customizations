@@ -591,6 +591,7 @@ window.addEventListener(
                 maList[0].previousElementSibling.insertBefore(th, maList[0].previousElementSibling.children[6]);
                 var maArray = [];
                 var dealerArray = [];
+                var poArray = [];
 
                 for (i = 0; i < maList.length; i++) {
 
@@ -606,8 +607,17 @@ window.addEventListener(
 
                     maRow.children[5].querySelectorAll("a")[0].setAttribute("target", "_blank");
 
+                    var dealerText = "";
+
+                    if (poArray.includes(poNo)) {
+                        dealerText = dealer + " (*)";
+                    }
+                    else {
+                        dealerText = dealer;
+                    }
+
                     var td = document.createElement("td");
-                    var tdText = document.createTextNode(dealer);
+                    var tdText = document.createTextNode(dealerText);
                     td.appendChild(tdText);
                     maRow.insertBefore(td, maRow.children[6]);
 
@@ -615,6 +625,7 @@ window.addEventListener(
                     maArray1.push(dealer);
                     maArray1.push(maDays);
                     maArray.push(maArray1);
+                    poArray.push(poNo);
 
                     if (!dealerArray.includes(dealer)) {
                         dealerArray.push(dealer);
