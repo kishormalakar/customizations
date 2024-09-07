@@ -3774,12 +3774,17 @@ window.addEventListener(
 
             var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
 
+            var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("input[name='PLNO_0']")[0];
+            var cpSelect = document.querySelectorAll("#s_2")[0].querySelectorAll("select[name='CP_Start_0']")[0];
+            plInput.focus();
+
             document.addEventListener("click", (e) => {
                 if (e.target.name == "btn_Show_0") {
                     confirmData();
 
                     divShowHtml1.children[1].style.display = "none";
                     divShowHtml1.querySelectorAll(".data_review")[0].querySelectorAll(".submit_aac_and_dues")[0].focus();
+                    document.title = "QRS " + plInput.value;
                 }
                 if (e.target.value == "Print") {
 
@@ -3806,9 +3811,6 @@ window.addEventListener(
                 }
             });
 
-            var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("input[name='PLNO_0']")[0];
-            var cpSelect = document.querySelectorAll("#s_2")[0].querySelectorAll("select[name='CP_Start_0']")[0];
-            plInput.focus();
             plInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
 
@@ -3830,6 +3832,7 @@ window.addEventListener(
                     if (divShowHtml1.style.display == "block") {
                         divShowHtml1.style.display = "none";
                         plInput.focus();
+                        document.title = "Quantity Review Sheet";
                     }
                 }
             });

@@ -1157,6 +1157,10 @@
     }
     
     @media print{
+		
+		.quantity_review{
+			background-color: white;
+		}
         
         .quantity_review #CanvassHolder,
         .quantity_review #TitleBar,
