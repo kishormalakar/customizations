@@ -94,7 +94,7 @@ window.addEventListener(
 
         if (pathname.startsWith("/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp")) {
             var tabulationId = prompt("Tabulation ID");
-            var bidderName = document.querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[1].innerText.trim();
+            var bidderName = document.querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[1].innerText.trim().split(" (")[0];
 
             var req = new XMLHttpRequest();
             req.open("GET", "https://ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
@@ -268,8 +268,23 @@ window.addEventListener(
         if (pathname.startsWith("/epsn/buyerInboxLink.do")) {
 
             var buyerInboxLinkForm = document.querySelectorAll("form[name='buyerInboxLinkForm']")[0];
+
+            buyerInboxLinkForm.parentElement.setAttribute("width", "80%");
+            buyerInboxLinkForm.parentElement.previousElementSibling.setAttribute("width", "10%");
+            buyerInboxLinkForm.parentElement.nextElementSibling.setAttribute("width", "10%");
+
             var tenderTable = buyerInboxLinkForm.querySelectorAll(".nit_summary")[0];
             var tenderList = tenderTable.children[0].children;
+
+            var headerRow = tenderList[0];
+            var td = document.createElement("td");
+            var strong = document.createElement("strong");
+            var strongText = document.createTextNode("Value");
+            strong.appendChild(strongText);
+            td.appendChild(strong);
+            td.style.cssText = headerRow.children[4].cssText;
+            td.style.textAlign = "center";
+            headerRow.insertBefore(td, headerRow.children[5]);
 
             for (var i = 1; i < tenderList.length; i++) {
 
@@ -294,6 +309,32 @@ window.addEventListener(
                 tenderRow.children[4].appendChild(br);
                 tenderRow.children[4].appendChild(span);
 
+                var actionButtons = tenderRow.children[6];
+                var finTabButton = actionButtons.querySelectorAll("a")[2];
+                var finTabButtonOnClick = finTabButton.getAttribute("onclick");
+                var finTabUrl = finTabButtonOnClick.split("('")[1].split("',")[0];
+
+                var req = new XMLHttpRequest();
+                req.open("GET", "https://ireps.gov.in" + finTabUrl, false);
+                req.send(null);
+
+                if (req.status == 200) {
+                    var parser = new DOMParser();
+                    var financialTabulation = parser.parseFromString(req.responseText, "text/html");
+                    var tenderValue = financialTabulation.querySelectorAll("#schForm")[0].querySelectorAll("tr")[4].children[3].innerText;
+
+                    var td = document.createElement("td");
+                    var span = document.createElement("span");
+                    var spanText = document.createTextNode(new Intl.NumberFormat("en-IN").format(Math.round(+tenderValue)));
+                    span.appendChild(spanText);
+                    td.appendChild(span);
+                    td.style.textAlign = "right";
+                    td.style.verticalAlign = "top";
+                    if (+tenderValue > 5000000) {
+                        td.style.color = "red";
+                    }
+                    tenderRow.insertBefore(td, tenderRow.children[5]);
+                }
             }
 
         }

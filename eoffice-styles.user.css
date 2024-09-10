@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         e-office
 @namespace    github.com/openstyles/stylus
-@version      1.0.0
+@version      1.0.1
 @license      unlicense
 @preprocessor default
 @var color link-color "Link Color" red
@@ -9,110 +9,20 @@
 
 @-moz-document url-prefix("https://ecr.eoffice.railnet.gov.in")
 {
-	#quickNoting #myTemplates,
-	#quickNoting .childmenuLi {
-		min-height: 20px;
-		padding: 5px;
+	
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container .col-lg-8{
+		justify-content: flex-start !important;
 	}
-
-	#quickNoting .childMenuLi ul {
-		top: 0 !important;
-		width: 600px !important;
-	}
-
-	#quickNoting .topmenuLi img {
-		height: 25px;
-		width: auto;
-	}
-
-	#quickNoting .childUl > li:nth-of-type(1),
-	#quickNoting .childUl > li:nth-of-type(2) {
+	
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(3){
 		display: none;
 	}
-
-	#quickNoting .childUl > li:nth-of-type(3) {
-		height: 50px;
+	
+	quick-noting-container .bg-green-note{
+		cursor: pointer;
 	}
-
-	/* .inboxListTbl{
-    display: flex;
-    flex-direction: column;
-}
-
-.inboxListTbl tbody{
-    display: flex;
-    flex-direction: column;
-} */
-
-	/* .inboxListTbl tbody tr{ */
-	/*     display: flex; */
-	/*     flex-direction: row; */
-	/* } */
-
-	.inboxListDivParent {
-		vertical-align: top;
-	}
-
-	.inboxListTbl tbody td {
-		min-height: 30px;
-		height: auto;
-	}
-
-	.inboxListTbl tbody td:nth-of-type(-n + 3) img {
-		height: 30px;
-		width: 9px;
-	}
-
-	/* .inboxListTbl tbody td span,
-.inboxListTbl tbody td span div,
-.inboxListTbl tbody td span nobr{
-    display: flex;
-    align-items: center;
-    height: 100%;
-    min-height: 30px;
-    flex-wrap: wrap;
-} */
-
-	.inboxListTbl .search-button {
-		min-height: 30px;
-	}
-
-	.inboxListTbl tbody td span {
-		display: flex;
-		align-items: center;
-		height: 100%;
-		/*     min-height: 30px; */
-		flex-wrap: wrap;
-	}
-
-	.inboxListTbl tbody td:nth-of-type(-n + 8) span a {
-		height: 100%;
-		display: flex;
-		flex-grow: 1;
-		align-items: center;
-	}
-
-	.inboxListTbl tbody td:nth-of-type(-n + 3) span em {
-		height: 100%;
-		width: 10px;
-		display: flex;
-	}
-
-	.inboxListDiv {
-		height: max-content;
-	}
-
-	table[id^="fileSearchList"] tbody td:nth-of-type(5),
-	table[id*=" fileSearchList"] tbody td:nth-of-type(5) {
-		width: 250px;
-	}
-
-	table[id^="fileSearchList"] tbody td:nth-of-type(5) em span,
-	table[id*=" fileSearchList"] tbody td:nth-of-type(5) em span {
-		word-wrap: break-word;
-	}
-
-	.receipt-create-panel .inboxListTbl td span {
-		min-height: 30px;
+	
+	#global-footer{
+		display: none !important;
 	}
 }
