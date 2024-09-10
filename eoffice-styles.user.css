@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         e-office
 @namespace    github.com/openstyles/stylus
-@version      1.0.1
+@version      1.0.3
 @license      unlicense
 @preprocessor default
 @var color link-color "Link Color" red
@@ -18,8 +18,74 @@
 		display: none;
 	}
 	
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(4){
+		background-color: unset;
+		color: #000;
+	}
+	
 	quick-noting-container .bg-green-note{
 		cursor: pointer;
+	}
+	
+	.list-unread,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread > td > div{
+		background-color: #E0F4FF !important;
+	}
+	
+	.list-unread:hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread:hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread:hover > td > div{
+		background-color: #A0DEFF !important;
+	}
+	
+	.list-read:has(button[data-id-attr="greenNote"]){
+		background-color: #BFF6C3 !important;
+	}
+	
+	.list-read:has(button[data-id-attr="greenNote"]):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover > td > div{
+		background-color: #9CDBA6 !important;
+	}
+	
+	.list-read:has(button[data-id-attr="yellowNote"]){
+		background-color: #FDFFE2 !important;
+	}
+	
+	.list-read:has(button[data-id-attr="yellowNote"]):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover > td > div{
+		background-color: #F3FEB8 !important;
+	}
+	
+	[data-id-attr="subject"]{
+		cursor: pointer;
+	}
+	
+	a[data-id-attr="menubar.fileView.send"],
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.send"]),
+	a[data-id-attr="menubar.fileView.sendBackFile"],
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.sendBackFile"]){
+		background-color: #b26200;
+	}
+	
+	a[data-id-attr="menubar.fileView.send"]:hover,
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.send"]):hover,
+	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.fileView.send"]:hover,
+	a[data-id-attr="menubar.fileView.sendBackFile"]:hover,
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.sendBackFile"]):hover,
+	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.fileView.sendBackFile"]:hover{
+		background-color: #cf7601 !important;
+	}
+	
+	[data-id-attr="send-to-recent-five-table"] tbody td{
+		cursor: pointer;
+	}
+	
+	.note-viewer-table .p-datatable-tbody tr [data-id-attr="note-attachment"]{
+		font-size: 14px;
+		font-weight: 700;
 	}
 	
 	#global-footer{

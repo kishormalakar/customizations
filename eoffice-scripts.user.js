@@ -19,9 +19,10 @@ window.addEventListener(
 
         document.addEventListener('click', (e) => {
 
+            var main_content = document.querySelectorAll(".main-content")[0];
+
             if (e.target.id == "quick-note-button") {
 
-                var main_content = document.querySelectorAll(".main-content")[0];
                 var utility_panel = main_content.querySelectorAll(".utility_panel")[0];
                 var quick_note_button = utility_panel.querySelectorAll("#quick-note-button")[0];
 
@@ -41,6 +42,18 @@ window.addEventListener(
                 e.target.previousElementSibling.querySelectorAll("input")[0].click();
                 quick_noting_container.querySelectorAll("button[data-id-attr='addButton']")[0].click();
 
+            }
+
+            if (e.target.getAttribute("data-id-attr") == "subject") {
+                e.target.previousElementSibling.previousElementSibling.querySelectorAll("button")[0].click();
+            }
+
+            if (e.target.closest("td") != null && e.target.closest("td").getAttribute("data-id-attr") == "subject") {
+                e.target.closest("td").previousElementSibling.previousElementSibling.querySelectorAll("button")[0].click();
+            }
+
+            if (e.target.closest("[data-id-attr='send-to-recent-five-table']") != null && e.target.parentElement.querySelectorAll("#onUserSelect-1")[0] != undefined) {
+                e.target.parentElement.querySelectorAll("#onUserSelect-1")[0].click();
             }
 
         });
