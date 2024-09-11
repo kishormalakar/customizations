@@ -2483,6 +2483,8 @@ window.addEventListener(
                             tr1.appendChild(th15);
                             tr1.appendChild(th16);
 
+                            var itemNature = getItemNature(pl);
+                            var itemCategory = getItemCategory(pl);
                             var dealerName = getDealerByPl(pl);
 
                             var tr2 = document.createElement("tr");
@@ -2509,14 +2511,14 @@ window.addEventListener(
                             td22.setAttribute("bgcolor", "lightBlue");
                             td22.setAttribute("colspan", "4");
                             var td23 = document.createElement("td");
-                            var text23 = document.createTextNode("");
+                            var text23 = document.createTextNode(itemNature);
                             td23.appendChild(text23);
                             td23.style.border = "1px solid black";
                             td23.style.width = "100px";
                             td23.setAttribute("bgcolor", "lightBlue");
                             td23.setAttribute("align", "center");
                             var td24 = document.createElement("td");
-                            var text24 = document.createTextNode("");
+                            var text24 = document.createTextNode(itemCategory);
                             td24.appendChild(text24);
                             td24.style.border = "1px solid black";
                             td24.style.width = "100px";
