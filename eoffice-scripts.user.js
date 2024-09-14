@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         E-office
 // @namespace    http://tampermonkey.net/
-// @version      1.0.3
+// @version      1.0.4
 // @description  try to take over the world!
 // @author       You
 // @match        https://ecr.eoffice.railnet.gov.in/efile/*
@@ -44,16 +44,23 @@ window.addEventListener(
 
             }
 
-            if (e.target.getAttribute("data-id-attr") == "subject") {
-                e.target.previousElementSibling.previousElementSibling.querySelectorAll("button")[0].click();
-            }
+            if (e.target.getAttribute("data-id-attr") == "subject" || (e.target.closest("td") != null && e.target.closest("td").getAttribute("data-id-attr") == "subject")) {
 
-            if (e.target.closest("td") != null && e.target.closest("td").getAttribute("data-id-attr") == "subject") {
-                e.target.closest("td").previousElementSibling.previousElementSibling.querySelectorAll("button")[0].click();
+                if (e.target.closest("tr").querySelectorAll("[data-id-attr='fileNumber']")[0] != null) {
+                    e.target.closest("tr").querySelectorAll("[data-id-attr='fileNumber']")[0].querySelectorAll("button")[0].click();
+                }
+                if (e.target.closest("tr").querySelectorAll("[data-id-attr='receiptNumber']")[0] != null) {
+                    e.target.closest("tr").querySelectorAll("[data-id-attr='receiptNumber']")[0].querySelectorAll("button")[0].click();
+                }
             }
 
             if (e.target.closest("[data-id-attr='send-to-recent-five-table']") != null && e.target.parentElement.querySelectorAll("#onUserSelect-1")[0] != undefined) {
                 e.target.parentElement.querySelectorAll("#onUserSelect-1")[0].click();
+
+                if (e.target.closest("tr").children[3].innerText.search("CMM") == -1) {
+                    e.target.closest("[data-id-attr='send-to-recent-five-table']").closest(".form").nextElementSibling.querySelectorAll("input#smsNotification")[0].checked = true;
+
+                }
             }
 
         });
