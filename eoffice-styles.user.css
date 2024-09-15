@@ -10,15 +10,18 @@
 @-moz-document url-prefix("https://ecr.eoffice.railnet.gov.in")
 {
 	
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container .col-lg-8{
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container .col-lg-8,
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container .col-lg-8{
 		justify-content: flex-start !important;
 	}
 	
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(3){
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(3),
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(3){
 		display: none;
 	}
 	
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(4){
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(4),
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(4){
 		background-color: unset;
 		color: #000;
 	}
@@ -66,7 +69,11 @@
 	a[data-id-attr="menubar.fileView.send"],
 	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.send"]),
 	a[data-id-attr="menubar.fileView.sendBackFile"],
-	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.sendBackFile"]){
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.sendBackFile"]),
+	a[data-id-attr="menubar.receiptView.send"],
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.receiptView.send"]),
+	a[data-id-attr="menubar.receiptView.sendBack"],
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.receiptView.sendBack"]){
 		background-color: #b26200;
 	}
 	
@@ -75,7 +82,13 @@
 	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.fileView.send"]:hover,
 	a[data-id-attr="menubar.fileView.sendBackFile"]:hover,
 	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.sendBackFile"]):hover,
-	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.fileView.sendBackFile"]:hover{
+	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.fileView.sendBackFile"]:hover,
+	a[data-id-attr="menubar.receiptView.send"]:hover,
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.receiptView.send"]):hover,
+	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.receiptView.send"]:hover,
+	a[data-id-attr="menubar.receiptView.sendBack"]:hover,
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.receiptView.sendBack"]):hover,
+	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.receiptView.sendBack"]:hover{
 		background-color: #cf7601 !important;
 	}
 	
