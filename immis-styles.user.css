@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         IMMIS
 @namespace    github.com/openstyles/stylus
-@version      1.0.50
+@version      1.0.51
 @var color link-color "Link Color" red
 ==/UserStyle== */
 @-moz-document url-prefix("https://ireps.gov.in/fcgi/")
@@ -158,7 +158,8 @@
 	#s_9,
 	#s_10,
 	#s_13,
-	#s_16 {
+	#s_16,
+    #s_22{
 		width: 100% !important;
 		margin: 0 !important;
 		height: auto !important;
@@ -954,8 +955,9 @@
         border-color: black !important;
     }
     
-    .qty_review_div{
-        max-width: 960px;
+    .qty_review_div,
+	.data_review{
+        width: 960px;
     }
     
     .qty_review_div table,
@@ -1095,67 +1097,67 @@
         width: calc((100% - 100px)/9);
     }
     
-    .quantity_review .data_review > table{
+    .data_review > table{
         width: 800px;
         margin-top: 20px;
     }
     
-    .quantity_review .data_review > table tr:nth-of-type(1) td:nth-of-type(1){
+    .data_review > table tr:nth-of-type(1) td:nth-of-type(1){
         text-align: center;
     }
     
-    .quantity_review .data_review > table tr:nth-of-type(n+2) td:nth-of-type(1){
+    .data_review > table tr:nth-of-type(n+2) td:nth-of-type(1){
         width: 180px;
     }
     
-    .quantity_review .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(2),
-    .quantity_review .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(3),
-    .quantity_review .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(4),
-    .quantity_review .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(5),
-    .quantity_review .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(6),
-    .quantity_review .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(7),
-	.quantity_review .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(8){
+    .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(2),
+    .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(3),
+    .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(4),
+    .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(5),
+    .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(6),
+    .data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(7),
+	.data_review > table:nth-of-type(1) tr:nth-of-type(n+2) td:nth-of-type(8){
         width: 100px;
 		text-align: center;
     }
 	
-	.quantity_review .data_review > table:nth-of-type(2) tr:nth-of-type(n+2) td:nth-of-type(2),
-    .quantity_review .data_review > table:nth-of-type(2) tr:nth-of-type(n+2) td:nth-of-type(3),
-	.quantity_review .data_review > table:nth-of-type(2) tr:nth-of-type(n+2) td:nth-of-type(4){
+	.data_review > table:nth-of-type(2) tr:nth-of-type(n+2) td:nth-of-type(2),
+    .data_review > table:nth-of-type(2) tr:nth-of-type(n+2) td:nth-of-type(3),
+	.data_review > table:nth-of-type(2) tr:nth-of-type(n+2) td:nth-of-type(4){
         width: 100px;
     }
 	
-	.quantity_review .data_review > table:nth-of-type(2) tr:nth-of-type(2) td:nth-of-type(4){
+	.data_review > table:nth-of-type(2) tr:nth-of-type(2) td:nth-of-type(4){
 		text-align: center;
 	}
     
-    .quantity_review .data_review > table input,
-    .quantity_review .data_review > table select{
+    .data_review > table input,
+    .data_review > table select{
         width: 95px;
         height: 25px;
     }
 	
-	.quantity_review .data_review > table input{
+	.data_review > table input{
 		text-align: center;
 	}
     
-    .quantity_review .data_review > table select.considered{
+    .data_review > table select.considered{
         background-color: darkgray;
         font-weight: bold;
     }
     
-    .quantity_review .data_review > table select.considered option{
+    .data_review > table select.considered option{
         font-weight: normal;
     }
     
-    .quantity_review .data_review > button{
+    .data_review > button{
         margin-top: 20px;
         margin-bottom: 20px;
         width: 80px;
         height: 34px;
         margin-left: calc((50% - 40px)/2);
     }
-    
+
     @media print{
 		
 		.quantity_review{
@@ -1226,7 +1228,7 @@
     
     .tpi_status #s_2 > table:nth-of-type(2){
         margin-top: 10px;
-        font-size: 9pt;
+        font-size: 8pt;
         border-collapse: collapse;
     }
     
