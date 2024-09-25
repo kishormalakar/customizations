@@ -213,6 +213,11 @@
 		width: 800px !important;
 		left: calc(50% - 400px) !important;
 	}
+	
+	#s_22 td > div{
+		margin-left: 0;
+		margin-right: 0;
+	}
 
 	div[id^="s__cnvs"] {
 		width: 800px !important;
@@ -541,8 +546,8 @@
 	}
 
 	.purchase_proposal #divShowHtml2 {
-		width: 800px !important;
-		left: calc(50% - 400px) !important;
+		width: 960px !important;
+		left: calc(50% - 480px) !important;
 		padding: 20px !important;
 		top: 100px !important;
 		height: auto !important;
@@ -1098,7 +1103,7 @@
     }
     
     .data_review > table{
-        width: 800px;
+        width: 100%;
         margin-top: 20px;
     }
     
@@ -1155,7 +1160,7 @@
         margin-bottom: 20px;
         width: 80px;
         height: 34px;
-        margin-left: calc((50% - 40px)/2);
+        margin-left: calc(50% - 20px);
     }
 
     @media print{
