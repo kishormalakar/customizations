@@ -1168,6 +1168,11 @@
 		.quantity_review{
 			background-color: white;
 		}
+		
+		.qty_review_div,
+		.data_review{
+			width: 100%;
+		}
         
         .quantity_review #CanvassHolder,
         .quantity_review #TitleBar,

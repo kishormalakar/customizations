@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IREPS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.7
+// @version      1.0.8
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/epsn/*
@@ -263,78 +263,85 @@ window.addEventListener(
             var tncTabButton = tenderDecisionForm.querySelectorAll("a[href='#tab80']")[0];
             var tncTab = tenderDecisionForm.querySelectorAll("#tab80")[0];
 
+            var docButtons = tenderDecisionForm.querySelectorAll(".advSearch")[0].nextSiblingElement.nextSiblingElement.querySelectorAll("tr")[0].children[1];
+
+
         }
 
         if (pathname.startsWith("/epsn/buyerInboxLink.do")) {
 
-            var buyerInboxLinkForm = document.querySelectorAll("form[name='buyerInboxLinkForm']")[0];
+            if (confirm("Do you want to display additional details?") == true) {
 
-            buyerInboxLinkForm.parentElement.setAttribute("width", "80%");
-            buyerInboxLinkForm.parentElement.previousElementSibling.setAttribute("width", "10%");
-            buyerInboxLinkForm.parentElement.nextElementSibling.setAttribute("width", "10%");
+                var buyerInboxLinkForm = document.querySelectorAll("form[name='buyerInboxLinkForm']")[0];
 
-            var tenderTable = buyerInboxLinkForm.querySelectorAll(".nit_summary")[0];
-            var tenderList = tenderTable.children[0].children;
+                buyerInboxLinkForm.parentElement.setAttribute("width", "80%");
+                buyerInboxLinkForm.parentElement.previousElementSibling.setAttribute("width", "10%");
+                buyerInboxLinkForm.parentElement.nextElementSibling.setAttribute("width", "10%");
 
-            var headerRow = tenderList[0];
-            var td = document.createElement("td");
-            var strong = document.createElement("strong");
-            var strongText = document.createTextNode("Value");
-            strong.appendChild(strongText);
-            td.appendChild(strong);
-            td.style.cssText = headerRow.children[4].cssText;
-            td.style.textAlign = "center";
-            headerRow.insertBefore(td, headerRow.children[5]);
+                var tenderTable = buyerInboxLinkForm.querySelectorAll(".nit_summary")[0];
+                var tenderList = tenderTable.children[0].children;
 
-            for (var i = 1; i < tenderList.length; i++) {
+                var headerRow = tenderList[0];
+                var td = document.createElement("td");
+                var strong = document.createElement("strong");
+                var strongText = document.createTextNode("Value");
+                strong.appendChild(strongText);
+                td.appendChild(strong);
+                td.style.cssText = headerRow.children[4].cssText;
+                td.style.textAlign = "center";
+                headerRow.insertBefore(td, headerRow.children[5]);
 
-                var tenderRow = tenderList[i];
-                var todText = tenderRow.children[4].innerText;
-                var tod = new Date(+todText.split(" ")[0].split("/")[2], +todText.split(" ")[0].split("/")[1] - 1, +todText.split(" ")[0].split("/")[0]);
-                tod.setHours(11);
-                var today = new Date();
-                var numDays = Math.round((today - tod) / (1000 * 60 * 60 * 24));
+                for (var i = 1; i < tenderList.length; i++) {
 
-                var br = document.createElement("br");
-                var span = document.createElement("span");
-                var spanText = document.createTextNode(numDays + " days");
-                span.appendChild(spanText);
-                if (numDays >= 12) {
-                    span.style.color = "red";
-                    span.style.fontWeight = "bold";
-                }
-                if (numDays >= 10) {
-                    span.style.color = "red";
-                }
-                tenderRow.children[4].appendChild(br);
-                tenderRow.children[4].appendChild(span);
+                    var tenderRow = tenderList[i];
+                    var todText = tenderRow.children[4].innerText;
+                    var tod = new Date(+todText.split(" ")[0].split("/")[2], +todText.split(" ")[0].split("/")[1] - 1, +todText.split(" ")[0].split("/")[0]);
+                    tod.setHours(11);
+                    var today = new Date();
+                    var numDays = Math.round((today - tod) / (1000 * 60 * 60 * 24));
 
-                var actionButtons = tenderRow.children[6];
-                var finTabButton = actionButtons.querySelectorAll("a")[2];
-                var finTabButtonOnClick = finTabButton.getAttribute("onclick");
-                var finTabUrl = finTabButtonOnClick.split("('")[1].split("',")[0];
-
-                var req = new XMLHttpRequest();
-                req.open("GET", "https://ireps.gov.in" + finTabUrl, false);
-                req.send(null);
-
-                if (req.status == 200) {
-                    var parser = new DOMParser();
-                    var financialTabulation = parser.parseFromString(req.responseText, "text/html");
-                    var tenderValue = financialTabulation.querySelectorAll("#schForm")[0].querySelectorAll("tr")[4].children[3].innerText;
-
-                    var td = document.createElement("td");
+                    var br = document.createElement("br");
                     var span = document.createElement("span");
-                    var spanText = document.createTextNode(new Intl.NumberFormat("en-IN").format(Math.round(+tenderValue)));
+                    var spanText = document.createTextNode(numDays + " days");
                     span.appendChild(spanText);
-                    td.appendChild(span);
-                    td.style.textAlign = "right";
-                    td.style.verticalAlign = "top";
-                    if (+tenderValue > 5000000) {
-                        td.style.color = "red";
+                    if (numDays >= 12) {
+                        span.style.color = "red";
+                        span.style.fontWeight = "bold";
                     }
-                    tenderRow.insertBefore(td, tenderRow.children[5]);
+                    if (numDays >= 10) {
+                        span.style.color = "red";
+                    }
+                    tenderRow.children[4].appendChild(br);
+                    tenderRow.children[4].appendChild(span);
+
+                    var actionButtons = tenderRow.children[6];
+                    var finTabButton = actionButtons.querySelectorAll("a")[2];
+                    var finTabButtonOnClick = finTabButton.getAttribute("onclick");
+                    var finTabUrl = finTabButtonOnClick.split("('")[1].split("',")[0];
+
+                    var req = new XMLHttpRequest();
+                    req.open("GET", "https://ireps.gov.in" + finTabUrl, false);
+                    req.send(null);
+
+                    if (req.status == 200) {
+                        var parser = new DOMParser();
+                        var financialTabulation = parser.parseFromString(req.responseText, "text/html");
+                        var tenderValue = financialTabulation.querySelectorAll("#schForm")[0].querySelectorAll("tr")[4].children[3].innerText;
+
+                        var td = document.createElement("td");
+                        var span = document.createElement("span");
+                        var spanText = document.createTextNode(new Intl.NumberFormat("en-IN").format(Math.round(+tenderValue)));
+                        span.appendChild(spanText);
+                        td.appendChild(span);
+                        td.style.textAlign = "right";
+                        td.style.verticalAlign = "top";
+                        if (+tenderValue > 5000000) {
+                            td.style.color = "red";
+                        }
+                        tenderRow.insertBefore(td, tenderRow.children[5]);
+                    }
                 }
+
             }
 
         }
