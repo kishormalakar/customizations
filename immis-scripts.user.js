@@ -1196,6 +1196,10 @@ window.addEventListener(
                         .innerText.startsWith("Item Card for PL NO:")
                 ) {
                     var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
+
+                    var consumptionTable = section_udm.previousElementSibling.previousElementSibling;
+                    var totalAAC = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[5].innerText.split("(")[0];
+
                     var uncoveredDuesTable = section_udm.nextElementSibling;
                     var uncoveredDues = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
@@ -1219,6 +1223,31 @@ window.addEventListener(
                         }
 
                     }
+
+                    var coveredDuesTable = section_udm.nextElementSibling.nextElementSibling.nextElementSibling;
+                    var coveredDues = coveredDuesTable.querySelectorAll("tbody")[0].children;
+                    var cummulativeDueQty = 0;
+
+                    for (i = 2; i < coveredDues.length; i++) {
+
+                        var coveredDue = coveredDues[i];
+                        var dueQty = 0;
+
+                        if (coveredDue.children.length == 10) {
+                            dueQty = +coveredDue.children[6].innerText;
+                        }
+
+                        if (coveredDue.children.length == 9) {
+                            dueQty = +coveredDue.children[5].innerText;
+                        }
+
+                        cummulativeDueQty += dueQty;
+
+                    }
+
+                    var coveredDuesHeader = coveredDues[0].querySelectorAll("strong")[0].innerText;
+                    coveredDuesHeader = coveredDuesHeader + " ( " + Math.round(+cummulativeDueQty / +totalAAC * 12 * 10) / 10 + " months )";
+                    coveredDues[0].querySelectorAll("strong")[0].innerText = coveredDuesHeader;
                 }
 
                 if (
