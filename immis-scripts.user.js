@@ -815,7 +815,7 @@ window.addEventListener(
 
             maKeyInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
-                    document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_57")[0].focus();
+                    s_2.querySelectorAll("input[name='btn_ViewAuth_0']")[0].focus();
                 }
             });
 
