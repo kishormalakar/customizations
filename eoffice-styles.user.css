@@ -10,6 +10,14 @@
 @-moz-document url-prefix("https://ecr.eoffice.railnet.gov.in")
 {
 	
+	div[data-faq-module-name="FILE#FILE_INBOX"] .srch-tab-ele input#select-user{
+		cursor: pointer;
+	}
+    
+	div[data-faq-module-name="FILE#FILE_INBOX"] .srch-tab-ele .form-check-label{
+		cursor: pointer;
+	}
+    
 	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container .col-lg-8,
 	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container .col-lg-8{
 		justify-content: flex-start !important;
