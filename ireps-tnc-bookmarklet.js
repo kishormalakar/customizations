@@ -11,11 +11,11 @@ javascript: (() => {
         var parser = new DOMParser();
         var technoCommercialTabulation = parser.parseFromString(req.responseText, "text/html");
         var tenderNo = technoCommercialTabulation
-            .querySelectorAll("tbody")[0]
+            .querySelectorAll("tbody")[1]
             .children[4].querySelectorAll("tr")[1]
             .querySelectorAll("td")[1].innerText;
         var conditionTables = technoCommercialTabulation
-            .querySelectorAll("tbody")[0]
+            .querySelectorAll("tbody")[1]
             .lastElementChild.querySelectorAll("td")[0]
             .querySelectorAll(":scope > table");
         var makeArray = [];

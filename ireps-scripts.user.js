@@ -104,7 +104,7 @@ window.addEventListener(
                 var parser = new DOMParser();
                 var technoCommercialTabulation = parser.parseFromString(req.responseText, "text/html");
 
-                var tod = technoCommercialTabulation.querySelectorAll("body")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[3].innerText.trim().split(" ")[0].substring(2).replaceAll('/', '');
+                var tod = technoCommercialTabulation.querySelectorAll("body")[0].querySelectorAll("table")[1].querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[3].innerText.trim().split(" ")[0].substring(2).replaceAll('/', '');
 
                 var industryTable = technoCommercialTabulation
                     .querySelectorAll("#oiDiv")[0]
