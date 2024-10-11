@@ -910,7 +910,7 @@ window.addEventListener(
                 if (e.target.title == "Click OK to publish tender to IREPS") {
 
                     var tenderNo = body.querySelectorAll("input[name='TENDER_NO_0']")[0].value;
-                    var tenderValue = +body.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value * 1.05;
+                    var tenderValue = +body.querySelectorAll("input[name='ESTD_VALUE_0']")[0].value;
                     var tod = body.querySelectorAll("input[name='DUE_DATE_0']")[0].value;
                     var tenderType = "";
 
@@ -934,7 +934,7 @@ window.addEventListener(
                         "https://docs.google.com/forms/d/e/1FAIpQLSerWA27snuLdU5MPDlW_NFkQuWm7lNONd9VBOfkOOiF8k13dw/formResponse?usp=pp_url&entry.735724294="
                         + tenderNo +
                         "&entry.801071618="
-                        + tenderType +
+                        + tenderValue +
                         "&entry.252628659="
                         + tod +
                         "&submit=Submit", '_blank');
@@ -1749,7 +1749,7 @@ window.addEventListener(
                     if (category == "A") {
                         escalationLimit = 1.25;
                     }
-                    else if (category = "B") {
+                    else if (category == "B") {
                         escalationLimit = 1.50;
                     }
                     else {
@@ -4115,7 +4115,7 @@ window.addEventListener(
                     if (category == "A") {
                         escalationLimit = 1.25;
                     }
-                    else if (category = "B") {
+                    else if (category == "B") {
                         escalationLimit = 1.50;
                     }
                     else {

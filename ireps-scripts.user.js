@@ -93,6 +93,22 @@ window.addEventListener(
         }
 
         if (pathname.startsWith("/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp")) {
+
+            var industryDropdown = document.querySelectorAll("tbody")[0].children[5].querySelectorAll("select#indsType")[0];
+            var industryDropdownOptions = industryDropdown.children;
+            var mseTypeDropdown = document.querySelectorAll("tbody")[0].children[5].querySelectorAll("select#mseType")[0];
+            var mseTypeDropdownOptions = mseTypeDropdown.children;
+
+            industryDropdown.addEventListener("change", () => {
+
+                if(industryDropdown.value == "1"){
+                    mseTypeDropdown.value = "8";
+                    document.querySelectorAll("tbody")[0].children[5].querySelectorAll("input[name='scsttype']")[2].checked = true;
+                    document.querySelectorAll("tbody")[0].children[5].querySelectorAll("input[name='wYN']")[1].checked = true;
+                }
+
+            });
+
             var tabulationId = prompt("Tabulation ID");
             var bidderName = document.querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[1].innerText.trim().split(" (")[0];
 
