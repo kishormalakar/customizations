@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.76
+// @version      1.0.77
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1642,6 +1642,7 @@ window.addEventListener(
                 var consumptionYearsArray = data.consumptionYearsArray;
                 var aacArray = data.aacArray;
                 var mcArray = data.mcArray;
+                var udmStockBalance = data.udmStockBalance;
                 var coveredDuesArray = data.coveredDuesArray;
                 var uncoveredDuesArray = data.uncoveredDuesArray;
 
@@ -1653,17 +1654,17 @@ window.addEventListener(
                 var ipMM = data.ipMM;
                 var bpMM = data.bpMM;
 
-                var qwsDiv = s_22.querySelectorAll("#QWSDiv")[0];
+                var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
 
-                if (qwsDiv.querySelectorAll(".data_review")[0]) {
+                if (divShowHtml1.querySelectorAll(".data_review")[0]) {
 
-                    qwsDiv.querySelectorAll(".data_review")[0].remove();
+                    divShowHtml1.querySelectorAll(".data_review")[0].remove();
 
                 }
 
-                if (qwsDiv.querySelectorAll(".qty_review_div")[0]) {
+                if (divShowHtml1.querySelectorAll(".qty_review_div")[0]) {
 
-                    qwsDiv.querySelectorAll(".qty_review_div")[0].remove();
+                    divShowHtml1.querySelectorAll(".qty_review_div")[0].remove();
 
                 }
 
@@ -1752,7 +1753,7 @@ window.addEventListener(
                     else if (category == "B") {
                         escalationLimit = 1.50;
                     }
-                    else{
+                    else {
                         escalationLimit = 2.00;
                     }
 
@@ -1775,6 +1776,22 @@ window.addEventListener(
 
                 }
 
+                table1.appendChild(tbody1);
+                div.appendChild(table1);
+
+                var table1 = document.createElement("table");
+                var tbody1 = document.createElement("tbody");
+                var tr1 = document.createElement("tr");
+                var td11 = document.createElement("td");
+                var text11 = document.createTextNode("Buffer Months");
+                td11.appendChild(text11);
+                var td12 = document.createElement("td");
+                var input12 = document.createElement("input");
+                input12.value = data.bpMM;
+                td12.appendChild(input12);
+                tr1.appendChild(td11);
+                tr1.appendChild(td12);
+                tbody1.appendChild(tr1);
                 table1.appendChild(tbody1);
                 div.appendChild(table1);
 
@@ -1873,7 +1890,7 @@ window.addEventListener(
                     var aacTable = dataReviewDiv.querySelectorAll("table")[0];
                     var aacRows = aacTable.children[0].children;
 
-                    var originalAacTable = qwsDiv.querySelectorAll(":scope > table")[1].querySelectorAll("table")[0];
+                    var originalAacTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[1];
                     var originalAacRows = originalAacTable.children[0].children;
 
                     for (var i = 2; i < originalAacRows.length; i++) {
@@ -1882,7 +1899,7 @@ window.addEventListener(
 
                             if (originalAacRows[i].children[0].innerText == aacRows[j].children[0].innerText) {
 
-                                originalAacRows[i].querySelectorAll("td")[12].innerText = aacRows[j].children[7].querySelectorAll("input")[0].value;
+                                originalAacRows[i].querySelectorAll("td")[13].innerText = aacRows[j].children[7].querySelectorAll("input")[0].value;
 
                             }
 
@@ -1890,10 +1907,14 @@ window.addEventListener(
 
                     }
 
-                    var uncoveredDuesTable = dataReviewDiv.querySelectorAll("table")[1];
+                    var bpText1 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(0, 8);
+                    var bpText2 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(9);
+                    divShowHtml1.children[1].children[10].nextSibling.textContent = bpText1 + dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value + bpText2;
+
+                    var uncoveredDuesTable = dataReviewDiv.querySelectorAll("table")[2];
                     var uncoveredRows = uncoveredDuesTable.children[0].children;
 
-                    var originalUncoveredDuesTable = qwsDiv.querySelectorAll(":scope > table")[1].querySelectorAll("table")[5];
+                    var originalUncoveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[1].querySelectorAll("table")[0];
                     var originalUncoveredRows = originalUncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
                     var j = 1;
@@ -1912,14 +1933,14 @@ window.addEventListener(
 
                     }
 
-                    qwsDiv.nextElementSibling.style.display = "none";
+                    divShowHtml1.children[2].style.display = "none";
                     showQWS();
 
                 }
                 div.appendChild(button);
 
-                qwsDiv.parentElement.appendChild(div);
-                /*qwsDiv.children[0].querySelectorAll("input[value='Print']")[0].removeAttribute('onclick');*/
+                divShowHtml1.appendChild(div);
+                divShowHtml1.children[0].querySelectorAll("input[value='Print']")[0].removeAttribute('onclick');
 
             }
 
@@ -4164,6 +4185,22 @@ window.addEventListener(
                 var tbody1 = document.createElement("tbody");
                 var tr1 = document.createElement("tr");
                 var td11 = document.createElement("td");
+                var text11 = document.createTextNode("Buffer Months");
+                td11.appendChild(text11);
+                var td12 = document.createElement("td");
+                var input12 = document.createElement("input");
+                input12.value = data.bpMM;
+                td12.appendChild(input12);
+                tr1.appendChild(td11);
+                tr1.appendChild(td12);
+                tbody1.appendChild(tr1);
+                table1.appendChild(tbody1);
+                div.appendChild(table1);
+
+                var table1 = document.createElement("table");
+                var tbody1 = document.createElement("tbody");
+                var tr1 = document.createElement("tr");
+                var td11 = document.createElement("td");
                 var text11 = document.createTextNode("Review Uncovered Dues");
                 td11.appendChild(text11);
                 td11.setAttribute("colspan", "6");
@@ -4272,7 +4309,11 @@ window.addEventListener(
 
                     }
 
-                    var uncoveredDuesTable = dataReviewDiv.querySelectorAll("table")[1];
+                    var bpText1 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(0, 8);
+                    var bpText2 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(9);
+                    divShowHtml1.children[1].children[10].nextSibling.textContent = bpText1 + dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value + bpText2;
+
+                    var uncoveredDuesTable = dataReviewDiv.querySelectorAll("table")[2];
                     var uncoveredRows = uncoveredDuesTable.children[0].children;
 
                     var originalUncoveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[1].querySelectorAll("table")[0];
