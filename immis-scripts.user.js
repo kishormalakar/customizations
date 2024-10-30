@@ -1642,7 +1642,6 @@ window.addEventListener(
                 var consumptionYearsArray = data.consumptionYearsArray;
                 var aacArray = data.aacArray;
                 var mcArray = data.mcArray;
-                var udmStockBalance = data.udmStockBalance;
                 var coveredDuesArray = data.coveredDuesArray;
                 var uncoveredDuesArray = data.uncoveredDuesArray;
 
@@ -1654,18 +1653,14 @@ window.addEventListener(
                 var ipMM = data.ipMM;
                 var bpMM = data.bpMM;
 
-                var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
+                var qwsDiv = s_22.querySelectorAll("#QWSDiv")[0];
 
-                if (divShowHtml1.querySelectorAll(".data_review")[0]) {
-
-                    divShowHtml1.querySelectorAll(".data_review")[0].remove();
-
+                if (qwsDiv.querySelectorAll(".data_review")[0]) {
+                    qwsDiv.querySelectorAll(".data_review")[0].remove();
                 }
 
-                if (divShowHtml1.querySelectorAll(".qty_review_div")[0]) {
-
-                    divShowHtml1.querySelectorAll(".qty_review_div")[0].remove();
-
+                if (qwsDiv.querySelectorAll(".qty_review_div")[0]) {
+                    qwsDiv.querySelectorAll(".qty_review_div")[0].remove();
                 }
 
                 var div = document.createElement("div");
@@ -1890,7 +1885,7 @@ window.addEventListener(
                     var aacTable = dataReviewDiv.querySelectorAll("table")[0];
                     var aacRows = aacTable.children[0].children;
 
-                    var originalAacTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[1];
+                    var originalAacTable = qwsDiv.querySelectorAll(":scope > table")[1].querySelectorAll("table")[0];
                     var originalAacRows = originalAacTable.children[0].children;
 
                     for (var i = 2; i < originalAacRows.length; i++) {
@@ -1899,7 +1894,7 @@ window.addEventListener(
 
                             if (originalAacRows[i].children[0].innerText == aacRows[j].children[0].innerText) {
 
-                                originalAacRows[i].querySelectorAll("td")[13].innerText = aacRows[j].children[7].querySelectorAll("input")[0].value;
+                                originalAacRows[i].querySelectorAll("td")[12].innerText = aacRows[j].children[7].querySelectorAll("input")[0].value;
 
                             }
 
@@ -1907,14 +1902,12 @@ window.addEventListener(
 
                     }
 
-                    var bpText1 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(0, 8);
-                    var bpText2 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(9);
-                    divShowHtml1.children[1].children[10].nextSibling.textContent = bpText1 + dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value + bpText2;
+                    qwsDiv.querySelectorAll(":scope > table")[1].querySelectorAll("table")[1].querySelectorAll("tr")[1].querySelectorAll("span")[0].innerText = dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value;
 
                     var uncoveredDuesTable = dataReviewDiv.querySelectorAll("table")[2];
                     var uncoveredRows = uncoveredDuesTable.children[0].children;
 
-                    var originalUncoveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[1].querySelectorAll("table")[0];
+                    var originalUncoveredDuesTable = qwsDiv.querySelectorAll(":scope > table")[1].querySelectorAll("table")[5];
                     var originalUncoveredRows = originalUncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
                     var j = 1;
@@ -1933,14 +1926,14 @@ window.addEventListener(
 
                     }
 
-                    divShowHtml1.children[2].style.display = "none";
+                    qwsDiv.nextElementSibling.style.display = "none";
                     showQWS();
 
                 }
                 div.appendChild(button);
 
-                divShowHtml1.appendChild(div);
-                divShowHtml1.children[0].querySelectorAll("input[value='Print']")[0].removeAttribute('onclick');
+                qwsDiv.parentElement.appendChild(div);  
+                /*qwsDiv.children[0].querySelectorAll("input[value='Print']")[0].removeAttribute('onclick');*/
 
             }
 
