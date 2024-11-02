@@ -1,20 +1,39 @@
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@/** Import Lepton stylesheet (Chrome) *****************************************/
+@import url("css/leptonChrome.css");
+
+
+/** Add your custom styles below **********************************************/
+
+/* Enable option to edit bookmark URLs under Add Bookmark (blue star) menu */
+/*
+.editBMPanel_locationRow {
+  display: initial !important;
+}
+*/
+
+/* Disable Email Image/Audio/Video and Set as Desktop Background context menu items */
 
 #contentAreaContextMenu menu[id^='extension_redux_devtools-menuitem'],
 #contentAreaContextMenu menuitem[id^='extension_redux_devtools-menuitem'],
 #contentAreaContextMenu menu[id^='_testpilot-containers-menuitem-'],
+#contentAreaContextMenu menuitem[id^='ublock0_raymondhill_net-menuitem-_uBlock0-blockElement'],
 #contentAreaContextMenu menuitem[id^='_testpilot-containers-menuitem-'],
 #contentAreaContextMenu menuitem[label = 'Copy Clean Link Location'],
+#contentAreaContextMenu [id^='context-media-'],
+#contentAreaContextMenu [id^='context-video-'],
 #contentAreaContextMenu #context-inspect-a11y,
 #contentAreaContextMenu #_74145f27-f039-47ce-a470-a662b129930a_-menuitem-_copy-link-to-clipboard,
 #contentAreaContextMenu #context-sendlinktodevice,
 #contentAreaContextMenu #context-savelinktopocket,
 #contentAreaContextMenu #context-bookmarklink,
 #contentAreaContextMenu #context-sendimage,
+#contentAreaContextMenu #context-sendvideo,
+#contentAreaContextMenu #context-sendaudio,
 #contentAreaContextMenu #context-setDesktopBackground,
+#contentAreaContextMenu #context-sep-setbackground,
 #contentAreaContextMenu #context-copyimage-contents,
-#contentAreaContextMenu #context-sep-setbackground
-{
+#contentAreaContextMenu #context-sep-setbackground,
+#contentAreaContextMenu #context-searchselect{
     display: none !important;
 }
 
@@ -29,3 +48,44 @@
 #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
     background-image: none !important;
 }
+
+/*** Proton Tabs Tweaks ***/
+
+/* Adjust tab corner shape, optionally remove space below tabs */
+
+#tabbrowser-tabs {
+  --user-tab-rounding: 12px !important;
+}
+
+.tab-background {
+  border-radius: var(--user-tab-rounding) var(--user-tab-rounding) 0px 0px !important; /* Connected */
+  margin-block: 1px 0 !important; /* Connected */
+}
+#scrollbutton-up, #scrollbutton-down { /* 6/10/2021 */
+  border-top-width: 1px !important;
+  border-bottom-width: 0 !important;
+}
+
+/* 1/16/2022 Tone down the Fx96 tab border with add-on themes in certain fallback situations */
+.tab-background:is([selected], [multiselected]):-moz-lwtheme {
+  --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
+  border-bottom-color: transparent !important;
+}
+[brighttext="true"] .tab-background:is([selected], [multiselected]):-moz-lwtheme {
+  --lwt-tabs-border-color: rgba(255, 255, 255, 0.5) !important;
+  border-bottom-color: transparent !important;
+}
+
+/* Container color bar visibility */
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+  margin: 0px max(calc(var(--user-tab-rounding) - 3px), 0px) !important;
+}
+
+  /* Make sure tab attention dot isn't too high - 10 Dec 2022 */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]),
+#firefox-view-button[attention], .webextension-browser-action[attention="true"] {
+background-position-y: bottom 5px !important;
+}
+
+/* Tweak Options as of 12/10/2022; Generated Sat Nov 02 2024 12:11:46 GMT+0530 (India Standard Time) */
