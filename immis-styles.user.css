@@ -306,6 +306,7 @@
 	#divShowHtml1 > div,
 	#divShowHtml2 > div {
 		height: auto !important;
+		width: 100% !important;
 	}
 
 	#DivAlertBox {
@@ -960,9 +961,9 @@
         border-color: black !important;
     }
     
-    .qty_review_div,
-	.data_review{
-        width: 960px;
+    #divShowHtml1 .qty_review_div,
+	#divShowHtml1 .data_review{
+        width: 960px !important;
     }
     
     .qty_review_div table,
