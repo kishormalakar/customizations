@@ -17,8 +17,9 @@ window.addEventListener(
 
         if (pathname.startsWith("/epsn/supply/bid/techBidSupplyTabulation.do")) {
             var technoCommercialTabulation = document.querySelectorAll("table")[0].children[0];
+
             var conditionTables =
-                technoCommercialTabulation.lastElementChild.firstElementChild.querySelectorAll(":scope > table");
+                technoCommercialTabulation.querySelectorAll("td")[1].querySelectorAll("tbody")[0].lastElementChild.children[0].querySelectorAll(":scope > table");
             var eligibilityTable;
             var makeTable;
             var makeTable2;
@@ -32,6 +33,7 @@ window.addEventListener(
 
                 if (conditionTables[i].querySelectorAll("td")[0].innerText.trim() == "Make Brand") {
                     makeTable = conditionTables[i + 1].querySelectorAll("tbody")[0].children;
+                    conditionTables[i].setAttribute("id", "table-make");
                 }
 
                 if (
@@ -39,6 +41,14 @@ window.addEventListener(
                     "GST Jurisdictional Assessing Officer Details"
                 ) {
                     jurisdictionalOfficerTable = conditionTables[i + 1].querySelectorAll("tbody")[0].children;
+                }
+
+                if (conditionTables[i].querySelectorAll("td")[0].innerText.trim() == "Deviations") {
+                    conditionTables[i].setAttribute("id", "table-deviations");
+                }
+
+                if (conditionTables[i].querySelectorAll("td")[0].innerText.trim() == "Commercial Compliance") {
+                    conditionTables[i].setAttribute("id", "table-commercialcompliance");
                 }
             }
 
@@ -90,6 +100,39 @@ window.addEventListener(
                     }
                 }
             }
+
+            var leftSidebar = technoCommercialTabulation.children[0].children[0];
+            var mainContent = technoCommercialTabulation.children[0].children[1];
+            var rightSidebar = technoCommercialTabulation.children[0].children[2];
+
+            leftSidebar.style.width = "50px";
+            mainContent.style.width = "1024px";
+            rightSidebar.style.width = "300px";
+
+            var sidebarDiv = document.createElement("div");
+            sidebarDiv.classList.add("sidebar-div");
+            sidebarDiv.style.cssText = "position: fixed; top: 100px; display: flex; flex-direction: column";
+            var a1 = document.createElement("a");
+            var a1Text = document.createTextNode("Local Content");
+            a1.appendChild(a1Text);
+            a1.setAttribute("href", "#table-commercialcompliance");
+            var a2 = document.createElement("a");
+            var a2Text = document.createTextNode("Deviations");
+            a2.appendChild(a2Text);
+            a2.setAttribute("href", "#table-deviations");
+            var a3 = document.createElement("a");
+            var a3Text = document.createTextNode("Make/brand");
+            a3.appendChild(a3Text);
+            a3.setAttribute("href", "#table-make");
+            var a4 = document.createElement("a");
+            var a4Text = document.createTextNode("Industry Type");
+            a4.appendChild(a4Text);
+            a4.setAttribute("href", "#oiDiv");
+            sidebarDiv.appendChild(a1);
+            sidebarDiv.appendChild(a2);
+            sidebarDiv.appendChild(a3);
+            sidebarDiv.appendChild(a4);
+            rightSidebar.appendChild(sidebarDiv);
         }
 
         if (pathname.startsWith("/epsn/jsp/supply/tds/firmMSEDetailsPage.jsp")) {

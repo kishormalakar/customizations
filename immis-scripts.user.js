@@ -5227,14 +5227,34 @@ window.addEventListener(
         if (document.title == "TPI Status" || document.title == "Run Form - IMMIS/PUR/TPINSP") {
             body.classList.add("tpi_status");
 
+            var s_2 = body.querySelectorAll("#s_2")[0];
+            var s_3 = body.querySelectorAll("#s_3")[0];
+
             var monthSelect = document.querySelectorAll("#s_0_10")[0];
             monthSelect.selectedIndex = new Date().getMonth();
 
+            var th = document.createElement("th");
+            var label = document.createElement("label");
+            label.style.cssText = s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[4].querySelectorAll("label")[0].style.cssText;
+            var b = document.createElement("b");
+            var text = document.createTextNode("Sec :");
+            b.appendChild(text);
+            label.appendChild(b);
+            th.appendChild(label);
+            th.setAttribute("nowrap", "");
+            var td = document.createElement("td");
+            var input = s_2.querySelectorAll("input[name='IC_NO_0']")[0].cloneNode(true);
+            input.removeAttribute("id");
+            input.setAttribute("name", "SEC_NO_0");
+            td.appendChild(input);
+
+            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].insertBefore(th, s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[4]);
+            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].insertBefore(td, s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[5]);
+            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[5].style.display = "none";
+            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("td")[5].style.display = "none";
+
             document.addEventListener("click", (e) => {
                 if (e.target.id == "s_0_15") {
-
-                    var s_2 = body.querySelectorAll("#s_2")[0];
-                    var s_3 = body.querySelectorAll("#s_3")[0];
 
                     if (s_2.querySelectorAll(":scope > table").length > 1) {
 
@@ -5257,6 +5277,8 @@ window.addEventListener(
                     tbody1.appendChild(tableHeaderClone);
                     table1.appendChild(tbody1);
                     s_2.appendChild(table1);
+
+                    var section = s_2.querySelectorAll("input[name='SEC_NO_0']")[0].value;
 
                     var inspectionTable = s_3.querySelectorAll("table")[1];
                     var inspectionTableRows = inspectionTable.querySelectorAll("tbody")[0].children;
@@ -5300,6 +5322,10 @@ window.addEventListener(
                         var text4 = document.createTextNode(icDate);
                         inspectionRow.children[17].appendChild(br4);
                         inspectionRow.children[17].appendChild(text4);
+
+                        if(section != "" && section != poNo.substring(0, 2)){
+                            inspectionRow.style.display = "none";
+                        }
 
                     }
 

@@ -63,6 +63,12 @@ window.addEventListener(
                 }
             }
 
+            if((e.target.classList.contains("panel-heading") || e.target.parentElement.classList.contains("panel-heading")) && e.target.closest("app-dialog").classList.contains("dialog-minimize")){
+
+                e.target.closest("referred-pdf-view").previousElementSibling.children[0].click();
+
+            }
+
         });
 
     },
