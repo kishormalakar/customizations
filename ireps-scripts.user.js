@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IREPS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.8
+// @version      1.0.9
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/epsn/*
@@ -421,7 +421,8 @@ window.addEventListener(
             var tabulationId = window.opener.document.querySelectorAll("input#oid")[0].value;
 
             var makeArray = [];
-            let makes = [];
+            var makes = [];
+            var accountsArray = [];
 
             var req = new XMLHttpRequest();
             req.open("GET", "https://ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
@@ -464,12 +465,14 @@ window.addEventListener(
                         .replace(/\t/g, "");
                         var firmName = firm.split("[")[0].trim();
                         var firmId = firm.split("[")[1].split("]")[0];
+                        var accountId = offeredMake.querySelectorAll("td")[0].querySelectorAll("a")[0].getAttribute("onclick").split("accId=")[1].split("',")[0];
 
                         itemMakeOffered.firmName = firmName;
                         itemMakeOffered.firmId = firmId;
                         itemMakeOffered.make = firmMake;
 
                         itemMake.offers.push(itemMakeOffered);
+                        accountsArray.push([firmId, accountId]);
                     }
 
                     makes.push(itemMake);
@@ -483,16 +486,17 @@ window.addEventListener(
                 var makeDetailsString = "";
                 var offerDetailsDiv = document.querySelectorAll("table#tcdaCase")[0].querySelectorAll("#devDtls")[0];
 
-                if(document.querySelectorAll(".offered-make")[0]){
-                    document.querySelectorAll(".offered-make")[0].remove();
+                if(document.querySelectorAll(".additional-details")[0]){
+                    document.querySelectorAll(".additional-details")[0].remove();
                 }
 
-                var offeredMakeDiv = document.createElement("div");
-                offeredMakeDiv.classList.add("offered-make");
+                var additionalDetailsDiv = document.createElement("div");
+                additionalDetailsDiv.classList.add("additional-details");
+                additionalDetailsDiv.style.cssText = "width: 95%; margin: 5px; margin-top: 10px";
                 var b = document.createElement("b");
                 var bText = document.createTextNode("Offered Make/brand");
                 b.appendChild(bText);
-                offeredMakeDiv.appendChild(b);
+                additionalDetailsDiv.appendChild(b);
 
                 makes.forEach((make) => {
                     make.offers.forEach((makeOffered) => {
@@ -503,12 +507,42 @@ window.addEventListener(
                             var span2Text = document.createTextNode(makeDetailsString);
                             span2.appendChild(br);
                             span2.appendChild(span2Text);
-                            offeredMakeDiv.appendChild(span2);
+                            additionalDetailsDiv.appendChild(span2);
                         }
                     });
                 });
 
-                offerDetailsDiv.appendChild(offeredMakeDiv);
+                var accountId = "";
+                accountsArray.forEach((account) => {
+
+                    if(account[0] == firmId){
+                        accountId = account[1];
+                    }
+
+                });
+
+                var req2 = new XMLHttpRequest();
+                req2.open("GET", "https://ireps.gov.in/epsn/tbo/downloaddocs.do?tenderOID="+tabulationId+"&accountID="+accountId+"&bid_id="+firmId, false);
+                req2.send(null);
+
+                if (req2.status == 200) {
+                    var parser2 = new DOMParser();
+                    var documentsBody = parser2.parseFromString(req2.responseText, "text/html");
+                    var documentsTable = documentsBody.querySelectorAll("table")[1].cloneNode(true);
+                    documentsTable.style.width = "100%";
+                    documentsTable.style.marginTop = "10px";
+                    var innerTables = documentsTable.querySelectorAll("table");
+
+                    for (var i = 0; i < innerTables.length; i++){
+
+                        innerTables[i].style.marginLeft = "0px";
+
+                    }
+
+                    additionalDetailsDiv.appendChild(documentsTable);
+                }
+
+                offerDetailsDiv.appendChild(additionalDetailsDiv);
 
             });
 
