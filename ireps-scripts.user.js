@@ -151,8 +151,8 @@ window.addEventListener(
                 }
 
             });
-
-            var tabulationId = prompt("Tabulation ID");
+            
+            var tabulationId = window.opener.document.querySelectorAll("input#oid")[0].value;
             var bidderName = document.querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[1].innerText.trim().split(" (")[0];
 
             var req = new XMLHttpRequest();
@@ -353,6 +353,21 @@ window.addEventListener(
                 for (var i = 1; i < tenderList.length; i++) {
 
                     var tenderRow = tenderList[i];
+
+                    var actionsContainer = tenderRow.lastChild.previousElementSibling.previousElementSibling;
+                    var finTabLink = actionsContainer.children[2];
+                    var commTabLink = actionsContainer.children[3];
+
+                    var finTabUrl = finTabLink.getAttribute("onclick").split("('/epsn/")[1].split("',")[0];
+                    var commTabUrl = commTabLink.getAttribute("onclick").split("('/epsn/")[1].split("',")[0];
+
+                    finTabLink.setAttribute("href", finTabUrl);
+                    finTabLink.setAttribute("target", "_blank");
+                    finTabLink.removeAttribute("onclick");
+                    commTabLink.setAttribute("href", commTabUrl);
+                    commTabLink.setAttribute("target", "_blank");
+                    commTabLink.removeAttribute("onclick");
+
                     var todText = tenderRow.children[4].innerText;
                     var tod = new Date(+todText.split(" ")[0].split("/")[2], +todText.split(" ")[0].split("/")[1] - 1, +todText.split(" ")[0].split("/")[0]);
                     tod.setHours(11);
@@ -373,13 +388,8 @@ window.addEventListener(
                     tenderRow.children[4].appendChild(br);
                     tenderRow.children[4].appendChild(span);
 
-                    var actionButtons = tenderRow.children[6];
-                    var finTabButton = actionButtons.querySelectorAll("a")[2];
-                    var finTabButtonOnClick = finTabButton.getAttribute("onclick");
-                    var finTabUrl = finTabButtonOnClick.split("('")[1].split("',")[0];
-
                     var req = new XMLHttpRequest();
-                    req.open("GET", "https://ireps.gov.in" + finTabUrl, false);
+                    req.open("GET", "https://ireps.gov.in/epsn/" + finTabUrl, false);
                     req.send(null);
 
                     if (req.status == 200) {
@@ -402,6 +412,105 @@ window.addEventListener(
                 }
 
             }
+
+        }
+
+        if (pathname.startsWith("/epsn/jsp/supply/tds/tdDiscussionPopup.jsp")) {
+
+            var selectFirm = document.querySelectorAll("select#bidId")[0];
+            var tabulationId = window.opener.document.querySelectorAll("input#oid")[0].value;
+
+            var makeArray = [];
+            let makes = [];
+
+            var req = new XMLHttpRequest();
+            req.open("GET", "https://ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
+            req.send(null);
+
+            if (req.status == 200) {
+                var parser = new DOMParser();
+                var technoCommercialTabulation = parser.parseFromString(req.responseText, "text/html");
+
+                var conditionTables = technoCommercialTabulation
+                .querySelectorAll("tbody")[1]
+                .lastElementChild.querySelectorAll("td")[0]
+                .querySelectorAll(":scope > table");
+
+                for (var k = 0; k < conditionTables.length; k++) {
+                    if (conditionTables[k].querySelectorAll("td")[0].innerText.trim() == "Make Brand") {
+                        makeArray = conditionTables[k + 1].querySelectorAll("tbody")[0].children;
+                    }
+                }
+
+                for (var i = 1; i < makeArray.length; i++) {
+                    var item = makeArray[i];
+                    var pl = item.querySelectorAll("td")[0].innerText.trim().replace(/\n/g, "").replace(/\t/g, "");
+                    var offeredMakes =
+                        item.querySelectorAll("td")[1].children.length != 0 ? item.querySelectorAll("tbody")[0].children : [];
+
+                    var itemMake = {};
+                    itemMake.pl = pl;
+                    itemMake.offers = [];
+
+                    for (var j = 0; j < offeredMakes.length; j++) {
+                        var offeredMake = offeredMakes[j];
+
+                        var itemMakeOffered = {};
+                        var firm = offeredMake.querySelectorAll("td")[0].innerText.trim().replace(/\n/g, "").replace(/\t/g, "");
+                        var firmMake = offeredMake
+                        .querySelectorAll("td")[1]
+                        .innerText.trim()
+                        .replace(/\n/g, "")
+                        .replace(/\t/g, "");
+                        var firmName = firm.split("[")[0].trim();
+                        var firmId = firm.split("[")[1].split("]")[0];
+
+                        itemMakeOffered.firmName = firmName;
+                        itemMakeOffered.firmId = firmId;
+                        itemMakeOffered.make = firmMake;
+
+                        itemMake.offers.push(itemMakeOffered);
+                    }
+
+                    makes.push(itemMake);
+
+                }
+            }
+
+            selectFirm.addEventListener("change", (e) => {
+
+                var firmId = e.target.value;
+                var makeDetailsString = "";
+                var offerDetailsDiv = document.querySelectorAll("table#tcdaCase")[0].querySelectorAll("#devDtls")[0];
+
+                if(document.querySelectorAll(".offered-make")[0]){
+                    document.querySelectorAll(".offered-make")[0].remove();
+                }
+
+                var offeredMakeDiv = document.createElement("div");
+                offeredMakeDiv.classList.add("offered-make");
+                var b = document.createElement("b");
+                var bText = document.createTextNode("Offered Make/brand");
+                b.appendChild(bText);
+                offeredMakeDiv.appendChild(b);
+
+                makes.forEach((make) => {
+                    make.offers.forEach((makeOffered) => {
+                        if ((makeOffered.firmId == firmId)) {
+                            makeDetailsString += "For " + make.pl + ": " + makeOffered.make;
+                            var br = document.createElement("br");
+                            var span2 = document.createElement("span");
+                            var span2Text = document.createTextNode(makeDetailsString);
+                            span2.appendChild(br);
+                            span2.appendChild(span2Text);
+                            offeredMakeDiv.appendChild(span2);
+                        }
+                    });
+                });
+
+                offerDetailsDiv.appendChild(offeredMakeDiv);
+
+            });
 
         }
     },
