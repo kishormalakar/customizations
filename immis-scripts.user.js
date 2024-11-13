@@ -293,7 +293,7 @@ window.addEventListener(
             var poFrom = poFromDay + "-" + poFromMonth + "-" + poFromYear;
             document.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = poFrom;
 
-            var buttonRow = body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].querySelectorAll("td")[3];
+            var buttonRow = body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].lastChild;
 
             var button1 = document.createElement("button");
             var text1 = document.createTextNode("Backward 1 Year");
