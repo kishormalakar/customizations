@@ -153,7 +153,17 @@ window.addEventListener(
             var plTrimmed = pl.substring(0, 4);
             var dealerName = "-";
 
-            if (specialPlArray.includes(pl.substring(0, 8))) {
+            if(isNaN(pl) || (pl.length > 8)){
+
+                if(pl.substring(0, 2) == "33"){
+                    dealerName = "Damodar Sah";
+                }
+                if(pl.substring(0, 2) == "38"){
+                    dealerName = "Surendra Prasad";
+                }
+
+            }
+            else if (specialPlArray.includes(pl.substring(0, 8))) {
                 dealerName = specialPlArray[specialPlArray.indexOf(pl.substring(0, 8)) + 1];
             }
             else {
