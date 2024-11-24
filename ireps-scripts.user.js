@@ -315,18 +315,6 @@ window.addEventListener(
             tenderTable.parentElement.insertBefore(table1, tenderTable);
         }
 
-        if (pathname.startsWith("/epsn/supply/tds/tenderDecisionTab.do")) {
-
-            var tenderDecisionForm = document.querySelectorAll("form[name='TenderDecisionForm']")[0];
-
-            var tncTabButton = tenderDecisionForm.querySelectorAll("a[href='#tab80']")[0];
-            var tncTab = tenderDecisionForm.querySelectorAll("#tab80")[0];
-
-            var docButtons = tenderDecisionForm.querySelectorAll(".advSearch")[0].nextSiblingElement.nextSiblingElement.querySelectorAll("tr")[0].children[1];
-
-
-        }
-
         if (pathname.startsWith("/epsn/buyerInboxLink.do")) {
 
             if (confirm("Do you want to display additional details?") == true) {

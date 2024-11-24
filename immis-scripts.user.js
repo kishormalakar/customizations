@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.77
+// @version      1.0.78
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -278,6 +278,9 @@ window.addEventListener(
         if (document.title == "Search Purchase Orders" || document.title == "Run Form - IMMIS/PUR/POSEARCH") {
             body.classList.add("po_search");
 
+            var s_2 = document.querySelectorAll("#s_2")[0];
+            var s_3 = document.querySelectorAll("#s_3")[0];
+
             var rlyButton = body.querySelectorAll("input[name='RLY_BTN_0']")[0];
             rlyButton.click();
 
@@ -469,10 +472,47 @@ window.addEventListener(
 
                     }
                 }
+                if (e.target.id.search("_LOV_PONO") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_PONO") != -1)) {
+
+                    var rly = e.target.closest("tr").children[0].children[0].innerText;
+                    rlyButton.click();
+
+                    var rlys = LovTable.querySelectorAll("tbody")[0].children;
+
+                    for (var i = 0; i < rlys.length; i++){
+
+                        if(rlys[i].children[0].innerText == rly){
+                            rlys[i].children[0].querySelectorAll("a")[0].click();
+                            s_2.querySelectorAll("input[name='SHOW_BTN_0']")[0].click();
+                        }
+
+                    }
+
+                }
             });
 
             var poNoInput = document.querySelectorAll("input[name='PO_NO_0']")[0];
             var descInput2 = document.querySelectorAll("input[name='DESC2_0']")[0];
+
+            poNoInput.addEventListener("keyup", (e) => {
+
+                if(s_2.querySelectorAll("input[name='RLYNM_0']")[0].value != "IR"){
+                    rlyButton.click();
+                    LovTable.querySelectorAll("tbody")[0].lastChild.querySelectorAll("a")[0].click();
+                    poNoInput.focus();
+                }
+
+            });
+
+            poNoInput.addEventListener("paste", (e) => {
+
+                if(s_2.querySelectorAll("input[name='RLYNM_0']")[0].value != "IR"){
+                    rlyButton.click();
+                    LovTable.querySelectorAll("tbody")[0].lastChild.querySelectorAll("a")[0].click();
+                    poNoInput.focus();
+                }
+
+            });
 
             poNoInput.addEventListener("keydown", (e) => {
                 if (e.key === "Tab" || e.key === "Enter") {
@@ -5245,7 +5285,7 @@ window.addEventListener(
 
             var th = document.createElement("th");
             var label = document.createElement("label");
-            label.style.cssText = s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[4].querySelectorAll("label")[0].style.cssText;
+            label.style.cssText = s_2.querySelectorAll("table")[0].querySelectorAll("tr")[1].querySelectorAll("th")[0].querySelectorAll("label")[0].style.cssText;
             var b = document.createElement("b");
             var text = document.createTextNode("Sec :");
             b.appendChild(text);
@@ -5258,13 +5298,13 @@ window.addEventListener(
             input.setAttribute("name", "SEC_NO_0");
             td.appendChild(input);
 
-            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].insertBefore(th, s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[4]);
-            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].insertBefore(td, s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[5]);
-            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("th")[5].style.display = "none";
-            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[0].querySelectorAll("td")[5].style.display = "none";
+            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[1].insertBefore(th, s_2.querySelectorAll("table")[0].querySelectorAll("tr")[1].querySelectorAll("th")[0]);
+            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[1].insertBefore(td, s_2.querySelectorAll("table")[0].querySelectorAll("tr")[1].querySelectorAll("th")[1]);
+            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[1].querySelectorAll("th")[1].style.display = "none";
+            s_2.querySelectorAll("table")[0].querySelectorAll("tr")[1].querySelectorAll("td")[1].style.display = "none";
 
             document.addEventListener("click", (e) => {
-                if (e.target.id == "s_0_15") {
+                if (e.target.getAttribute("name") == "SHOW_BTN_0") {
 
                     if (s_2.querySelectorAll(":scope > table").length > 1) {
 
