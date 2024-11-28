@@ -115,11 +115,18 @@
 	
 	[data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(8),
 	[data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(8) efile-tool-tip,
-	[data-id-attr="receipt-inbox-container-table-view"] .list-read > td:nth-of-type(8),
-	[data-id-attr="receipt-inbox-container-table-view"] .list-read > td:nth-of-type(8) efile-tool-tip{
+	[data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(8),
+	[data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(8) efile-tool-tip{
 		width: 150px !important;
 		min-width: 100px !important;
 	}
+	
+	[data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(11),
+    [data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(12),
+    [data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(11),
+    [data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(12){
+        display: none;
+    }
 
 	app-dialog .panel-heading span{
 		cursor: pointer;
