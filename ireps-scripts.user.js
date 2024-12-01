@@ -411,6 +411,7 @@ window.addEventListener(
             var makeArray = [];
             var makes = [];
             var accountsArray = [];
+            var localContentArray = [];
 
             var req = new XMLHttpRequest();
             req.open("GET", "https://ireps.gov.in/epsn/supply/bid/techBidSupplyTabulation.do?oid=" + tabulationId, false);
@@ -428,6 +429,9 @@ window.addEventListener(
                 for (var k = 0; k < conditionTables.length; k++) {
                     if (conditionTables[k].querySelectorAll("td")[0].innerText.trim() == "Make Brand") {
                         makeArray = conditionTables[k + 1].querySelectorAll("tbody")[0].children;
+                    }
+                    if (conditionTables[k].querySelectorAll("td")[1] != null && conditionTables[k].querySelectorAll("td")[1].innerText.trim().startsWith("Please enter the percentage of local content")) {
+                        localContentArray.push(conditionTables[k + 1].querySelectorAll("tbody")[0].children);
                     }
                 }
 
@@ -499,6 +503,31 @@ window.addEventListener(
                         }
                     });
                 });
+
+                var br = document.createElement("br");
+                var b = document.createElement("b");
+                var bText = document.createTextNode("Local Content Declaration");
+                b.appendChild(bText);
+                b.style.marginTop = "10px";
+                b.style.display = "block";
+                additionalDetailsDiv.appendChild(br);
+                additionalDetailsDiv.appendChild(b);
+                additionalDetailsDiv.appendChild(localContentArray[0][0].cloneNode(true));
+
+                localContentArray.forEach((localContent) => {
+
+                    Array.from(localContent).forEach((localContentByFirm) => {
+
+                        if((localContentByFirm.children[0].innerText.indexOf("[") != -1) && (localContentByFirm.children[0].innerText.split("[")[1].split("]")[0] == firmId)){
+
+                            additionalDetailsDiv.appendChild(localContentByFirm.cloneNode(true));
+
+                        }
+
+
+                    })
+
+                })
 
                 var accountId = "";
                 accountsArray.forEach((account) => {
