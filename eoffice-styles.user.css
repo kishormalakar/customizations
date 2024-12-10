@@ -131,6 +131,10 @@
 	app-dialog .panel-heading span{
 		cursor: pointer;
 	}
+
+	.creation-form .p-autocomplete-panel{
+		display: none;
+	}
 	
 	#global-footer{
 		display: none !important;
