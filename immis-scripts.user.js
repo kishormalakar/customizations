@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.78
+// @version      1.0.79
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -306,6 +306,12 @@ window.addEventListener(
             var poFrom = poFromDay + "-" + poFromMonth + "-" + poFromYear;
             document.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = poFrom;
 
+            body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[2].querySelectorAll("td")[3].setAttribute("colspan", "2");
+            body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[2].querySelectorAll("td")[4].setAttribute("colspan", "1");
+            body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].querySelectorAll("td")[4].setAttribute("colspan", "1");
+            body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].querySelectorAll("td")[4].style.display = "none";
+            body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].querySelectorAll("td")[5].setAttribute("colspan", "3");
+
             var buttonRow = body.querySelectorAll("#s_2")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].querySelectorAll("tr")[3].lastChild;
 
             var button1 = document.createElement("button");
@@ -387,11 +393,11 @@ window.addEventListener(
                     table.prepend(lastRow);
                 }
                 if (
-                    e.target.id == "s_0_29" ||
-                    e.target.id == "s_0_52" ||
-                    e.target.id == "s_0_53" ||
-                    e.target.id == "s_0_54" ||
-                    e.target.id == "s_0_55"
+                    e.target.name == "SHOW_BTN_0" ||
+                    e.target.name == "FPAGE_0" ||
+                    e.target.name == "PPAGE_0" ||
+                    e.target.name == "NPAGE_0" ||
+                    e.target.name == "LPAGE_0"
                 ) {
                     var poTable = document.querySelectorAll("#s_3")[0].querySelectorAll("table")[2];
 
