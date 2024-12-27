@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.79
+// @version      1.0.80
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1254,7 +1254,7 @@ window.addEventListener(
                     var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
 
                     var tables = divShowHtml1.querySelectorAll(":scope > div")[1].querySelectorAll(":scope > table");
-                    var uncoveredDuesTable, coveredDuesTable, icTable, orderPlacedTable;
+                    var uncoveredDuesTable, coveredDuesTable, underTransitTable, icTable, orderPlacedTable;
 
                     for(i = 0; i < tables.length; i++){
 
@@ -1263,6 +1263,9 @@ window.addEventListener(
                         }
                         if(tables[i].querySelectorAll("td")[0].innerText.trim() == "COVERED DUES DETAILS"){
                             coveredDuesTable = tables[i];
+                        }
+                        if(tables[i].querySelectorAll("td")[0].innerText.trim() == "MATERIAL UNDER TRANSIT"){
+                            underTransitTable = tables[i];
                         }
                         if(tables[i].querySelectorAll("td")[0].innerText.trim() == "INSPECTION CERTIFICATE DETAILS"){
                             icTable = tables[i];
@@ -1369,6 +1372,57 @@ window.addEventListener(
                             var tdText = document.createTextNode(consignee);
                             td.appendChild(tdText);
                             ic[i].insertBefore(td, ic[i].children[4]);
+
+                        }
+
+                    }
+
+                    if(underTransitTable != null && underTransitTable != undefined){
+
+                        var underTransit = underTransitTable.querySelectorAll("tbody")[0].children;
+                        var orderPlaced = orderPlacedTable.querySelectorAll("tbody")[0].children;
+
+                        var td = document.createElement("td");
+                        var tdText = document.createTextNode("Depot");
+                        td.appendChild(tdText);
+                        td.setAttribute("width", "10%");
+                        underTransit[1].insertBefore(td, underTransit[1].children[3]);
+
+                        for(i = 2; i < underTransit.length; i++){
+
+                            var poNo = underTransit[i].children[1].innerText.trim().substring(8, 22);
+                            var poSrNo = underTransit[i].children[2].innerText;
+                            var consignee;
+
+                            for(j = 2; j < orderPlaced.length; j++){
+
+                                if(orderPlaced[j].children.length == 13 && orderPlaced[j].children[0].querySelectorAll("a")[0].innerText == poNo){
+
+                                    if(orderPlaced[j].children[1].innerText == poSrNo){
+                                        consignee = orderPlaced[j].children[2].innerText;
+                                    }
+                                    else{
+
+                                        var k = 1;
+                                        while(orderPlaced[j+k].children.length != 13){
+
+                                            if(orderPlaced[j+k].children[0].innerText == poSrNo){
+                                                consignee = orderPlaced[j+k].children[1].innerText;
+                                            }
+                                            k++;
+
+                                        }
+
+                                    }
+
+                                }
+
+                            }
+
+                            var td = document.createElement("td");
+                            var tdText = document.createTextNode(consignee);
+                            td.appendChild(tdText);
+                            underTransit[i].insertBefore(td, underTransit[i].children[3]);
 
                         }
 
