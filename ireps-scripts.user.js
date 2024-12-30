@@ -146,12 +146,13 @@ window.addEventListener(
 
                 if(industryDropdown.value == "1"){
                     mseTypeDropdown.value = "8";
-                    document.querySelectorAll("tbody")[0].children[5].querySelectorAll("input[name='scsttype']")[2].checked = true;
-                    document.querySelectorAll("tbody")[0].children[5].querySelectorAll("input[name='wYN']")[1].checked = true;
                 }
 
+                document.querySelectorAll("tbody")[0].children[5].querySelectorAll("input[name='scsttype']")[2].checked = true;
+                document.querySelectorAll("tbody")[0].children[5].querySelectorAll("input[name='wYN']")[1].checked = true;
+
             });
-            
+
             var tabulationId = window.opener.document.querySelectorAll("input#oid")[0].value;
             var bidderName = document.querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[1].innerText.trim().split(" (")[0];
 
@@ -166,9 +167,9 @@ window.addEventListener(
                 var tod = technoCommercialTabulation.querySelectorAll("body")[0].querySelectorAll("table")[1].querySelectorAll("tbody")[0].children[2].querySelectorAll("tr")[0].children[3].innerText.trim().split(" ")[0].substring(2).replaceAll('/', '');
 
                 var industryTable = technoCommercialTabulation
-                    .querySelectorAll("#oiDiv")[0]
-                    .querySelectorAll("table")[1]
-                    .querySelectorAll("tbody")[0].children;
+                .querySelectorAll("#oiDiv")[0]
+                .querySelectorAll("table")[1]
+                .querySelectorAll("tbody")[0].children;
                 for (var x = 1; x < industryTable.length; x++) {
                     if (industryTable[x].children.length == 1) {
                         industryTable[x].remove();
