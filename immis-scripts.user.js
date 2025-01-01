@@ -1923,7 +1923,7 @@ window.addEventListener(
                     var escalationLimit = 1;
 
                     if (category == "A") {
-                        escalationLimit = 1.25;
+                        escalationLimit = 1.15;
                     }
                     else if (category == "B") {
                         escalationLimit = 1.50;
@@ -4323,7 +4323,7 @@ window.addEventListener(
                     var escalationLimit = 1;
 
                     if (category == "A") {
-                        escalationLimit = 1.25;
+                        escalationLimit = 1.15;
                     }
                     else if (category == "B") {
                         escalationLimit = 1.50;
