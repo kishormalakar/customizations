@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.80
+// @version      1.0.81
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1322,9 +1322,15 @@ window.addEventListener(
 
                     }
 
-                    var coveredDuesHeader = coveredDues[0].querySelectorAll("strong")[0].innerText;
-                    coveredDuesHeader = coveredDuesHeader + " ( " + Math.round(+cummulativeDueQty / +totalAAC * 12 * 10) / 10 + " months )";
-                    coveredDues[0].querySelectorAll("strong")[0].innerText = coveredDuesHeader;
+                    if(cummulativeDueQty > 0){
+
+                        var duesUnit = coveredDues[2].children[5].innerText;
+                        var coveredDuesHeader = coveredDues[0].querySelectorAll("strong")[0].innerText;
+                        var coveredDuesHeader2 = coveredDues[0].querySelectorAll("strong")[0].cloneNode(true);
+                        coveredDuesHeader2.innerText = " ( " + cummulativeDueQty + " " + duesUnit + " | " + Math.round(+cummulativeDueQty / +totalAAC * 12 * 10) / 10 + " months )";
+                        coveredDues[0].children[0].appendChild(coveredDuesHeader2);
+
+                    }
 
                     if(icTable != null && icTable != undefined){
 
