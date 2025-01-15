@@ -3176,7 +3176,15 @@ window.addEventListener(
                 if (e.target.name == "btn_Exit_0") {
 
                     dateType.selectedIndex = "0";
-                    var dateFrom = "01-APR-" + (+dateToArray[2] - 3);
+
+                    var dateFrom;
+                    if(["JAN", "FEB", "MAR"].includes(dateToArray[1])){
+                        dateFrom = "01-APR-" + (+dateToArray[2] - 4);
+                    }
+                    else{
+                        dateFrom = "01-APR-" + (+dateToArray[2] - 3);
+                    }
+
                     dateFromInput.value = dateFrom;
                     dateToInput.value = dateTo;
 
