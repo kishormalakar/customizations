@@ -1,7 +1,13 @@
 javascript: (() => {
     
     var today = new Date();
-    var monday = new Date(today - (today.getDay() - 1)*24*60*60*1000);
+    var monday;
+    if(today.getDay() != 0){
+        monday = new Date(today - (today.getDay() - 1)*24*60*60*1000);
+    }
+    else{
+        monday = new Date(today - (7 - 1)*24*60*60*1000);
+    }
     var todayString = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
     var mondayString = monday.getDate() + "/" + (monday.getMonth() + 1) + "/" + monday.getFullYear();
 
