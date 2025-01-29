@@ -3684,11 +3684,11 @@ window.addEventListener(
                             th1.setAttribute("colspan", "3");
                             row6.appendChild(th1);
                             var th2 = document.createElement("th");
-                            var thText2 = document.createTextNode("Remarks");
+                            var thText2 = document.createTextNode("Remarks of HQ");
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
                             var th3 = document.createElement("th");
-                            var thText3 = document.createTextNode("Remarks of Previous Meeting");
+                            var thText3 = document.createTextNode("Remarks of Depot");
                             th3.appendChild(thText3);
                             row6.appendChild(th3);
                             row6.setAttribute("bgcolor", "lightBlue");
