@@ -3309,6 +3309,8 @@ window.addEventListener(
 
         if (document.title == "Stock Balance Report" || document.title == "Run Form - IMMIS/DEP/STOCKMASTER") {
             body.classList.add("stockmaster");
+
+            body.querySelectorAll("textarea[name='report_format_0']")[0].removeAttribute("readonly");
         }
 
         if (document.title == "Output of Report - LISTPOS" || document.title == "Output of Report - LISTPOS") {
