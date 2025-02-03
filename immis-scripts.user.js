@@ -2961,7 +2961,25 @@ window.addEventListener(
 
                     LovDiv.scrollIntoView();
                 }
+
+                if(e.target.id == "aacApproved_0"){
+
+                    var aacProposedByDepot = e.target.parentElement.previousElementSibling.previousElementSibling.innerText;
+                    e.target.value = aacProposedByDepot;
+
+                    e.target.parentElement.parentElement.nextElementSibling.querySelectorAll("#aac_wef_1")[0].checked = false;
+                    e.target.parentElement.parentElement.nextElementSibling.querySelectorAll("#aac_wef_2")[0].selectedIndex = 1;
+                }
             });
+
+            /*var plInput = document.querySelectorAll("input[name='PLGRP_0']")[0];
+            plInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab" || e.key === "Enter") {
+
+                    LovDiv.querySelectorAll("a")[0].focus();
+
+                }
+            });*/
         }
 
         if (
