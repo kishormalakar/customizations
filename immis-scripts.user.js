@@ -3708,7 +3708,7 @@ window.addEventListener(
                             th2.appendChild(thText2);
                             row6.appendChild(th2);
                             var th3 = document.createElement("th");
-                            var thText3 = document.createTextNode("Remarks of Depot");
+                            var thText3 = document.createTextNode("Action taken by depot");
                             th3.appendChild(thText3);
                             row6.appendChild(th3);
                             row6.setAttribute("bgcolor", "lightBlue");
