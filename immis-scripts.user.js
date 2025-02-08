@@ -1839,6 +1839,11 @@ window.addEventListener(
                 var ipMM = data.ipMM;
                 var bpMM = data.bpMM;
 
+                var revisedAacArray = [];
+                var revisedMcArray = [];
+                var revisedUncoveredDuesArray = [];
+                var revisedBP = 0;
+
                 var qwsDiv = s_22.querySelectorAll("#QWSDiv")[0];
 
                 if (qwsDiv.querySelectorAll(".data_review")[0]) {
@@ -1884,7 +1889,7 @@ window.addEventListener(
                 var text27 = document.createTextNode("AAC");
                 td27.appendChild(text27);
                 var td28 = document.createElement("td");
-                var text28 = document.createTextNode("Adjusted AAC");
+                var text28 = document.createTextNode("Revised AAC");
                 td28.appendChild(text28);
                 tr2.appendChild(td21);
                 tr2.appendChild(td22);
@@ -2080,13 +2085,19 @@ window.addEventListener(
 
                             if (originalAacRows[i].children[0].innerText == aacRows[j].children[0].innerText) {
 
-                                originalAacRows[i].querySelectorAll("td")[12].innerText = aacRows[j].children[7].querySelectorAll("input")[0].value;
+                                revisedAacArray.push(+aacRows[j].children[7].querySelectorAll("input")[0].value);
+                                revisedMcArray.push(aacRows[j].children[7].querySelectorAll("input")[0].value / 12);
 
                             }
 
                         }
 
                     }
+
+                    //var bpText1 = qwsDiv.children[1].children[10].nextSibling.textContent.substring(0, 8);
+                    //var bpText2 = qwsDiv.children[1].children[10].nextSibling.textContent.substring(9);
+                    //qwsDiv.children[1].children[10].nextSibling.textContent = bpText1 + dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value + bpText2;
+                    revisedBP = dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value;
 
                     qwsDiv.querySelectorAll(":scope > table")[1].querySelectorAll("table")[1].querySelectorAll("tr")[1].querySelectorAll("span")[0].innerText = dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value;
 
@@ -2100,7 +2111,14 @@ window.addEventListener(
                     for (var i = 2; i < uncoveredRows.length; i++) {
 
                         if (uncoveredRows[i].children[5].querySelectorAll("select")[0].value == "Consider") {
-                            originalUncoveredRows[j].querySelectorAll("td")[1].innerText = uncoveredRows[i].children[3].querySelectorAll("input")[0].value;
+                            var array3 = [];
+                            array3.push(uncoveredRows[i].children[0].innerText);
+                            array3.push(uncoveredRows[i].children[3].querySelectorAll("input")[0].value);
+                            array3.push(uncoveredRows[i].children[1].innerText);
+                            array3.push(uncoveredRows[i].children[2].innerText);
+                            array3.push(uncoveredRows[i].children[4].innerText);
+                            revisedUncoveredDuesArray.push(array3);
+                            //originalUncoveredRows[j].querySelectorAll("td")[1].innerText = uncoveredRows[i].children[3].querySelectorAll("input")[0].value;
                         }
                         else {
 
@@ -2112,20 +2130,23 @@ window.addEventListener(
 
                     }
 
+                    data.revisedAacArray = revisedAacArray;
+                    data.revisedMcArray = revisedMcArray;
+                    data.revisedUncoveredDuesArray = revisedUncoveredDuesArray;
+                    data.revisedBP = revisedBP;
+
                     qwsDiv.nextElementSibling.style.display = "none";
-                    showQWS();
+                    showQWS(data);
 
                 }
                 div.appendChild(button);
 
-                qwsDiv.parentElement.appendChild(div);  
+                qwsDiv.parentElement.appendChild(div);
                 /*qwsDiv.children[0].querySelectorAll("input[value='Print']")[0].removeAttribute('onclick');*/
 
             }
 
-            let showQWS = () => {
-
-                var data = getData();
+            let showQWS = (data) => {
 
                 var date = data.date;
                 var plNo = data.plNo;
@@ -2151,6 +2172,11 @@ window.addEventListener(
                 var ipTo = data.ipTo;
                 var ipMM = data.ipMM;
                 var bpMM = data.bpMM;
+
+                var revisedAacArray = data.revisedAacArray;
+                var revisedMcArray = data.revisedMcArray;
+                var revisedUncoveredDuesArray = data.revisedUncoveredDuesArray;
+                var revisedBP = data.revisedBP;
 
                 var ipRequirementsArray = [];
                 var cpRequirementsArray = [];
@@ -2263,13 +2289,13 @@ window.addEventListener(
                 var text6 = document.createTextNode("Cons " + consumptionYearsArray[3]);
                 td6.appendChild(text6);
                 var td7 = document.createElement("td");
-                var text7 = document.createTextNode("Weighted Avg Consumption");
+                var text7 = document.createTextNode("Max Consumption");
                 td7.appendChild(text7);
                 var td8 = document.createElement("td");
-                var text8 = document.createTextNode("Max Consumption");
+                var text8 = document.createTextNode("AAC");
                 td8.appendChild(text8);
                 var td9 = document.createElement("td");
-                var text9 = document.createTextNode("AAC");
+                var text9 = document.createTextNode("Revised AAC");
                 td9.appendChild(text9);
                 var td10 = document.createElement("td");
                 var text10 = document.createTextNode("Stock");
@@ -2312,15 +2338,15 @@ window.addEventListener(
                     var date2 = new Date("20" + consumptionYearsArray[3].split("-")[0], 3, 1);
                     var numDays = (date1 - date2) / (1000 * 60 * 60 * 24);
                     var avgConsumption = Math.round((+consumptionArray[i][0] * 1 + +consumptionArray[i][1] * 2 + +consumptionArray[i][2] * 3 + +consumptionArray[i][3] * 3) / (6 + 3 * numDays / 365) * 100) / 100;
-                    var tdi6 = document.createElement("td");
-                    var texti6 = document.createTextNode(avgConsumption);
-                    tdi6.appendChild(texti6);
                     var maxConsumption = Math.max(+consumptionArray[i][0], +consumptionArray[i][1], +consumptionArray[i][2], Math.round(+consumptionArray[i][3] * 365 / numDays));
+                    var tdi6 = document.createElement("td");
+                    var texti6 = document.createTextNode(maxConsumption);
+                    tdi6.appendChild(texti6);
                     var tdi7 = document.createElement("td");
-                    var texti7 = document.createTextNode(maxConsumption);
+                    var texti7 = document.createTextNode(aacArray[i]);
                     tdi7.appendChild(texti7);
                     var tdi8 = document.createElement("td");
-                    var texti8 = document.createTextNode(aacArray[i]);
+                    var texti8 = document.createTextNode(revisedAacArray[i]);
                     tdi8.appendChild(texti8);
                     var tdi9 = document.createElement("td");
                     var texti9 = document.createTextNode(stockArray[i]);
@@ -2522,9 +2548,9 @@ window.addEventListener(
                     var tdJ3 = document.createElement("td");
 
                     var totalDues = 0;
-                    for (var j = 0; j < uncoveredDuesArray.length; j++) {
+                    for (var j = 0; j < revisedUncoveredDuesArray.length; j++) {
 
-                        var row4 = uncoveredDuesArray[j];
+                        var row4 = revisedUncoveredDuesArray[j];
 
                         if (row4[0] == depotArray[i]) {
 
@@ -2619,7 +2645,7 @@ window.addEventListener(
                 var text42 = document.createTextNode("-");
                 td42.appendChild(text42);
                 var td43 = document.createElement("td");
-                var text43 = document.createTextNode(bpMM + " Months");
+                var text43 = document.createTextNode(revisedBP + " Months");
                 td43.appendChild(text43);
                 tr4.appendChild(td41);
                 tr4.appendChild(td42);
@@ -2702,20 +2728,20 @@ window.addEventListener(
                     var tdM2 = document.createElement("td");
                     var textM2;
                     if (i == depotArray.length) {
-                        textM2 = document.createTextNode(aacArray.reduce((a, b) => a + b, 0));
+                        textM2 = document.createTextNode(revisedAacArray.reduce((a, b) => a + b, 0));
                     }
                     else {
-                        textM2 = document.createTextNode(aacArray[i]);
+                        textM2 = document.createTextNode(revisedAacArray[i]);
                     }
                     tdM2.appendChild(textM2);
 
                     var tdM3 = document.createElement("td");
                     var textM3;
                     if (i == depotArray.length) {
-                        textM3 = document.createTextNode(Math.round(mcArray.reduce((a, b) => a + b, 0) * 100) / 100);
+                        textM3 = document.createTextNode(Math.round(revisedMcArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        textM3 = document.createTextNode(Math.round(mcArray[i] * 100) / 100);
+                        textM3 = document.createTextNode(Math.round(revisedMcArray[i] * 100) / 100);
                     }
                     tdM3.appendChild(textM3);
 
@@ -2725,7 +2751,7 @@ window.addEventListener(
                         textM4 = document.createTextNode(Math.round(ipRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        var ipRequirement = mcArray[i] * ipMM;
+                        var ipRequirement = revisedMcArray[i] * ipMM;
                         ipRequirementsArray.push(+ipRequirement);
                         textM4 = document.createTextNode(Math.round(ipRequirement * 100) / 100);
                     }
@@ -2737,7 +2763,7 @@ window.addEventListener(
                         textM5 = document.createTextNode(Math.round(cpRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        var cpRequirement = aacArray[i];
+                        var cpRequirement = revisedAacArray[i];
                         cpRequirementsArray.push(+cpRequirement);
                         textM5 = document.createTextNode(Math.round(cpRequirement * 100) / 100);
                     }
@@ -2749,7 +2775,7 @@ window.addEventListener(
                         textM6 = document.createTextNode(Math.round(bpRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        var bpRequirement = mcArray[i] * bpMM;
+                        var bpRequirement = revisedMcArray[i] * revisedBP;
                         bpRequirementsArray.push(+bpRequirement);
                         textM6 = document.createTextNode(Math.round(bpRequirement * 100) / 100);
                     }
@@ -2791,7 +2817,7 @@ window.addEventListener(
                         textM10 = document.createTextNode(Math.round(netRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        var netRequirement = ipRequirement + cpRequirement + bpRequirement - totalCoveredDuesArray[i] - totalUncoveredDuesArray[i] - stockArray[i];
+                        var netRequirement = +ipRequirement + +cpRequirement + +bpRequirement - +totalCoveredDuesArray[i] - +totalUncoveredDuesArray[i] - +stockArray[i];
                         netRequirementsArray.push(+netRequirement);
                         textM10 = document.createTextNode(Math.round(netRequirement * 100) / 100);
                     }
@@ -3329,6 +3355,8 @@ window.addEventListener(
             body.classList.add("stockmaster");
 
             body.querySelectorAll("textarea[name='report_format_0']")[0].removeAttribute("readonly");
+            body.querySelectorAll("textarea[name='report_format_0']")[0].value = "PL No,Description,Long Description,ABC,AAC,CCONS3,CCONS2,CCONS1,CCONS0,Stock,CBQTY PrevYr";
+
         }
 
         if (document.title == "Output of Report - LISTPOS" || document.title == "Output of Report - LISTPOS") {
@@ -4269,6 +4297,11 @@ window.addEventListener(
                 var ipMM = data.ipMM;
                 var bpMM = data.bpMM;
 
+                var revisedAacArray = [];
+                var revisedMcArray = [];
+                var revisedUncoveredDuesArray = [];
+                var revisedBP = 0;
+
                 var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
 
                 if (divShowHtml1.querySelectorAll(".data_review")[0]) {
@@ -4318,7 +4351,7 @@ window.addEventListener(
                 var text27 = document.createTextNode("AAC");
                 td27.appendChild(text27);
                 var td28 = document.createElement("td");
-                var text28 = document.createTextNode("Adjusted AAC");
+                var text28 = document.createTextNode("Revised AAC");
                 td28.appendChild(text28);
                 tr2.appendChild(td21);
                 tr2.appendChild(td22);
@@ -4514,7 +4547,8 @@ window.addEventListener(
 
                             if (originalAacRows[i].children[0].innerText == aacRows[j].children[0].innerText) {
 
-                                originalAacRows[i].querySelectorAll("td")[13].innerText = aacRows[j].children[7].querySelectorAll("input")[0].value;
+                                revisedAacArray.push(+aacRows[j].children[7].querySelectorAll("input")[0].value);
+                                revisedMcArray.push(aacRows[j].children[7].querySelectorAll("input")[0].value / 12);
 
                             }
 
@@ -4524,7 +4558,8 @@ window.addEventListener(
 
                     var bpText1 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(0, 8);
                     var bpText2 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(9);
-                    divShowHtml1.children[1].children[10].nextSibling.textContent = bpText1 + dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value + bpText2;
+                    //divShowHtml1.children[1].children[10].nextSibling.textContent = bpText1 + dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value + bpText2;
+                    revisedBP = dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value;
 
                     var uncoveredDuesTable = dataReviewDiv.querySelectorAll("table")[2];
                     var uncoveredRows = uncoveredDuesTable.children[0].children;
@@ -4536,7 +4571,14 @@ window.addEventListener(
                     for (var i = 2; i < uncoveredRows.length; i++) {
 
                         if (uncoveredRows[i].children[5].querySelectorAll("select")[0].value == "Consider") {
-                            originalUncoveredRows[j].querySelectorAll("td")[1].innerText = uncoveredRows[i].children[3].querySelectorAll("input")[0].value;
+                            var array3 = [];
+                            array3.push(uncoveredRows[i].children[0].innerText);
+                            array3.push(uncoveredRows[i].children[3].querySelectorAll("input")[0].value);
+                            array3.push(uncoveredRows[i].children[1].innerText);
+                            array3.push(uncoveredRows[i].children[2].innerText);
+                            array3.push(uncoveredRows[i].children[4].innerText);
+                            revisedUncoveredDuesArray.push(array3);
+                            //originalUncoveredRows[j].querySelectorAll("td")[1].innerText = uncoveredRows[i].children[3].querySelectorAll("input")[0].value;
                         }
                         else {
 
@@ -4548,8 +4590,13 @@ window.addEventListener(
 
                     }
 
+                    data.revisedAacArray = revisedAacArray;
+                    data.revisedMcArray = revisedMcArray;
+                    data.revisedUncoveredDuesArray = revisedUncoveredDuesArray;
+                    data.revisedBP = revisedBP;
+
                     divShowHtml1.children[2].style.display = "none";
-                    showQWS();
+                    showQWS(data);
 
                 }
                 div.appendChild(button);
@@ -4559,9 +4606,7 @@ window.addEventListener(
 
             }
 
-            let showQWS = () => {
-
-                var data = getData();
+            let showQWS = (data) => {
 
                 var date = data.date;
                 var plNo = data.plNo;
@@ -4588,6 +4633,11 @@ window.addEventListener(
                 var ipTo = data.ipTo;
                 var ipMM = data.ipMM;
                 var bpMM = data.bpMM;
+
+                var revisedAacArray = data.revisedAacArray;
+                var revisedMcArray = data.revisedMcArray;
+                var revisedUncoveredDuesArray = data.revisedUncoveredDuesArray;
+                var revisedBP = data.revisedBP;
 
                 var ipRequirementsArray = [];
                 var cpRequirementsArray = [];
@@ -4700,13 +4750,13 @@ window.addEventListener(
                 var text6 = document.createTextNode("Cons " + consumptionYearsArray[3]);
                 td6.appendChild(text6);
                 var td7 = document.createElement("td");
-                var text7 = document.createTextNode("Weighted Avg Consumption");
+                var text7 = document.createTextNode("Max Consumption");
                 td7.appendChild(text7);
                 var td8 = document.createElement("td");
-                var text8 = document.createTextNode("Max Consumption");
+                var text8 = document.createTextNode("AAC");
                 td8.appendChild(text8);
                 var td9 = document.createElement("td");
-                var text9 = document.createTextNode("AAC");
+                var text9 = document.createTextNode("Revised AAC");
                 td9.appendChild(text9);
                 var td10 = document.createElement("td");
                 var text10 = document.createTextNode("Stock");
@@ -4749,15 +4799,15 @@ window.addEventListener(
                     var date2 = new Date("20" + consumptionYearsArray[3].split("-")[0], 3, 1);
                     var numDays = (date1 - date2) / (1000 * 60 * 60 * 24);
                     var avgConsumption = Math.round((+consumptionArray[i][0] * 1 + +consumptionArray[i][1] * 2 + +consumptionArray[i][2] * 3 + +consumptionArray[i][3] * 3) / (6 + 3 * numDays / 365) * 100) / 100;
-                    var tdi6 = document.createElement("td");
-                    var texti6 = document.createTextNode(avgConsumption);
-                    tdi6.appendChild(texti6);
                     var maxConsumption = Math.max(+consumptionArray[i][0], +consumptionArray[i][1], +consumptionArray[i][2], Math.round(+consumptionArray[i][3] * 365 / numDays));
+                    var tdi6 = document.createElement("td");
+                    var texti6 = document.createTextNode(maxConsumption);
+                    tdi6.appendChild(texti6);
                     var tdi7 = document.createElement("td");
-                    var texti7 = document.createTextNode(maxConsumption);
+                    var texti7 = document.createTextNode(aacArray[i]);
                     tdi7.appendChild(texti7);
                     var tdi8 = document.createElement("td");
-                    var texti8 = document.createTextNode(aacArray[i]);
+                    var texti8 = document.createTextNode(revisedAacArray[i]);
                     tdi8.appendChild(texti8);
                     var tdi9 = document.createElement("td");
                     var texti9 = document.createTextNode(stockArray[i]);
@@ -4959,9 +5009,9 @@ window.addEventListener(
                     var tdJ3 = document.createElement("td");
 
                     var totalDues = 0;
-                    for (var j = 0; j < uncoveredDuesArray.length; j++) {
+                    for (var j = 0; j < revisedUncoveredDuesArray.length; j++) {
 
-                        var row4 = uncoveredDuesArray[j];
+                        var row4 = revisedUncoveredDuesArray[j];
 
                         if (row4[0] == depotArray[i]) {
 
@@ -5056,7 +5106,7 @@ window.addEventListener(
                 var text42 = document.createTextNode("-");
                 td42.appendChild(text42);
                 var td43 = document.createElement("td");
-                var text43 = document.createTextNode(bpMM + " Months");
+                var text43 = document.createTextNode(revisedBP + " Months");
                 td43.appendChild(text43);
                 tr4.appendChild(td41);
                 tr4.appendChild(td42);
@@ -5139,20 +5189,20 @@ window.addEventListener(
                     var tdM2 = document.createElement("td");
                     var textM2;
                     if (i == depotArray.length) {
-                        textM2 = document.createTextNode(aacArray.reduce((a, b) => a + b, 0));
+                        textM2 = document.createTextNode(revisedAacArray.reduce((a, b) => a + b, 0));
                     }
                     else {
-                        textM2 = document.createTextNode(aacArray[i]);
+                        textM2 = document.createTextNode(revisedAacArray[i]);
                     }
                     tdM2.appendChild(textM2);
 
                     var tdM3 = document.createElement("td");
                     var textM3;
                     if (i == depotArray.length) {
-                        textM3 = document.createTextNode(Math.round(mcArray.reduce((a, b) => a + b, 0) * 100) / 100);
+                        textM3 = document.createTextNode(Math.round(revisedMcArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        textM3 = document.createTextNode(Math.round(mcArray[i] * 100) / 100);
+                        textM3 = document.createTextNode(Math.round(revisedMcArray[i] * 100) / 100);
                     }
                     tdM3.appendChild(textM3);
 
@@ -5162,7 +5212,7 @@ window.addEventListener(
                         textM4 = document.createTextNode(Math.round(ipRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        var ipRequirement = mcArray[i] * ipMM;
+                        var ipRequirement = revisedMcArray[i] * ipMM;
                         ipRequirementsArray.push(+ipRequirement);
                         textM4 = document.createTextNode(Math.round(ipRequirement * 100) / 100);
                     }
@@ -5174,7 +5224,7 @@ window.addEventListener(
                         textM5 = document.createTextNode(Math.round(cpRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        var cpRequirement = aacArray[i];
+                        var cpRequirement = revisedAacArray[i];
                         cpRequirementsArray.push(+cpRequirement);
                         textM5 = document.createTextNode(Math.round(cpRequirement * 100) / 100);
                     }
@@ -5186,7 +5236,7 @@ window.addEventListener(
                         textM6 = document.createTextNode(Math.round(bpRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        var bpRequirement = mcArray[i] * bpMM;
+                        var bpRequirement = revisedMcArray[i] * revisedBP;
                         bpRequirementsArray.push(+bpRequirement);
                         textM6 = document.createTextNode(Math.round(bpRequirement * 100) / 100);
                     }
@@ -5228,7 +5278,7 @@ window.addEventListener(
                         textM10 = document.createTextNode(Math.round(netRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
                     }
                     else {
-                        var netRequirement = ipRequirement + cpRequirement + bpRequirement - totalCoveredDuesArray[i] - totalUncoveredDuesArray[i] - stockArray[i];
+                        var netRequirement = +ipRequirement + +cpRequirement + +bpRequirement - +totalCoveredDuesArray[i] - +totalUncoveredDuesArray[i] - +stockArray[i];
                         netRequirementsArray.push(+netRequirement);
                         textM10 = document.createTextNode(Math.round(netRequirement * 100) / 100);
                     }
