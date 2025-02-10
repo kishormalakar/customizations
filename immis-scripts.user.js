@@ -629,6 +629,7 @@ window.addEventListener(
             var s_3 = document.querySelectorAll("#s_3")[0];
             var s_4 = document.querySelectorAll("#s_4")[0];
             var s_6 = document.querySelectorAll("#s_6")[0];
+            var s_7 = document.querySelectorAll("#s_7")[0];
             var s_8 = document.querySelectorAll("#s_8")[0];
 
             var buttonExit = s_2.querySelectorAll("input[name='btn_Exit_0']")[0];
@@ -856,10 +857,9 @@ window.addEventListener(
                 }
                 if (e.target.title == "View/Authorize M.A.") {
                     var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
-                    var s_7 = document.querySelectorAll("#s_7")[0];
-                    var s__cnvs23 = document.querySelectorAll("#s__cnvs23")[0];
+                    var s__cnvs24 = document.querySelectorAll("#s__cnvs24")[0];
                     s_7.style.top = scrollTop + "px";
-                    s__cnvs23.style.top = scrollTop + "px";
+                    s__cnvs24.style.top = scrollTop + "px";
                     var s_7cssText = s_7.style.cssText;
                     var s_7cssTextNew = s_7cssText.slice(0, s_7cssText.indexOf("width:") - 2) + " !important" + s_7cssText.slice(s_7cssText.indexOf("width:") - 2);
                     s_7.style.cssText = s_7cssTextNew;
