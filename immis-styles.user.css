@@ -957,6 +957,7 @@
     }
     
     .quantity_review #divShowHtml1{
+		top: 53px !important;
         background-color: white !important;
         border-color: black !important;
     }
