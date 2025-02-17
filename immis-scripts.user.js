@@ -5703,6 +5703,10 @@ window.addEventListener(
             var statisticsButton = document.querySelectorAll("#s_0_28")[0];
             statisticsButton.click();
         }
+
+        if (document.title == "Request for Authorization of Proposals / Records" || document.title == "Run Form - IMMIS/AUTHREQ") {
+            body.classList.add("authreq");
+        }
     },
     false
 );

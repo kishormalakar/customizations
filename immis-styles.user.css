@@ -1333,4 +1333,12 @@
         width: 960px !important;
         margin-left: calc(50% - 480px) !important;
     }
+	
+	.authreq #s_4{
+		position: absolute !important;
+	}
+	
+	.authreq #s_4 > table{
+		max-width: 1024px !important;
+	}
 }
