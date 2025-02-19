@@ -1,4 +1,4 @@
-@/** Import Lepton stylesheet (Chrome) *****************************************/
+/** Import Lepton stylesheet (Chrome) *****************************************/
 @import url("css/leptonChrome.css");
 
 
@@ -41,20 +41,12 @@
     display: none !important;
 }
 
-#tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background{
-    background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none) !important;
-}
-
-#tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
-    background-image: none !important;
-}
-
 /*** Proton Tabs Tweaks ***/
 
 /* Adjust tab corner shape, optionally remove space below tabs */
 
 #tabbrowser-tabs {
-  --user-tab-rounding: 12px !important;
+  --user-tab-rounding: 5px !important;
 }
 
 .tab-background {
