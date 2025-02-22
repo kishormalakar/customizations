@@ -208,6 +208,44 @@ window.addEventListener(
             return itemCategory;
         }
 
+        let showHistorySheet = (pl) => {
+
+            var req = new XMLHttpRequest();
+            req.open("GET", "https://ireps.gov.in/iMMS/depot/itempos/gethistsheet?rly="+currentZoneCode+"&plno="+pl, false);
+            req.send(null);
+
+            if (req.status == 200) {
+                var parser = new DOMParser();
+                var html = parser.parseFromString(req.responseText, "text/html");
+
+                if(document.querySelectorAll(".hs_div")[0] == null || document.querySelectorAll(".hs_div")[0] == undefined){
+
+                    var hs_div = document.createElement("div");
+                    hs_div.classList.add("hs_div");
+                    body.appendChild(hs_div);
+
+                }
+
+                var scrollTop = window.pageYOffset || document.body.scrollTop;
+
+                document.querySelectorAll(".hs_div")[0].innerHTML = req.responseText;
+                document.querySelectorAll(".hs_div")[0].style.display = "block";
+                document.querySelectorAll(".hs_div")[0].style.top = scrollTop + "px";
+
+                var button = document.createElement("button");
+                var buttonText = document.createTextNode("Hide");
+                button.addEventListener("click", (e) => {
+                    document.querySelectorAll(".hs_div")[0].style.display = "none";
+                });
+
+                button.appendChild(buttonText);
+                document.querySelectorAll(".hs_div")[0].prepend(button);
+
+            }
+
+
+        }
+
         if (document.title != "System Start Page" && document.title != "Output of Report - LISTPOS") {
             setRelativePositioning();
 
@@ -3970,12 +4008,21 @@ window.addEventListener(
                             td20.setAttribute("bgcolor", "lightBlue");
                             td20.setAttribute("align", "center");
                             var td21 = document.createElement("td");
+                            var p21 = document.createElement("p");
                             var text21 = document.createTextNode(pl);
-                            td21.appendChild(text21);
+                            p21.appendChild(text21);
+                            td21.appendChild(p21);
                             td21.style.border = "1px solid black";
                             td21.style.width = "100px";
+                            p21.style.textDecoration = "underline";
+                            p21.style.cursor = "pointer";
                             td21.setAttribute("bgcolor", "lightBlue");
                             td21.setAttribute("align", "center");
+                            p21.addEventListener("click", (e) => {
+
+                                showHistorySheet(e.target.innerText);
+
+                            });
                             var td22 = document.createElement("td");
                             var text22 = document.createTextNode(itemDescription);
                             td22.appendChild(text22);
