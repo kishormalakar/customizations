@@ -380,8 +380,8 @@ window.addEventListener(
 
                 var dateFromArray = dateFrom.split("-");
                 var dateToArray = dateTo.split("-");
-                var dateFromNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+dateToArray[2] - 2);
-                var dateToNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+ dateToArray[2] - 1);
+                var dateFromNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] - 1);
+                var dateToNew = dateFrom;
 
                 body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = dateFromNew;
                 body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value = dateToNew;
@@ -394,8 +394,8 @@ window.addEventListener(
 
                 var dateFromArray = dateFrom.split("-");
                 var dateToArray = dateTo.split("-");
-                var dateFromNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] + 1);
-                var dateToNew = dateFromArray[0] + "-" + dateFromArray[1] + "-" + (+dateFromArray[2] + 2);
+                var dateFromNew = dateTo;
+                var dateToNew = dateToArray[0] + "-" + dateToArray[1] + "-" + (+dateToArray[2] + 1);
 
                 body.querySelectorAll("#LBL_TB_DT_FR")[0].nextElementSibling.value = dateFromNew;
                 body.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value = dateToNew;
