@@ -1193,10 +1193,6 @@
         font-size: 14px;   
     }
     
-    .item_position #divShowHtml1 #section_udm table:nth-child(n + 2) {
-		display: none;
-	}
-    
     .item_position #divShowHtml1 #section_udm table img{
         display: none;
     }

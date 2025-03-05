@@ -3026,13 +3026,32 @@ window.addEventListener(
                     LovDiv.scrollIntoView();
                 }
 
-                if(e.target.id == "aacApproved_0"){
+                if(e.target.id.startsWith("aacApproved_")){
 
-                    var aacProposedByDepot = e.target.parentElement.previousElementSibling.previousElementSibling.innerText;
-                    e.target.value = aacProposedByDepot;
+                    var pl = document.querySelectorAll("#s_2")[0].querySelectorAll("input[name='PLGRP_0']")[0].value;
+                    var itemNature = getItemNature(pl);
 
-                    e.target.parentElement.parentElement.nextElementSibling.querySelectorAll("#aac_wef_1")[0].checked = false;
-                    e.target.parentElement.parentElement.nextElementSibling.querySelectorAll("#aac_wef_2")[0].selectedIndex = 1;
+                    if(itemNature == "S" || itemNature == "V" || itemNature == "MC" || itemNature == "PN"){
+
+                        var p = document.createElement("p");
+                        var pText = document.createTextNode("This is a safety item");
+                        p.appendChild(pText);
+                        p.style.color = "red";
+                        p.style.fontSize = "18px";
+                        p.style.fontWeight = "bold";
+                        document.querySelectorAll("#s_3")[0].querySelectorAll("table")[0].querySelectorAll("td")[1].appendChild(p);
+                    }
+
+                    for(var i = 2; i < e.target.closest("tr").closest("tbody").children.length - 1; i++){
+
+                        var row = e.target.closest("tr").closest("tbody").children[i];
+                        var aacProposedByDepot = row.children[10].innerText;
+                        row.children[12].querySelectorAll("input")[0].value = aacProposedByDepot;
+
+                    }
+
+                    e.target.closest("tr").closest("tbody").lastChild.querySelectorAll("#aac_wef_1")[0].checked = false;
+                    e.target.closest("tr").closest("tbody").lastChild.querySelectorAll("#aac_wef_2")[0].selectedIndex = 1;
                 }
             });
 
