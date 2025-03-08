@@ -515,6 +515,25 @@
 		left: calc(50% - 400px) !important;
 		padding: 20px !important;
 	}
+	
+	.review_process_demand #s_3 .dealer_wise_demand{
+        border-collapse: collapse;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 800px;
+    }
+    
+	.review_process_demand #s_3 .dealer_wise_demand td,
+    .review_process_demand #s_3 .dealer_wise_demand th{
+        border: 1px solid black;
+        height: 35px;
+        width: 10%;
+        text-align: center;
+    }
+	
+	.review_process_demand #s_3 .dealer_wise_demand th:nth-of-type(1){
+		min-width: 150px;
+	}
 
 	.purchase_proposal #s_4 > table {
 		width: 1024px;

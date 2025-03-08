@@ -587,16 +587,214 @@ window.addEventListener(
         if (document.title == "Review / Act on Pending Demands" || document.title == "Run Form - IMMIS/PUR/DEMREVIEW") {
             body.classList.add("review_process_demand");
 
+            var s_2 = document.querySelectorAll("#s_2")[0];
+            var s_3 = document.querySelectorAll("#s_3")[0];
+            var s_5 = document.querySelectorAll("#s_5")[0];
+
             document.addEventListener("click", (e) => {
                 var id = e.target.id;
                 if (id.includes("DropBtn")) {
                     var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
-                    var s_5 = document.querySelectorAll("#s_5")[0];
                     var s__cnvs5 = document.querySelectorAll("#s__cnvs5")[0];
 
                     s_5.style.top = scrollTop + "px";
                     s__cnvs5.style.top = scrollTop + "px";
                 }
+
+                if(e.target.name == "btn_Start_0"){
+
+                    var table = document.createElement("table");
+                    table.classList.add("dealer_wise_demand");
+                    var tbody = document.createElement("tbody");
+                    var tr1 = document.createElement("tr");
+                    var th1 = document.createElement("th");
+                    var th1Text = document.createTextNode("Name");
+                    th1.appendChild(th1Text);
+                    var th2 = document.createElement("th");
+                    var th2Text = document.createTextNode("< 1 Month");
+                    th2.appendChild(th2Text);
+                    var th3 = document.createElement("th");
+                    var th3Text = document.createTextNode("1 - 3 Months");
+                    th3.appendChild(th3Text);
+                    var th4 = document.createElement("th");
+                    var th4Text = document.createTextNode("3 - 6 Months");
+                    th4.appendChild(th4Text);
+                    var th5 = document.createElement("th");
+                    var th5Text = document.createTextNode("6 - 12 Months");
+                    th5.appendChild(th5Text);
+                    var th6 = document.createElement("th");
+                    var th6Text = document.createTextNode("> 12 Months");
+                    th6.appendChild(th6Text);
+                    var th7 = document.createElement("th");
+                    var th7Text = document.createTextNode("Total");
+                    th7.appendChild(th7Text);
+                    tr1.appendChild(th1);
+                    tr1.appendChild(th2);
+                    tr1.appendChild(th3);
+                    tr1.appendChild(th4);
+                    tr1.appendChild(th5);
+                    tr1.appendChild(th6);
+                    tr1.appendChild(th7);
+                    tbody.appendChild(tr1);
+
+                    var totalMonths0to1 = 0;
+                    var totalMonths1to3 = 0;
+                    var totalMonths3to6 = 0;
+                    var totalMonths6to12 = 0;
+                    var totalMonthsAbove12 = 0;
+
+                    var demandTable = s_3.querySelectorAll("div")[0].querySelectorAll("table")[0];
+                    var demandList = demandTable.querySelectorAll("tbody")[0].querySelectorAll("tr[id^=DemTR]");
+                    var demandPL = "";
+                    var dealerArray = [];
+                    var demandDistributionArray = [];
+
+                    for(var i = 0; i < demandList.length; i++){
+
+                        var demandRow = demandList[i];
+                        var demandNo = demandRow.children[1].innerText;
+                        var demandDateText = demandRow.children[2].innerText;
+                        var demandDate = new Date(
+                            "20" + demandDateText.split("-")[2],
+                            monthArray.indexOf(demandDateText.split("-")[1]),
+                            demandDateText.split("-")[0]
+                        );
+
+                        var today = new Date();
+                        var demandDays = Math.floor((today - demandDate) / 86400000);
+
+                        if(demandRow.previousElementSibling.querySelectorAll("th")[0] != undefined){
+                            demandPL = demandRow.previousElementSibling.previousElementSibling.querySelectorAll("td")[0].querySelectorAll("strong")[0].innerText;
+                        }
+                        else if(demandRow.previousElementSibling.querySelectorAll("td")[0] != undefined && demandRow.previousElementSibling.querySelectorAll("td").length == 1){
+                            demandPL = demandRow.previousElementSibling.querySelectorAll("td")[0].querySelectorAll("strong")[0].innerText;
+                        }
+
+                        var dealer = getDealerByPl(demandPL);
+
+                        if(dealerArray.includes(dealer)){
+
+                            var distribution = demandDistributionArray[dealerArray.indexOf(dealer)];
+
+                            if(demandDays <= 30){
+
+                                demandDistributionArray[dealerArray.indexOf(dealer)][1] = demandDistributionArray[dealerArray.indexOf(dealer)][1] + 1;
+
+                            }
+                            else if(demandDays > 30 && demandDays <= 90){
+
+                                demandDistributionArray[dealerArray.indexOf(dealer)][2] = demandDistributionArray[dealerArray.indexOf(dealer)][2] + 1;
+
+                            }
+                            else if(demandDays > 90 && demandDays <= 180){
+
+                                demandDistributionArray[dealerArray.indexOf(dealer)][3] = demandDistributionArray[dealerArray.indexOf(dealer)][3] + 1;
+
+                            }
+                            else if(demandDays > 180 && demandDays <= 365){
+
+                                demandDistributionArray[dealerArray.indexOf(dealer)][4] = demandDistributionArray[dealerArray.indexOf(dealer)][4] + 1;
+
+                            }
+                            else if(demandDays > 365){
+
+                                demandDistributionArray[dealerArray.indexOf(dealer)][5] = demandDistributionArray[dealerArray.indexOf(dealer)][5] + 1;
+
+                            }
+
+                            demandDistributionArray[dealerArray.indexOf(dealer)][6] = demandDistributionArray[dealerArray.indexOf(dealer)][6] + 1;
+
+                        }
+                        else{
+
+                            if(demandDays <= 30){
+
+                                var distribution = [dealer, 1, 0, 0, 0, 0, 1];
+                                demandDistributionArray.push(distribution);
+                                dealerArray.push(dealer);
+
+                            }
+                            else if(demandDays > 30 && demandDays <= 90){
+
+                                var distribution = [dealer, 0, 1, 0, 0, 0, 1];
+                                demandDistributionArray.push(distribution);
+                                dealerArray.push(dealer);
+
+                            }
+                            else if(demandDays > 90 && demandDays <= 180){
+
+                                var distribution = [dealer, 0, 0, 1, 0, 0, 1];
+                                demandDistributionArray.push(distribution);
+                                dealerArray.push(dealer);
+
+                            }
+                            else if(demandDays > 180 && demandDays <= 365){
+
+                                var distribution = [dealer, 0, 0, 0, 1, 0, 1];
+                                demandDistributionArray.push(distribution);
+                                dealerArray.push(dealer);
+
+                            }
+                            else if(demandDays > 365){
+
+                                var distribution = [dealer, 0, 0, 0, 1, 0, 1];
+                                demandDistributionArray.push(distribution);
+                                dealerArray.push(dealer);
+
+                            }
+
+                        }
+
+                    }
+
+                    demandDistributionArray.forEach((distribution) => {
+
+                        var dealer = distribution[0];
+                        var months0to1 = distribution[1];
+                        var months1to3 = distribution[2];
+                        var months3to6 = distribution[3];
+                        var months6to12 = distribution[4];
+                        var monthsAbove12 = distribution[5];
+                        var totalDemands = distribution[6];
+
+                        var tr2 = document.createElement("tr");
+                        var td1 = document.createElement("td");
+                        var td1Text = document.createTextNode(dealer);
+                        td1.appendChild(td1Text);
+                        var td2 = document.createElement("td");
+                        var td2Text = document.createTextNode(months0to1);
+                        td2.appendChild(td2Text);
+                        var td3 = document.createElement("td");
+                        var td3Text = document.createTextNode(months1to3);
+                        td3.appendChild(td3Text);
+                        var td4 = document.createElement("td");
+                        var td4Text = document.createTextNode(months3to6);
+                        td4.appendChild(td4Text);
+                        var td5 = document.createElement("td");
+                        var td5Text = document.createTextNode(months6to12);
+                        td5.appendChild(td5Text);
+                        var td6 = document.createElement("td");
+                        var td6Text = document.createTextNode(monthsAbove12);
+                        td6.appendChild(td6Text);
+                        var td7 = document.createElement("td");
+                        var td7Text = document.createTextNode(totalDemands);
+                        td7.appendChild(td7Text);
+                        tr2.appendChild(td1);
+                        tr2.appendChild(td2);
+                        tr2.appendChild(td3);
+                        tr2.appendChild(td4);
+                        tr2.appendChild(td5);
+                        tr2.appendChild(td6);
+                        tr2.appendChild(td7);
+                        tbody.appendChild(tr2);
+
+                    });
+
+                    table.appendChild(tbody);
+                    s_3.insertBefore(table, s_3.children[1]);
+
+                }
+
             });
         }
 
