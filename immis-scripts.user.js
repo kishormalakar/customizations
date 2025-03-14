@@ -593,6 +593,79 @@ window.addEventListener(
 
         if (document.title == "Availability Status of Items" || document.title == "Run Form - IMMIS/DEP/AVAILSTAT") {
             body.classList.add("availability");
+
+            var s_2 = document.querySelectorAll("#s_2")[0];
+            var buttonShowStatus = s_2.querySelectorAll("input[name='btn_Stat_0']")[0];
+
+            buttonShowStatus.addEventListener("click", (e) => {
+
+                var availabilityTable = s_2.querySelectorAll(":scope > table")[1].querySelectorAll("div")[0].querySelectorAll(":scope > table")[1].querySelectorAll("tbody")[0].children;
+
+                if(s_2.querySelectorAll("input[name='STKBASIS']")[2].checked == true){
+
+                    for(var i = 0; i < availabilityTable.length - 1; i++){
+
+                        var row = availabilityTable[i];
+
+                        if(i == 0){
+
+                            row.querySelectorAll("th")[4].setAttribute("colspan", "12");
+
+                        }
+
+                        else if(i == 1){
+
+                            var th = row.querySelectorAll("th")[6].cloneNode(true);
+                            th.innerText = "Adequacy";
+                            row.appendChild(th);
+
+                        }
+
+                        else if(i < availabilityTable.length - 2){
+
+                            var numTotal = row.querySelectorAll("td")[2].innerText;
+                            var numZero = row.querySelectorAll("td")[4].innerText;
+                            var num0to1 = row.querySelectorAll("td")[5].innerText;
+                            var num1to2 = row.querySelectorAll("td")[6].innerText;
+                            var num2to3 = row.querySelectorAll("td")[7].innerText;
+                            var num3to6 = row.querySelectorAll("td")[8].innerText;
+                            var num6to12 = row.querySelectorAll("td")[9].innerText;
+                            var numAbove12 = row.querySelectorAll("td")[10].innerText;
+                            var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
+                            var numAboveAdequacy = +num6to12 + +numAbove12;
+
+                            var adequacy = Math.round(+numAboveAdequacy / +numTotal * 100);
+                            var td = row.querySelectorAll("td")[8].cloneNode(true);
+                            td.innerText = adequacy + "%";
+                            row.appendChild(td);
+                        }
+
+                        else{
+
+                            var numTotal = row.querySelectorAll("td")[1].innerText;
+                            var numZero = row.querySelectorAll("td")[3].innerText;
+                            var num0to1 = row.querySelectorAll("td")[4].innerText;
+                            var num1to2 = row.querySelectorAll("td")[5].innerText;
+                            var num2to3 = row.querySelectorAll("td")[6].innerText;
+                            var num3to6 = row.querySelectorAll("td")[7].innerText;
+                            var num6to12 = row.querySelectorAll("td")[8].innerText;
+                            var numAbove12 = row.querySelectorAll("td")[9].innerText;
+                            var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
+                            var numAboveAdequacy = +num6to12 + +numAbove12;
+
+                            var adequacy = Math.round(+numAboveAdequacy / +numTotal * 100);
+                            var td = row.querySelectorAll("td")[8].cloneNode(true);
+                            td.innerText = adequacy + "%";
+                            row.appendChild(td);
+
+                        }
+
+                    }
+
+                }
+
+            });
+
         }
 
         if (document.title == "Review / Act on Pending Demands" || document.title == "Run Form - IMMIS/PUR/DEMREVIEW") {
