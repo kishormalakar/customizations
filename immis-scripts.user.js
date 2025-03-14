@@ -6,7 +6,7 @@
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gov.in
-// @grant        none
+// @grant        GM_xmlhttpRequest
 // @run-at       document-end
 // ==/UserScript==
 
@@ -1582,6 +1582,24 @@ window.addEventListener(
             var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
             var divShowHtml2 = document.querySelectorAll("#divShowHtml2")[0];
 
+            GM_xmlhttpRequest({
+                method : "GET",
+                url : "https://cdn.jsdelivr.net/npm/chart.js",
+                onload : (ev) =>
+                {
+                    let e = document.createElement('script');
+                    e.innerText = ev.responseText;
+                    document.head.appendChild(e);
+                }
+            });
+
+            var canvas_div = document.createElement("div");
+            canvas_div.id = "canvas_div";
+            var canvas = document.createElement("canvas");
+            canvas.id = "chart_canvas";
+            canvas_div.appendChild(canvas);
+            body.appendChild(canvas_div);
+
             var consigneeArray = [
                 "C&W/SUPDT/OBRADAM",
                 "H.TXR/PATRATU",
@@ -1617,13 +1635,18 @@ window.addEventListener(
                     .querySelectorAll("tr")[0]
                     .innerText.startsWith("Item Card for PL NO:")
                 ) {
+                    var today = new Date();
+
                     var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
 
                     var tables = divShowHtml1.querySelectorAll(":scope > div")[1].querySelectorAll(":scope > table");
-                    var uncoveredDuesTable, coveredDuesTable, underTransitTable, icTable, orderPlacedTable;
+                    var consumptionTable, uncoveredDuesTable, coveredDuesTable, underTransitTable, icTable, orderPlacedTable;
 
                     for(i = 0; i < tables.length; i++){
 
+                        if(tables[i].querySelectorAll("td")[0].innerText.trim() == "STOCK, AAC AND CONSUMPTION DETAILS"){
+                            consumptionTable = tables[i];
+                        }
                         if(tables[i].querySelectorAll("td")[0].innerText.trim() == "UN-COVERED DUES DETAILS"){
                             uncoveredDuesTable = tables[i];
                         }
@@ -1642,8 +1665,15 @@ window.addEventListener(
 
                     }
 
-                    var consumptionTable = section_udm.previousElementSibling.previousElementSibling;
+                    var totalConsumptionLY = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[3].innerText;
+                    var totalConsumptionCY = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[4].innerText;
                     var totalAAC = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[5].innerText.split("(")[0];
+                    var totalStock = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[6].innerText.split("(")[0].trim();
+                    var currentFY = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("tr")[2].querySelectorAll("td")[3].innerText;
+                    var dateFY = new Date("20" + currentFY.split("-")[0], 3, 1);
+                    var numDays = (today - dateFY) / (1000 * 60 * 60 * 24);
+                    var consumptionRateLY = Math.round(+totalConsumptionLY / 12);
+                    var consumptionRateCY = Math.round(+totalConsumptionCY / numDays * 30);
 
                     var uncoveredDues = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
@@ -1671,20 +1701,60 @@ window.addEventListener(
                     var coveredDues = coveredDuesTable.querySelectorAll("tbody")[0].children;
                     var cummulativeDueQty = 0;
 
+                    var receiptMonthArray = [];
+                    var receiptQtyArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    var cbArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    var consumptionRateArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+                    for (i = 0; i < 15; i++){
+
+                        var mm = +today.getMonth() + i - Math.floor((today.getMonth() + i) / 12) * 12;
+                        var yy = +today.getFullYear().toString().substring(2, 4) + Math.floor((today.getMonth() + i) / 12);
+                        var mmyy = monthArray[mm] + ", " + yy;
+                        receiptMonthArray.push(mmyy);
+
+                    }
+
+
                     for (i = 2; i < coveredDues.length; i++) {
 
                         var coveredDue = coveredDues[i];
                         var dueQty = 0;
+                        var dueDateText = "";
 
                         if (coveredDue.children.length == 10) {
                             dueQty = +coveredDue.children[6].innerText;
+                            dueDateText = coveredDue.children[8].innerText;
                         }
 
                         if (coveredDue.children.length == 9) {
                             dueQty = +coveredDue.children[5].innerText;
+                            dueDateText = coveredDue.children[7].innerText;
+                        }
+
+                        var dueDate = new Date(
+                            "20" + dueDateText.split("/")[2],
+                            dueDateText.split("/")[1],
+                            dueDateText.split("/")[0]
+                        );
+                        var dueMonth = monthArray[+dueDateText.split("/")[1] - 1] + ", " + dueDateText.split("/")[2];
+
+                        if(dueDate >= today && receiptMonthArray.includes(dueMonth)){
+
+                            receiptQtyArray[receiptMonthArray.indexOf(dueMonth)] = receiptQtyArray[receiptMonthArray.indexOf(dueMonth)] + dueQty;
+
                         }
 
                         cummulativeDueQty += dueQty;
+
+                    }
+
+                    var cb = +totalStock;
+                    for (i = 0; i < cbArray.length; i++){
+
+                        cb = +cb + +receiptQtyArray[i] - (+consumptionRateCY + +consumptionRateLY)/2;
+                        cbArray[i] = cb;
+                        consumptionRateArray[i] = (+consumptionRateCY + +consumptionRateLY)/2;
 
                     }
 
@@ -1695,6 +1765,64 @@ window.addEventListener(
                         var coveredDuesHeader2 = coveredDues[0].querySelectorAll("strong")[0].cloneNode(true);
                         coveredDuesHeader2.innerText = " ( " + cummulativeDueQty + " " + duesUnit + " | " + Math.round(+cummulativeDueQty / +totalAAC * 12 * 10) / 10 + " months )";
                         coveredDues[0].children[0].appendChild(coveredDuesHeader2);
+
+                        var button1 = document.createElement("button");
+                        var button1Text = document.createTextNode("Show Graph");
+                        button1.appendChild(button1Text);
+                        button1.addEventListener("click", (el) => {
+
+                            document.querySelectorAll("#canvas_div")[0].style.display = "block";
+
+                            let chartStatus = Chart.getChart("chart_canvas"); // <canvas> id
+                            if (chartStatus != undefined) {
+                                chartStatus.destroy();
+                            }
+
+                            var chart = new Chart(canvas, {
+                                data: {
+                                    labels: receiptMonthArray,
+                                    datasets: [
+                                        {
+                                            label: "Closing Balance",
+                                            type: "line",
+                                            data: cbArray,
+                                            borderWidth: 1,
+                                        },
+                                        {
+                                            label: "Receipt",
+                                            type: "bar",
+                                            data: receiptQtyArray,
+                                            borderWidth: 1,
+                                        },
+                                        {
+                                            label: "Consumption Rate",
+                                            type: "line",
+                                            data: consumptionRateArray,
+                                            borderWidth: 1,
+                                        },
+                                    ]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                        }
+                                    }
+                                },
+                            });
+
+
+                        });
+
+                        var button2 = document.createElement("button");
+                        var button2Text = document.createTextNode("Hide Graph");
+                        button2.appendChild(button2Text);
+                        button2.addEventListener("click", (el) => {
+                            document.querySelectorAll("#canvas_div")[0].style.display = "none";
+                        });
+
+                        divShowHtml1.querySelectorAll(":scope > div")[0].querySelectorAll("td")[1].appendChild(button1);
+                        divShowHtml1.querySelectorAll(":scope > div")[0].querySelectorAll("td")[1].appendChild(button2);
 
                     }
 
@@ -1906,6 +2034,10 @@ window.addEventListener(
                     tr.appendChild(td2);
                     aacTable.querySelectorAll("tbody")[0].appendChild(tr);
 
+                }
+
+                if (e.target.value == "Hide"){
+                    document.querySelectorAll("#canvas_div")[0].style.display = "none";
                 }
             });
 

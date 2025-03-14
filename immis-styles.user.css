@@ -1228,6 +1228,19 @@
         padding: 10px !important;
         border-radius: 5px;
     }
+	
+	.item_position #canvas_div{
+		display: none;
+		position: absolute;
+		width: 960px;
+		height: 480px;
+		top: 100px;
+		left: calc(50% - 480px);
+		z-index: 100;
+		background: #effeed;
+		padding: 10px;
+		border: 1px solid black;
+	}
     
     .consignee_aac #s_2,
     .consignee_aac #s_3,
