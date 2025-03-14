@@ -1754,7 +1754,7 @@ window.addEventListener(
 
                         cb = +cb + +receiptQtyArray[i] - (+consumptionRateCY + +consumptionRateLY)/2;
                         cbArray[i] = cb;
-                        consumptionRateArray[i] = (+consumptionRateCY + +consumptionRateLY)/2;
+                        consumptionRateArray[i] = (+consumptionRateCY + +consumptionRateLY) / 2 * 3;
 
                     }
 
@@ -1795,10 +1795,11 @@ window.addEventListener(
                                             borderWidth: 1,
                                         },
                                         {
-                                            label: "Consumption Rate",
+                                            label: "Optimum Inventory",
                                             type: "line",
                                             data: consumptionRateArray,
                                             borderWidth: 1,
+                                            pointRadius: 0,
                                         },
                                     ]
                                 },
