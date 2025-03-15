@@ -1766,66 +1766,68 @@ window.addEventListener(
                         coveredDuesHeader2.innerText = " ( " + cummulativeDueQty + " " + duesUnit + " | " + Math.round(+cummulativeDueQty / +totalAAC * 12 * 10) / 10 + " months )";
                         coveredDues[0].children[0].appendChild(coveredDuesHeader2);
 
-                        var button1 = document.createElement("button");
-                        var button1Text = document.createTextNode("Show Graph");
-                        button1.appendChild(button1Text);
-                        button1.addEventListener("click", (el) => {
-
-                            document.querySelectorAll("#canvas_div")[0].style.display = "block";
-
-                            let chartStatus = Chart.getChart("chart_canvas"); // <canvas> id
-                            if (chartStatus != undefined) {
-                                chartStatus.destroy();
-                            }
-
-                            var chart = new Chart(canvas, {
-                                data: {
-                                    labels: receiptMonthArray,
-                                    datasets: [
-                                        {
-                                            label: "Closing Balance",
-                                            type: "line",
-                                            data: cbArray,
-                                            borderWidth: 1,
-                                        },
-                                        {
-                                            label: "Receipt",
-                                            type: "bar",
-                                            data: receiptQtyArray,
-                                            borderWidth: 1,
-                                        },
-                                        {
-                                            label: "Optimum Inventory",
-                                            type: "line",
-                                            data: consumptionRateArray,
-                                            borderWidth: 1,
-                                            pointRadius: 0,
-                                        },
-                                    ]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                        }
-                                    }
-                                },
-                            });
-
-
-                        });
-
-                        var button2 = document.createElement("button");
-                        var button2Text = document.createTextNode("Hide Graph");
-                        button2.appendChild(button2Text);
-                        button2.addEventListener("click", (el) => {
-                            document.querySelectorAll("#canvas_div")[0].style.display = "none";
-                        });
-
-                        divShowHtml1.querySelectorAll(":scope > div")[0].querySelectorAll("td")[1].appendChild(button1);
-                        divShowHtml1.querySelectorAll(":scope > div")[0].querySelectorAll("td")[1].appendChild(button2);
-
                     }
+
+                    var button1 = document.createElement("button");
+                    var button1Text = document.createTextNode("Show Flow");
+                    button1.appendChild(button1Text);
+                    button1.style.marginRight = "16px";
+                    button1.addEventListener("click", (el) => {
+
+                        document.querySelectorAll("#canvas_div")[0].style.display = "block";
+
+                        let chartStatus = Chart.getChart("chart_canvas"); // <canvas> id
+                        if (chartStatus != undefined) {
+                            chartStatus.destroy();
+                        }
+
+                        var chart = new Chart(canvas, {
+                            data: {
+                                labels: receiptMonthArray,
+                                datasets: [
+                                    {
+                                        label: "Closing Balance",
+                                        type: "line",
+                                        data: cbArray,
+                                        borderWidth: 1,
+                                    },
+                                    {
+                                        label: "Receipt",
+                                        type: "bar",
+                                        data: receiptQtyArray,
+                                        borderWidth: 1,
+                                    },
+                                    {
+                                        label: "Optimum Inventory",
+                                        type: "line",
+                                        data: consumptionRateArray,
+                                        borderWidth: 1,
+                                        pointRadius: 0,
+                                    },
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                    }
+                                }
+                            },
+                        });
+
+
+                    });
+
+                    var button2 = document.createElement("button");
+                    var button2Text = document.createTextNode("Hide Flow");
+                    button2.appendChild(button2Text);
+                    button2.style.marginRight = "16px";
+                    button2.addEventListener("click", (el) => {
+                        document.querySelectorAll("#canvas_div")[0].style.display = "none";
+                    });
+
+                    divShowHtml1.querySelectorAll(":scope > div")[0].querySelectorAll("td")[1].insertBefore(button1, divShowHtml1.querySelectorAll(":scope > div")[0].querySelectorAll("td")[1].children[0]);
+                    divShowHtml1.querySelectorAll(":scope > div")[0].querySelectorAll("td")[1].insertBefore(button2, divShowHtml1.querySelectorAll(":scope > div")[0].querySelectorAll("td")[1].children[0]);
 
                     if(icTable != null && icTable != undefined){
 
@@ -2065,9 +2067,11 @@ window.addEventListener(
                         [divShowHtml1.querySelectorAll("table").length - 1].querySelectorAll("input")[0]
                             .click();
                         plInput.focus();
+                        document.querySelectorAll("#canvas_div")[0].style.display = "none";
 
                     } else {
                         document.querySelectorAll("#divShowHtml1")[0].style.display = "none";
+                        document.querySelectorAll("#canvas_div")[0].style.display = "none";
                         plInput.focus();
 
                     }
