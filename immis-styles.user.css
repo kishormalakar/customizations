@@ -1381,4 +1381,58 @@
 		padding: 5px;
 		text-align: right;
 	}
+	
+	.mmis_organization #CanvassHolder{
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: wrap !important;
+		align-items: flex-start !important;
+	}
+	
+	.mmis_organization #CanvassHolder #s_2{
+		flex-basis: 100% !important;
+		height: 100px !important;
+		position: relative !important;
+	}
+	
+	.mmis_organization #CanvassHolder #s_3{
+		flex-basis: 20% !important;
+		position: relative !important;
+	}
+	
+	.mmis_organization #CanvassHolder #s_4,
+	.mmis_organization #CanvassHolder #s_5,
+	.mmis_organization #CanvassHolder #s_6,
+	.mmis_organization #CanvassHolder #s_7,
+	.mmis_organization #CanvassHolder #s_8,
+	.mmis_organization #CanvassHolder #s_9,
+	.mmis_organization #CanvassHolder #s_10,
+	.mmis_organization #CanvassHolder #s_11,
+	.mmis_organization #CanvassHolder #s_12,
+	.mmis_organization #CanvassHolder #s_13{
+		flex-basis: 80% !important;
+		position: relative !important;
+	}
+	
+	.organization_structure #CanvassHolder{
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: wrap !important;
+		align-items: flex-start !important;
+	}
+	
+	.organization_structure #CanvassHolder #s_2{
+		flex-basis: 40% !important;
+		position: relative !important;
+	}
+	
+	.organization_structure #CanvassHolder #s_3,
+	.organization_structure #CanvassHolder #s_4{
+		flex-basis: 55% !important;
+		position: relative !important;
+	}
+	
+	.organization_structure #CanvassHolder #s_2 div{
+		width: 100% !important;
+	}
 }

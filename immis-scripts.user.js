@@ -5605,9 +5605,17 @@ window.addEventListener(
 			statisticsButton.click();
 		}
 
-		if (document.title == "Request for Authorization of Proposals / Records" || document.title == "Run Form - IMMIS/AUTHREQ") {
-			body.classList.add("authreq");
-		}
+        if (document.title == "Request for Authorization of Proposals / Records" || document.title == "Run Form - IMMIS/AUTHREQ") {
+            body.classList.add("authreq");
+        }
+
+        if (document.title == "MMIS - Organization Masters (Railways)" || document.title == "Run Form - IMMIS/MMISORGRLY") {
+            body.classList.add("mmis_organization");
+        }
+
+        if (document.title == "View / Manage Organization Structure" || document.title == "Run Form - ORG") {
+            body.classList.add("organization_structure");
+        }
 	},
 	false
 );
