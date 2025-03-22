@@ -1082,15 +1082,15 @@ window.addEventListener(
 				if (e.target.name == "btn_Hide_0") {
 					maKeyInput.focus();
 				}
-				if (e.target.title == "View/Authorize M.A.") {
-					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
-					var s__cnvs24 = document.querySelectorAll("#s__cnvs24")[0];
-					s_7.style.top = scrollTop + "px";
-					s__cnvs24.style.top = scrollTop + "px";
-					var s_7cssText = s_7.style.cssText;
-					var s_7cssTextNew = s_7cssText.slice(0, s_7cssText.indexOf("width:") - 2) + " !important" + s_7cssText.slice(s_7cssText.indexOf("width:") - 2);
-					s_7.style.cssText = s_7cssTextNew;
-				}
+                if (e.target.title == "View/Authorize M.A.") {
+                    var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+                    var s__cnvs25 = document.querySelectorAll("#s__cnvs25")[0];
+                    s_7.style.top = scrollTop + "px";
+                    s__cnvs25.style.top = scrollTop + "px";
+                    var s_7cssText = s_7.style.cssText;
+                    var s_7cssTextNew = s_7cssText.slice(0, s_7cssText.indexOf("width:") - 2) + " !important" + s_7cssText.slice(s_7cssText.indexOf("width:") - 2);
+                    s_7.style.cssText = s_7cssTextNew;
+                }
 				if (e.target.name == "btn_ViewAuth_0") {
 					buttonAuthorization.focus();
 				}
