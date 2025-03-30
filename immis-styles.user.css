@@ -769,6 +769,10 @@
 	.ais #divShowHtml1 * {
 		font-size: 100% !important;
 	}
+	
+	.ais input[name='btn_NewAAC_0']{
+		display: block !important;
+	}
 
 	.stockmaster_ard #s_2,
 	.stockmaster_ard #s_3 {
