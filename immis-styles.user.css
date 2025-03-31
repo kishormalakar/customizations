@@ -451,6 +451,8 @@
 
 	.po_generation #s_6 {
 		top: 45px !important;
+		width: 500px !important;
+		left: calc(50% - 250px) !important;
 	}
 
 	/* .po_generation #s_8 {
