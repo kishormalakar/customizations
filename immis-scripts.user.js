@@ -1158,6 +1158,7 @@ window.addEventListener(
 			body.classList.add("tender_publishing");
 
 			var s_2 = document.querySelectorAll("#s_2")[0];
+			var s_6 = document.querySelectorAll("#s_6")[0];
 			var s_13 = document.querySelectorAll("#s_13")[0];
 			var s_17 = document.querySelectorAll("#s_17")[0];
 			var s_23 = document.querySelectorAll("#s_23")[0];
@@ -1272,6 +1273,45 @@ window.addEventListener(
 					div1.style.textAlign = "center";
 					s_17.querySelectorAll("#optTable1")[0].parentElement.appendChild(div1);
 				}
+
+				if (e.target.id.search("btnItemRow_") != -1) {
+					var lineItemTable = s_6.querySelectorAll("table")[0].querySelectorAll("tbody")[0];
+
+					lineItemTable.children[0].children[0].setAttribute("colspan", "14");
+					lineItemTable.children[2].children[0].setAttribute("colspan", "1");
+					lineItemTable.children[2].children[1].setAttribute("colspan", "2");
+					lineItemTable.children[3].children[0].setAttribute("colspan", "1");
+					lineItemTable.children[3].children[1].setAttribute("colspan", "1");
+					lineItemTable.children[3].children[2].setAttribute("colspan", "1");
+					lineItemTable.children[3].children[3].setAttribute("colspan", "5");
+					lineItemTable.children[4].children[0].setAttribute("colspan", "1");
+					lineItemTable.children[4].children[1].setAttribute("colspan", "13");
+					lineItemTable.children[5].children[0].setAttribute("colspan", "1");
+					lineItemTable.children[5].children[1].setAttribute("colspan", "13");
+					lineItemTable.children[6].children[0].setAttribute("colspan", "1");
+					lineItemTable.children[6].children[1].setAttribute("colspan", "13");
+					lineItemTable.children[7].children[0].setAttribute("colspan", "1");
+					lineItemTable.children[7].children[1].setAttribute("colspan", "5");
+					lineItemTable.children[7].children[2].setAttribute("colspan", "1");
+					lineItemTable.children[7].children[3].setAttribute("colspan", "1");
+					lineItemTable.children[7].children[4].setAttribute("colspan", "1");
+					lineItemTable.children[7].children[5].setAttribute("colspan", "1");
+					lineItemTable.children[8].children[0].setAttribute("colspan", "1");
+					lineItemTable.children[8].children[1].setAttribute("colspan", "1");
+					lineItemTable.children[9].children[0].setAttribute("colspan", "4");
+					lineItemTable.children[9].children[1].setAttribute("colspan", "2");
+					lineItemTable.children[9].children[2].setAttribute("colspan", "2");
+					lineItemTable.children[9].children[3].setAttribute("colspan", "1");
+					lineItemTable.children[9].children[4].setAttribute("colspan", "1");
+					lineItemTable.children[10].children[0].setAttribute("colspan", "4");
+					lineItemTable.children[10].children[1].setAttribute("colspan", "2");
+					lineItemTable.children[10].children[2].setAttribute("colspan", "2");
+					lineItemTable.children[10].children[3].setAttribute("colspan", "6");
+					lineItemTable.children[11].children[0].setAttribute("colspan", "4");
+
+					lineItemTable.children[5].children[1].querySelectorAll("input[name='BTN_ADD_EDIT_INSPDTLS_0']")[0].value = "Inspection/Tolerance";
+					lineItemTable.children[5].children[1].querySelectorAll("input[name='BTN_UVM_LNK_0']")[0].value = "Link UVAM ID";
+				}
 			});
 
 			var tenderNoInput = document.querySelectorAll("input[name='TENDER_NO_0']")[0];
@@ -1324,6 +1364,11 @@ window.addEventListener(
 						buttonAuthorization.focus();
 					}
 				}
+			});
+            tenderNoInput.addEventListener("keyup", (e) => {
+				var pastedContent = tenderNoInput.value;
+                var trimmedContent = pastedContent.trim();
+                tenderNoInput.value = trimmedContent;
 			});
 
 			var s_25 = document.querySelectorAll("#s_25")[0];
@@ -1770,6 +1815,11 @@ window.addEventListener(
 				if (e.key === "Tab" || e.key === "Enter") {
 					buttonView.focus();
 				}
+			});
+            ppInput.addEventListener("keyup", (e) => {
+				var pastedContent = ppInput.value;
+                var trimmedContent = pastedContent.trim();
+                ppInput.value = trimmedContent;
 			});
 
 			var buttonAuthorization = s_16.querySelectorAll("input[name='btn_Auth_0']")[0];

@@ -474,6 +474,10 @@
 		height: unset !important;
 	}
 
+	.tender_publishing #s_6 > table{
+		border-collapse: collapse;
+	}
+
     .tender_publishing #s_6 > table > tbody > tr:nth-of-type(4) > td:last-child #LBL_TQ_GST_CODE{
         display: block;
         margin-top: 5px;
@@ -482,6 +486,10 @@
 
 	.tender_publishing #s_13 > table {
 		max-width: 1024px;
+	}
+
+	.tender_publishing #s_17 select {
+		height: auto !important;
 	}
 
 	.tender_publishing #s_17 div {
