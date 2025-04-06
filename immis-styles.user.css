@@ -448,6 +448,11 @@
 		margin-left: calc(50% - 512px) !important;
 		height: auto !important;
 	}
+	
+	.po_generation #s_3 tr[title="PO Already Created For This Firm From Original Purchase Order Form."],
+	.po_generation #s_3 tr.hovhilite:has(a[onclick^="PublishedPOList("]){
+		display: none;
+	}
 
 	.po_generation #s_6 {
 		top: 45px !important;
