@@ -1470,7 +1470,7 @@ window.addEventListener(
 					}
 				}
 
-				if (e.target.name == "BTN_HST_0" && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:")) {
+				if ((e.target.name == "BTN_HST_0" && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:")) || (e.target.name.includes("HS") && e.target.name.includes("_0") && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:"))) {
 					var today = new Date();
 
 					var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
@@ -1499,6 +1499,7 @@ window.addEventListener(
 						}
 					}
 
+					var historySheetZone = tables[0].querySelectorAll("td")[0].innerText.split(":")[1].trim();
 					var totalConsumptionLY = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[3].innerText;
 					var totalConsumptionCY = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[4].innerText;
 					var totalAAC = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[5].innerText.split("(")[0];
@@ -1549,6 +1550,9 @@ window.addEventListener(
 						if (coveredDue.children.length == 10) {
 							dueQty = +coveredDue.children[6].innerText;
 							dueDateText = coveredDue.children[8].innerText;
+
+							var poHistoryButton = coveredDue.children[0].querySelectorAll("a")[1];
+							coveredDue.children[0].appendChild(poHistoryButton);
 						}
 
 						if (coveredDue.children.length == 9) {
@@ -1712,6 +1716,33 @@ window.addEventListener(
 							var tdText = document.createTextNode(consignee);
 							td.appendChild(tdText);
 							underTransit[i].insertBefore(td, underTransit[i].children[3]);
+						}
+					}
+
+					if (orderPlacedTable != null && orderPlacedTable != undefined) {
+						var orders = orderPlacedTable.querySelectorAll("tbody")[0].children;
+
+						for (i = 2; i < orders.length; i++) {
+							var order = orders[i];
+
+							if (order.children.length == 13) {
+								var poNo = order.children[0].querySelectorAll("a")[0].innerText;
+
+								var a = document.createElement("a");
+								a.setAttribute("href", "#");
+								a.style.textDecoration = "underline";
+								a.style.color = "red";
+								a.setAttribute("onclick", "showIcHistReq('" + zoneJson[historySheetZone] + "', '" + poNo + "')");
+								var img = document.createElement("img");
+								img.setAttribute("src", "/ireps/images/common/GenerateLOA.png");
+								img.setAttribute("height", "15");
+								img.setAttribute("width", "15");
+								img.setAttribute("border", "0");
+								img.setAttribute("title", "Historical data of inspection and dispatch");
+
+								a.appendChild(img);
+								order.children[0].appendChild(a);
+							}
 						}
 					}
 				}
