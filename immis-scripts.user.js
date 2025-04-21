@@ -1123,60 +1123,64 @@ window.addEventListener(
 			});
 		}
 
-		if (document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER" || document.title == "Run Form - IMMIS/PUR/ORDERGEN") {
-			body.classList.add("po_generation");
+		if ((document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDERGEN") && document.querySelectorAll("input[name='BTN_SHOW_0']")[0] != undefined) {
+            body.classList.add("po_generation");
 
-			var s_4 = document.querySelectorAll("#s_4")[0];
-			var s_10 = document.querySelectorAll("#s_10")[0];
-			var s_15 = document.querySelectorAll("#s_15")[0];
-			var s_18 = document.querySelectorAll("#s_18")[0];
+            var s_4 = document.querySelectorAll("#s_4")[0];
+            var s_10 = document.querySelectorAll("#s_10")[0];
+            var s_15 = document.querySelectorAll("#s_15")[0];
+            var s_18 = document.querySelectorAll("#s_18")[0];
 
-			var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
+            var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
 
-			if (poKeyInput != null && poKeyInput != undefined) {
-				poKeyInput.focus();
-				poKeyInput.addEventListener("keydown", (e) => {
-					if (e.key === "Tab" || e.key === "Enter") {
-						document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_27")[0].focus();
-					}
-				});
-			}
+            if (poKeyInput != null && poKeyInput != undefined) {
+                poKeyInput.focus();
+                poKeyInput.addEventListener("keydown", (e) => {
+                    if (e.key === "Tab" || e.key === "Enter") {
+                        document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_27")[0].focus();
+                    }
+                });
+            }
 
-			var buttonExit = s_4.querySelectorAll("input[name='EXIT_BTN_0']")[0];
-			var buttonView = s_4.querySelectorAll("input[name='NUM_BTN_0']")[0];
-			var buttonAuthorization = s_10.querySelectorAll("input[name='btn_PoNumber_0']")[0];
-			var buttonfundConfirmation = s_18.querySelectorAll("input[name='PROCEED_0']")[0];
+            var buttonExit = s_4.querySelectorAll("input[name='EXIT_BTN_0']")[0];
+            var buttonView = s_4.querySelectorAll("input[name='NUM_BTN_0']")[0];
+            var buttonAuthorization = s_10.querySelectorAll("input[name='btn_PoNumber_0']")[0];
+            var buttonfundConfirmation = s_18.querySelectorAll("input[name='PROCEED_0']")[0];
 
-			document.addEventListener("keydown", (e) => {
-				if (e.key === "Escape") {
-					if (s_10.style.display == "block") {
-						s_10.style.display = "none";
-						s_15.style.display = "none";
-						buttonExit.click();
-					} else {
-						buttonExit.click();
-					}
-				}
-			});
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (s_10.style.display == "block") {
+                        s_10.style.display = "none";
+                        s_15.style.display = "none";
+                        buttonExit.click();
+                    } else {
+                        buttonExit.click();
+                    }
+                }
+            });
 
-			document.addEventListener("click", (e) => {
-				if (e.target.id.search("_LOV_PO") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_PO") != -1)) {
-					buttonView.focus();
-				}
-			});
+            document.addEventListener("click", (e) => {
+                if (e.target.id.search("_LOV_PO") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_PO") != -1)) {
+                    buttonView.focus();
+                }
+            });
 
-			buttonView.addEventListener("click", (e) => {
-				buttonAuthorization.focus();
-			});
+            buttonView.addEventListener("click", (e) => {
+                buttonAuthorization.focus();
+            });
 
-			buttonAuthorization.addEventListener("click", (e) => {
-				s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
-			});
+            buttonAuthorization.addEventListener("click", (e) => {
+                s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
+            });
 
-			buttonfundConfirmation.addEventListener("click", (e) => {
-				s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
-			});
-		}
+            buttonfundConfirmation.addEventListener("click", (e) => {
+                s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
+            });
+        }
+
+        if ((document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER") && document.querySelectorAll("input[name='BTN_SHOW_0']")[0] == undefined) {
+            body.classList.add("po_preparation");
+        }
 
 		if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
 			body.classList.add("tender_publishing");
@@ -1470,7 +1474,7 @@ window.addEventListener(
 					}
 				}
 
-				if ((e.target.name == "BTN_HST_0" && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:")) || (e.target.name.includes("HS") && e.target.name.includes("_0") && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:"))) {
+                if ((e.target.tagName == "INPUT" && e.target.name == "BTN_HST_0" && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:")) || (e.target.tagName == "INPUT" && e.target.name.includes("HS") && e.target.name.includes("_0") && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:"))) {
 					var today = new Date();
 
 					var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
@@ -5702,6 +5706,22 @@ window.addEventListener(
 
         if (document.title == "View / Manage Organization Structure" || document.title == "Run Form - ORG") {
             body.classList.add("organization_structure");
+        }
+
+        if (document.title == "Processing of Purchase Orders" || document.title == "Run Form - IMMIS/PUR/ORDERAUTH") {
+            body.classList.add("po_process");
+
+            var s_4 = document.querySelectorAll("#s_4")[0];
+
+            document.addEventListener("click", (e) => {
+
+                if(e.target.id.startsWith("btnActRow_")){
+
+                    s_4.querySelectorAll("input[name='btn_Auth_0']")[0].focus();
+
+                }
+
+            });
         }
 	},
 	false

@@ -431,6 +431,7 @@
 	.po_modification #s_8,
 	.po_generation #s_13,
 	.po_generation #s_15,
+	.po_process #s_6,
 	.tender_publishing #s_17,
 	.tender_publishing #s_18,
 	.tender_publishing #s_23 {
@@ -443,7 +444,8 @@
 	}
 
 	.po_generation #s_10 table td > div,
-	.po_generation #s_8 table td > div {
+	.po_preparation #s_8 table td > div,
+	.po_process #s_4 table td > div {
 		width: 1024px !important;
 		margin-left: calc(50% - 512px) !important;
 		height: auto !important;
@@ -454,20 +456,19 @@
 		display: none;
 	}
 
-	.po_generation #s_6 {
+	.po_generation #s_6{
 		top: 45px !important;
-		width: 500px !important;
-		left: calc(50% - 250px) !important;
 	}
 
-	/* .po_generation #s_8 {
+	.po_generation #s_8 {
 		top: 45px !important;
 		right: 0 !important;
 		left: auto !important;
 		max-width: 600px !important;
-	} */
+	}
 
-	.po_generation #s_18 {
+	.po_generation #s_18,
+	.po_process #s_7 {
 		width: 800px !important;
 		top: 33px !important;
 		left: calc(50% - 400px) !important;
