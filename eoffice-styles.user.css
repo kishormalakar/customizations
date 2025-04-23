@@ -74,6 +74,16 @@
 		background-color: #F3FEB8 !important;
 	}
 	
+	.list-read:has(button.icon-imp){
+		background-color: #ffe2e2 !important;
+	}
+	
+	.list-read:has(button.icon-imp):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button.icon-imp):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button.icon-imp):hover > td > div{
+		background-color: #ffbcbc !important;
+	}
+	
 	[data-id-attr="subject"]{
 		cursor: pointer;
 	}
