@@ -503,8 +503,9 @@ window.addEventListener(
 				}
 			});
 
-			poNoInput.addEventListener("keydown", (e) => {
+            poNoInput.addEventListener("keydown", (e) => {
 				if (e.key === "Tab" || e.key === "Enter") {
+					poNoInput.blur();
 					poNoInput.nextElementSibling.click();
 				}
 			});
