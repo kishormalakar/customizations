@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.84
+// @version      1.0.85
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -1474,7 +1474,7 @@ window.addEventListener(
 					}
 				}
 
-                if ((e.target.tagName == "INPUT" && e.target.name == "BTN_HST_0" && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:")) || (e.target.tagName == "INPUT" && e.target.name.includes("HS") && e.target.name.includes("_0") && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:"))) {
+				if ((e.target.tagName == "INPUT" && e.target.name == "BTN_HST_0" && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:")) || (e.target.tagName == "INPUT" && e.target.name.includes("HS") && e.target.name.includes("_0") && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:"))) {
 					var today = new Date();
 
 					var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
@@ -1491,6 +1491,7 @@ window.addEventListener(
 						}
 						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "COVERED DUES DETAILS") {
 							coveredDuesTable = tables[i];
+							coveredDuesTable.classList.add("covered_dues_table");
 						}
 						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "MATERIAL UNDER TRANSIT") {
 							underTransitTable = tables[i];
@@ -1500,6 +1501,7 @@ window.addEventListener(
 						}
 						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "ORDERS PLACED DURING LAST 3 YEARS" || tables[i].querySelectorAll("td")[0].innerText.trim() == "ORDERS PLACED DURING LAST 5 YEARS") {
 							orderPlacedTable = tables[i];
+							orderPlacedTable.classList.add("orders_placed_table");
 						}
 					}
 
@@ -1552,16 +1554,16 @@ window.addEventListener(
 						var dueDateText = "";
 
 						if (coveredDue.children.length == 10) {
-							dueQty = +coveredDue.children[6].innerText;
-							dueDateText = coveredDue.children[8].innerText;
+							dueQty = +coveredDue.children[7].innerText;
+							dueDateText = coveredDue.children[9].innerText;
 
 							var poHistoryButton = coveredDue.children[0].querySelectorAll("a")[1];
 							coveredDue.children[0].appendChild(poHistoryButton);
 						}
 
 						if (coveredDue.children.length == 9) {
-							dueQty = +coveredDue.children[5].innerText;
-							dueDateText = coveredDue.children[7].innerText;
+							dueQty = +coveredDue.children[6].innerText;
+							dueDateText = coveredDue.children[8].innerText;
 						}
 
 						var dueDate = new Date("20" + dueDateText.split("/")[2], dueDateText.split("/")[1], dueDateText.split("/")[0]);
@@ -1746,6 +1748,26 @@ window.addEventListener(
 
 								a.appendChild(img);
 								order.children[0].appendChild(a);
+
+								if (+order.children[6].innerText > 0) {
+									order.children[6].style.color = "red";
+									order.children[6].style.fontWeight = "bold";
+								}
+								if (+order.children[7].innerText > 0) {
+									order.children[7].style.color = "red";
+									order.children[7].style.fontWeight = "bold";
+								}
+							}
+
+							if (order.children.length == 12) {
+								if (+order.children[5].innerText > 0) {
+									order.children[5].style.color = "red";
+									order.children[5].style.fontWeight = "bold";
+								}
+								if (+order.children[6].innerText > 0) {
+									order.children[6].style.color = "red";
+									order.children[6].style.fontWeight = "bold";
+								}
 							}
 						}
 					}
