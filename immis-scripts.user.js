@@ -5746,6 +5746,44 @@ window.addEventListener(
 
             });
         }
+
+		if (document.title == "Formation of NIT for Publishing" || document.title == "Run Form - IMMIS/PUR/NITPUBLISH") {
+            body.classList.add("newspaper_publication");
+
+            var todFromInput = document.querySelectorAll("input[name='TOD_FR_0']")[0];
+            var todToInput = document.querySelectorAll("input[name='TOD_TO_0']")[0];
+
+            var todFromValue = todFromInput.value;
+            var todFromArray = todFromValue.split("-");
+
+            todFromInput.value = todFromArray[0] + "-" + todFromArray[1] + "-" + (+todFromArray[2] - 1);
+            todToInput.value = todFromArray[0] + "-" + todFromArray[1] + "-" + (+todFromArray[2] + 1);
+
+            var getTendersButton = document.querySelectorAll("input[name='GET_BTN_0']")[0];
+
+            getTendersButton.addEventListener("click", (e) => {
+
+                var lastNITDateValue = document.querySelectorAll("input[name='MAX_NIT_DT_0']")[0].value;
+                var lastNITDate = new Date("20" + lastNITDateValue.split("-")[2], monthArray.indexOf(lastNITDateValue.split("-")[1]), lastNITDateValue.split("-")[0]);
+
+                var s_3 = document.querySelectorAll("#s_3")[0];
+
+                var listTenders = s_3.querySelectorAll("div")[0].querySelectorAll("tbody")[0].children;
+
+                for(var i = 1; i < listTenders.length; i++){
+
+                    var tender = listTenders[i];
+                    var publishedDateValue = tender.children[9].innerText.trim();
+                    var publishedDate = new Date("20" + publishedDateValue.split("-")[2], monthArray.indexOf(publishedDateValue.split("-")[1]), publishedDateValue.split("-")[0]);
+
+                    if(publishedDate < lastNITDate){
+                        tender.style.display = "none";
+                    }
+
+                }
+
+            });
+        }
 	},
 	false
 );
