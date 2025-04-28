@@ -5784,6 +5784,10 @@ window.addEventListener(
 
             });
         }
+
+        if (document.title == "PL Group to Purchase Section Mapping" || document.title == "Run Form - IMMIS/PLSECMAP") {
+            body.classList.add("pl_section_mapping");
+        }
 	},
 	false
 );
