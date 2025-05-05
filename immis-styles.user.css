@@ -1027,6 +1027,10 @@
         width: 100%;
         margin-top: 20px;
     }
+	
+	.qty_review_div > table:nth-of-type(5){
+		display: none;
+	}
     
     .qty_review_div table td,
     .data_review table td{
