@@ -2232,6 +2232,22 @@ window.addEventListener(
 						inputP8.style.color = "red";
 					}
 					totalInputAAC += Math.min(+aacArray[i], Math.round(escalationLimit * maxConsumption));
+					
+                    inputP8.addEventListener("keyup", (e) => {
+						var dataReviewDiv = document.querySelectorAll(".data_review")[0];
+						var rows = dataReviewDiv.querySelectorAll("table")[0].querySelectorAll("tr");
+						var inputs = dataReviewDiv.querySelectorAll("table")[0].querySelectorAll("input");
+						var totalInputAAC = 0;
+						var bar = barArray[0];
+
+						for (var i = 0; i < inputs.length; i++) {
+							var input = inputs[i];
+							totalInputAAC += +inputs[i].value;
+						}
+
+						rows[rows.length - 2].querySelectorAll("td")[7].innerText = totalInputAAC;
+						rows[rows.length - 1].querySelectorAll("td")[7].innerText = Math.round(+totalInputAAC * +bar);
+					});
 
 					tdP8.appendChild(inputP8);
 					trP.appendChild(tdP1);
@@ -4579,6 +4595,22 @@ window.addEventListener(
 						inputP8.style.color = "red";
 					}
 					totalInputAAC += Math.min(+aacArray[i], Math.round(escalationLimit * maxConsumption));
+
+                    inputP8.addEventListener("keyup", (e) => {
+						var dataReviewDiv = document.querySelectorAll(".data_review")[0];
+						var rows = dataReviewDiv.querySelectorAll("table")[0].querySelectorAll("tr");
+						var inputs = dataReviewDiv.querySelectorAll("table")[0].querySelectorAll("input");
+						var totalInputAAC = 0;
+						var bar = barArray[0];
+
+						for (var i = 0; i < inputs.length; i++) {
+							var input = inputs[i];
+							totalInputAAC += +inputs[i].value;
+						}
+
+						rows[rows.length - 2].querySelectorAll("td")[7].innerText = totalInputAAC;
+						rows[rows.length - 1].querySelectorAll("td")[7].innerText = Math.round(+totalInputAAC * +bar);
+					});
 
 					tdP8.appendChild(inputP8);
 					trP.appendChild(tdP1);
