@@ -1898,10 +1898,10 @@ window.addEventListener(
 					buttonView.focus();
 				}
 			});
-            ppInput.addEventListener("keyup", (e) => {
+			ppInput.addEventListener("keyup", (e) => {
 				var pastedContent = ppInput.value;
-                var trimmedContent = pastedContent.trim();
-                ppInput.value = trimmedContent;
+				var trimmedContent = pastedContent.trim();
+				ppInput.value = trimmedContent;
 			});
 
 			var buttonAuthorization = s_16.querySelectorAll("input[name='btn_Auth_0']")[0];
@@ -1952,6 +1952,7 @@ window.addEventListener(
 				var consumptionRows = consumptionTable.querySelectorAll("tbody")[0].children;
 				var depotArray = [];
 				var stockArray = [];
+				var barArray = [];
 				var consumptionArray = [];
 				var consumptionYearsArray = [];
 				var aacArray = [];
@@ -1965,6 +1966,7 @@ window.addEventListener(
 					var row1 = consumptionRows[i];
 					depotArray.push(row1.querySelectorAll("td")[0].innerText);
 					stockArray.push(+row1.querySelectorAll("td")[4].innerText);
+					barArray.push(+row1.querySelectorAll("td")[2].innerText);
 					var array1 = [];
 					array1.push(+row1.querySelectorAll("td")[7].innerText);
 					array1.push(+row1.querySelectorAll("td")[8].innerText);
@@ -2072,6 +2074,7 @@ window.addEventListener(
 
 				data.depotArray = depotArray;
 				data.stockArray = stockArray;
+				data.barArray = barArray;
 				data.consumptionArray = consumptionArray;
 				data.consumptionYearsArray = consumptionYearsArray;
 				data.aacArray = aacArray;
@@ -2103,6 +2106,7 @@ window.addEventListener(
 
 				var depotArray = data.depotArray;
 				var stockArray = data.stockArray;
+				var barArray = data.barArray;
 				var consumptionArray = data.consumptionArray;
 				var consumptionYearsArray = data.consumptionYearsArray;
 				var aacArray = data.aacArray;
@@ -2181,6 +2185,8 @@ window.addEventListener(
 				tbody1.appendChild(tr1);
 				tbody1.appendChild(tr2);
 
+				var totalInputAAC = 0;
+
 				for (var i = 0; i < depotArray.length; i++) {
 					var trP = document.createElement("tr");
 					var tdP1 = document.createElement("td");
@@ -2225,6 +2231,8 @@ window.addEventListener(
 					if (aacArray[i] > escalationLimit * maxConsumption) {
 						inputP8.style.color = "red";
 					}
+					totalInputAAC += Math.min(+aacArray[i], Math.round(escalationLimit * maxConsumption));
+
 					tdP8.appendChild(inputP8);
 					trP.appendChild(tdP1);
 					trP.appendChild(tdP2);
@@ -2236,6 +2244,52 @@ window.addEventListener(
 					trP.appendChild(tdP8);
 					tbody1.appendChild(trP);
 				}
+
+				var trP = document.createElement("tr");
+				var tdP1 = document.createElement("td");
+				var textP1 = document.createTextNode("Total");
+				tdP1.appendChild(textP1);
+				var tdP2 = document.createElement("td");
+				var tdP3 = document.createElement("td");
+				var tdP4 = document.createElement("td");
+				var tdP5 = document.createElement("td");
+				var tdP6 = document.createElement("td");
+				var tdP7 = document.createElement("td");
+				var tdP8 = document.createElement("td");
+				var textP8 = document.createTextNode(totalInputAAC);
+				tdP8.appendChild(textP8);
+				trP.appendChild(tdP1);
+				trP.appendChild(tdP2);
+				trP.appendChild(tdP3);
+				trP.appendChild(tdP4);
+				trP.appendChild(tdP5);
+				trP.appendChild(tdP6);
+				trP.appendChild(tdP7);
+				trP.appendChild(tdP8);
+				tbody1.appendChild(trP);
+
+				var trP = document.createElement("tr");
+				var tdP1 = document.createElement("td");
+				var textP1 = document.createTextNode("Total AAC Value");
+				tdP1.appendChild(textP1);
+				var tdP2 = document.createElement("td");
+				var tdP3 = document.createElement("td");
+				var tdP4 = document.createElement("td");
+				var tdP5 = document.createElement("td");
+				var tdP6 = document.createElement("td");
+				var tdP7 = document.createElement("td");
+				var tdP8 = document.createElement("td");
+				var textP8 = document.createTextNode(Math.round(totalInputAAC * barArray[0]));
+				tdP8.appendChild(textP8);
+				trP.appendChild(tdP1);
+				trP.appendChild(tdP2);
+				trP.appendChild(tdP3);
+				trP.appendChild(tdP4);
+				trP.appendChild(tdP5);
+				trP.appendChild(tdP6);
+				trP.appendChild(tdP7);
+				trP.appendChild(tdP8);
+				tbody1.appendChild(trP);
 
 				table1.appendChild(tbody1);
 				div.appendChild(table1);
@@ -4241,6 +4295,7 @@ window.addEventListener(
 				var consumptionRows = consumptionTable.querySelectorAll("tbody")[0].children;
 				var depotArray = [];
 				var stockArray = [];
+				var barArray = [];
 				var consumptionArray = [];
 				var consumptionYearsArray = [];
 				var aacArray = [];
@@ -4254,6 +4309,7 @@ window.addEventListener(
 					var row1 = consumptionRows[i];
 					depotArray.push(row1.querySelectorAll("td")[0].innerText);
 					stockArray.push(+row1.querySelectorAll("td")[4].innerText);
+					barArray.push(+row1.querySelectorAll("td")[2].innerText);
 					var array1 = [];
 					array1.push(+row1.querySelectorAll("td")[7].innerText);
 					array1.push(+row1.querySelectorAll("td")[8].innerText);
@@ -4350,7 +4406,7 @@ window.addEventListener(
 				var ipTo = cpText.substring(56, 64);
 				var ipMM = parseInt(cpText.substring(67, 69));
 				var bpText = divShowHtml1.children[1].children[10].nextSibling.textContent;
-				var bpMM = parseInt(bpText.substring(8, 9));
+				var bpMM = parseInt(bpText.substring(8, 10).trim());
 
 				var data = new Object();
 				data.date = date;
@@ -4363,6 +4419,7 @@ window.addEventListener(
 
 				data.depotArray = depotArray;
 				data.stockArray = stockArray;
+				data.barArray = barArray;
 				data.consumptionArray = consumptionArray;
 				data.consumptionYearsArray = consumptionYearsArray;
 				data.aacArray = aacArray;
@@ -4395,6 +4452,7 @@ window.addEventListener(
 
 				var depotArray = data.depotArray;
 				var stockArray = data.stockArray;
+				var barArray = data.barArray;
 				var consumptionArray = data.consumptionArray;
 				var consumptionYearsArray = data.consumptionYearsArray;
 				var aacArray = data.aacArray;
@@ -4474,6 +4532,8 @@ window.addEventListener(
 				tbody1.appendChild(tr1);
 				tbody1.appendChild(tr2);
 
+				var totalInputAAC = 0;
+
 				for (var i = 0; i < depotArray.length; i++) {
 					var trP = document.createElement("tr");
 					var tdP1 = document.createElement("td");
@@ -4518,6 +4578,8 @@ window.addEventListener(
 					if (aacArray[i] > escalationLimit * maxConsumption) {
 						inputP8.style.color = "red";
 					}
+					totalInputAAC += Math.min(+aacArray[i], Math.round(escalationLimit * maxConsumption));
+
 					tdP8.appendChild(inputP8);
 					trP.appendChild(tdP1);
 					trP.appendChild(tdP2);
@@ -4529,6 +4591,52 @@ window.addEventListener(
 					trP.appendChild(tdP8);
 					tbody1.appendChild(trP);
 				}
+
+				var trP = document.createElement("tr");
+				var tdP1 = document.createElement("td");
+				var textP1 = document.createTextNode("Total");
+				tdP1.appendChild(textP1);
+				var tdP2 = document.createElement("td");
+				var tdP3 = document.createElement("td");
+				var tdP4 = document.createElement("td");
+				var tdP5 = document.createElement("td");
+				var tdP6 = document.createElement("td");
+				var tdP7 = document.createElement("td");
+				var tdP8 = document.createElement("td");
+				var textP8 = document.createTextNode(totalInputAAC);
+				tdP8.appendChild(textP8);
+				trP.appendChild(tdP1);
+				trP.appendChild(tdP2);
+				trP.appendChild(tdP3);
+				trP.appendChild(tdP4);
+				trP.appendChild(tdP5);
+				trP.appendChild(tdP6);
+				trP.appendChild(tdP7);
+				trP.appendChild(tdP8);
+				tbody1.appendChild(trP);
+
+				var trP = document.createElement("tr");
+				var tdP1 = document.createElement("td");
+				var textP1 = document.createTextNode("Total AAC Value");
+				tdP1.appendChild(textP1);
+				var tdP2 = document.createElement("td");
+				var tdP3 = document.createElement("td");
+				var tdP4 = document.createElement("td");
+				var tdP5 = document.createElement("td");
+				var tdP6 = document.createElement("td");
+				var tdP7 = document.createElement("td");
+				var tdP8 = document.createElement("td");
+				var textP8 = document.createTextNode(Math.round(totalInputAAC * barArray[0]));
+				tdP8.appendChild(textP8);
+				trP.appendChild(tdP1);
+				trP.appendChild(tdP2);
+				trP.appendChild(tdP3);
+				trP.appendChild(tdP4);
+				trP.appendChild(tdP5);
+				trP.appendChild(tdP6);
+				trP.appendChild(tdP7);
+				trP.appendChild(tdP8);
+				tbody1.appendChild(trP);
 
 				table1.appendChild(tbody1);
 				div.appendChild(table1);
