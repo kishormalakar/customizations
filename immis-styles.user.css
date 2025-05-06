@@ -691,6 +691,10 @@
         width: 80px;
     }
 
+	.nit_search #s_2 .DONTPrint img{
+		cursor: pointer;
+	}
+
 	.nit_search #s_3 {
 		position: absolute !important;
 		right: 0 !important;
