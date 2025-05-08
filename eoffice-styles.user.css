@@ -42,6 +42,17 @@
 		max-height: calc((var(--vh, 1vh) * 90) - 90px);
 	}
 	
+	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(5),
+	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(8),
+	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(10),
+	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(11),
+	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(5),
+	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(8),
+	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(10),
+	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(11){
+		display: none;
+	}
+	
 	.list-unread,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread > td > div{
