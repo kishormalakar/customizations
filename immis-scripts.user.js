@@ -1553,22 +1553,36 @@ window.addEventListener(
 						var coveredDue = coveredDues[i];
 						var dueQty = 0;
 						var dueDateText = "";
+						var dueDate, dueMonth;
 
 						if (coveredDue.children.length == 10) {
 							dueQty = +coveredDue.children[7].innerText;
 							dueDateText = coveredDue.children[9].innerText;
 
+							dueDate = new Date("20" + dueDateText.split("/")[2], dueDateText.split("/")[1], dueDateText.split("/")[0]);
+							dueMonth = monthArray[+dueDateText.split("/")[1] - 1] + ", " + dueDateText.split("/")[2];
+
 							var poHistoryButton = coveredDue.children[0].querySelectorAll("a")[1];
 							coveredDue.children[0].appendChild(poHistoryButton);
+
+							if (dueQty > 0 && dueDate < today) {
+								coveredDue.children[7].style.color = "red";
+								coveredDue.children[9].style.color = "red";
+							}
 						}
 
 						if (coveredDue.children.length == 9) {
 							dueQty = +coveredDue.children[6].innerText;
 							dueDateText = coveredDue.children[8].innerText;
-						}
 
-						var dueDate = new Date("20" + dueDateText.split("/")[2], dueDateText.split("/")[1], dueDateText.split("/")[0]);
-						var dueMonth = monthArray[+dueDateText.split("/")[1] - 1] + ", " + dueDateText.split("/")[2];
+							dueDate = new Date("20" + dueDateText.split("/")[2], dueDateText.split("/")[1], dueDateText.split("/")[0]);
+							dueMonth = monthArray[+dueDateText.split("/")[1] - 1] + ", " + dueDateText.split("/")[2];
+
+							if (dueQty > 0 && dueDate < today) {
+								coveredDue.children[6].style.color = "red";
+								coveredDue.children[8].style.color = "red";
+							}
+						}
 
 						if (dueDate >= today && receiptMonthArray.includes(dueMonth)) {
 							receiptQtyArray[receiptMonthArray.indexOf(dueMonth)] = receiptQtyArray[receiptMonthArray.indexOf(dueMonth)] + dueQty;
