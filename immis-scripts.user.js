@@ -1559,7 +1559,7 @@ window.addEventListener(
 							dueQty = +coveredDue.children[7].innerText;
 							dueDateText = coveredDue.children[9].innerText;
 
-							dueDate = new Date("20" + dueDateText.split("/")[2], dueDateText.split("/")[1], dueDateText.split("/")[0]);
+							dueDate = new Date("20" + dueDateText.split("/")[2], +dueDateText.split("/")[1] - 1, dueDateText.split("/")[0]);
 							dueMonth = monthArray[+dueDateText.split("/")[1] - 1] + ", " + dueDateText.split("/")[2];
 
 							var poHistoryButton = coveredDue.children[0].querySelectorAll("a")[1];
@@ -1575,7 +1575,7 @@ window.addEventListener(
 							dueQty = +coveredDue.children[6].innerText;
 							dueDateText = coveredDue.children[8].innerText;
 
-							dueDate = new Date("20" + dueDateText.split("/")[2], dueDateText.split("/")[1], dueDateText.split("/")[0]);
+							dueDate = new Date("20" + dueDateText.split("/")[2], +dueDateText.split("/")[1] - 1, dueDateText.split("/")[0]);
 							dueMonth = monthArray[+dueDateText.split("/")[1] - 1] + ", " + dueDateText.split("/")[2];
 
 							if (dueQty > 0 && dueDate < today) {
