@@ -42,6 +42,10 @@
 		max-height: calc((var(--vh, 1vh) * 90) - 90px);
 	}
 	
+	file-toc-container file-toc-list-container .file-toc-list div:has(> table){
+		max-height: calc((var(--vh, 1vh) * 90) - 200px) !important;
+	} 
+	
 	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(5),
 	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(8),
 	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(10),
