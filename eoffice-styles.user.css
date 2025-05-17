@@ -34,6 +34,17 @@
 		color: #000;
 	}
 	
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .sentTo-container .tab-content.form:has(.show),
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .sentTo-container .tab-content.form:has(.show){
+		max-height: 300px;
+		min-height: 280px;
+	}
+	
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .sentTo-container .box_container .sentForm-container .text-small.text-italic,
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .sentTo-container .box_container .sentForm-container .text-small.text-italic{
+		display: none;
+	}
+	
 	quick-noting-container .bg-green-note{
 		cursor: pointer;
 	}
