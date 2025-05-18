@@ -1478,6 +1478,11 @@ window.addEventListener(
 				if ((e.target.tagName == "INPUT" && e.target.name == "BTN_HST_0" && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:")) || (e.target.tagName == "INPUT" && e.target.name.includes("HS") && e.target.name.includes("_0") && divShowHtml1.querySelectorAll("table")[0].querySelectorAll("tr")[0].innerText.startsWith("Item Card for PL NO:"))) {
 					var today = new Date();
 
+					var printButton = divShowHtml1.querySelectorAll("div")[0].querySelectorAll("input[value='Print']")[0];
+					var printButtonOnClick = printButton.getAttribute("onclick");
+					printButtonOnClick = printButtonOnClick.replace("Item Card for PL NO:", "HS");
+					printButton.setAttribute("onclick", printButtonOnClick);
+
 					var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
 
 					var tables = divShowHtml1.querySelectorAll(":scope > div")[1].querySelectorAll(":scope > table");
