@@ -481,6 +481,34 @@
 		width: 100% !important;
 		height: unset !important;
 	}
+	
+	.po_preparation #s_4{
+        width: 1200px !important;
+        left: calc(50% - 600px) !important;
+		top: 240px !important;
+    }
+    
+    .po_preparation #s_4 > table,
+    .po_preparation #s_4 > div{
+        width: 100% !important;
+		max-width: 100% !important;
+		position: relative !important;
+    }
+    
+    .po_preparation #s_6{
+		width: 1200px !important;
+        left: calc(50% - 600px) !important;
+		top: 44px !important;
+    }
+	
+	.po_preparation #s_6 table,
+	.po_preparation #s_6 > div{
+		width: 400px !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		overflow-x: hidden;
+		border: 1px solid black;
+	}
 
 	.tender_publishing #s_6 > table{
 		border-collapse: collapse;
