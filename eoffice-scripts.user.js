@@ -52,6 +52,9 @@ window.addEventListener(
                 if (e.target.closest("tr").querySelectorAll("[data-id-attr='receiptNumber']")[0] != null) {
                     e.target.closest("tr").querySelectorAll("[data-id-attr='receiptNumber']")[0].querySelectorAll("button")[0].click();
                 }
+                if (e.target.closest("tr").querySelectorAll("[data-id-attr='document-number']")[0] != null) {
+                    e.target.closest("tr").querySelectorAll("[data-id-attr='document-number']")[0].click();
+                }
             }
 
             if (e.target.closest("[data-id-attr='send-to-recent-five-table']") != null && e.target.parentElement.querySelectorAll("#onUserSelect-1")[0] != undefined) {
