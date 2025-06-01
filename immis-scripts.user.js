@@ -2237,7 +2237,7 @@ window.addEventListener(
 					var escalationLimit = 1;
 
 					if (category == "A") {
-						escalationLimit = 1.15;
+						escalationLimit = 1.5;
 					} else if (category == "B") {
 						escalationLimit = 1.5;
 					} else {
@@ -4600,7 +4600,7 @@ window.addEventListener(
 					var escalationLimit = 1;
 
 					if (category == "A") {
-						escalationLimit = 1.15;
+						escalationLimit = 1.5;
 					} else if (category == "B") {
 						escalationLimit = 1.5;
 					} else {
