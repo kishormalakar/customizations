@@ -70,6 +70,10 @@ window.addEventListener(
                 }
             }
 
+            if (e.target.closest("[data-id-attr='send-to-recent-five-table']") != null && e.target.parentElement.querySelectorAll("#onUserSelect-2")[0] != undefined) {
+                e.target.parentElement.querySelectorAll("#onUserSelect-2")[0].click();
+            }
+
             if((e.target.classList.contains("panel-heading") || e.target.parentElement.classList.contains("panel-heading")) && e.target.closest("app-dialog").classList.contains("dialog-minimize")){
 
                 e.target.closest("referred-pdf-view").previousElementSibling.children[0].click();
