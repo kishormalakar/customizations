@@ -525,6 +525,34 @@ window.addEventListener(
 				offerDetailsDiv.appendChild(additionalDetailsDiv);
 			});
 		}
+
+		if (pathname.startsWith("/epsn/reports/shieldCriteriaReport/adequacyOfCoverageOfCurrentData.do")) {
+			var adequacyTable = document.querySelectorAll(".lightGrayTbl")[0].children[0].children;
+
+			var th = adequacyTable[0].children[3].cloneNode(true);
+			th.innerText = "Adequacy %";
+			adequacyTable[0].appendChild(th);
+
+			for (var i = 1; i < adequacyTable.length; i++) {
+				var row = adequacyTable[i];
+				var adequacyItemCount;
+				var inadequacyItemCount;
+
+				if (i == adequacyTable.length - 1) {
+					adequacyItemCount = row.children[1].innerText;
+					inadequacyItemCount = row.children[2].innerText;
+				} else {
+					adequacyItemCount = row.children[2].innerText;
+					inadequacyItemCount = row.children[3].innerText;
+				}
+
+				var adequacyPercentage = Math.round((+adequacyItemCount / (+adequacyItemCount + +inadequacyItemCount)) * 10000, 2) / 100;
+
+				var td = row.children[2].cloneNode(true);
+				td.innerText = adequacyPercentage + "%";
+				row.appendChild(td);
+			}
+		}
 	},
 	false
 );
