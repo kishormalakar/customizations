@@ -27,6 +27,7 @@ window.addEventListener(
 		var currentZoneCode = "";
 		var currentZone = "";
 		var currentYear = "";
+        var today = new Date();
 
 		var body = document.querySelectorAll("body")[0];
 
@@ -4017,7 +4018,15 @@ window.addEventListener(
 									td1.style.border = "1px solid black";
 									td1.innerHTML = coveragePO.innerHTML;
 									td1.appendChild(br);
-									td1.appendChild(tdText2);
+									var span = document.createElement("span");
+									span.appendChild(tdText2);
+
+									var coverageDPDate = new Date("20" + coverageDP.split("/")[2] + "-" + coverageDP.split("/")[1] + "-" + coverageDP.split("/")[0]);
+									if (today - coverageDPDate > 30 * 24 * 60 * 60 && !span.innerText.startsWith("Material under accountal")) {
+										span.style.color = "red";
+									}
+
+									td1.appendChild(span);
 									tr1.appendChild(td1);
 									row6.lastChild.children[0].children[0].appendChild(tr1);
 
@@ -4035,7 +4044,16 @@ window.addEventListener(
 									var br = document.createElement("br");
 									var tdNum = row6.lastChild.children[0].querySelectorAll("td").length;
 									row6.lastChild.children[0].querySelectorAll("td")[tdNum - 1].appendChild(br);
-									row6.lastChild.children[0].querySelectorAll("td")[tdNum - 1].appendChild(tdText1);
+
+									var span = document.createElement("span");
+									span.appendChild(tdText1);
+
+									var coverageDPDate = new Date("20" + coverageDP.split("/")[2] + "-" + coverageDP.split("/")[1] + "-" + coverageDP.split("/")[0]);
+									if (today - coverageDPDate > 30 * 24 * 60 * 60 && !span.innerText.startsWith("Material under accountal")) {
+										span.style.color = "red";
+									}
+
+									row6.lastChild.children[0].querySelectorAll("td")[tdNum - 1].appendChild(span);
 
 									if (!isNaN(coverageQty)) {
 										cummulativeCoverage += +coverageQty;
