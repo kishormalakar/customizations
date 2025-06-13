@@ -4022,7 +4022,7 @@ window.addEventListener(
 									span.appendChild(tdText2);
 
 									var coverageDPDate = new Date("20" + coverageDP.split("/")[2] + "-" + coverageDP.split("/")[1] + "-" + coverageDP.split("/")[0]);
-									if (today - coverageDPDate > 30 * 24 * 60 * 60 && !span.innerText.startsWith("Material under accountal")) {
+									if (today - coverageDPDate > 30 * 24 * 60 * 60 * 1000 && !span.innerText.startsWith("Material under accountal")) {
 										span.style.color = "red";
 									}
 
@@ -4049,7 +4049,7 @@ window.addEventListener(
 									span.appendChild(tdText1);
 
 									var coverageDPDate = new Date("20" + coverageDP.split("/")[2] + "-" + coverageDP.split("/")[1] + "-" + coverageDP.split("/")[0]);
-									if (today - coverageDPDate > 30 * 24 * 60 * 60 && !span.innerText.startsWith("Material under accountal")) {
+									if (today - coverageDPDate > 30 * 24 * 60 * 60 * 1000 && !span.innerText.startsWith("Material under accountal")) {
 										span.style.color = "red";
 									}
 
