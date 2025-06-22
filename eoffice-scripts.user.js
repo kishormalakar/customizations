@@ -20,14 +20,17 @@ window.addEventListener(
 		let updateFileCount = () => {
 			var navigation_menu = document.querySelectorAll("navigation-menu-component")[0];
 			var file_button = navigation_menu.querySelectorAll("button[data-id-attr='file']")[0];
-			var unread_file_count = file_button.querySelectorAll("span.msg-count")[0].innerText;
-			var title = document.title;
 
-			if (!title.startsWith("(")) {
-				document.title = "(" + unread_file_count + ") " + title;
-			} else {
-				var title2 = title.split(")")[1];
-				document.title = "(" + unread_file_count + ") " + title2;
+			if (file_button.querySelectorAll("span.msg-count")[0] != null || file_button.querySelectorAll("span.msg-count")[0] != undefined) {
+				var unread_file_count = file_button.querySelectorAll("span.msg-count")[0].innerText;
+				var title = document.title;
+
+				if (!title.startsWith("(")) {
+					document.title = "(" + unread_file_count + ") " + title;
+				} else {
+					var title2 = title.split(")")[1];
+					document.title = "(" + unread_file_count + ") " + title2;
+				}
 			}
 		};
 		setInterval(updateFileCount, 1000);
