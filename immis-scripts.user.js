@@ -3632,7 +3632,7 @@ window.addEventListener(
 			body.classList.add("stockmaster");
 
 			body.querySelectorAll("textarea[name='report_format_0']")[0].removeAttribute("readonly");
-			body.querySelectorAll("textarea[name='report_format_0']")[0].value = "PL No,Description,Long Description,ABC,AAC,CCONS3,CCONS2,CCONS1,CCONS0,Stock,CBQTY PrevYr";
+			body.querySelectorAll("textarea[name='report_format_0']")[0].value = "PL No,Description,Long Description,ABC,AAC,CCONS3,CCONS2,CCONS1,CCONS0,Stock,CBQTY PrevYr,BAR";
 		}
 
 		if (document.title == "Output of Report - LISTPOS" || document.title == "Output of Report - LISTPOS") {
