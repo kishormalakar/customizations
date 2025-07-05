@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMMIS
 // @namespace    http://tampermonkey.net/
-// @version      1.0.85
+// @version      1.0.86
 // @description  try to take over the world!
 // @author       You
 // @match        https://ireps.gov.in/fcgi/*
@@ -523,85 +523,330 @@ window.addEventListener(
 		}
 
 		if (document.title == "Availability Status of Items" || document.title == "Run Form - IMMIS/DEP/AVAILSTAT") {
-            body.classList.add("availability");
+			body.classList.add("availability");
 
-            var s_2 = document.querySelectorAll("#s_2")[0];
+			var s_2 = document.querySelectorAll("#s_2")[0];
+			var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
+			var divShowHtml2 = document.querySelectorAll("#divShowHtml2")[0];
 
-            s_2.querySelectorAll("input[name='RLYNAME_0']")[0].removeAttribute("readonly");
-            s_2.querySelectorAll("input[name='btn_LovRly_0']")[0].removeAttribute("disabled");
+			s_2.querySelectorAll("input[name='RLYNAME_0']")[0].removeAttribute("readonly");
+			s_2.querySelectorAll("input[name='btn_LovRly_0']")[0].removeAttribute("disabled");
 
-            var buttonShowStatus = s_2.querySelectorAll("input[name='btn_Stat_0']")[0];
+			var buttonShowStatus = s_2.querySelectorAll("input[name='btn_Stat_0']")[0];
 
-            buttonShowStatus.addEventListener("click", (e) => {
+			buttonShowStatus.addEventListener("click", (e) => {
+				var availabilityTable = s_2.querySelectorAll(":scope > table")[1].querySelectorAll("div")[0].querySelectorAll(":scope > table")[1].querySelectorAll("tbody")[0].children;
 
-                var availabilityTable = s_2.querySelectorAll(":scope > table")[1].querySelectorAll("div")[0].querySelectorAll(":scope > table")[1].querySelectorAll("tbody")[0].children;
+				if (s_2.querySelectorAll("input[name='STKBASIS']")[2].checked == true) {
+					for (var i = 0; i < availabilityTable.length - 1; i++) {
+						var row = availabilityTable[i];
 
-                if(s_2.querySelectorAll("input[name='STKBASIS']")[2].checked == true){
+						if (i == 0) {
+							row.querySelectorAll("th")[4].setAttribute("colspan", "12");
+						} else if (i == 1) {
+							var th = row.querySelectorAll("th")[6].cloneNode(true);
+							th.innerText = "Adequacy";
+							row.appendChild(th);
+						} else if (i < availabilityTable.length - 2) {
+							var numTotal = row.querySelectorAll("td")[2].innerText;
+							var numZero = row.querySelectorAll("td")[4].innerText;
+							var num0to1 = row.querySelectorAll("td")[5].innerText;
+							var num1to2 = row.querySelectorAll("td")[6].innerText;
+							var num2to3 = row.querySelectorAll("td")[7].innerText;
+							var num3to6 = row.querySelectorAll("td")[8].innerText;
+							var num6to12 = row.querySelectorAll("td")[9].innerText;
+							var numAbove12 = row.querySelectorAll("td")[10].innerText;
+							var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
+							var numAboveAdequacy = +num6to12 + +numAbove12;
 
-                    for(var i = 0; i < availabilityTable.length - 1; i++){
+							var adequacy = Math.round((+numAboveAdequacy / +numTotal) * 100);
+							var td = row.querySelectorAll("td")[8].cloneNode(true);
+							td.innerText = adequacy + "%";
+							row.appendChild(td);
+						} else {
+							var numTotal = row.querySelectorAll("td")[1].innerText;
+							var numZero = row.querySelectorAll("td")[3].innerText;
+							var num0to1 = row.querySelectorAll("td")[4].innerText;
+							var num1to2 = row.querySelectorAll("td")[5].innerText;
+							var num2to3 = row.querySelectorAll("td")[6].innerText;
+							var num3to6 = row.querySelectorAll("td")[7].innerText;
+							var num6to12 = row.querySelectorAll("td")[8].innerText;
+							var numAbove12 = row.querySelectorAll("td")[9].innerText;
+							var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
+							var numAboveAdequacy = +num6to12 + +numAbove12;
 
-                        var row = availabilityTable[i];
+							var adequacy = Math.round((+numAboveAdequacy / +numTotal) * 100);
+							var td = row.querySelectorAll("td")[8].cloneNode(true);
+							td.innerText = adequacy + "%";
+							row.appendChild(td);
+						}
+					}
+				}
+			});
 
-                        if(i == 0){
+			document.addEventListener("click", (e) => {
+				var id = e.target.id;
+				if (id.startsWith("btnHSRow_")) {
+					var today = new Date();
 
-                            row.querySelectorAll("th")[4].setAttribute("colspan", "12");
+					var printButton = divShowHtml1.querySelectorAll("div")[0].querySelectorAll("input[value='Print']")[0];
+					var printButtonOnClick = printButton.getAttribute("onclick");
+					printButtonOnClick = printButtonOnClick.replace("Item Card for PL NO:", "HS");
+					printButton.setAttribute("onclick", printButtonOnClick);
 
-                        }
+					var section_udm = divShowHtml1.querySelectorAll("#section_udm")[0];
 
-                        else if(i == 1){
+					var tables = divShowHtml1.querySelectorAll(":scope > div")[1].querySelectorAll(":scope > table");
+					var consumptionTable, uncoveredDuesTable, coveredDuesTable, underTransitTable, icTable, orderPlacedTable;
 
-                            var th = row.querySelectorAll("th")[6].cloneNode(true);
-                            th.innerText = "Adequacy";
-                            row.appendChild(th);
+					for (i = 0; i < tables.length; i++) {
+						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "STOCK, AAC AND CONSUMPTION DETAILS") {
+							consumptionTable = tables[i];
+						}
+						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "UN-COVERED DUES DETAILS") {
+							uncoveredDuesTable = tables[i];
+						}
+						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "COVERED DUES DETAILS") {
+							coveredDuesTable = tables[i];
+							coveredDuesTable.classList.add("covered_dues_table");
+						}
+						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "MATERIAL UNDER TRANSIT") {
+							underTransitTable = tables[i];
+						}
+						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "INSPECTION CERTIFICATE DETAILS") {
+							icTable = tables[i];
+						}
+						if (tables[i].querySelectorAll("td")[0].innerText.trim() == "ORDERS PLACED DURING LAST 3 YEARS" || tables[i].querySelectorAll("td")[0].innerText.trim() == "ORDERS PLACED DURING LAST 5 YEARS") {
+							orderPlacedTable = tables[i];
+							orderPlacedTable.classList.add("orders_placed_table");
+						}
+					}
 
-                        }
+					var historySheetZone = tables[0].querySelectorAll("td")[0].innerText.split(":")[1].trim();
+					var totalConsumptionLY = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[3].innerText;
+					var totalConsumptionCY = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[4].innerText;
+					var totalAAC = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[5].innerText.split("(")[0];
+					var totalStock = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("#stockdata_total")[0].children[6].innerText.split("(")[0].trim();
+					var currentFY = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll("tr")[2].querySelectorAll("td")[3].innerText;
+					var dateFY = new Date("20" + currentFY.split("-")[0], 3, 1);
+					var numDays = (today - dateFY) / (1000 * 60 * 60 * 24);
+					var consumptionRateLY = Math.round(+totalConsumptionLY / 12);
+					var consumptionRateCY = Math.round((+totalConsumptionCY / numDays) * 30);
 
-                        else if(i < availabilityTable.length - 2){
+					var uncoveredDues = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
-                            var numTotal = row.querySelectorAll("td")[2].innerText;
-                            var numZero = row.querySelectorAll("td")[4].innerText;
-                            var num0to1 = row.querySelectorAll("td")[5].innerText;
-                            var num1to2 = row.querySelectorAll("td")[6].innerText;
-                            var num2to3 = row.querySelectorAll("td")[7].innerText;
-                            var num3to6 = row.querySelectorAll("td")[8].innerText;
-                            var num6to12 = row.querySelectorAll("td")[9].innerText;
-                            var numAbove12 = row.querySelectorAll("td")[10].innerText;
-                            var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
-                            var numAboveAdequacy = +num6to12 + +numAbove12;
+					for (i = 2; i < uncoveredDues.length; i++) {
+						if (uncoveredDues[i].children[8]) {
+							var dueDate = uncoveredDues[i].children[8].innerText;
 
-                            var adequacy = Math.round(+numAboveAdequacy / +numTotal * 100);
-                            var td = row.querySelectorAll("td")[8].cloneNode(true);
-                            td.innerText = adequacy + "%";
-                            row.appendChild(td);
-                        }
+							if (dueDate != "") {
+								var tenderDueDate = new Date("20" + dueDate.split("/")[2], dueDate.split("/")[1] - 1, dueDate.split("/")[0]);
+								var today = new Date();
 
-                        else{
+								var dateDiff = Math.floor((today - tenderDueDate) / 86400000);
 
-                            var numTotal = row.querySelectorAll("td")[1].innerText;
-                            var numZero = row.querySelectorAll("td")[3].innerText;
-                            var num0to1 = row.querySelectorAll("td")[4].innerText;
-                            var num1to2 = row.querySelectorAll("td")[5].innerText;
-                            var num2to3 = row.querySelectorAll("td")[6].innerText;
-                            var num3to6 = row.querySelectorAll("td")[7].innerText;
-                            var num6to12 = row.querySelectorAll("td")[8].innerText;
-                            var numAbove12 = row.querySelectorAll("td")[9].innerText;
-                            var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
-                            var numAboveAdequacy = +num6to12 + +numAbove12;
+								uncoveredDues[i].children[8].innerText = dueDate + " (" + dateDiff + " days)";
+							}
+						}
+					}
 
-                            var adequacy = Math.round(+numAboveAdequacy / +numTotal * 100);
-                            var td = row.querySelectorAll("td")[8].cloneNode(true);
-                            td.innerText = adequacy + "%";
-                            row.appendChild(td);
+					var coveredDues = coveredDuesTable.querySelectorAll("tbody")[0].children;
+					var cummulativeDueQty = 0;
 
-                        }
+					var receiptMonthArray = [];
+					var receiptQtyArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+					var cbArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+					var consumptionRateArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-                    }
+					for (i = 0; i < 15; i++) {
+						var mm = +today.getMonth() + i - Math.floor((today.getMonth() + i) / 12) * 12;
+						var yy = +today.getFullYear().toString().substring(2, 4) + Math.floor((today.getMonth() + i) / 12);
+						var mmyy = monthArray[mm] + ", " + yy;
+						receiptMonthArray.push(mmyy);
+					}
 
-                }
+					for (i = 2; i < coveredDues.length; i++) {
+						var coveredDue = coveredDues[i];
+						var dueQty = 0;
+						var dueDateText = "";
+						var dueDate, dueMonth;
 
-            });
+						if (coveredDue.children.length == 10) {
+							dueQty = +coveredDue.children[7].innerText;
+							dueDateText = coveredDue.children[9].innerText;
 
-        }
+							dueDate = new Date("20" + dueDateText.split("/")[2], +dueDateText.split("/")[1] - 1, dueDateText.split("/")[0]);
+							dueMonth = monthArray[+dueDateText.split("/")[1] - 1] + ", " + dueDateText.split("/")[2];
+
+							var poHistoryButton = coveredDue.children[0].querySelectorAll("a")[1];
+							coveredDue.children[0].appendChild(poHistoryButton);
+
+							if (dueQty > 0 && dueDate < today) {
+								coveredDue.children[7].style.color = "red";
+								coveredDue.children[9].style.color = "red";
+							}
+						}
+
+						if (coveredDue.children.length == 9) {
+							dueQty = +coveredDue.children[6].innerText;
+							dueDateText = coveredDue.children[8].innerText;
+
+							dueDate = new Date("20" + dueDateText.split("/")[2], +dueDateText.split("/")[1] - 1, dueDateText.split("/")[0]);
+							dueMonth = monthArray[+dueDateText.split("/")[1] - 1] + ", " + dueDateText.split("/")[2];
+
+							if (dueQty > 0 && dueDate < today) {
+								coveredDue.children[6].style.color = "red";
+								coveredDue.children[8].style.color = "red";
+							}
+						}
+
+						if (dueDate >= today && receiptMonthArray.includes(dueMonth)) {
+							receiptQtyArray[receiptMonthArray.indexOf(dueMonth)] = receiptQtyArray[receiptMonthArray.indexOf(dueMonth)] + dueQty;
+						}
+
+						cummulativeDueQty += dueQty;
+					}
+
+					var cb = +totalStock;
+					for (i = 0; i < cbArray.length; i++) {
+						cb = +cb + +receiptQtyArray[i] - (+consumptionRateCY + +consumptionRateLY) / 2;
+						cbArray[i] = cb;
+						consumptionRateArray[i] = ((+consumptionRateCY + +consumptionRateLY) / 2) * 3;
+					}
+
+					if (cummulativeDueQty > 0) {
+						var duesUnit = coveredDues[2].children[5].innerText;
+						var coveredDuesHeader = coveredDues[0].querySelectorAll("strong")[0].innerText;
+						var coveredDuesHeader2 = coveredDues[0].querySelectorAll("strong")[0].cloneNode(true);
+						coveredDuesHeader2.innerText = " ( " + cummulativeDueQty + " " + duesUnit + " | " + Math.round((+cummulativeDueQty / +totalAAC) * 12 * 10) / 10 + " months )";
+						coveredDues[0].children[0].appendChild(coveredDuesHeader2);
+					}
+
+					if (icTable != null && icTable != undefined) {
+						var ic = icTable.querySelectorAll("tbody")[0].children;
+						var orderPlaced = orderPlacedTable.querySelectorAll("tbody")[0].children;
+
+						var td = document.createElement("td");
+						var tdText = document.createTextNode("Depot");
+						td.appendChild(tdText);
+						td.setAttribute("width", "10%");
+						ic[1].insertBefore(td, ic[1].children[4]);
+
+						for (i = 2; i < ic.length; i++) {
+							var poNo = ic[i].children[1].innerText.trim().substring(0, 14);
+							var poSrNo = ic[i].children[3].innerText;
+							var consignee;
+
+							for (j = 2; j < orderPlaced.length; j++) {
+								if (orderPlaced[j].children.length == 13 && orderPlaced[j].children[0].querySelectorAll("a")[0].innerText == poNo) {
+									if (orderPlaced[j].children[1].innerText == poSrNo) {
+										consignee = orderPlaced[j].children[2].innerText;
+									} else {
+										var k = 1;
+										while (orderPlaced[j + k].children.length != 13) {
+											if (orderPlaced[j + k].children[0].innerText == poSrNo) {
+												consignee = orderPlaced[j + k].children[1].innerText;
+											}
+											k++;
+										}
+									}
+								}
+							}
+
+							var td = document.createElement("td");
+							var tdText = document.createTextNode(consignee);
+							td.appendChild(tdText);
+							ic[i].insertBefore(td, ic[i].children[4]);
+						}
+					}
+
+					if (underTransitTable != null && underTransitTable != undefined) {
+						var underTransit = underTransitTable.querySelectorAll("tbody")[0].children;
+						var orderPlaced = orderPlacedTable.querySelectorAll("tbody")[0].children;
+
+						var td = document.createElement("td");
+						var tdText = document.createTextNode("Depot");
+						td.appendChild(tdText);
+						td.setAttribute("width", "10%");
+						underTransit[1].insertBefore(td, underTransit[1].children[3]);
+
+						for (i = 2; i < underTransit.length; i++) {
+							var poNo = underTransit[i].children[1].innerText.trim().substring(8, 22);
+							var poSrNo = underTransit[i].children[2].innerText;
+							var consignee;
+
+							for (j = 2; j < orderPlaced.length; j++) {
+								if (orderPlaced[j].children.length == 13 && orderPlaced[j].children[0].querySelectorAll("a")[0].innerText == poNo) {
+									if (orderPlaced[j].children[1].innerText == poSrNo) {
+										consignee = orderPlaced[j].children[2].innerText;
+									} else {
+										var k = 1;
+										while (orderPlaced[j + k].children.length != 13) {
+											if (orderPlaced[j + k].children[0].innerText == poSrNo) {
+												consignee = orderPlaced[j + k].children[1].innerText;
+											}
+											k++;
+										}
+									}
+								}
+							}
+
+							var td = document.createElement("td");
+							var tdText = document.createTextNode(consignee);
+							td.appendChild(tdText);
+							underTransit[i].insertBefore(td, underTransit[i].children[3]);
+						}
+					}
+
+					if (orderPlacedTable != null && orderPlacedTable != undefined) {
+						var orders = orderPlacedTable.querySelectorAll("tbody")[0].children;
+
+						for (i = 2; i < orders.length; i++) {
+							var order = orders[i];
+
+							if (order.children.length == 13) {
+								var poNo = order.children[0].querySelectorAll("a")[0].innerText;
+
+								var a = document.createElement("a");
+								a.setAttribute("href", "#");
+								a.style.textDecoration = "underline";
+								a.style.color = "red";
+								a.setAttribute("onclick", "showIcHistReq('" + zoneJson[historySheetZone] + "', '" + poNo + "')");
+								var img = document.createElement("img");
+								img.setAttribute("src", "/ireps/images/common/GenerateLOA.png");
+								img.setAttribute("height", "15");
+								img.setAttribute("width", "15");
+								img.setAttribute("border", "0");
+								img.setAttribute("title", "Historical data of inspection and dispatch");
+
+								a.appendChild(img);
+								order.children[0].appendChild(a);
+
+								if (+order.children[6].innerText > 0) {
+									order.children[6].style.color = "red";
+									order.children[6].style.fontWeight = "bold";
+								}
+								if (+order.children[7].innerText > 0) {
+									order.children[7].style.color = "red";
+									order.children[7].style.fontWeight = "bold";
+								}
+							}
+
+							if (order.children.length == 12) {
+								if (+order.children[5].innerText > 0) {
+									order.children[5].style.color = "red";
+									order.children[5].style.fontWeight = "bold";
+								}
+								if (+order.children[6].innerText > 0) {
+									order.children[6].style.color = "red";
+									order.children[6].style.fontWeight = "bold";
+								}
+							}
+						}
+					}
+				}
+			});
+		}
 
 		if (document.title == "Review / Act on Pending Demands" || document.title == "Run Form - IMMIS/PUR/DEMREVIEW") {
 			body.classList.add("review_process_demand");
