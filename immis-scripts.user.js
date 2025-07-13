@@ -930,7 +930,7 @@ window.addEventListener(
 						var dealer = getDealerByPl(demandPL);
 						var itemCP = getItemCP(demandPL);
 
-						if (+itemCP <= 5) {
+						if (+itemCP <= 12) {
 							if (dealerArray.includes(dealer)) {
 								var distribution = demandDistributionArray[dealerArray.indexOf(dealer)];
 
