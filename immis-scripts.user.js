@@ -2214,7 +2214,7 @@ window.addEventListener(
 				var itemDescription = qwsDiv.querySelectorAll(":scope > table")[0].querySelectorAll("tr")[1].querySelectorAll("td")[1].innerText;
 				var descriptionText = qwsDiv.querySelectorAll(":scope > table")[0].querySelectorAll("tr")[2].querySelectorAll("td")[2].innerText;
 				var unit = descriptionText.substring(descriptionText.indexOf("BU:") + 4, descriptionText.indexOf("Pur.Sec:") - 1);
-				var category = descriptionText.substring(descriptionText.indexOf("ABC-Cat:") + 9, descriptionText.indexOf("ABC-Cat:") + 10);
+				var category = descriptionText.substring(descriptionText.indexOf("ABC-Cat:") + 9, descriptionText.indexOf("V/S :"));
 				var nature = descriptionText.substring(descriptionText.indexOf("V/S :") + 5);
 
 				var consumptionTable = qwsDiv.querySelectorAll(":scope > table")[1].querySelectorAll("table")[0];
@@ -2486,9 +2486,9 @@ window.addEventListener(
 
 					var escalationLimit = 1;
 
-					if (category == "A") {
+					if (category.substring(0, 1) == "A") {
 						escalationLimit = 1.5;
-					} else if (category == "B") {
+					} else if (category.substring(0, 1) == "B") {
 						escalationLimit = 1.5;
 					} else {
 						escalationLimit = 2.0;
@@ -4590,7 +4590,7 @@ window.addEventListener(
 				var itemDescription = divShowHtml1.children[1].querySelectorAll(":scope > table")[0].querySelectorAll("tr")[1].querySelectorAll("td")[1].innerText;
 				var descriptionText = divShowHtml1.children[1].querySelectorAll(":scope > table")[0].querySelectorAll("tr")[2].querySelectorAll("td")[0].innerText;
 				var unit = descriptionText.substring(descriptionText.indexOf("BU:") + 4, descriptionText.indexOf("Pur.Sec:") - 1);
-				var category = descriptionText.substring(descriptionText.indexOf("ABC-Cat:") + 9, descriptionText.indexOf("ABC-Cat:") + 10);
+				var category = descriptionText.substring(descriptionText.indexOf("ABC-Cat:") + 9, descriptionText.indexOf("V/S :"));
 				var nature = descriptionText.substring(descriptionText.indexOf("V/S :") + 5);
 
 				var consumptionTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[1];
@@ -4866,9 +4866,9 @@ window.addEventListener(
 
 					var escalationLimit = 1;
 
-					if (category == "A") {
+					if (category.substring(0, 1) == "A") {
 						escalationLimit = 1.5;
-					} else if (category == "B") {
+					} else if (category.substring(0, 1) == "B") {
 						escalationLimit = 1.5;
 					} else {
 						escalationLimit = 2.0;
