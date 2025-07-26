@@ -413,62 +413,66 @@ window.addEventListener(
 				if (e.target.name == "SHOW_BTN_0" || e.target.name == "FPAGE_0" || e.target.name == "PPAGE_0" || e.target.name == "NPAGE_0" || e.target.name == "LPAGE_0") {
 					var poTable = document.querySelectorAll("#s_3")[0].querySelectorAll("table")[2];
 
-					var td1 = document.createElement("td");
-					var text1 = document.createTextNode("Bill Details");
-					td1.appendChild(text1);
-					poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].appendChild(td1);
-					poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].children[2].setAttribute("width", "5%");
-					poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].children[5].setAttribute("width", "5%");
-					poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].children[6].setAttribute("width", "10%");
-					poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].children[12].setAttribute("width", "7%");
+					/*
+                    var td1 = document.createElement("td");
+                    var text1 = document.createTextNode("Bill Details");
+                    td1.appendChild(text1);
+                    poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].appendChild(td1);
+                    poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].children[2].setAttribute("width", "5%");
+                    poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].children[5].setAttribute("width", "5%");
+                    poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].children[6].setAttribute("width", "10%");
+                    poTable.querySelectorAll("thead")[0].querySelectorAll("tr")[0].children[12].setAttribute("width", "7%");
+                    */
 
 					var poRows = poTable.querySelectorAll("tbody")[1].children;
-					for (var i = 0; i < poRows.length - 1; i++) {
-						var poRow = poRows[i];
-						var poNo;
-						var poSerial;
-						var purchaseType;
-						var linkHref;
+					/*
+                    for (var i = 0; i < poRows.length - 1; i++) {
+                        var poRow = poRows[i];
+                        var poNo;
+                        var poSerial;
+                        var purchaseType;
+                        var linkHref;
 
-						if (poRow.children.length == 13) {
-							poNo = poRow.children[1].innerText.split(" ")[0];
-							poSerial = poRow.children[5].innerText;
-							purchaseType = poNo.substring(8, 9) == "2" ? "GM" : "TN";
+                        if (poRow.children.length == 13) {
+                            poNo = poRow.children[1].innerText.split(" ")[0];
+                            poSerial = poRow.children[5].innerText;
+                            purchaseType = poNo.substring(8, 9) == "2" ? "GM" : "TN";
 
-							linkHref = "https://ireps.gov.in/iMMS/caseHistoryBillPOPopUp?poNumber=" + poNo + "&poSr=" + poSerial + "&rly=10&purType=" + purchaseType;
-						}
+                            linkHref = "https://ireps.gov.in/iMMS/caseHistoryBillPOPopUp?poNumber=" + poNo + "&poSr=" + poSerial + "&rly=10&purType=" + purchaseType;
+                        }
 
-						if (poRow.children.length == 10) {
-							var url = poRow.previousElementSibling.lastChild.querySelectorAll("a")[0].getAttribute("href");
-							var urlPart1 = url.substring(0, url.search("&poSr=") + 6);
-							var urlPart2 = url.substring(url.search("&rly="));
-							poSerial = poRow.children[2].innerText;
+                        if (poRow.children.length == 10) {
+                            var url = poRow.previousElementSibling.lastChild.querySelectorAll("a")[0].getAttribute("href");
+                            var urlPart1 = url.substring(0, url.search("&poSr=") + 6);
+                            var urlPart2 = url.substring(url.search("&rly="));
+                            poSerial = poRow.children[2].innerText;
 
-							linkHref = urlPart1 + poSerial + urlPart2;
-						}
+                            linkHref = urlPart1 + poSerial + urlPart2;
+                        }
 
-						if (poRow.children.length == 8) {
-							var url = poRow.previousElementSibling.lastChild.querySelectorAll("a")[0].getAttribute("href");
-							var urlPart1 = url.substring(0, url.search("&poSr=") + 6);
-							var urlPart2 = url.substring(url.search("&rly="));
-							poSerial = poRow.children[0].innerText;
+                        if (poRow.children.length == 8) {
+                            var url = poRow.previousElementSibling.lastChild.querySelectorAll("a")[0].getAttribute("href");
+                            var urlPart1 = url.substring(0, url.search("&poSr=") + 6);
+                            var urlPart2 = url.substring(url.search("&rly="));
+                            poSerial = poRow.children[0].innerText;
 
-							linkHref = urlPart1 + poSerial + urlPart2;
-						}
+                            linkHref = urlPart1 + poSerial + urlPart2;
+                        }
 
-						if (poRow.children.length == 13 || poRow.children.length == 10 || poRow.children.length == 8) {
-							var td2 = document.createElement("td");
-							var link = document.createElement("a");
-							var linkText = document.createTextNode("Bill Status");
-							link.appendChild(linkText);
-							link.title = "Check Bill Status";
-							link.href = linkHref;
-							link.target = "_blank";
-							td2.appendChild(link);
-							td2.setAttribute("align", "right");
-							poRow.appendChild(td2);
-						}
-					}
+                        if (poRow.children.length == 13 || poRow.children.length == 10 || poRow.children.length == 8) {
+                            var td2 = document.createElement("td");
+                            var link = document.createElement("a");
+                            var linkText = document.createTextNode("Bill Status");
+                            link.appendChild(linkText);
+                            link.title = "Check Bill Status";
+                            link.href = linkHref;
+                            link.target = "_blank";
+                            td2.appendChild(link);
+                            td2.setAttribute("align", "right");
+                            poRow.appendChild(td2);
+                        }
+                    }
+                    */
 				}
 				if (e.target.id.search("_LOV_PONO") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_PONO") != -1)) {
 					var rly = e.target.closest("tr").children[0].children[0].innerText;
@@ -504,7 +508,7 @@ window.addEventListener(
 				}
 			});
 
-            poNoInput.addEventListener("keydown", (e) => {
+			poNoInput.addEventListener("keydown", (e) => {
 				if (e.key === "Tab" || e.key === "Enter") {
 					poNoInput.blur();
 					poNoInput.nextElementSibling.click();
@@ -1089,12 +1093,12 @@ window.addEventListener(
 				var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
 
 				if (e.target.title == "Return this Demand") {
-					var s_2 = document.querySelectorAll("#s_2")[0];
-					var s__cnvs3 = document.querySelectorAll("#s__cnvs3")[0];
-					scrollTop += 150;
+                    var s_2 = document.querySelectorAll("#s_2")[0];
+                    var s__cnvs4 = document.querySelectorAll("#s__cnvs4")[0];
+                    scrollTop += 150;
 
-					s__cnvs3.style.top = scrollTop + "px";
-				}
+                    s__cnvs4.style.top = scrollTop + "px";
+                }
 				if (e.target.title == "View Demand Details") {
 					var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
 
