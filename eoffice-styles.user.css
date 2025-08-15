@@ -9,54 +9,53 @@
 
 @-moz-document url-prefix("https://ecr.eoffice.railnet.gov.in")
 {
-	
-	div[data-faq-module-name="FILE#FILE_INBOX"] .srch-tab-ele input#select-user{
-		cursor: pointer;
-	}
-    
-	div[data-faq-module-name="FILE#FILE_INBOX"] .srch-tab-ele .form-check-label{
-		cursor: pointer;
-	}
-    
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container .col-lg-8,
-	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container .col-lg-8{
-		justify-content: flex-start !important;
-	}
-	
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(3),
-	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(3){
-		display: none;
-	}
-	
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(4),
-	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(4){
-		background-color: unset;
-		color: #000;
-	}
-	
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .sentTo-container .tab-content.form:has(.show),
-	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .sentTo-container .tab-content.form:has(.show){
-		max-height: 300px;
-		min-height: 280px;
-	}
-	
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .sentTo-container .box_container .sentForm-container .text-small.text-italic,
-	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .sentTo-container .box_container .sentForm-container .text-small.text-italic{
-		display: none;
-	}
-	
-	quick-noting-container .bg-green-note{
+	div[data-faq-module-name="FILE#FILE_INBOX"] .srch-tab-ele input#select-user {
 		cursor: pointer;
 	}
 
-	quick-noting-container .panel-body{
+	div[data-faq-module-name="FILE#FILE_INBOX"] .srch-tab-ele .form-check-label {
+		cursor: pointer;
+	}
+
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container .col-lg-8,
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container .col-lg-8 {
+		justify-content: flex-start !important;
+	}
+
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(3),
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(3) {
+		display: none;
+	}
+
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(4),
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(4) {
+		background-color: unset;
+		color: #000;
+	}
+
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .sentTo-container .tab-content.form:has(.show),
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .sentTo-container .tab-content.form:has(.show) {
+		max-height: 300px;
+		min-height: 280px;
+	}
+
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .sentTo-container .box_container .sentForm-container .text-small.text-italic,
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .sentTo-container .box_container .sentForm-container .text-small.text-italic {
+		display: none;
+	}
+
+	quick-noting-container .bg-green-note {
+		cursor: pointer;
+	}
+
+	quick-noting-container .panel-body {
 		max-height: calc((var(--vh, 1vh) * 90) - 90px);
 	}
-	
-	file-toc-container file-toc-list-container .file-toc-list div:has(> table){
+
+	file-toc-container file-toc-list-container .file-toc-list div:has(> table) {
 		max-height: calc((var(--vh, 1vh) * 90) - 200px) !important;
-	} 
-	
+	}
+
 	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(5),
 	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(8),
 	file-toc-container file-toc-list-container .file-toc-list table thead tr th:nth-of-type(10),
@@ -64,56 +63,56 @@
 	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(5),
 	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(8),
 	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(10),
-	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(11){
+	file-toc-container file-toc-list-container .file-toc-list table tbody tr td:nth-of-type(11) {
 		display: none;
 	}
-	
+
 	.list-unread,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread > td > div{
-		background-color: #E0F4FF !important;
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread > td > div {
+		background-color: #e0f4ff !important;
 	}
-	
+
 	.list-unread:hover,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread:hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread:hover > td > div{
-		background-color: #A0DEFF !important;
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-unread:hover > td > div {
+		background-color: #a0deff !important;
 	}
-	
-	.list-read:has(button[data-id-attr="greenNote"]){
-		background-color: #BFF6C3 !important;
-	}
-	
-	.list-read:has(button[data-id-attr="greenNote"]):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover > td > div{
-		background-color: #9CDBA6 !important;
-	}
-	
-	.list-read:has(button[data-id-attr="yellowNote"]){
-		background-color: #FDFFE2 !important;
-	}
-	
-	.list-read:has(button[data-id-attr="yellowNote"]):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover > td > div{
-		background-color: #F3FEB8 !important;
-	}
-	
-	.list-read:has(button.icon-imp){
+
+	.list-read:has(button.icon-imp) {
 		background-color: #ffe2e2 !important;
 	}
-	
+
 	.list-read:has(button.icon-imp):hover,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button.icon-imp):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button.icon-imp):hover > td > div{
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button.icon-imp):hover > td > div {
 		background-color: #ffbcbc !important;
 	}
-	
-	[data-id-attr="subject"]{
+
+	.list-read:has(button[data-id-attr="greenNote"]) {
+		background-color: #bff6c3 !important;
+	}
+
+	.list-read:has(button[data-id-attr="greenNote"]):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover > td > div {
+		background-color: #9cdba6 !important;
+	}
+
+	.list-read:has(button[data-id-attr="yellowNote"]) {
+		background-color: #fdffe2 !important;
+	}
+
+	.list-read:has(button[data-id-attr="yellowNote"]):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover,
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover > td > div {
+		background-color: #f3feb8 !important;
+	}
+
+	[data-id-attr="subject"] {
 		cursor: pointer;
 	}
-	
+
 	a[data-id-attr="menubar.fileView.send"],
 	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.send"]),
 	a[data-id-attr="menubar.fileView.sendBackFile"],
@@ -121,10 +120,10 @@
 	a[data-id-attr="menubar.receiptView.send"],
 	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.receiptView.send"]),
 	a[data-id-attr="menubar.receiptView.sendBack"],
-	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.receiptView.sendBack"]){
+	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.receiptView.sendBack"]) {
 		background-color: #b26200;
 	}
-	
+
 	a[data-id-attr="menubar.fileView.send"]:hover,
 	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.fileView.send"]):hover,
 	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.fileView.send"]:hover,
@@ -136,43 +135,43 @@
 	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.receiptView.send"]:hover,
 	a[data-id-attr="menubar.receiptView.sendBack"]:hover,
 	[data-id-attr="homeIcon"] li:has(a[data-id-attr="menubar.receiptView.sendBack"]):hover,
-	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.receiptView.sendBack"]:hover{
+	.tbl-menu-style .navbar-nav > li > a[data-id-attr="menubar.receiptView.sendBack"]:hover {
 		background-color: #cf7601 !important;
 	}
-	
-	[data-id-attr="send-to-recent-five-table"] tbody td{
+
+	[data-id-attr="send-to-recent-five-table"] tbody td {
 		cursor: pointer;
 	}
-	
-	.note-viewer-table .p-datatable-tbody tr [data-id-attr="note-attachment"]{
+
+	.note-viewer-table .p-datatable-tbody tr [data-id-attr="note-attachment"] {
 		font-size: 14px;
 		font-weight: 700;
 	}
-	
+
 	[data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(8),
 	[data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(8) efile-tool-tip,
 	[data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(8),
-	[data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(8) efile-tool-tip{
+	[data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(8) efile-tool-tip {
 		width: 150px !important;
 		min-width: 100px !important;
 	}
-	
-	[data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(11),
-    [data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(12),
-    [data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(11),
-    [data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(12){
-        display: none;
-    }
 
-	app-dialog .panel-heading span{
+	[data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(11),
+	[data-id-attr="receipt-inbox-container-table-view"] thead > tr > th:nth-of-type(12),
+	[data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(11),
+	[data-id-attr="receipt-inbox-container-table-view"] tbody > tr > td:nth-of-type(12) {
+		display: none;
+	}
+
+	app-dialog .panel-heading span {
 		cursor: pointer;
 	}
 
-	.creation-form .p-autocomplete-panel{
+	.creation-form .p-autocomplete-panel {
 		display: none;
 	}
-	
-	#global-footer{
+
+	#global-footer {
 		display: none !important;
 	}
 }
