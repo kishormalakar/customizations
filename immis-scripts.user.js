@@ -2136,6 +2136,11 @@ window.addEventListener(
 					document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_15")[0].focus();
 				}
 			});
+            plInput.addEventListener("keyup", (e) => {
+				var pastedContent = plInput.value;
+                var trimmedContent = pastedContent.trim();
+                plInput.value = trimmedContent;
+			});
 
 			document.addEventListener("keydown", (e) => {
 				if (e.key === "Escape") {
