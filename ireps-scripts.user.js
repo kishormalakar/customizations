@@ -420,7 +420,7 @@ window.addEventListener(
 						var firmMake = offeredMake.querySelectorAll("td")[1].innerText.trim().replace(/\n/g, "").replace(/\t/g, "");
 						var firmName = firm.split("[")[0].trim();
 						var firmId = firm.split("[")[1].split("]")[0];
-						var accountId = offeredMake.querySelectorAll("td")[0].querySelectorAll("a")[0].getAttribute("onclick").split("accId=")[1].split("',")[0];
+						var accountId = offeredMake.querySelectorAll("td")[0].querySelectorAll("a")[0].getAttribute("onclick").split("viewVendordetails('")[1].split("',")[0];
 
 						itemMakeOffered.firmName = firmName;
 						itemMakeOffered.firmId = firmId;
