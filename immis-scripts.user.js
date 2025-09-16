@@ -4650,6 +4650,9 @@ window.addEventListener(
 						//here covered dues shall be appended
 						consumptionRows.children[3].children[12].innerText = "";
 						consumptionRows.children[3].children[12].setAttribute("align", "left");
+						var table = document.createElement("table");
+						var tbody = document.createElement("tbody");
+						consumptionRows.children[3].children[12].appendChild(table);
 
 						var cummulativeCoveredDues = 0;
 
@@ -4683,8 +4686,10 @@ window.addEventListener(
 									}
 
 									td.appendChild(tdText);
+									var br = document.createElement("br");
+									td.appendChild(br);
 									tr.appendChild(td);
-									consumptionRows.children[3].children[12].appendChild(tr);
+									consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
 								}
 
 								continue;
@@ -4699,8 +4704,10 @@ window.addEventListener(
 								coveredRow.querySelectorAll("td")[0].removeAttribute("rowspan");
 
 								var tr = document.createElement("tr");
+								var br = document.createElement("br");
+								coveredRow.querySelectorAll("td")[0].appendChild(br);
 								tr.appendChild(coveredRow.querySelectorAll("td")[0].cloneNode(true));
-								consumptionRows.children[3].children[12].appendChild(tr);
+								consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
 
 								var depot = coveredRow.children[2].innerText;
 								var qty = coveredRow.children[7].innerText;
@@ -4711,8 +4718,10 @@ window.addEventListener(
 
 								if (+qty > 0) {
 									var tr = document.createElement("tr");
+									var br = document.createElement("br");
+									coveredRow.children[2].appendChild(br);
 									tr.appendChild(coveredRow.children[2].cloneNode(true));
-									consumptionRows.children[3].children[12].appendChild(tr);
+									consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
 
 									for (var m = 3; m < consumptionRows.children.length; m++) {
 										if (consumptionRows.children[m].children[1].innerText == depot) {
@@ -4742,8 +4751,10 @@ window.addEventListener(
 
 									if (+qty > 0) {
 										var tr = document.createElement("tr");
+										var br = document.createElement("br");
+										coveredRow1.children[1].appendChild(br);
 										tr.appendChild(coveredRow1.children[1].cloneNode(true));
-										consumptionRows.children[3].children[12].appendChild(tr);
+										consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
 
 										for (var m = 3; m < consumptionRows.children.length; m++) {
 											if (consumptionRows.children[m].children[1].innerText == depot) {
@@ -4800,11 +4811,17 @@ window.addEventListener(
 									}
 
 									var tr = document.createElement("tr");
+									var br = document.createElement("br");
+									uncoveredRow.children[7].appendChild(br);
 									tr.appendChild(uncoveredRow.children[7].cloneNode(true));
 									uncoveredRow.children[1].innerText = uncoveredRow.children[1].innerText + ": " + tenderQty;
 									var tr2 = document.createElement("tr");
+									var br = document.createElement("br");
+									uncoveredRow.children[1].appendChild(br);
 									tr2.appendChild(uncoveredRow.children[1].cloneNode(true));
 									var tr3 = document.createElement("tr");
+									var br = document.createElement("br");
+									tenderStatus.appendChild(br);
 									tr3.appendChild(tenderStatus.cloneNode(true));
 
 									var isInserted = false;
@@ -4818,9 +4835,9 @@ window.addEventListener(
 										}
 									}
 									if (!isInserted) {
-										consumptionRows.children[3].children[12].appendChild(tr);
-										consumptionRows.children[3].children[12].appendChild(tr3);
-										consumptionRows.children[3].children[12].appendChild(tr2);
+										consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
+										consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr3);
+										consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr2);
 									}
 								}
 							}
@@ -4851,7 +4868,7 @@ window.addEventListener(
 						headerTable.querySelectorAll("tr")[0].children[14].remove();
 						headerTable.querySelectorAll("tr")[0].children[13].remove();
 						headerTable.querySelectorAll("tr")[0].children[12].innerText = "Dealer";
-						headerTable.querySelectorAll("tr")[0].children[12].setAttribute("colspan", "3");
+						headerTable.querySelectorAll("tr")[0].children[12].setAttribute("colspan", "2");
 						headerTable.querySelectorAll("tr")[0].children[11].innerText = "Raised By";
 						headerTable.querySelectorAll("tr")[0].children[8].remove();
 						headerTable.querySelectorAll("tr")[0].children[7].remove();
@@ -4867,7 +4884,7 @@ window.addEventListener(
 						headerTable.querySelectorAll("tr")[1].children[14].remove();
 						headerTable.querySelectorAll("tr")[1].children[13].remove();
 						headerTable.querySelectorAll("tr")[1].children[12].innerText = "";
-						headerTable.querySelectorAll("tr")[1].children[12].setAttribute("colspan", "3");
+						headerTable.querySelectorAll("tr")[1].children[12].setAttribute("colspan", "2");
 						headerTable.querySelectorAll("tr")[1].children[11].innerText = "";
 						headerTable.querySelectorAll("tr")[1].children[8].remove();
 						headerTable.querySelectorAll("tr")[1].children[7].remove();
@@ -4884,31 +4901,128 @@ window.addEventListener(
 
 						consumptionTable.querySelectorAll("tr")[0].children[9].removeAttribute("rowspan");
 						consumptionTable.querySelectorAll("tr")[0].appendChild(consumptionTable.querySelectorAll("tr")[0].children[9].cloneNode(true));
+						consumptionTable.querySelectorAll("tr")[0].children[10].innerText = "Remarks by Depot";
 						consumptionTable.querySelectorAll("tr")[0].children[8].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[8].setAttribute("colspan", "3");
 						consumptionTable.querySelectorAll("tr")[0].children[7].removeAttribute("rowspan");
 						consumptionTable.querySelectorAll("tr")[0].children[6].removeAttribute("rowspan");
 						consumptionTable.querySelectorAll("tr")[0].children[5].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[6].innerText = "STOCK";
+						consumptionTable.querySelectorAll("tr")[0].children[5].innerText = "AAC";
+						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[0].children[5], consumptionTable.querySelectorAll("tr")[0].children[2]);
 						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[1].children[3], consumptionTable.querySelectorAll("tr")[0].children[4]);
 						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[1].children[2], consumptionTable.querySelectorAll("tr")[0].children[4]);
 						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[1].children[1], consumptionTable.querySelectorAll("tr")[0].children[4]);
 						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[1].children[0], consumptionTable.querySelectorAll("tr")[0].children[4]);
+						consumptionTable.querySelectorAll("tr")[0].children[9].remove();
 						consumptionTable.querySelectorAll("tr")[0].children[8].remove();
+						consumptionTable.querySelectorAll("tr")[0].children[5].remove();
+						consumptionTable.querySelectorAll("tr")[0].children[4].remove();
 						consumptionTable.querySelectorAll("tr")[0].children[3].removeAttribute("rowspan");
-						consumptionTable.querySelectorAll("tr")[0].children[2].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[3].remove();
 						consumptionTable.querySelectorAll("tr")[0].children[1].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[1].remove();
 						consumptionTable.querySelectorAll("tr")[0].children[0].removeAttribute("rowspan");
 						consumptionTable.querySelectorAll("tr")[0].children[0].removeAttribute("colspan");
 
 						consumptionTable.querySelectorAll("tr")[1].remove();
 
-						var numCoverageRows = consumptionRows.children[1].children[12].children.length;
+						var numCoverageRows = consumptionRows.children[1].children[12].querySelectorAll("table")[0].children.length;
+						for (var j = 0; j < consumptionRows.children[1].children[12].querySelectorAll("table")[0].children.length; j++) {
+							consumptionRows.children[1].children[12].querySelectorAll("table")[0].children[j].setAttribute("colspan", "3");
+							consumptionRows.children[1].children[12].querySelectorAll("table")[0].children[j].children[0].setAttribute("colspan", "3");
+						}
 
 						var consumptionRows = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll(":scope > tr");
+						var rowSpan = Math.floor(numCoverageRows / (consumptionRows.length - 2));
 
 						for (var j = 1; j < consumptionRows.length - 1; j++) {
 							var consumptionRow = consumptionRows[j];
+							consumptionRow.children[13].innerText = "";
+							consumptionRow.appendChild(consumptionRow.children[13].cloneNode(true));
+							consumptionRow.children[14].setAttribute("rowspan", consumptionRows.length - 2);
+							consumptionRow.children[13].setAttribute("rowspan", consumptionRows.length - 2);
+							consumptionRow.children[12].removeAttribute("nowrap");
+							consumptionRow.children[12].setAttribute("colspan", "3");
+							consumptionRow.children[12].setAttribute("rowspan", consumptionRows.length - 2);
+							consumptionRow.children[9].innerHTML = consumptionRow.children[9].innerHTML.split("<br>")[0];
+							consumptionRow.children[10].innerText = consumptionRow.children[10].innerHTML.split("<br>")[0];
+							consumptionRow.insertBefore(consumptionRow.children[9], consumptionRow.children[2]);
+
+							if (j > 1) {
+								consumptionRow.children[14].remove();
+								consumptionRow.children[13].remove();
+								consumptionRow.children[12].remove();
+								consumptionRow.children[11].removeAttribute("rowspan");
+								consumptionRow.children[10].removeAttribute("rowspan");
+								consumptionRow.children[9].removeAttribute("rowspan");
+								consumptionRow.children[8].removeAttribute("rowspan");
+								consumptionRow.children[7].removeAttribute("rowspan");
+								consumptionRow.children[1].removeAttribute("rowspan");
+							}
+							if (j == 1) {
+								/*
+                                consumptionRow.children[11].setAttribute("rowspan", numCoverageRows - consumptionRows.length + 3);
+                                consumptionRow.children[10].setAttribute("rowspan", numCoverageRows - consumptionRows.length + 3);
+                                consumptionRow.children[9].setAttribute("rowspan", numCoverageRows - consumptionRows.length + 3);
+                                consumptionRow.children[8].setAttribute("rowspan", numCoverageRows - consumptionRows.length + 3);
+                                consumptionRow.children[7].setAttribute("rowspan", numCoverageRows - consumptionRows.length + 3);
+                                consumptionRow.children[1].setAttribute("rowspan", numCoverageRows - consumptionRows.length + 3);
+                                */
+							}
+							consumptionRow.children[7].remove();
+							consumptionRow.children[6].remove();
+							consumptionRow.children[5].remove();
+							consumptionRow.children[4].remove();
+							consumptionRow.children[3].remove();
 							consumptionRow.children[0].remove();
 						}
+
+						consumptionRows[consumptionRows.length - 1].children[8].setAttribute("colspan", "5");
+						consumptionRows[consumptionRows.length - 1].children[5].innerText = consumptionRows[consumptionRows.length - 1].children[5].innerText.split("(")[0];
+						consumptionRows[consumptionRows.length - 1].children[2].remove();
+						consumptionRows[consumptionRows.length - 1].children[1].remove();
+						consumptionRows[consumptionRows.length - 1].children[0].removeAttribute("colspan");
+						consumptionRows[consumptionRows.length - 1].children[0].innerText = "TOTAL";
+
+						for (var j = 0; j < consumptionRows.length; j++) {
+							var consumptionRow = consumptionRows[j];
+							headerTable.querySelectorAll("tbody")[0].appendChild(consumptionRow);
+						}
+
+						headerTable.querySelectorAll("tr").forEach((tr) => {
+							tr.removeAttribute("bgcolor");
+						});
+						headerTable.querySelectorAll("td").forEach((td) => {
+							td.removeAttribute("bgcolor");
+							td.removeAttribute("align");
+							td.style.verticalAlign = "middle";
+							td.style.width = "100px";
+							td.style.maxWidth = "100px";
+						});
+						headerTable.querySelectorAll("td[colspan='2']").forEach((td) => {
+							td.style.width = "200px";
+							td.style.maxWidth = "200px";
+						});
+						headerTable.querySelectorAll("td[colspan='3']").forEach((td) => {
+							td.style.width = "300px";
+							td.style.maxWidth = "300px";
+						});
+						headerTable.querySelectorAll("td[colspan='4']").forEach((td) => {
+							td.style.width = "400px";
+							td.style.maxWidth = "400px";
+						});
+						headerTable.style.font = "10pt Arial";
+						headerTable.querySelectorAll("table")[0].style.font = "10pt Arial";
+						headerTable.querySelectorAll("a").forEach((a) => {
+							a.style.font = "10pt Arial";
+						});
+						headerTable.querySelectorAll("tr")[0].style.fontWeight = "bold";
+						headerTable.querySelectorAll("tr")[0].style.backgroundColor = "#add8e6";
+						headerTable.querySelectorAll("tr")[2].style.fontWeight = "bold";
+						headerTable.querySelectorAll("tr")[2].style.backgroundColor = "#add8e6";
+
+						consumptionTable.querySelectorAll("tbody")[0].appendChild(document.createElement("td"));
 					}
 				}
 			});
