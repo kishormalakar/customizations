@@ -4583,6 +4583,335 @@ window.addEventListener(
 			plSubmit.addEventListener("click", (e) => {
 				plInput.focus();
 			});
+
+			var summaryButton = document.createElement("input");
+			summaryButton.id = "summaryButton";
+			summaryButton.classList.add("button");
+			summaryButton.classList.add("btnSunflower");
+			summaryButton.value = "Summary";
+			document.querySelectorAll("#s_2")[0].querySelectorAll("input[name='BTN_Prt_0']")[0].parentElement.insertBefore(summaryButton, document.querySelectorAll("#s_2")[0].querySelectorAll("input[name='BTN_Prt_0']")[0]);
+
+			summaryButton.addEventListener("click", (e) => {
+				var positionDiv = document.querySelectorAll("#s_2")[0].querySelectorAll(":scope > table")[2].querySelectorAll("tr")[1].querySelectorAll("div")[0].querySelectorAll(":scope > table");
+				console.log(positionDiv);
+
+				for (var i = 0; i < positionDiv.length; i++) {
+					if (positionDiv[i].querySelectorAll("td")[0].innerText.trim() == "Sr." && positionDiv[i].querySelectorAll("td")[1].innerText.trim() == "PL. No.") {
+						var headerTable, consumptionTable, UDMTable, uncoveredDuesTable, coveredDuesTable, indentTable, remarksTable;
+
+						for (var j = 0; j < Math.min(10, positionDiv.length - i); j++) {
+							if (positionDiv[i + j].querySelectorAll("td")[0] != undefined && positionDiv[i + j].querySelectorAll("td")[0].innerText.trim() == "Sr." && positionDiv[i + j].querySelectorAll("td")[1].innerText.trim() == "PL. No.") {
+								headerTable = positionDiv[i + j];
+							}
+							if (positionDiv[i + j].querySelectorAll("td")[0] != undefined && positionDiv[i + j].querySelectorAll("td")[0].innerText.trim() == "STOCK, AAC AND CONSUMPTION DETAILS") {
+								consumptionTable = positionDiv[i + j];
+							}
+							if (positionDiv[i + j].querySelectorAll("th")[0] != undefined && positionDiv[i + j].querySelectorAll("th")[0].innerText.trim() == "Available Stock of selected item in Digital Ledgers maintained by Users / Consignees of IREPS in UDM") {
+								UDMTable = positionDiv[i + j];
+							}
+							if (positionDiv[i + j].querySelectorAll("td")[0] != undefined && positionDiv[i + j].querySelectorAll("td")[0].innerText.trim() == "UN-COVERED DUES DETAILS") {
+								uncoveredDuesTable = positionDiv[i + j];
+							}
+							if (positionDiv[i + j].querySelectorAll("td")[0] != undefined && positionDiv[i + j].querySelectorAll("td")[0].innerText.trim() == "INDENT DETAILS") {
+								indentTable = positionDiv[i + j];
+							}
+							if (positionDiv[i + j].querySelectorAll("td")[0] != undefined && positionDiv[i + j].querySelectorAll("td")[0].innerText.trim() == "COVERED DUES DETAILS") {
+								coveredDuesTable = positionDiv[i + j];
+							}
+							if (positionDiv[i + j].querySelectorAll("td")[0] != undefined && positionDiv[i + j].querySelectorAll("td")[0].innerText.trim() == "Remarks:") {
+								remarksTable = positionDiv[i + j];
+							}
+							if (positionDiv[i + j].nextElementSibling != undefined && positionDiv[i + j].nextElementSibling.tagName == "BR") {
+								break;
+							}
+						}
+
+						var consumptionRows = consumptionTable.querySelectorAll("tbody")[0];
+
+						//set headings
+						consumptionRows.children[1].children[7].innerText = "DUES";
+						consumptionRows.children[1].children[8].innerText = "COVERAGE";
+						consumptionRows.children[1].children[9].innerText = "Remarks of HQ";
+						consumptionRows.children[2].children[0].innerText = "CONS " + consumptionRows.children[2].children[0].innerText;
+						consumptionRows.children[2].children[1].innerText = "CONS " + consumptionRows.children[2].children[1].innerText;
+						consumptionRows.children[2].children[2].innerText = "CONS " + consumptionRows.children[2].children[2].innerText;
+						consumptionRows.children[2].children[3].innerText = "CONS " + consumptionRows.children[2].children[3].innerText;
+
+						//check for closed depots
+						for (var j = 3; j < consumptionRows.children.length - 1; j++) {
+							if (consumptionRows.children[j].children[2].innerText.search("Closed") != -1) {
+								consumptionRows.querySelectorAll("tr")[j].remove();
+							}
+						}
+
+						//covered dues
+						var coveredRows = coveredDuesTable.querySelectorAll("tbody")[0];
+
+						//here covered dues shall be appended
+						consumptionRows.children[3].children[12].innerText = "";
+						consumptionRows.children[3].children[12].setAttribute("align", "left");
+
+						var cummulativeCoveredDues = 0;
+
+						for (var j = 2; j < coveredRows.children.length; j++) {
+							var coveredRow = coveredRows.children[j];
+
+							if (coveredRow.children.length == 1 && coveredRow.children[0].innerText.trim() != "NO COVERED DUES FOR THIS ITEM") {
+								var dispatchRows = coveredRow.children[0].querySelectorAll("tbody")[0];
+
+								for (var k = 2; k < dispatchRows.children.length; k++) {
+									var dispatchRow = dispatchRows.children[k];
+									var inspectionCallDate = dispatchRow.children[2].innerText.split("Dt.")[1];
+									var inspectionCallQty = dispatchRow.children[3].innerText;
+									var inspectionCertificateDate = dispatchRow.children[6].innerText.split("Dt.")[1];
+									var inspectionCertificateQty = dispatchRow.children[7].innerText;
+									var dispatchDate;
+									var dispatchQty;
+
+									var tr = document.createElement("tr");
+									var td = document.createElement("td");
+									var tdText;
+
+									if (dispatchRow.children[9].innerText != "") {
+										dispatchDate = dispatchRow.children[9].innerText.split("Dt.")[1].substring(0, 9);
+										dispatchQty = dispatchRow.children[9].innerText.split("(")[1].split(")")[0];
+										tdText = document.createTextNode("Material dispatched, Qty: " + dispatchQty + ", Date: " + dispatchDate);
+									} else if (inspectionCertificateQty != "") {
+										tdText = document.createTextNode("Inspection complete, Qty: " + inspectionCertificateQty + ", Date: " + inspectionCertificateDate);
+									} else {
+										tdText = document.createTextNode("Inspection call placed, Qty: " + inspectionCallQty + ", Date: " + inspectionCallDate);
+									}
+
+									td.appendChild(tdText);
+									tr.appendChild(td);
+									consumptionRows.children[3].children[12].appendChild(tr);
+								}
+
+								continue;
+							}
+
+							if (coveredRow.children.length == 10 && ["1", "2", "7"].includes(coveredRow.querySelectorAll("td")[0].innerText.trim().substring(15, 16))) {
+								var anchors = coveredRow.querySelectorAll("td")[0].querySelectorAll("a");
+								for (var k = 1; k < anchors.length; k++) {
+									anchors[k].remove();
+								}
+								coveredRow.querySelectorAll("td")[0].querySelectorAll("span")[0].remove();
+								coveredRow.querySelectorAll("td")[0].removeAttribute("rowspan");
+
+								var tr = document.createElement("tr");
+								tr.appendChild(coveredRow.querySelectorAll("td")[0].cloneNode(true));
+								consumptionRows.children[3].children[12].appendChild(tr);
+
+								var depot = coveredRow.children[2].innerText;
+								var qty = coveredRow.children[7].innerText;
+								var dp = coveredRow.children[9].innerText;
+
+								coveredRow.children[2].innerText = coveredRow.children[2].innerText + ": " + coveredRow.children[7].innerText + "; DP: " + coveredRow.children[9].innerText;
+								coveredRow.children[2].setAttribute("align", "left");
+
+								if (+qty > 0) {
+									var tr = document.createElement("tr");
+									tr.appendChild(coveredRow.children[2].cloneNode(true));
+									consumptionRows.children[3].children[12].appendChild(tr);
+
+									for (var m = 3; m < consumptionRows.children.length; m++) {
+										if (consumptionRows.children[m].children[1].innerText == depot) {
+											consumptionRows.children[m].children[11].innerText = +consumptionRows.children[m].children[11].innerText + +qty;
+										}
+									}
+
+									cummulativeCoveredDues = +cummulativeCoveredDues + +qty;
+								}
+
+								for (var k = 1; k < coveredRows.children.length - j; k++) {
+									var coveredRow1 = coveredRows.children[j + k];
+
+									if (coveredRow1.children.length == 10) {
+										break;
+									}
+									if (coveredRow1.children.length == 1) {
+										continue;
+									}
+
+									var depot = coveredRow1.children[1].innerText;
+									var qty = coveredRow1.children[6].innerText;
+									var dp = coveredRow1.children[8].innerText;
+
+									coveredRow1.children[1].innerText = coveredRow1.children[1].innerText + ": " + coveredRow1.children[6].innerText + "; DP: " + coveredRow1.children[8].innerText;
+									coveredRow1.children[1].setAttribute("align", "left");
+
+									if (+qty > 0) {
+										var tr = document.createElement("tr");
+										tr.appendChild(coveredRow1.children[1].cloneNode(true));
+										consumptionRows.children[3].children[12].appendChild(tr);
+
+										for (var m = 3; m < consumptionRows.children.length; m++) {
+											if (consumptionRows.children[m].children[1].innerText == depot) {
+												consumptionRows.children[m].children[11].innerText = +consumptionRows.children[m].children[11].innerText + +qty;
+											}
+										}
+
+										cummulativeCoveredDues = +cummulativeCoveredDues + +qty;
+									}
+								}
+							}
+						}
+
+						consumptionRows.querySelectorAll("#stockdata_total")[0].children[7].innerText = cummulativeCoveredDues;
+
+						var uncoveredRows = uncoveredDuesTable.querySelectorAll("tbody")[0];
+
+						if (uncoveredRows.children.length >= 3 && uncoveredRows.children[2].children.length > 1) {
+							for (var j = 2; j < uncoveredRows.children.length; j++) {
+								var uncoveredRow = uncoveredRows.children[j];
+
+								var tenderDepot = uncoveredRow.children[1].innerText;
+								var tenderText = uncoveredRow.children[7].innerText;
+								var tod = uncoveredRow.children[8].innerText;
+								var tenderStatus = uncoveredRow.children[9];
+								var tenderNo;
+								var tenderQty;
+								var tenderLink;
+
+								console.log(tenderText);
+
+								if (tenderText != "" && tenderText.search("T No.") != -1) {
+									tenderNo = tenderText.substring(6, tenderText.indexOf(" ("));
+									tenderQty = tenderText.split("(")[1].split(")")[0];
+
+									if (uncoveredRow.children[7].querySelectorAll("a")[0] != undefined) {
+										tenderLink = uncoveredRow.children[7].querySelectorAll("a")[0];
+										uncoveredRow.children[7].innerHTML = "";
+										uncoveredRow.children[7].setAttribute("align", "left");
+										uncoveredRow.children[7].appendChild(tenderLink);
+
+										var p = document.createElement("span");
+										var pText = document.createTextNode(" due on " + tod);
+										p.appendChild(pText);
+										uncoveredRow.children[7].appendChild(p);
+									} else {
+										uncoveredRow.children[7].innerHTML = "";
+										uncoveredRow.children[7].setAttribute("align", "left");
+
+										var p = document.createElement("span");
+										var pText = document.createTextNode("T No. " + tenderNo + " (draft)");
+										p.appendChild(pText);
+										uncoveredRow.children[7].appendChild(p);
+									}
+
+									var tr = document.createElement("tr");
+									tr.appendChild(uncoveredRow.children[7].cloneNode(true));
+									uncoveredRow.children[1].innerText = uncoveredRow.children[1].innerText + ": " + tenderQty;
+									var tr2 = document.createElement("tr");
+									tr2.appendChild(uncoveredRow.children[1].cloneNode(true));
+									var tr3 = document.createElement("tr");
+									tr3.appendChild(tenderStatus.cloneNode(true));
+
+									var isInserted = false;
+									for (var k = 0; k < consumptionRows.children[3].children[12].children.length - 1; k++) {
+										var consumptionRow = consumptionRows.children[3].children[12].children[k];
+
+										if (consumptionRow.innerText == tr.innerText) {
+											consumptionRows.children[3].children[12].insertBefore(tr2, consumptionRows.children[3].children[12].children[k + 2]);
+											isInserted = true;
+											break;
+										}
+									}
+									if (!isInserted) {
+										consumptionRows.children[3].children[12].appendChild(tr);
+										consumptionRows.children[3].children[12].appendChild(tr3);
+										consumptionRows.children[3].children[12].appendChild(tr2);
+									}
+								}
+							}
+						}
+
+						//formatting
+
+						if (UDMTable != undefined) {
+							UDMTable.remove();
+						}
+						if (uncoveredDuesTable != undefined) {
+							uncoveredDuesTable.remove();
+						}
+						if (coveredDuesTable != undefined) {
+							coveredDuesTable.remove();
+						}
+						if (indentTable != undefined) {
+							indentTable.remove();
+						}
+						if (remarksTable != undefined) {
+							remarksTable.nextElementSibling.nextSibling.remove();
+							remarksTable.nextElementSibling.remove();
+							remarksTable.remove();
+						}
+
+						headerTable.querySelectorAll("tr")[0].children[16].remove();
+						headerTable.querySelectorAll("tr")[0].children[15].remove();
+						headerTable.querySelectorAll("tr")[0].children[14].remove();
+						headerTable.querySelectorAll("tr")[0].children[13].remove();
+						headerTable.querySelectorAll("tr")[0].children[12].innerText = "Dealer";
+						headerTable.querySelectorAll("tr")[0].children[12].setAttribute("colspan", "3");
+						headerTable.querySelectorAll("tr")[0].children[11].innerText = "Raised By";
+						headerTable.querySelectorAll("tr")[0].children[8].remove();
+						headerTable.querySelectorAll("tr")[0].children[7].remove();
+						headerTable.querySelectorAll("tr")[0].children[6].remove();
+						headerTable.querySelectorAll("tr")[0].children[5].remove();
+						headerTable.querySelectorAll("tr")[0].children[4].remove();
+						headerTable.querySelectorAll("tr")[0].children[3].remove();
+						headerTable.querySelectorAll("tr")[0].children[2].innerText = "Description";
+						headerTable.querySelectorAll("tr")[0].children[2].setAttribute("colspan", "4");
+
+						headerTable.querySelectorAll("tr")[1].children[16].remove();
+						headerTable.querySelectorAll("tr")[1].children[15].remove();
+						headerTable.querySelectorAll("tr")[1].children[14].remove();
+						headerTable.querySelectorAll("tr")[1].children[13].remove();
+						headerTable.querySelectorAll("tr")[1].children[12].innerText = "";
+						headerTable.querySelectorAll("tr")[1].children[12].setAttribute("colspan", "3");
+						headerTable.querySelectorAll("tr")[1].children[11].innerText = "";
+						headerTable.querySelectorAll("tr")[1].children[8].remove();
+						headerTable.querySelectorAll("tr")[1].children[7].remove();
+						headerTable.querySelectorAll("tr")[1].children[6].remove();
+						headerTable.querySelectorAll("tr")[1].children[5].remove();
+						headerTable.querySelectorAll("tr")[1].children[4].remove();
+						headerTable.querySelectorAll("tr")[1].children[3].remove();
+						headerTable.querySelectorAll("tr")[1].children[2].innerText = headerTable.querySelectorAll("tr")[2].innerText.split(" ").slice(0, 5).join(" ");
+						headerTable.querySelectorAll("tr")[1].children[2].setAttribute("colspan", "4");
+
+						headerTable.querySelectorAll("tr")[2].remove();
+
+						consumptionTable.querySelectorAll("tr")[0].remove();
+
+						consumptionTable.querySelectorAll("tr")[0].children[9].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].appendChild(consumptionTable.querySelectorAll("tr")[0].children[9].cloneNode(true));
+						consumptionTable.querySelectorAll("tr")[0].children[8].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[7].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[6].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[5].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[1].children[3], consumptionTable.querySelectorAll("tr")[0].children[4]);
+						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[1].children[2], consumptionTable.querySelectorAll("tr")[0].children[4]);
+						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[1].children[1], consumptionTable.querySelectorAll("tr")[0].children[4]);
+						consumptionTable.querySelectorAll("tr")[0].insertBefore(consumptionTable.querySelectorAll("tr")[1].children[0], consumptionTable.querySelectorAll("tr")[0].children[4]);
+						consumptionTable.querySelectorAll("tr")[0].children[8].remove();
+						consumptionTable.querySelectorAll("tr")[0].children[3].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[2].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[1].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[0].removeAttribute("rowspan");
+						consumptionTable.querySelectorAll("tr")[0].children[0].removeAttribute("colspan");
+
+						consumptionTable.querySelectorAll("tr")[1].remove();
+
+						var numCoverageRows = consumptionRows.children[1].children[12].children.length;
+
+						var consumptionRows = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll(":scope > tr");
+
+						for (var j = 1; j < consumptionRows.length - 1; j++) {
+							var consumptionRow = consumptionRows[j];
+							consumptionRow.children[0].remove();
+						}
+					}
+				}
+			});
 		}
 
 		if (document.title == "Quantity Review Sheet" || document.title == "Run Form - IMMIS/PUR/QTYREVIEW") {
