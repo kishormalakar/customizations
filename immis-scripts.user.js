@@ -4679,15 +4679,18 @@ window.addEventListener(
 										dispatchDate = dispatchRow.children[9].innerText.split("Dt.")[1].substring(0, 9);
 										dispatchQty = dispatchRow.children[9].innerText.split("(")[1].split(")")[0];
 										tdText = document.createTextNode("Material dispatched, Qty: " + dispatchQty + ", Date: " + dispatchDate);
-									} else if (inspectionCertificateQty != "") {
+									} else if (inspectionCertificateQty != "" && inspectionCertificateQty != "--") {
 										tdText = document.createTextNode("Inspection complete, Qty: " + inspectionCertificateQty + ", Date: " + inspectionCertificateDate);
-									} else {
+									} else if (inspectionCallQty != "" && inspectionCallQty != "--") {
 										tdText = document.createTextNode("Inspection call placed, Qty: " + inspectionCallQty + ", Date: " + inspectionCallDate);
+									} else {
+										continue;
 									}
 
 									td.appendChild(tdText);
 									var br = document.createElement("br");
 									td.appendChild(br);
+									td.style.fontWeight = "bold";
 									tr.appendChild(td);
 									consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
 								}
@@ -4706,7 +4709,9 @@ window.addEventListener(
 								var tr = document.createElement("tr");
 								var br = document.createElement("br");
 								coveredRow.querySelectorAll("td")[0].appendChild(br);
-								tr.appendChild(coveredRow.querySelectorAll("td")[0].cloneNode(true));
+								var td = coveredRow.querySelectorAll("td")[0];
+								td.innerHTML = td.innerHTML.split(" PO-CAT:")[0] + td.innerHTML.split(" ]  ")[1];
+								tr.appendChild(td.cloneNode(true));
 								consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
 
 								var depot = coveredRow.children[2].innerText;
@@ -4784,8 +4789,6 @@ window.addEventListener(
 								var tenderQty;
 								var tenderLink;
 
-								console.log(tenderText);
-
 								if (tenderText != "" && tenderText.search("T No.") != -1) {
 									tenderNo = tenderText.substring(6, tenderText.indexOf(" ("));
 									tenderQty = tenderText.split("(")[1].split(")")[0];
@@ -4825,11 +4828,11 @@ window.addEventListener(
 									tr3.appendChild(tenderStatus.cloneNode(true));
 
 									var isInserted = false;
-									for (var k = 0; k < consumptionRows.children[3].children[12].children.length - 1; k++) {
-										var consumptionRow = consumptionRows.children[3].children[12].children[k];
+									for (var k = 0; k < consumptionRows.children[3].children[12].querySelectorAll("table")[0].children.length - 1; k++) {
+										var consumptionRow = consumptionRows.children[3].children[12].querySelectorAll("table")[0].children[k];
 
-										if (consumptionRow.innerText == tr.innerText) {
-											consumptionRows.children[3].children[12].insertBefore(tr2, consumptionRows.children[3].children[12].children[k + 2]);
+										if (consumptionRow.innerText.trim() == tr.innerText.trim()) {
+											consumptionRows.children[3].children[12].querySelectorAll("table")[0].insertBefore(tr2, consumptionRows.children[3].children[12].querySelectorAll("table")[0].children[k + 2]);
 											isInserted = true;
 											break;
 										}
@@ -4857,9 +4860,13 @@ window.addEventListener(
 						if (indentTable != undefined) {
 							indentTable.remove();
 						}
-						if (remarksTable != undefined) {
-							remarksTable.nextElementSibling.nextSibling.remove();
-							remarksTable.nextElementSibling.remove();
+						if (remarksTable != undefined && remarksTable != null) {
+							if (remarksTable.nextElementSibling != undefined && remarksTable.nextElementSibling != null) {
+								if (remarksTable.nextElementSibling.nextSibling != undefined && remarksTable.nextElementSibling.nextSibling != null) {
+									remarksTable.nextElementSibling.nextSibling.remove();
+								}
+								remarksTable.nextElementSibling.remove();
+							}
 							remarksTable.remove();
 						}
 
@@ -4895,6 +4902,9 @@ window.addEventListener(
 						headerTable.querySelectorAll("tr")[1].children[2].innerText = headerTable.querySelectorAll("tr")[2].innerText.split(" ").slice(0, 5).join(" ");
 						headerTable.querySelectorAll("tr")[1].children[2].setAttribute("colspan", "4");
 
+						if (headerTable.querySelectorAll("tr")[3] != undefined) {
+							headerTable.querySelectorAll("tr")[3].remove();
+						}
 						headerTable.querySelectorAll("tr")[2].remove();
 
 						consumptionTable.querySelectorAll("tr")[0].remove();
@@ -4980,6 +4990,7 @@ window.addEventListener(
 
 						consumptionRows[consumptionRows.length - 1].children[8].setAttribute("colspan", "5");
 						consumptionRows[consumptionRows.length - 1].children[5].innerText = consumptionRows[consumptionRows.length - 1].children[5].innerText.split("(")[0];
+						consumptionRows[consumptionRows.length - 1].insertBefore(consumptionRows[consumptionRows.length - 1].children[5], consumptionRows[consumptionRows.length - 1].children[3]);
 						consumptionRows[consumptionRows.length - 1].children[2].remove();
 						consumptionRows[consumptionRows.length - 1].children[1].remove();
 						consumptionRows[consumptionRows.length - 1].children[0].removeAttribute("colspan");
