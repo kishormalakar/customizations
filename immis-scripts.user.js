@@ -4670,12 +4670,17 @@ window.addEventListener(
 									var inspectionCertificateQty = dispatchRow.children[7].innerText;
 									var dispatchDate;
 									var dispatchQty;
+									var accountalDate;
 
 									var tr = document.createElement("tr");
 									var td = document.createElement("td");
 									var tdText;
 
-									if (dispatchRow.children[9].innerText != "") {
+									if (dispatchRow.children[10].innerText != "") {
+										accountalDate = dispatchRow.children[10].innerText.split("Dt.")[1].substring(0, 9);
+										dispatchQty = dispatchRow.children[9].innerText.split("(")[1].split(")")[0];
+										tdText = document.createTextNode("Material under accountal, Qty: " + dispatchQty + ", Date: " + accountalDate);
+									} else if (dispatchRow.children[9].innerText != "") {
 										dispatchDate = dispatchRow.children[9].innerText.split("Dt.")[1].substring(0, 9);
 										dispatchQty = dispatchRow.children[9].innerText.split("(")[1].split(")")[0];
 										tdText = document.createTextNode("Material dispatched, Qty: " + dispatchQty + ", Date: " + dispatchDate);
@@ -4711,15 +4716,22 @@ window.addEventListener(
 								coveredRow.querySelectorAll("td")[0].appendChild(br);
 								var td = coveredRow.querySelectorAll("td")[0];
 								td.innerHTML = td.innerHTML.split(" PO-CAT:")[0] + td.innerHTML.split(" ]  ")[1];
+								if (consumptionRows.children[3].children[12].querySelectorAll("table")[0].children[0] != undefined) {
+									td.style.borderTop = "1px solid black";
+								}
 								tr.appendChild(td.cloneNode(true));
 								consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
 
 								var depot = coveredRow.children[2].innerText;
 								var qty = coveredRow.children[7].innerText;
 								var dp = coveredRow.children[9].innerText;
+								var dpDate = new Date("20" + dp.split("/")[2], dp.split("/")[1] - 1, dp.split("/")[0]);
 
 								coveredRow.children[2].innerText = coveredRow.children[2].innerText + ": " + coveredRow.children[7].innerText + "; DP: " + coveredRow.children[9].innerText;
 								coveredRow.children[2].setAttribute("align", "left");
+								if (dpDate < today) {
+									coveredRow.children[2].style.color = "red";
+								}
 
 								if (+qty > 0) {
 									var tr = document.createElement("tr");
@@ -4784,6 +4796,7 @@ window.addEventListener(
 								var tenderDepot = uncoveredRow.children[1].innerText;
 								var tenderText = uncoveredRow.children[7].innerText;
 								var tod = uncoveredRow.children[8].innerText;
+								var todDate = new Date("20" + tod.split("/")[2], tod.split("/")[1] - 1, tod.split("/")[0]);
 								var tenderStatus = uncoveredRow.children[9];
 								var tenderNo;
 								var tenderQty;
@@ -4813,19 +4826,21 @@ window.addEventListener(
 										uncoveredRow.children[7].appendChild(p);
 									}
 
-									var tr = document.createElement("tr");
-									var br = document.createElement("br");
-									uncoveredRow.children[7].appendChild(br);
-									tr.appendChild(uncoveredRow.children[7].cloneNode(true));
-									uncoveredRow.children[1].innerText = uncoveredRow.children[1].innerText + ": " + tenderQty;
-									var tr2 = document.createElement("tr");
-									var br = document.createElement("br");
-									uncoveredRow.children[1].appendChild(br);
-									tr2.appendChild(uncoveredRow.children[1].cloneNode(true));
-									var tr3 = document.createElement("tr");
-									var br = document.createElement("br");
-									tenderStatus.appendChild(br);
-									tr3.appendChild(tenderStatus.cloneNode(true));
+									if (today - todDate < 180 * 24 * 60 * 60 * 1000) {
+										var tr = document.createElement("tr");
+										var br = document.createElement("br");
+										uncoveredRow.children[7].appendChild(br);
+										tr.appendChild(uncoveredRow.children[7].cloneNode(true));
+										uncoveredRow.children[1].innerText = uncoveredRow.children[1].innerText + ": " + tenderQty;
+										var tr2 = document.createElement("tr");
+										var br = document.createElement("br");
+										uncoveredRow.children[1].appendChild(br);
+										tr2.appendChild(uncoveredRow.children[1].cloneNode(true));
+										var tr3 = document.createElement("tr");
+										var br = document.createElement("br");
+										tenderStatus.appendChild(br);
+										tr3.appendChild(tenderStatus.cloneNode(true));
+									}
 
 									var isInserted = false;
 									for (var k = 0; k < consumptionRows.children[3].children[12].querySelectorAll("table")[0].children.length - 1; k++) {
@@ -4838,6 +4853,7 @@ window.addEventListener(
 										}
 									}
 									if (!isInserted) {
+										tr.children[0].style.borderTop = "1px solid black";
 										consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr);
 										consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr3);
 										consumptionRows.children[3].children[12].querySelectorAll("table")[0].appendChild(tr2);
@@ -4940,7 +4956,9 @@ window.addEventListener(
 						var numCoverageRows = consumptionRows.children[1].children[12].querySelectorAll("table")[0].children.length;
 						for (var j = 0; j < consumptionRows.children[1].children[12].querySelectorAll("table")[0].children.length; j++) {
 							consumptionRows.children[1].children[12].querySelectorAll("table")[0].children[j].setAttribute("colspan", "3");
-							consumptionRows.children[1].children[12].querySelectorAll("table")[0].children[j].children[0].setAttribute("colspan", "3");
+							if (consumptionRows.children[1].children[12].querySelectorAll("table")[0].children[j].children[0] != undefined) {
+								consumptionRows.children[1].children[12].querySelectorAll("table")[0].children[j].children[0].setAttribute("colspan", "3");
+							}
 						}
 
 						var consumptionRows = consumptionTable.querySelectorAll("tbody")[0].querySelectorAll(":scope > tr");
@@ -5018,6 +5036,7 @@ window.addEventListener(
 						headerTable.querySelectorAll("td[colspan='3']").forEach((td) => {
 							td.style.width = "300px";
 							td.style.maxWidth = "300px";
+							td.closest("table").style.width = "100%";
 						});
 						headerTable.querySelectorAll("td[colspan='4']").forEach((td) => {
 							td.style.width = "400px";
