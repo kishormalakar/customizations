@@ -88,25 +88,25 @@
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button.icon-imp):hover > td > div {
 		background-color: #ffbcbc !important;
 	}
-
-	.list-read:has(button[data-id-attr="greenNote"]) {
-		background-color: #bff6c3 !important;
+	
+	.list-read:has(span[data-id-attr="greenNote"]){
+		background-color: #BFF6C3 !important;
 	}
-
-	.list-read:has(button[data-id-attr="greenNote"]):hover,
+	
+	.list-read:has(span[data-id-attr="greenNote"]):hover,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover > td > div {
-		background-color: #9cdba6 !important;
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="greenNote"]):hover > td > div{
+		background-color: #9CDBA6 !important;
 	}
-
-	.list-read:has(button[data-id-attr="yellowNote"]) {
-		background-color: #fdffe2 !important;
+	
+	.list-read:has(span[data-id-attr="yellowNote"]){
+		background-color: #FDFFE2 !important;
 	}
-
-	.list-read:has(button[data-id-attr="yellowNote"]):hover,
+	
+	.list-read:has(span[data-id-attr="yellowNote"]):hover,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover > td > div {
-		background-color: #f3feb8 !important;
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button[data-id-attr="yellowNote"]):hover > td > div{
+		background-color: #F3FEB8 !important;
 	}
 
 	[data-id-attr="subject"] {
