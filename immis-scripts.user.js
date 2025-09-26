@@ -4573,11 +4573,11 @@ window.addEventListener(
 		if (document.title == "Manage List Groups for Reports" || document.title == "Run Form - IMMIS/LISTGROUPS") {
 			body.classList.add("manage_list");
 
-			var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_44")[0];
-			var plSubmit = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_53")[0];
+			var plInput = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_50")[0];
+			var plSubmit = document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_59")[0];
 			plInput.addEventListener("keydown", (e) => {
 				if (e.key === "Tab" || e.key === "Enter") {
-					document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_53")[0].focus();
+					plSubmit.focus();
 				}
 			});
 			plSubmit.addEventListener("click", (e) => {
@@ -4593,7 +4593,6 @@ window.addEventListener(
 
 			summaryButton.addEventListener("click", (e) => {
 				var positionDiv = document.querySelectorAll("#s_2")[0].querySelectorAll(":scope > table")[2].querySelectorAll("tr")[1].querySelectorAll("div")[0].querySelectorAll(":scope > table");
-				console.log(positionDiv);
 
 				for (var i = 0; i < positionDiv.length; i++) {
 					if (positionDiv[i].querySelectorAll("td")[0].innerText.trim() == "Sr." && positionDiv[i].querySelectorAll("td")[1].innerText.trim() == "PL. No.") {
@@ -4765,9 +4764,14 @@ window.addEventListener(
 									var depot = coveredRow1.children[1].innerText;
 									var qty = coveredRow1.children[6].innerText;
 									var dp = coveredRow1.children[8].innerText;
+									var dpDate = new Date("20" + dp.split("/")[2], dp.split("/")[1] - 1, dp.split("/")[0]);
 
 									coveredRow1.children[1].innerText = coveredRow1.children[1].innerText + ": " + coveredRow1.children[6].innerText + "; DP: " + coveredRow1.children[8].innerText;
 									coveredRow1.children[1].setAttribute("align", "left");
+
+									if (dpDate < today) {
+										coveredRow1.children[1].style.color = "red";
+									}
 
 									if (+qty > 0) {
 										var tr = document.createElement("tr");
@@ -4931,6 +4935,7 @@ window.addEventListener(
 
 						consumptionTable.querySelectorAll("tr")[0].remove();
 
+						consumptionTable.querySelectorAll("tr")[0].children[10].remove();
 						consumptionTable.querySelectorAll("tr")[0].children[9].removeAttribute("rowspan");
 						consumptionTable.querySelectorAll("tr")[0].appendChild(consumptionTable.querySelectorAll("tr")[0].children[9].cloneNode(true));
 						consumptionTable.querySelectorAll("tr")[0].children[10].innerText = "Remarks by Depot";
@@ -4972,6 +4977,7 @@ window.addEventListener(
 
 						for (var j = 1; j < consumptionRows.length - 1; j++) {
 							var consumptionRow = consumptionRows[j];
+							consumptionRow.children[14].remove();
 							consumptionRow.children[13].innerText = "";
 							consumptionRow.appendChild(consumptionRow.children[13].cloneNode(true));
 							consumptionRow.children[14].setAttribute("rowspan", consumptionRows.length - 2);
