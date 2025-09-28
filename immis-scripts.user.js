@@ -4680,7 +4680,11 @@ window.addEventListener(
 
 									if (dispatchRow.children[10].innerText != "") {
 										accountalDate = dispatchRow.children[10].innerText.split("Dt.")[1].substring(0, 9);
-										dispatchQty = dispatchRow.children[9].innerText.split("(")[1].split(")")[0];
+										if (dispatchRow.children[9].innerText.split("(")[1] != undefined) {
+											dispatchQty = dispatchRow.children[9].innerText.split("(")[1].split(")")[0];
+										} else {
+											dispatchQty = dispatchRow.children[10].innerText.split("(")[1].split(")")[0];
+										}
 										tdText = document.createTextNode("Material under accountal, Qty: " + dispatchQty + ", Date: " + accountalDate);
 									} else if (dispatchRow.children[9].innerText != "") {
 										dispatchDate = dispatchRow.children[9].innerText.split("Dt.")[1].substring(0, 9);
