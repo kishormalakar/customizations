@@ -11,11 +11,11 @@
 // ==/UserScript==
 
 window.addEventListener(
-    "load",
-    function () {
-        "use strict";
+	"load",
+	function () {
+		"use strict";
 
-        var body = document.querySelectorAll("body")[0];
+		var body = document.querySelectorAll("body")[0];
 
 		let updateFileCount = () => {
 			var navigation_menu = document.querySelectorAll("navigation-menu-component")[0];
@@ -56,6 +56,9 @@ window.addEventListener(
 
 				e.target.previousElementSibling.querySelectorAll("input")[0].click();
 				quick_noting_container.querySelectorAll("button[data-id-attr='addButton']")[0].click();
+				var iframe = document.querySelectorAll(".noting_container")[0].querySelectorAll("iframe")[0];
+				var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+				iframeDoc.querySelectorAll("#tinymce")[0].focus();
 			}
 
 			if (e.target.getAttribute("data-id-attr") == "subject" || (e.target.closest("td") != null && e.target.closest("td").getAttribute("data-id-attr") == "subject")) {
@@ -89,7 +92,6 @@ window.addEventListener(
 				e.target.closest("referred-pdf-view").previousElementSibling.children[0].click();
 			}
 		});
-
-    },
-    false
+	},
+	false
 );
