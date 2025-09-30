@@ -78,6 +78,7 @@ window.addEventListener(
 
 			if (e.target.closest("[data-id-attr='send-to-recent-five-table']") != null && e.target.parentElement.querySelectorAll("#onUserSelect-1")[0] != undefined) {
 				e.target.parentElement.querySelectorAll("#onUserSelect-1")[0].click();
+				e.target.closest(".tab-content").closest(".sentTo-container").querySelectorAll(".btn_container")[0].querySelectorAll("button#send")[0].focus();
 
 				if (e.target.closest("tr").children[3].innerText.search("CMM") == -1) {
 					e.target.closest("[data-id-attr='send-to-recent-five-table']").closest(".form").nextElementSibling.querySelectorAll("input#smsNotification")[0].checked = true;
@@ -86,6 +87,7 @@ window.addEventListener(
 
 			if (e.target.closest("[data-id-attr='send-to-recent-five-table']") != null && e.target.parentElement.querySelectorAll("#onUserSelect-2")[0] != undefined) {
 				e.target.parentElement.querySelectorAll("#onUserSelect-2")[0].click();
+				e.target.closest(".tab-content").closest(".sentTo-container").querySelectorAll(".btn_container")[0].querySelectorAll("button#send")[0].focus();
 			}
 
 			if ((e.target.classList.contains("panel-heading") || e.target.parentElement.classList.contains("panel-heading")) && e.target.closest("app-dialog").classList.contains("dialog-minimize")) {
