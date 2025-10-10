@@ -4986,6 +4986,8 @@ window.addEventListener(
 							consumptionRow.appendChild(consumptionRow.children[13].cloneNode(true));
 							consumptionRow.children[14].setAttribute("rowspan", consumptionRows.length - 2);
 							consumptionRow.children[13].setAttribute("rowspan", consumptionRows.length - 2);
+							var text = document.createTextNode("UDM Stock: ");
+							consumptionRow.children[13].appendChild(text);
 							consumptionRow.children[12].removeAttribute("nowrap");
 							consumptionRow.children[12].setAttribute("colspan", "3");
 							consumptionRow.children[12].setAttribute("rowspan", consumptionRows.length - 2);
