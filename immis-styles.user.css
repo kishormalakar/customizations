@@ -131,7 +131,7 @@
 		margin-top: 2px !important;
 		margin-bottom: 2px !important;
 	}
-	
+/*	
 	input[type='text'],
 	input[type='password']{
 		height: 22px;
@@ -140,7 +140,7 @@
 		margin-top: 2px !important;
 		margin-bottom: 2px !important;
 	}
-	
+*/	
 	select{
 		height: 22px;
 		margin-left: 2px !important;
@@ -281,19 +281,41 @@
 		left: auto !important;
 		top: 0 !important;
 	}
-
+/*
 	#LoginDiv {
 		width: 600px !important;
 		left: calc(50% - 300px) !important;
 		padding: 20px !important;
 		top: 100px !important;
 	}
-
+*/
+	
+	#LoginDiv .button,
+	#LoginDiv .button:active,	
+    #LoginDiv .btn,
+    #LoginDiv .btn:active{
+        border-width: 2px 2px 2px !important;
+        border-radius: 5px !important;
+        height: 45px !important;
+        padding: 5px !important;
+        opacity: 1 !important;
+		margin-left: 2px !important;
+		margin-right: 2px !important;
+		margin-top: 2px !important;
+		margin-bottom: 2px !important;
+    }
+	
 	#PasswdDiv {
 		width: 600px !important;
-		left: calc(50% - 300px) !important;
+		/*left: calc(50% - 300px) !important;*/
 		padding: 20px !important;
-		top: 190px !important;
+		top: 340px !important;
+	}
+	
+	#PasswdDiv > div{
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0 !important;
 	}
 
 	#divShowHtml1,
