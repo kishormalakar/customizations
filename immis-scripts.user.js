@@ -5151,8 +5151,7 @@ window.addEventListener(
 				consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[2].innerText);
 				consumptionYearsArray.push(consumptionTable.querySelectorAll("tr")[1].children[3].innerText);
 
-				var udmStockBalance = divShowHtml1.children[1].querySelectorAll(":scope > table")[2].querySelectorAll("td")[0].innerText;
-				var coveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[0].querySelectorAll("table")[0];
+				var coveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[2].querySelectorAll("tr")[0].children[0].querySelectorAll("table")[0];
 				var coveredRows = coveredDuesTable.querySelectorAll("tbody")[0].children;
 				var coveredDuesArray = [];
 				var array2 = [];
@@ -5195,7 +5194,7 @@ window.addEventListener(
 					}
 				}
 
-				var uncoveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[1].querySelectorAll("table")[0];
+				var uncoveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[2].querySelectorAll("tr")[0].children[1].querySelectorAll("table")[0];
 				var uncoveredRows = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
 				var uncoveredDuesArray = [];
 
@@ -5224,14 +5223,29 @@ window.addEventListener(
 					}
 				}
 
-				var cpText = divShowHtml1.children[1].children[9].nextSibling.textContent;
+				var udmStockTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3];
+				var udmStockRows = udmStockTable.querySelectorAll("tbody")[0].children;
+				var udmStockArray = [];
+
+				if (udmStockRows.length > 1) {
+					for (var i = 2; i < udmStockRows.length - 1; i++) {
+						var row4 = udmStockRows[i];
+
+						var udmDepot = row4.children[0].innerText;
+						var udmQty = row4.children[5].innerText;
+
+						udmStockArray.push(+udmQty);
+					}
+				}
+
+				var cpText = divShowHtml1.children[1].children[8].nextSibling.textContent;
 				var cpFrom = cpText.substring(4, 12);
 				var cpTo = cpText.substring(16, 24);
 				var cpMM = parseInt(cpText.substring(27, 29));
 				var ipFrom = cpText.substring(44, 52);
 				var ipTo = cpText.substring(56, 64);
 				var ipMM = parseInt(cpText.substring(67, 69));
-				var bpText = divShowHtml1.children[1].children[10].nextSibling.textContent;
+				var bpText = divShowHtml1.children[1].children[9].nextSibling.textContent;
 				var bpMM = parseInt(bpText.substring(8, 10).trim());
 
 				var data = new Object();
@@ -5250,9 +5264,9 @@ window.addEventListener(
 				data.consumptionYearsArray = consumptionYearsArray;
 				data.aacArray = aacArray;
 				data.mcArray = mcArray;
-				data.udmStockBalance = udmStockBalance;
 				data.coveredDuesArray = coveredDuesArray;
 				data.uncoveredDuesArray = uncoveredDuesArray;
+				data.udmStockArray = udmStockArray;
 
 				data.cpFrom = cpFrom;
 				data.cpTo = cpTo;
@@ -5283,9 +5297,9 @@ window.addEventListener(
 				var consumptionYearsArray = data.consumptionYearsArray;
 				var aacArray = data.aacArray;
 				var mcArray = data.mcArray;
-				var udmStockBalance = data.udmStockBalance;
 				var coveredDuesArray = data.coveredDuesArray;
 				var uncoveredDuesArray = data.uncoveredDuesArray;
+				var udmStockArray = data.udmStockArray;
 
 				var cpFrom = data.cpFrom;
 				var cpTo = data.cpTo;
@@ -5406,7 +5420,7 @@ window.addEventListener(
 					}
 					totalInputAAC += Math.min(+aacArray[i], Math.round(escalationLimit * maxConsumption));
 
-                    inputP8.addEventListener("keyup", (e) => {
+					inputP8.addEventListener("keyup", (e) => {
 						var dataReviewDiv = document.querySelectorAll(".data_review")[0];
 						var rows = dataReviewDiv.querySelectorAll("table")[0].querySelectorAll("tr");
 						var inputs = dataReviewDiv.querySelectorAll("table")[0].querySelectorAll("input");
@@ -5603,15 +5617,15 @@ window.addEventListener(
 						}
 					}
 
-					var bpText1 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(0, 8);
-					var bpText2 = divShowHtml1.children[1].children[10].nextSibling.textContent.substring(9);
+					var bpText1 = divShowHtml1.children[1].children[9].nextSibling.textContent.substring(0, 8);
+					var bpText2 = divShowHtml1.children[1].children[9].nextSibling.textContent.substring(9);
 					//divShowHtml1.children[1].children[10].nextSibling.textContent = bpText1 + dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value + bpText2;
 					revisedBP = dataReviewDiv.querySelectorAll("table")[1].querySelectorAll("input")[0].value;
 
 					var uncoveredDuesTable = dataReviewDiv.querySelectorAll("table")[2];
 					var uncoveredRows = uncoveredDuesTable.children[0].children;
 
-					var originalUncoveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[3].querySelectorAll("tr")[0].children[1].querySelectorAll("table")[0];
+					var originalUncoveredDuesTable = divShowHtml1.children[1].querySelectorAll(":scope > table")[2].querySelectorAll("tr")[0].children[1].querySelectorAll("table")[0];
 					var originalUncoveredRows = originalUncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
 					var j = 1;
@@ -5661,9 +5675,9 @@ window.addEventListener(
 				var consumptionYearsArray = data.consumptionYearsArray;
 				var aacArray = data.aacArray;
 				var mcArray = data.mcArray;
-				var udmStockBalance = data.udmStockBalance;
 				var coveredDuesArray = data.coveredDuesArray;
 				var uncoveredDuesArray = data.uncoveredDuesArray;
+				var udmStockArray = data.udmStockArray;
 
 				var cpFrom = data.cpFrom;
 				var cpTo = data.cpTo;
@@ -5859,45 +5873,6 @@ window.addEventListener(
 					tri.appendChild(tdi9);
 					tbody1.appendChild(tri);
 				}
-
-				var tri = document.createElement("tr");
-				var tdi1 = document.createElement("td");
-				var texti1 = document.createTextNode("UDM");
-				tdi1.appendChild(texti1);
-				var tdi2 = document.createElement("td");
-				var texti2 = document.createTextNode("-");
-				tdi2.appendChild(texti2);
-				var tdi3 = document.createElement("td");
-				var texti3 = document.createTextNode("-");
-				tdi3.appendChild(texti3);
-				var tdi4 = document.createElement("td");
-				var texti4 = document.createTextNode("-");
-				tdi4.appendChild(texti4);
-				var tdi5 = document.createElement("td");
-				var texti5 = document.createTextNode("-");
-				tdi5.appendChild(texti5);
-				var tdi6 = document.createElement("td");
-				var texti6 = document.createTextNode("-");
-				tdi6.appendChild(texti6);
-				var tdi7 = document.createElement("td");
-				var texti7 = document.createTextNode("-");
-				tdi7.appendChild(texti7);
-				var tdi8 = document.createElement("td");
-				var texti8 = document.createTextNode("-");
-				tdi8.appendChild(texti8);
-				var tdi9 = document.createElement("td");
-				var texti9 = document.createTextNode(udmStockBalance);
-				tdi9.appendChild(texti9);
-				tri.appendChild(tdi1);
-				tri.appendChild(tdi2);
-				tri.appendChild(tdi3);
-				tri.appendChild(tdi4);
-				tri.appendChild(tdi5);
-				tri.appendChild(tdi6);
-				tri.appendChild(tdi7);
-				tri.appendChild(tdi8);
-				tri.appendChild(tdi9);
-				tbody1.appendChild(tri);
 
 				table1.appendChild(tbody1);
 				div.appendChild(table1);
@@ -6149,7 +6124,7 @@ window.addEventListener(
 				var td1 = document.createElement("td");
 				var text1 = document.createTextNode("Net Requirements");
 				td1.appendChild(text1);
-				td1.setAttribute("colspan", 10);
+				td1.setAttribute("colspan", 11);
 				tr1.appendChild(td1);
 				var tr2 = document.createElement("tr");
 				var td2 = document.createElement("td");
@@ -6162,13 +6137,13 @@ window.addEventListener(
 				var text4 = document.createTextNode("Monthly Requirement");
 				td4.appendChild(text4);
 				var td5 = document.createElement("td");
-				var text5 = document.createTextNode("IP Requirement");
+				var text5 = document.createTextNode("IP Qty");
 				td5.appendChild(text5);
 				var td6 = document.createElement("td");
-				var text6 = document.createTextNode("CP Requirement");
+				var text6 = document.createTextNode("CP Qty");
 				td6.appendChild(text6);
 				var td7 = document.createElement("td");
-				var text7 = document.createTextNode("BP Requirement");
+				var text7 = document.createTextNode("BP Qty");
 				td7.appendChild(text7);
 				var td8 = document.createElement("td");
 				var text8 = document.createTextNode("CD");
@@ -6180,8 +6155,11 @@ window.addEventListener(
 				var text10 = document.createTextNode("Stock");
 				td10.appendChild(text10);
 				var td11 = document.createElement("td");
-				var text11 = document.createTextNode("Total Requirement");
+				var text11 = document.createTextNode("UDM Stock Considered");
 				td11.appendChild(text11);
+				var td12 = document.createElement("td");
+				var text12 = document.createTextNode("Total Requirement");
+				td12.appendChild(text12);
 				tr2.appendChild(td2);
 				tr2.appendChild(td3);
 				tr2.appendChild(td4);
@@ -6192,6 +6170,7 @@ window.addEventListener(
 				tr2.appendChild(td9);
 				tr2.appendChild(td10);
 				tr2.appendChild(td11);
+				tr2.appendChild(td12);
 				tr1.setAttribute("bgcolor", "lightBlue");
 				tr2.setAttribute("bgcolor", "lightBlue");
 				tbody1.appendChild(tr1);
@@ -6289,13 +6268,22 @@ window.addEventListener(
 					var tdM10 = document.createElement("td");
 					var textM10;
 					if (i == depotArray.length) {
-						textM10 = document.createTextNode(Math.round(netRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
+						textM10 = document.createTextNode(udmStockArray.reduce((a, b) => a + b, 0));
 					} else {
-						var netRequirement = +ipRequirement + +cpRequirement + +bpRequirement - +totalCoveredDuesArray[i] - +totalUncoveredDuesArray[i] - +stockArray[i];
-						netRequirementsArray.push(+netRequirement);
-						textM10 = document.createTextNode(Math.round(netRequirement * 100) / 100);
+						textM10 = document.createTextNode(udmStockArray[i]);
 					}
 					tdM10.appendChild(textM10);
+
+					var tdM11 = document.createElement("td");
+					var textM11;
+					if (i == depotArray.length) {
+						textM11 = document.createTextNode(Math.round(netRequirementsArray.reduce((a, b) => a + b, 0) * 100) / 100);
+					} else {
+						var netRequirement = +ipRequirement + +cpRequirement + +bpRequirement - +totalCoveredDuesArray[i] - +totalUncoveredDuesArray[i] - +stockArray[i] - +udmStockArray[i];
+						netRequirementsArray.push(+netRequirement);
+						textM11 = document.createTextNode(Math.round(netRequirement * 100) / 100);
+					}
+					tdM11.appendChild(textM11);
 
 					trM.appendChild(tdM1);
 					trM.appendChild(tdM2);
@@ -6307,6 +6295,7 @@ window.addEventListener(
 					trM.appendChild(tdM8);
 					trM.appendChild(tdM9);
 					trM.appendChild(tdM10);
+					trM.appendChild(tdM11);
 
 					tbody1.appendChild(trM);
 				}
