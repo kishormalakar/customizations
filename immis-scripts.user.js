@@ -27,6 +27,7 @@ window.addEventListener(
 		var currentZoneCode = "";
 		var currentZone = "";
 		var currentYear = "";
+		var currentSections = ["04", "05", "12", "13"];
         var today = new Date();
 
 		var body = document.querySelectorAll("body")[0];
@@ -1133,7 +1134,7 @@ window.addEventListener(
 
 			let assignMAtoDealer = () => {
 				var maList = s_6.querySelectorAll("[id^=TrMAList_]");
-				var maNum = maList.length;
+				var maNum = 0;
 
 				var th = document.createElement("th");
 				var thText = document.createTextNode("Dealer");
@@ -1151,33 +1152,40 @@ window.addEventListener(
 					var today = new Date();
 					var maDays = Math.floor((today - maReqDate) / 86400000);
 
+					var section = maRow.children[1].innerText;
 					var poNo = maRow.children[5].innerText.substring(0, 15);
 					var plNo = maRow.children[7].innerText.split("[")[1].split("]")[0];
 					var dealer = getDealerByPl(plNo);
 
-					maRow.children[5].querySelectorAll("a")[0].setAttribute("target", "_blank");
+					if (currentSections.includes(section)) {
+						maRow.children[5].querySelectorAll("a")[0].setAttribute("target", "_blank");
 
-					var dealerText = "";
+						var dealerText = "";
 
-					if (poArray.includes(poNo)) {
-						dealerText = dealer + " (*)";
+						if (poArray.includes(poNo)) {
+							dealerText = dealer + " (*)";
+						} else {
+							dealerText = dealer;
+						}
+
+						var td = document.createElement("td");
+						var tdText = document.createTextNode(dealerText);
+						td.appendChild(tdText);
+						maRow.insertBefore(td, maRow.children[6]);
+
+						var maArray1 = [];
+						maArray1.push(dealer);
+						maArray1.push(maDays);
+						maArray.push(maArray1);
+						poArray.push(poNo);
+
+						if (!dealerArray.includes(dealer)) {
+							dealerArray.push(dealer);
+						}
+
+						maNum++;
 					} else {
-						dealerText = dealer;
-					}
-
-					var td = document.createElement("td");
-					var tdText = document.createTextNode(dealerText);
-					td.appendChild(tdText);
-					maRow.insertBefore(td, maRow.children[6]);
-
-					var maArray1 = [];
-					maArray1.push(dealer);
-					maArray1.push(maDays);
-					maArray.push(maArray1);
-					poArray.push(poNo);
-
-					if (!dealerArray.includes(dealer)) {
-						dealerArray.push(dealer);
+						maRow.remove();
 					}
 				}
 
@@ -1339,15 +1347,15 @@ window.addEventListener(
 				if (e.target.name == "btn_Hide_0") {
 					maKeyInput.focus();
 				}
-                if (e.target.title == "View/Authorize M.A.") {
-                    var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
-                    var s__cnvs26 = document.querySelectorAll("#s__cnvs26")[0];
-                    s_7.style.top = scrollTop + "px";
-                    s__cnvs26.style.top = scrollTop + "px";
-                    var s_7cssText = s_7.style.cssText;
-                    var s_7cssTextNew = s_7cssText.slice(0, s_7cssText.indexOf("width:") - 2) + " !important" + s_7cssText.slice(s_7cssText.indexOf("width:") - 2);
-                    s_7.style.cssText = s_7cssTextNew;
-                }
+				if (e.target.title == "View/Authorize M.A.") {
+					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
+					var s__cnvs26 = document.querySelectorAll("#s__cnvs26")[0];
+					s_7.style.top = scrollTop + "px";
+					s__cnvs26.style.top = scrollTop + "px";
+					var s_7cssText = s_7.style.cssText;
+					var s_7cssTextNew = s_7cssText.slice(0, s_7cssText.indexOf("width:") - 2) + " !important" + s_7cssText.slice(s_7cssText.indexOf("width:") - 2);
+					s_7.style.cssText = s_7cssTextNew;
+				}
 				if (e.target.name == "btn_ViewAuth_0") {
 					buttonAuthorization.focus();
 				}
@@ -6671,20 +6679,27 @@ window.addEventListener(
         }
 
         if (document.title == "Processing of Purchase Orders" || document.title == "Run Form - IMMIS/PUR/ORDERAUTH") {
-            body.classList.add("po_process");
+			body.classList.add("po_process");
 
-            var s_4 = document.querySelectorAll("#s_4")[0];
+			var s_3 = document.querySelectorAll("#s_3")[0];
+			var s_4 = document.querySelectorAll("#s_4")[0];
 
-            document.addEventListener("click", (e) => {
+			var poList = s_3.querySelectorAll("tr[id^=PORow_]");
 
-                if(e.target.id.startsWith("btnActRow_")){
+			for (i = 0; i < poList.length; i++) {
+				var poRow = poList[i];
+				var section = poRow.children[1].innerText.split(":")[0];
+				if (!currentSections.includes(section)) {
+					poRow.remove();
+				}
+			}
 
-                    s_4.querySelectorAll("input[name='btn_Auth_0']")[0].focus();
-
-                }
-
-            });
-        }
+			document.addEventListener("click", (e) => {
+				if (e.target.id.startsWith("btnActRow_")) {
+					s_4.querySelectorAll("input[name='btn_Auth_0']")[0].focus();
+				}
+			});
+		}
 
 		if (document.title == "Formation of NIT for Publishing" || document.title == "Run Form - IMMIS/PUR/NITPUBLISH") {
             body.classList.add("newspaper_publication");
