@@ -1090,6 +1090,8 @@ window.addEventListener(
 		}
 
 		if (document.title == "Demand Registration (Non-Stock)" || document.title == "Run Form - IMMIS/PUR/DMDREGNS") {
+			body.classList.add("demand_registration_ns");
+
 			document.addEventListener("click", (e) => {
 				var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
 
@@ -1104,7 +1106,7 @@ window.addEventListener(
 					var s_3 = document.querySelectorAll("#s_3")[0];
 					scrollTop += 150;
 
-					s_3.style.cssText = "position: absolute !important; top: " + scrollTop + "px !important;" + s_3.style.cssText;
+					s_3.style.cssText = "top: " + scrollTop + "px !important;" + s_3.style.cssText;
 				}
 				if (e.target.title == "View Demand Details") {
 					var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];

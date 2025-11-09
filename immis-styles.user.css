@@ -1531,4 +1531,8 @@
 	.pl_section_mapping #s_3{
 		top: 103px !important;
 	}
+	
+	.demand_registration_ns #s_3{
+		position: absolute !important;
+	}
 }
