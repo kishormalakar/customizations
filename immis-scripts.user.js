@@ -1094,12 +1094,18 @@ window.addEventListener(
 				var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
 
 				if (e.target.title == "Return this Demand") {
-                    var s_2 = document.querySelectorAll("#s_2")[0];
-                    var s__cnvs4 = document.querySelectorAll("#s__cnvs4")[0];
-                    scrollTop += 150;
+					var s_2 = document.querySelectorAll("#s_2")[0];
+					var s__cnvs4 = document.querySelectorAll("#s__cnvs4")[0];
+					scrollTop += 150;
 
-                    s__cnvs4.style.top = scrollTop + "px";
-                }
+					s__cnvs4.style.top = scrollTop + "px";
+				}
+				if (e.target.title == "Register this Demand") {
+					var s_3 = document.querySelectorAll("#s_3")[0];
+					scrollTop += 150;
+
+					s_3.style.cssText = "position: absolute !important; top: " + scrollTop + "px !important;" + s_3.style.cssText;
+				}
 				if (e.target.title == "View Demand Details") {
 					var divShowHtml1 = document.querySelectorAll("#divShowHtml1")[0];
 
