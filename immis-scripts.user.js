@@ -1106,6 +1106,7 @@ window.addEventListener(
 					var s_3 = document.querySelectorAll("#s_3")[0];
 					scrollTop += 150;
 
+					s_3.style.top = scrollTop + "px";
 					s_3.style.cssText = "top: " + scrollTop + "px !important;" + s_3.style.cssText;
 				}
 				if (e.target.title == "View Demand Details") {
