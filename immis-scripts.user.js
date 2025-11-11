@@ -1661,10 +1661,21 @@ window.addEventListener(
 					}
 				}
 			});
-            tenderNoInput.addEventListener("keyup", (e) => {
+
+			var sectionSelect = s_2.querySelectorAll("select[name='PUR_SEC_0']")[0];
+
+			tenderNoInput.addEventListener("keyup", (e) => {
 				var pastedContent = tenderNoInput.value;
-                var trimmedContent = pastedContent.trim();
-                tenderNoInput.value = trimmedContent;
+				var trimmedContent = pastedContent.trim();
+				tenderNoInput.value = trimmedContent;
+
+				var sectionOptions = sectionSelect.querySelectorAll("option");
+				for (var i = 0; i < sectionOptions.length; i++) {
+					var option = sectionOptions[i];
+					if (option.value == trimmedContent.substring(0, 2)) {
+						sectionSelect.value = option.value;
+					}
+				}
 			});
 
 			var s_25 = document.querySelectorAll("#s_25")[0];
@@ -2183,6 +2194,7 @@ window.addEventListener(
 
 			var ppInput = s_3.querySelectorAll("input[name='PROPOSAL_NO_0']")[0];
 			var buttonView = s_3.querySelectorAll("input[name='btn_Auth_0']")[0];
+			var sectionSelect = s_3.querySelectorAll("select[name='PUR_SECDIV_0']")[0];
 			ppInput.focus();
 			ppInput.addEventListener("keydown", (e) => {
 				if (e.key === "Tab" || e.key === "Enter") {
@@ -2193,6 +2205,14 @@ window.addEventListener(
 				var pastedContent = ppInput.value;
 				var trimmedContent = pastedContent.trim();
 				ppInput.value = trimmedContent;
+
+				var sectionOptions = sectionSelect.querySelectorAll("option");
+				for (var i = 0; i < sectionOptions.length; i++) {
+					var option = sectionOptions[i];
+					if (option.value.split(":")[0] == trimmedContent.substring(0, 2)) {
+						sectionSelect.value = option.value;
+					}
+				}
 			});
 
 			var buttonAuthorization = s_16.querySelectorAll("input[name='btn_Auth_0']")[0];
@@ -2523,8 +2543,8 @@ window.addEventListener(
 						inputP8.style.color = "red";
 					}
 					totalInputAAC += Math.min(+aacArray[i], Math.round(escalationLimit * maxConsumption));
-					
-                    inputP8.addEventListener("keyup", (e) => {
+
+					inputP8.addEventListener("keyup", (e) => {
 						var dataReviewDiv = document.querySelectorAll(".data_review")[0];
 						var rows = dataReviewDiv.querySelectorAll("table")[0].querySelectorAll("tr");
 						var inputs = dataReviewDiv.querySelectorAll("table")[0].querySelectorAll("input");
