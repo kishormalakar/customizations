@@ -22,11 +22,13 @@ javascript: (() => {
         var list = table.children;
 
         var section1 = "P4";
-        var section2 = "P 3";
-        var section3 = "P14";
+        var section2 = "P5";
+        var section3 = "P12";
+        var section4 = "P13";
         var numSection1 = 0; 
         var numSection2 = 0;
         var numSection3 = 0;
+        var numSection4 = 0;
 
         for(var i = 1; i < list.length; i++){
 
@@ -41,10 +43,13 @@ javascript: (() => {
             if(tender.children[4].innerText == section3){
                 numSection3++;
             }
+            if(tender.children[4].innerText == section4){
+                numSection4++;
+            }
 
         }
 
-        alert("No of tenders publshed from "+mondayString+" to "+todayString+": \n "+section1+"   : "+numSection1+" \n "+section2+"  : "+numSection2+" \n "+section3+" : "+numSection3);
+        alert("No of tenders publshed from "+mondayString+" to "+todayString+": \n "+section1+"   : "+numSection1+" \n "+section2+"  : "+numSection2+" \n "+section3+" : "+numSection3+" \n "+section4+" : "+numSection4);
         
     }
 })();
