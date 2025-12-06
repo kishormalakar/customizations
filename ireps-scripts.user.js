@@ -526,6 +526,7 @@ window.addEventListener(
 			});
 		}
 
+		/*
 		if (pathname.startsWith("/epsn/reports/shieldCriteriaReport/adequacyOfCoverageOfCurrentData.do")) {
 			var adequacyTable = document.querySelectorAll(".lightGrayTbl")[0].children[0].children;
 
@@ -553,6 +554,7 @@ window.addEventListener(
 				row.appendChild(td);
 			}
 		}
+		*/
 	},
 	false
 );
