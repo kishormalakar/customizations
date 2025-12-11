@@ -163,7 +163,7 @@ javascript: (() => {
             svc.value = "Applicable";
             svcLabel.value = 3;
             sgc.value =
-                "This tender and the contract/purchase order placed against this tender shall be governed by all the terms and conditions mentioned in the schedule of tender, IRS conditions of contract (latest version), Integrated Bid Document (IBD v3.0) of ECR and the documents attached with this tender.";
+                "This tender and the contract/purchase order placed against this tender shall be governed by all the terms and conditions mentioned in the schedule of tender, IRS conditions of contract, Integrated Bid Document (IBD v3.0) of ECR and its correction slips and the documents attached with this tender.";
             sgc.style.height = sgc.scrollHeight;
 
             var addButton = svc.parentElement.nextElementSibling.querySelectorAll("a")[1];
