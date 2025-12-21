@@ -5058,6 +5058,8 @@ window.addEventListener(
 							consumptionRow.children[12].removeAttribute("nowrap");
 							consumptionRow.children[12].setAttribute("colspan", "3");
 							consumptionRow.children[12].setAttribute("rowspan", consumptionRows.length - 2);
+							consumptionRow.children[7].innerHTML = consumptionRow.children[7].innerHTML.split("<br>")[0];
+							consumptionRow.children[8].innerHTML = consumptionRow.children[8].innerHTML.split("<br>")[0];
 							consumptionRow.children[9].innerHTML = consumptionRow.children[9].innerHTML.split("<br>")[0];
 							consumptionRow.children[10].innerText = consumptionRow.children[10].innerHTML.split("<br>")[0];
 							consumptionRow.insertBefore(consumptionRow.children[9], consumptionRow.children[2]);
