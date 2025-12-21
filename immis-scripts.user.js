@@ -4788,7 +4788,7 @@ window.addEventListener(
 								var br = document.createElement("br");
 								coveredRow.querySelectorAll("td")[0].appendChild(br);
 								var td = coveredRow.querySelectorAll("td")[0];
-								td.innerHTML = td.innerHTML.split(" PO-CAT:")[0] + td.innerHTML.split(" ]  ")[1];
+								td.innerHTML = td.innerHTML.split(" PO-CAT:")[0] + td.innerHTML.split(" ] ")[1];
 								if (consumptionRows.children[3].children[12].querySelectorAll("table")[0].children[0] != undefined) {
 									td.style.borderTop = "1px solid black";
 								}
