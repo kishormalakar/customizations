@@ -12,12 +12,14 @@ javascript: (() => {
 
         var section1 = "04";
         var section2 = "05";
-        var section3 = "12";
-        var section4 = "13";
+        var section3 = "10";
+        var section4 = "12";
+        var section5 = "13";
         var adequacySection1 = 0;
         var adequacySection2 = 0;
         var adequacySection3 = 0;
         var adequacySection4 = 0;
+        var adequacySection5 = 0;
 
         for(var i = 1; i < list.length; i++){
 
@@ -35,10 +37,13 @@ javascript: (() => {
             if(section.children[1].innerText == section4){
                 adequacySection4 = section.children[5].innerText;
             }
+            if(section.children[1].innerText == section5){
+                adequacySection5 = section.children[5].innerText;
+            }
 
         }
 
-        alert("Adequacy \n "+section1+" : "+adequacySection1+" \n "+section2+" : "+adequacySection2+" \n "+section3+" : "+adequacySection3+" \n "+section4+" : "+adequacySection4);
+        alert("Adequacy \n "+section1+" : "+adequacySection1+" \n "+section2+" : "+adequacySection2+" \n "+section3+" : "+adequacySection3+" \n "+section4+" : "+adequacySection4+" \n "+section5+" : "+adequacySection5);
         
     }
 })();
