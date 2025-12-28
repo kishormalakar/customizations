@@ -555,6 +555,28 @@ window.addEventListener(
 			}
 		}
 		*/
+
+		if (pathname.startsWith("/epsn/cvap/admintab/vndrDirectory.do")) {
+			var vdTable = document.querySelectorAll("table.advSearch")[0].children[0].children[8].querySelectorAll("tbody")[0].querySelectorAll("td")[1];
+			var vdItems = vdTable.querySelectorAll(":scope > table");
+
+			for (var i = 3; i < vdItems.length; i++) {
+				var vdItem = vdItems[i];
+				var vendors = vdItem.querySelectorAll("tr");
+
+				for (var j = 0; j < vendors.length - 1; j++) {
+					var vendor = vendors[j];
+
+					if (vendor.querySelectorAll("td").length == 2) {
+						var vendorName = vendor.querySelectorAll("td")[0].querySelectorAll("font")[0];
+						vendorName.innerHTML = vendorName.innerHTML.substring(0, vendorName.innerHTML.indexOf("&nbsp;")) + vendorName.innerHTML.substring(vendorName.innerHTML.indexOf("&nbsp;") + 6);
+						vendorName.style.fontWeight = "bold";
+						var vendorId = vendorName.nextSibling.nextSibling.nextSibling;
+						vendorId.textContent = vendorId.textContent.replace(/^[\s\u00A0]+/, "");
+					}
+				}
+			}
+		}
 	},
 	false
 );

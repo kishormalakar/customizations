@@ -1521,8 +1521,10 @@ window.addEventListener(
 					}
 
 					var accountingUnitSelect = s_2.querySelectorAll("input[name='BTN_AUCODE_0']")[0];
-					accountingUnitSelect.click();
+					/*
+                    accountingUnitSelect.click();
 					document.querySelectorAll("#LovDiv")[0].querySelectorAll("a")[0].click();
+                    */
 					var buttonAuthorization = s_2.querySelectorAll("input[name='btn_ViewAuth_0']")[0];
 					buttonAuthorization.focus();
 				}
@@ -1654,8 +1656,10 @@ window.addEventListener(
 
 					if (tenderValue > 0) {
 						var accountingUnitSelect = s_2.querySelectorAll("input[name='BTN_AUCODE_0']")[0];
-						accountingUnitSelect.click();
+						/*
+                        accountingUnitSelect.click();
 						document.querySelectorAll("#LovDiv")[0].querySelectorAll("a")[0].click();
+                        */
 						var buttonAuthorization = s_2.querySelectorAll("input[name='btn_ViewAuth_0']")[0];
 						buttonAuthorization.focus();
 					}
