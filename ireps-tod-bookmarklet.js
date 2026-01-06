@@ -22,9 +22,9 @@ javascript: (() => {
         var list = table.children;
 
         var section1 = "P4";
-        var section2 = "P5";
-        var section3 = "P10";
-        var section4 = "P12";
+        var section2 = "P12";
+        var section3 = "P5";
+        var section4 = "P10";
         var section5 = "P13";
         var numSection1 = 0; 
         var numSection2 = 0;
@@ -54,7 +54,7 @@ javascript: (() => {
 
         }
 
-        alert("No of tenders publshed from "+mondayString+" to "+todayString+": \n "+section1+"   : "+numSection1+" \n "+section2+"   : "+numSection2+" \n "+section3+" : "+numSection3+" \n "+section4+" : "+numSection4+" \n "+section5+" : "+numSection5);
+        alert("No of tenders publshed from "+mondayString+" to "+todayString+": \n "+section1+"   : "+numSection1+" \n "+section2+" : "+numSection2+" \n "+section3+"   : "+numSection3+" \n "+section4+" : "+numSection4+" \n "+section5+" : "+numSection5);
         
     }
 })();
