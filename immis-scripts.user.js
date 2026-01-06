@@ -2235,7 +2235,7 @@ window.addEventListener(
 			buttonAuthorization.addEventListener("click", (e) => {
 				var ppValue = s_3.querySelectorAll("input[name='PROP_VALUE_0']")[0].value.trim();
 
-				if (+ppValue >= 1000000 && document.querySelectorAll("#DivAlertBox")[0].querySelectorAll("input[value='A']")[0] != null) {
+				if (+ppValue >= 10000000 && document.querySelectorAll("#DivAlertBox")[0].querySelectorAll("input[value='A']")[0] != null) {
 					document.querySelectorAll("#DivAlertBox")[0].querySelectorAll("input[value='A']")[0].disabled = "true";
 				}
 			});
