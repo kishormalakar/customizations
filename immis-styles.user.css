@@ -868,6 +868,14 @@
 		position: relative !important;
 	}
 
+	.stocking_proposal #s_12{
+		height: 500px !important;
+	}
+	
+	.stocking_proposal #s_12 > div > table tr td{
+		text-wrap-mode: wrap;
+	}	
+
 	.po_cancellation #s_4 {
 		position: absolute !important;
 	}
