@@ -170,6 +170,15 @@
 	.creation-form .p-autocomplete-panel {
 		display: none;
 	}
+	
+	#app-header div.dropdown-menu{
+		width: 500px;
+	}
+	
+	#app-header div.dropdown-menu .notification-content{
+		height: auto;
+		max-height: 300px;
+	}
 
 	#global-footer {
 		display: none !important;
