@@ -3504,6 +3504,26 @@ window.addEventListener(
 
 		if (document.title == "STOCKING PROPOSAL" || document.title == "Run Form - IMMIS/DEP/STKPROP") {
 			body.classList.add("stocking_proposal");
+
+			let showH2 = () => {
+				var s_9 = body.querySelectorAll("#s_9")[0];
+				var list = s_9.querySelectorAll(":scope > div")[0].querySelectorAll("table")[0].querySelectorAll("tbody")[0].children;
+
+				for (var i = 1; i < list.length; i++) {
+					var qform = list[i];
+					if (qform.children[6].innerText == "H2") {
+						qform.style.backgroundColor = "rgb(204, 255, 204)";
+					}
+				}
+			};
+
+			showH2();
+
+			document.addEventListener("click", (e) => {
+				if (e.target.name == "BTN_EXIT_0") {
+					showH2();
+				}
+			});
 		}
 
 		if (document.title == "Registers for Purchase Module" || document.title == "Run Form - IMMIS/PUR/HQREGISTERS") {
