@@ -3520,7 +3520,7 @@ window.addEventListener(
 			showH2();
 
 			document.addEventListener("click", (e) => {
-				if (e.target.name == "BTN_EXIT_0") {
+				if (e.target.name == "BTN_EXIT_0" || e.target.name == "btn_Auth_0") {
 					showH2();
 				}
 			});
