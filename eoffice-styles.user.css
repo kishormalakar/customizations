@@ -183,4 +183,8 @@
 	#global-footer {
 		display: none !important;
 	}
+	
+	.footer-space{
+		padding-bottom: 0;
+	}
 }
