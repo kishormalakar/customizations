@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         e-office
 @namespace    github.com/openstyles/stylus
-@version      1.0.5
+@version      1.0.6
 @license      unlicense
 @preprocessor default
 @var color link-color "Link Color" red
@@ -17,18 +17,18 @@
 		cursor: pointer;
 	}
 
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container .col-lg-8,
-	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container .col-lg-8 {
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view,
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view {
 		justify-content: flex-start !important;
 	}
 
 	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(3),
 	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(3) {
-		display: none;
+		/*display: none;*/
 	}
 
-	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(4),
-	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(4) {
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(3),
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(3) {
 		background-color: unset;
 		color: #000;
 	}
@@ -88,25 +88,25 @@
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(button.icon-imp):hover > td > div {
 		background-color: #ffbcbc !important;
 	}
-	
-	.list-read:has(span[data-id-attr="greenNote"]){
-		background-color: #BFF6C3 !important;
+
+	.list-read:has(span[data-id-attr="greenNote"]) {
+		background-color: #bff6c3 !important;
 	}
-	
+
 	.list-read:has(span[data-id-attr="greenNote"]):hover,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(span[data-id-attr="greenNote"]):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(span[data-id-attr="greenNote"]):hover > td > div{
-		background-color: #9CDBA6 !important;
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(span[data-id-attr="greenNote"]):hover > td > div {
+		background-color: #9cdba6 !important;
 	}
-	
-	.list-read:has(span[data-id-attr="yellowNote"]){
-		background-color: #FDFFE2 !important;
+
+	.list-read:has(span[data-id-attr="yellowNote"]) {
+		background-color: #fdffe2 !important;
 	}
-	
+
 	.list-read:has(span[data-id-attr="yellowNote"]):hover,
 	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(span[data-id-attr="yellowNote"]):hover,
-	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(span[data-id-attr="yellowNote"]):hover > td > div{
-		background-color: #F3FEB8 !important;
+	p-table:not(.no-hover-effect) .p-datatable .p-datatable-tbody > tr.list-read:has(span[data-id-attr="yellowNote"]):hover > td > div {
+		background-color: #f3feb8 !important;
 	}
 
 	[data-id-attr="subject"] {
@@ -170,12 +170,12 @@
 	.creation-form .p-autocomplete-panel {
 		display: none;
 	}
-	
-	#app-header div.dropdown-menu{
+
+	#app-header div.dropdown-menu {
 		width: 500px;
 	}
-	
-	#app-header div.dropdown-menu .notification-content{
+
+	#app-header div.dropdown-menu .notification-content {
 		height: auto;
 		max-height: 300px;
 	}
