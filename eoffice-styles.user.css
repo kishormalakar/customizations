@@ -28,7 +28,9 @@
 	}
 
 	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(3),
-	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(3) {
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(3),
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container file-header-view > div > div:nth-of-type(4),
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container receipt-header-view > div > div:nth-of-type(4) {
 		background-color: unset;
 		color: #000;
 	}
@@ -41,6 +43,13 @@
 
 	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .sentTo-container .box_container .sentForm-container .text-small.text-italic,
 	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .sentTo-container .box_container .sentForm-container .text-small.text-italic {
+		display: none;
+	}
+
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container > button[data-id-attr="previous-file"],
+	div[data-faq-module-name="FILE#FILE_INNER_PAGE"] .file_details_container > button[data-id-attr="next-file"],
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container > button[data-id-attr="previous-receipt"],
+	div[data-faq-module-name="RECEIPT#RECEIPT_INNER_PAGE"] .file_details_container > button[data-id-attr="next-receipt"] {
 		display: none;
 	}
 
@@ -183,8 +192,8 @@
 	#global-footer {
 		display: none !important;
 	}
-	
-	.footer-space{
+
+	.footer-space {
 		padding-bottom: 0;
 	}
 }
