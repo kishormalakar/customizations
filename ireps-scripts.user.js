@@ -230,7 +230,7 @@ window.addEventListener(
 
 			for (var i = 1; i < tenderRows.length; i++) {
 				var tenderRow = tenderRows[i];
-				var tenderDecision = tenderRow.querySelectorAll("td")[9].innerText;
+				var tenderDecision = tenderRow.lastElementChild.innerText;
 				numTotalTenders++;
 				valueTotalTenders = valueTotalTenders + parseInt(tenderRow.children[6].innerText);
 
