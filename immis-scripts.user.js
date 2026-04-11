@@ -1358,7 +1358,7 @@ window.addEventListener(
 				}
 				if (e.target.title == "View/Authorize M.A.") {
 					var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
-					var s__cnvs26 = document.querySelectorAll("#s__cnvs26")[0];
+					var s__cnvs26 = document.querySelectorAll("#s__cnvs27")[0];
 					s_7.style.top = scrollTop + "px";
 					s__cnvs26.style.top = scrollTop + "px";
 					var s_7cssText = s_7.style.cssText;
