@@ -27,7 +27,7 @@ window.addEventListener(
 		var currentZoneCode = "";
 		var currentZone = "";
 		var currentYear = "";
-		var currentSections = ["04", "05", "10", "13"];
+		var currentSections = ["04", "05", "08", "10", "13"];
         var today = new Date();
 
 		var body = document.querySelectorAll("body")[0];
@@ -6832,8 +6832,12 @@ window.addEventListener(
         }
 
         if (document.title == "PL Group to Purchase Section Mapping" || document.title == "Run Form - IMMIS/PLSECMAP") {
-            body.classList.add("pl_section_mapping");
-        }
+			body.classList.add("pl_section_mapping");
+		}
+
+		if (document.title == "PL Unification Console" || document.title == "Run Form - IMMIS/PUR/PLUSMGT") {
+			body.classList.add("pl_unification");
+		}
 	},
 	false
 );

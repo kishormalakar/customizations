@@ -1543,4 +1543,19 @@
 	.demand_registration_ns #s_3{
 		position: absolute !important;
 	}
+	
+	.pl_unification #CanvassHolder{
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: wrap !important;
+		align-items: flex-start !important;
+	}
+	
+	.pl_unification #CanvassHolder #s_3,
+	.pl_unification #CanvassHolder #s_4{
+		margin-top: 50px !important;
+		flex-basis: 50% !important;
+		position: relative !important;
+	}
+	
 }
