@@ -526,36 +526,6 @@ window.addEventListener(
 			});
 		}
 
-		/*
-		if (pathname.startsWith("/epsn/reports/shieldCriteriaReport/adequacyOfCoverageOfCurrentData.do")) {
-			var adequacyTable = document.querySelectorAll(".lightGrayTbl")[0].children[0].children;
-
-			var th = adequacyTable[0].children[3].cloneNode(true);
-			th.innerText = "Adequacy %";
-			adequacyTable[0].appendChild(th);
-
-			for (var i = 1; i < adequacyTable.length; i++) {
-				var row = adequacyTable[i];
-				var adequacyItemCount;
-				var inadequacyItemCount;
-
-				if (i == adequacyTable.length - 1) {
-					adequacyItemCount = row.children[1].innerText;
-					inadequacyItemCount = row.children[2].innerText;
-				} else {
-					adequacyItemCount = row.children[2].innerText;
-					inadequacyItemCount = row.children[3].innerText;
-				}
-
-				var adequacyPercentage = Math.round((+adequacyItemCount / (+adequacyItemCount + +inadequacyItemCount)) * 10000, 2) / 100;
-
-				var td = row.children[2].cloneNode(true);
-				td.innerText = adequacyPercentage + "%";
-				row.appendChild(td);
-			}
-		}
-		*/
-
 		if (pathname.startsWith("/epsn/cvap/admintab/vndrDirectory.do")) {
 			var vdTable = document.querySelectorAll("table.advSearch")[0].children[0].children[8].querySelectorAll("tbody")[0].querySelectorAll("td")[1];
 			var vdItems = vdTable.querySelectorAll(":scope > table");
@@ -569,8 +539,8 @@ window.addEventListener(
 
 					if (vendor.querySelectorAll("td").length == 2) {
 						var vendorName = vendor.querySelectorAll("td")[0].querySelectorAll("font")[0];
-						vendorName.innerHTML = vendorName.innerHTML.substring(0, vendorName.innerHTML.indexOf("&nbsp;")) + vendorName.innerHTML.substring(vendorName.innerHTML.indexOf("&nbsp;") + 6);
 						vendorName.style.fontWeight = "bold";
+						vendorName.innerHTML = vendorName.innerHTML.substring(0, vendorName.innerHTML.indexOf("&nbsp;")) + vendorName.innerHTML.substring(vendorName.innerHTML.indexOf("&nbsp;") + 6);
 						var vendorId = vendorName.nextSibling.nextSibling.nextSibling;
 						vendorId.textContent = vendorId.textContent.replace(/^[\s\u00A0]+/, "");
 					}
@@ -578,5 +548,5 @@ window.addEventListener(
 			}
 		}
 	},
-	false
+	false,
 );
