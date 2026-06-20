@@ -559,10 +559,12 @@ window.addEventListener(
 							var num1to2 = row.querySelectorAll("td")[6].innerText;
 							var num2to3 = row.querySelectorAll("td")[7].innerText;
 							var num3to6 = row.querySelectorAll("td")[8].innerText;
-							var num6to12 = row.querySelectorAll("td")[9].innerText;
-							var numAbove12 = row.querySelectorAll("td")[10].innerText;
+							var num6to8 = row.querySelectorAll("td")[9].innerText;
+							var num8to10 = row.querySelectorAll("td")[10].innerText;
+							var num10to12 = row.querySelectorAll("td")[11].innerText;
+							var numAbove12 = row.querySelectorAll("td")[12].innerText;
 							var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
-							var numAboveAdequacy = +num6to12 + +numAbove12;
+							var numAboveAdequacy = +num6to8 + +num8to10 + +num10to12 + +numAbove12;
 
 							var adequacy = Math.round((+numAboveAdequacy / +numTotal) * 100);
 							var td = row.querySelectorAll("td")[8].cloneNode(true);
@@ -575,10 +577,12 @@ window.addEventListener(
 							var num1to2 = row.querySelectorAll("td")[5].innerText;
 							var num2to3 = row.querySelectorAll("td")[6].innerText;
 							var num3to6 = row.querySelectorAll("td")[7].innerText;
-							var num6to12 = row.querySelectorAll("td")[8].innerText;
-							var numAbove12 = row.querySelectorAll("td")[9].innerText;
+							var num6to8 = row.querySelectorAll("td")[8].innerText;
+							var num8to10 = row.querySelectorAll("td")[9].innerText;
+							var num10to12 = row.querySelectorAll("td")[10].innerText;
+							var numAbove12 = row.querySelectorAll("td")[11].innerText;
 							var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
-							var numAboveAdequacy = +num6to12 + +numAbove12;
+							var numAboveAdequacy = +num6to8 + +num8to10 + +num10to12 + +numAbove12;
 
 							var adequacy = Math.round((+numAboveAdequacy / +numTotal) * 100);
 							var td = row.querySelectorAll("td")[8].cloneNode(true);
@@ -3667,13 +3671,13 @@ window.addEventListener(
 				}
 			});
 
-			var s_0_14 = body.querySelectorAll("#s_0_14")[0];
-			var s_0_16 = body.querySelectorAll("#s_0_16")[0];
-			var s_0_17 = body.querySelectorAll("#s_0_17")[0];
+			var tenderStatus = body.querySelectorAll("select[name='STATUS_0']")[0];
+			var dateFromInput = body.querySelectorAll("input[name='Dt1_0']")[0];
+			var dateToInput = body.querySelectorAll("input[name='Dt2_0']")[0];
 
-			var dateFrom = s_0_16.value.split("-")[0] + "-" + s_0_16.value.split("-")[1] + "-" + (+s_0_16.value.split("-")[2] - 1);
-			s_0_16.value = dateFrom;
-			s_0_14.selectedIndex = 4;
+			var dateFrom = dateToInput.value.split("-")[0] + "-" + dateToInput.value.split("-")[1] + "-" + (+dateToInput.value.split("-")[2] - 1);
+			dateFromInput.value = dateFrom;
+			tenderStatus.selectedIndex = 4;
 		}
 
 		if (document.title == "Vendor Performance" || document.title == "Run Form - IMMIS/PUR/VENDPOS") {

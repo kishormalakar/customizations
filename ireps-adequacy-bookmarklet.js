@@ -10,10 +10,10 @@ javascript: (() => {
         var table = html.querySelectorAll("tbody")[3];
         var list = table.children;
 
-        var section1 = "04";
-        var section2 = "05";
-        var section3 = "10";
-        var section4 = "12";
+        var section1 = "05";
+        var section2 = "10";
+        var section3 = "13";
+        var section4 = "10";
         var section5 = "13";
         var adequacySection1 = 0;
         var adequacySection2 = 0;
@@ -43,7 +43,7 @@ javascript: (() => {
 
         }
 
-        alert("Adequacy \n "+section1+" : "+adequacySection1+" \n "+section2+" : "+adequacySection2+" \n "+section3+" : "+adequacySection3+" \n "+section4+" : "+adequacySection4+" \n "+section5+" : "+adequacySection5);
+        alert("Adequacy \n "+section1+" : "+adequacySection1+" \n "+section2+" : "+adequacySection2+" \n "+section3+" : "+adequacySection3);
         
     }
 })();
