@@ -4695,7 +4695,7 @@ window.addEventListener(
 							if (positionDiv[i + j].querySelectorAll("td")[0] != undefined && positionDiv[i + j].querySelectorAll("td")[0].innerText.trim() == "STOCK, AAC AND CONSUMPTION DETAILS") {
 								consumptionTable = positionDiv[i + j];
 							}
-							if (positionDiv[i + j].querySelectorAll("th")[0] != undefined && positionDiv[i + j].querySelectorAll("th")[0].innerText.trim() == "Available Stock of selected item in Digital Ledgers maintained by Users / Consignees of IREPS in UDM") {
+							if (positionDiv[i + j].querySelectorAll("th")[0] != undefined && positionDiv[i + j].querySelectorAll("th")[0].innerText.trim() == "UDM BINCARD Available Stock of selected item in Digital Ledgers maintained by Users / Consignees of IREPS in UDM") {
 								UDMTable = positionDiv[i + j];
 							}
 							if (positionDiv[i + j].querySelectorAll("td")[0] != undefined && positionDiv[i + j].querySelectorAll("td")[0].innerText.trim() == "UN-COVERED DUES DETAILS") {
