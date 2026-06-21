@@ -543,16 +543,25 @@ window.addEventListener(
 				var availabilityTable = s_2.querySelectorAll(":scope > table")[1].querySelectorAll("div")[0].querySelectorAll(":scope > table")[1].querySelectorAll("tbody")[0].children;
 
 				if (s_2.querySelectorAll("input[name='STKBASIS']")[2].checked == true) {
-					for (var i = 0; i < availabilityTable.length - 1; i++) {
+					console.log(s_2.querySelectorAll("select[name='VS_0']")[0].selectedIndex);
+					var j = 0;
+					if (s_2.querySelectorAll("select[name='VS_0']")[0].selectedIndex == "6") {
+						j = 1;
+					}
+
+					for (var i = 0; i < availabilityTable.length - j; i++) {
 						var row = availabilityTable[i];
 
 						if (i == 0) {
 							row.querySelectorAll("th")[4].setAttribute("colspan", "12");
 						} else if (i == 1) {
 							var th = row.querySelectorAll("th")[6].cloneNode(true);
-							th.innerText = "Adequacy";
+							th.innerText = "Adequacy 6M";
 							row.appendChild(th);
-						} else if (i < availabilityTable.length - 2) {
+							var th = row.querySelectorAll("th")[6].cloneNode(true);
+							th.innerText = "Adequacy 12M";
+							row.appendChild(th);
+						} else if (i < availabilityTable.length - j - 1) {
 							var numTotal = row.querySelectorAll("td")[2].innerText;
 							var numZero = row.querySelectorAll("td")[4].innerText;
 							var num0to1 = row.querySelectorAll("td")[5].innerText;
@@ -566,9 +575,13 @@ window.addEventListener(
 							var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
 							var numAboveAdequacy = +num6to8 + +num8to10 + +num10to12 + +numAbove12;
 
-							var adequacy = Math.round((+numAboveAdequacy / +numTotal) * 100);
+							var adequacy6M = Math.round((+numAboveAdequacy / +numTotal) * 100);
+							var adequacy12M = Math.round((+numAbove12 / +numTotal) * 100);
 							var td = row.querySelectorAll("td")[8].cloneNode(true);
-							td.innerText = adequacy + "%";
+							td.innerText = adequacy6M + "%";
+							row.appendChild(td);
+							var td = row.querySelectorAll("td")[8].cloneNode(true);
+							td.innerText = adequacy12M + "%";
 							row.appendChild(td);
 						} else {
 							var numTotal = row.querySelectorAll("td")[1].innerText;
@@ -584,9 +597,13 @@ window.addEventListener(
 							var numBelowAdequacy = +numZero + +num0to1 + +num1to2 + +num2to3 + +num3to6;
 							var numAboveAdequacy = +num6to8 + +num8to10 + +num10to12 + +numAbove12;
 
-							var adequacy = Math.round((+numAboveAdequacy / +numTotal) * 100);
+							var adequacy6M = Math.round((+numAboveAdequacy / +numTotal) * 100);
+							var adequacy12M = Math.round((+numAbove12 / +numTotal) * 100);
 							var td = row.querySelectorAll("td")[8].cloneNode(true);
-							td.innerText = adequacy + "%";
+							td.innerText = adequacy6M + "%";
+							row.appendChild(td);
+							var td = row.querySelectorAll("td")[8].cloneNode(true);
+							td.innerText = adequacy12M + "%";
 							row.appendChild(td);
 						}
 					}
