@@ -5048,7 +5048,7 @@ window.addEventListener(
 						headerTable.querySelectorAll("tr")[1].children[5].remove();
 						headerTable.querySelectorAll("tr")[1].children[4].remove();
 						headerTable.querySelectorAll("tr")[1].children[3].remove();
-						headerTable.querySelectorAll("tr")[1].children[2].innerText = headerTable.querySelectorAll("tr")[2].innerText.split(" ").slice(0, 5).join(" ");
+						headerTable.querySelectorAll("tr")[1].children[2].innerText = headerTable.querySelectorAll("tr")[2].innerText.split(" ").slice(0, 8).join(" ");
 						headerTable.querySelectorAll("tr")[1].children[2].setAttribute("colspan", "4");
 
 						if (headerTable.querySelectorAll("tr")[3] != undefined) {
