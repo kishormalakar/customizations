@@ -3585,6 +3585,12 @@ window.addEventListener(
 			var LovDiv = document.querySelectorAll("#LovDiv")[0];
 			var s__cnvs4 = document.querySelectorAll("#s__cnvs5")[0];
 
+			var s_2 = document.querySelectorAll("#s_2")[0];
+			s_2.querySelectorAll("input[name='PLGRP_0']")[0].value = "";
+			s_2.querySelectorAll("input[name='PL_NO_0']")[0].value = "";
+			s_2.querySelectorAll("input[name='SRS_YYMM_0']")[0].value = "";
+			s_2.querySelectorAll("select[name='LIST_TYPE_0']")[0].selectedIndex = "3";
+
 			document.addEventListener("click", (e) => {
 				var scrollTop = window.pageYOffset || e.target.scrollTop || document.body.scrollTop;
 				var s_3 = document.querySelectorAll("#s_3")[0];
@@ -3657,14 +3663,23 @@ window.addEventListener(
 					aacTable.lastChild.querySelectorAll("#aac_wef_1")[0].checked = false;
 					aacTable.lastChild.querySelectorAll("#aac_wef_2")[0].selectedIndex = 1;
 				}
+
+				if (e.target.value == "Exit") {
+					console.log("exit");
+					s_2.querySelectorAll("input[name='PLGRP_0']")[0].value = "";
+					s_2.querySelectorAll("input[name='PL_NO_0']")[0].value = "";
+					s_2.querySelectorAll("input[name='SRS_YYMM_0']")[0].value = "";
+					s_2.querySelectorAll("input[name='AISKEY_0']")[0].value = "";
+					s_2.querySelectorAll("select[name='LIST_TYPE_0']")[0].selectedIndex = "3";
+				}
 			});
 
 			/*var plInput = document.querySelectorAll("input[name='PLGRP_0']")[0];
                   plInput.addEventListener("keydown", (e) => {
                       if (e.key === "Tab" || e.key === "Enter") {
-      
+
                           LovDiv.querySelectorAll("a")[0].focus();
-      
+
                       }
                   });*/
 		}
