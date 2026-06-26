@@ -88,6 +88,12 @@ window.addEventListener(
 			["MEMU/GAYA", "44"],
 			["GSD/SPJ", "70"],
 			["TRS/SPJ", "71"],
+			["CSSH/PNBE", "80"],
+			["DRH/DNR", "81"],
+			["DRH/SEE", "82"],
+			["DRH/SPJ", "83"],
+			["DRH/DDU", "84"],
+			["DRH/DHN", "85"],
 		];
 
 		var monthArray = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
