@@ -6880,6 +6880,48 @@ window.addEventListener(
 		if (document.title == "PL Unification Console" || document.title == "Run Form - IMMIS/PUR/PLUSMGT") {
 			body.classList.add("pl_unification");
 		}
+
+        if (document.title == "UDM BINCARD" || document.title == "Run Form - IMMIS/DEP/UDM_BINCARD") {
+			body.classList.add("udm_bincard");
+
+			let toggleRows = (e) => {
+				var button = e.target;
+				var buttonText = button.innerText;
+				var rows = button.parentElement.nextElementSibling.querySelectorAll("tr");
+				for (var j = 0; j < rows.length - 1; j++) {
+					var row = rows[j];
+					row.classList.toggle("hidden");
+				}
+
+				if (buttonText == "[ Expand ]") {
+					button.innerText = "[ Collapse ]";
+				}
+				if (buttonText == "[ Collapse ]") {
+					button.innerText = "[ Expand ]";
+				}
+			};
+
+			var s_3 = document.querySelectorAll("#s_3")[0];
+			var blocks = s_3.querySelectorAll(".block");
+			for (var i = 0; i < blocks.length; i++) {
+				var block = blocks[i];
+				var blockHeader = block.querySelectorAll(".block-header")[0];
+				var button = document.createElement("button");
+				var buttonText = document.createTextNode("[ Expand ]");
+				button.appendChild(buttonText);
+				button.addEventListener("click", (e) => {
+					toggleRows(e);
+				});
+				if (blockHeader != undefined) {
+					blockHeader.appendChild(button);
+				}
+
+				var rows = block.querySelectorAll("tr");
+				for (var j = 0; j < rows.length - 1; j++) {
+					rows[j].classList.add("hidden");
+				}
+			}
+		}
 	},
 	false
 );
