@@ -6922,6 +6922,10 @@ window.addEventListener(
 				}
 			}
 		}
+
+        if (document.title == "Option Clause Operation" || document.title == "Run Form - IMMIS/PUR/POOPC") {
+			body.classList.add("option_clause");
+		}
 	},
 	false
 );
