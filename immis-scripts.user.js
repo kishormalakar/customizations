@@ -27,7 +27,7 @@ window.addEventListener(
 		var currentZoneCode = "";
 		var currentZone = "";
 		var currentYear = "";
-		var currentSections = ["04", "05", "08", "10", "13"];
+		var currentSections = ["01", "02", "03", "05", "08", "14"];
         var today = new Date();
 
 		var body = document.querySelectorAll("body")[0];
