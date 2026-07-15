@@ -21,9 +21,9 @@ javascript: (() => {
         var table = html.querySelectorAll("tbody")[0].querySelectorAll("tbody")[0];
         var list = table.children;
 
-        var section1 = "P5";
-        var section2 = "P10";
-        var section3 = "P13";
+        var section1 = "P 3";
+        var section2 = "P5";
+        var section3 = "P14";
         var section4 = "P10";
         var section5 = "P13";
         var numSection1 = 0; 
@@ -54,7 +54,7 @@ javascript: (() => {
 
         }
 
-        alert("No of tenders publshed from "+mondayString+" to "+todayString+": \n "+section1+"   : "+numSection1+" \n "+section2+" : "+numSection2+" \n "+section3+" : "+numSection3);
+        alert("No of tenders publshed from "+mondayString+" to "+todayString+": \n "+section1+"  : "+numSection1+" \n "+section2+"   : "+numSection2+" \n "+section3+" : "+numSection3);
         
     }
 })();
