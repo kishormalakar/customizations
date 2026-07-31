@@ -317,6 +317,9 @@ window.addEventListener(
 			var poSource = document.querySelectorAll('select[name="PO_SLOT_0"]')[0];
 			poSource.value = "1";
 
+			var poCat = document.querySelectorAll('select[name="PO_CAT_0"]')[0];
+			poCat.value = "R";
+
 			var poTo = document.querySelectorAll("#LBL_TB_DT_TO")[0].nextElementSibling.value;
 			var poToArray = poTo.split("-");
 
