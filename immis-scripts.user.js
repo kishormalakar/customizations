@@ -28,7 +28,7 @@ window.addEventListener(
 		var currentZone = "";
 		var currentYear = "";
 		var currentSections = ["01", "02", "03", "05", "08", "14"];
-        var today = new Date();
+		var today = new Date();
 
 		var body = document.querySelectorAll("body")[0];
 
@@ -1417,63 +1417,63 @@ window.addEventListener(
 		}
 
 		if ((document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDERGEN") && document.querySelectorAll("input[name='BTN_SHOW_0']")[0] != undefined) {
-            body.classList.add("po_generation");
+			body.classList.add("po_generation");
 
-            var s_4 = document.querySelectorAll("#s_4")[0];
-            var s_10 = document.querySelectorAll("#s_10")[0];
-            var s_15 = document.querySelectorAll("#s_15")[0];
-            var s_18 = document.querySelectorAll("#s_18")[0];
+			var s_4 = document.querySelectorAll("#s_4")[0];
+			var s_10 = document.querySelectorAll("#s_10")[0];
+			var s_15 = document.querySelectorAll("#s_15")[0];
+			var s_18 = document.querySelectorAll("#s_18")[0];
 
-            var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
+			var poKeyInput = document.querySelectorAll("#s_3")[0].querySelectorAll("#s_0_147")[0];
 
-            if (poKeyInput != null && poKeyInput != undefined) {
-                poKeyInput.focus();
-                poKeyInput.addEventListener("keydown", (e) => {
-                    if (e.key === "Tab" || e.key === "Enter") {
-                        document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_27")[0].focus();
-                    }
-                });
-            }
+			if (poKeyInput != null && poKeyInput != undefined) {
+				poKeyInput.focus();
+				poKeyInput.addEventListener("keydown", (e) => {
+					if (e.key === "Tab" || e.key === "Enter") {
+						document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_27")[0].focus();
+					}
+				});
+			}
 
-            var buttonExit = s_4.querySelectorAll("input[name='EXIT_BTN_0']")[0];
-            var buttonView = s_4.querySelectorAll("input[name='NUM_BTN_0']")[0];
-            var buttonAuthorization = s_10.querySelectorAll("input[name='btn_PoNumber_0']")[0];
-            var buttonfundConfirmation = s_18.querySelectorAll("input[name='PROCEED_0']")[0];
+			var buttonExit = s_4.querySelectorAll("input[name='EXIT_BTN_0']")[0];
+			var buttonView = s_4.querySelectorAll("input[name='NUM_BTN_0']")[0];
+			var buttonAuthorization = s_10.querySelectorAll("input[name='btn_PoNumber_0']")[0];
+			var buttonfundConfirmation = s_18.querySelectorAll("input[name='PROCEED_0']")[0];
 
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape") {
-                    if (s_10.style.display == "block") {
-                        s_10.style.display = "none";
-                        s_15.style.display = "none";
-                        buttonExit.click();
-                    } else {
-                        buttonExit.click();
-                    }
-                }
-            });
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Escape") {
+					if (s_10.style.display == "block") {
+						s_10.style.display = "none";
+						s_15.style.display = "none";
+						buttonExit.click();
+					} else {
+						buttonExit.click();
+					}
+				}
+			});
 
-            document.addEventListener("click", (e) => {
-                if (e.target.id.search("_LOV_PO") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_PO") != -1)) {
-                    buttonView.focus();
-                }
-            });
+			document.addEventListener("click", (e) => {
+				if (e.target.id.search("_LOV_PO") != -1 || (e.target.tagName == "A" && e.target.closest("tr").children[0].children[0].id.search("_LOV_PO") != -1)) {
+					buttonView.focus();
+				}
+			});
 
-            buttonView.addEventListener("click", (e) => {
-                buttonAuthorization.focus();
-            });
+			buttonView.addEventListener("click", (e) => {
+				buttonAuthorization.focus();
+			});
 
-            buttonAuthorization.addEventListener("click", (e) => {
-                s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
-            });
+			buttonAuthorization.addEventListener("click", (e) => {
+				s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
+			});
 
-            buttonfundConfirmation.addEventListener("click", (e) => {
-                s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
-            });
-        }
+			buttonfundConfirmation.addEventListener("click", (e) => {
+				s_15.querySelectorAll("input[name='btn_Ok_0']")[0].focus();
+			});
+		}
 
-        if ((document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER") && document.querySelectorAll("input[name='BTN_SHOW_0']")[0] == undefined) {
-            body.classList.add("po_preparation");
-        }
+		if ((document.title == "Purchase Order Generation" || document.title == "Run Form - IMMIS/PUR/ORDER") && document.querySelectorAll("input[name='BTN_SHOW_0']")[0] == undefined) {
+			body.classList.add("po_preparation");
+		}
 
 		if (document.title == "Publish Tender Document" || document.title == "Run Form - IMMIS/PUR/TENDERNEW") {
 			body.classList.add("tender_publishing");
@@ -1829,6 +1829,34 @@ window.addEventListener(
 					var consumptionRateLY = Math.round(+totalConsumptionLY / 12);
 					var consumptionRateCY = Math.round((+totalConsumptionCY / numDays) * 30);
 
+					var consumptionRows = consumptionTable.querySelectorAll("tbody")[0].children;
+
+					for (i = 3; i < consumptionRows.length - 1; i++) {
+						var consumptionRow = consumptionRows[i];
+						var wardBlock = consumptionRow.children[2];
+						var dateBlock = consumptionRow.children[12];
+						var lidt = dateBlock.innerHTML.split("<br>")[0];
+
+						if (wardBlock.innerText.search("Close") == -1) {
+							var liDate = new Date("20" + lidt.split("/")[2], +lidt.split("/")[1] - 1, +lidt.split("/")[0]);
+							if (today - liDate >= 2 * 365 * 24 * 60 * 60 * 1000) {
+								var p = document.createElement("p");
+								var statusText = document.createTextNode("(surplus)");
+								p.appendChild(statusText);
+								p.style.color = "red";
+								p.style.textIndent = "0";
+								dateBlock.appendChild(p);
+							} else if (today - liDate >= 365 * 24 * 60 * 60 * 1000) {
+								var p = document.createElement("p");
+								var statusText = document.createTextNode("(inactive)");
+								p.appendChild(statusText);
+								p.style.color = "red";
+								p.style.textIndent = "0";
+								dateBlock.appendChild(p);
+							}
+						}
+					}
+
 					var uncoveredDues = uncoveredDuesTable.querySelectorAll("tbody")[0].children;
 
 					for (i = 2; i < uncoveredDues.length; i++) {
@@ -1836,7 +1864,7 @@ window.addEventListener(
 							var dueDate = uncoveredDues[i].children[8].innerText;
 
 							if (dueDate != "") {
-								var tenderDueDate = new Date("20" + dueDate.split("/")[2], dueDate.split("/")[1] - 1, dueDate.split("/")[0]);
+								var tenderDueDate = new Date("20" + dueDate.split("-")[2], dueDate.split("-")[1] - 1, dueDate.split("-")[0]);
 								var today = new Date();
 
 								var dateDiff = Math.floor((today - tenderDueDate) / 86400000);
@@ -2193,10 +2221,10 @@ window.addEventListener(
 					document.querySelectorAll("#s_2")[0].querySelectorAll("#s_0_15")[0].focus();
 				}
 			});
-            plInput.addEventListener("keyup", (e) => {
+			plInput.addEventListener("keyup", (e) => {
 				var pastedContent = plInput.value;
-                var trimmedContent = pastedContent.trim();
-                plInput.value = trimmedContent;
+				var trimmedContent = pastedContent.trim();
+				plInput.value = trimmedContent;
 			});
 
 			document.addEventListener("keydown", (e) => {
@@ -6798,19 +6826,19 @@ window.addEventListener(
 			statisticsButton.click();
 		}
 
-        if (document.title == "Request for Authorization of Proposals / Records" || document.title == "Run Form - IMMIS/AUTHREQ") {
-            body.classList.add("authreq");
-        }
+		if (document.title == "Request for Authorization of Proposals / Records" || document.title == "Run Form - IMMIS/AUTHREQ") {
+			body.classList.add("authreq");
+		}
 
-        if (document.title == "MMIS - Organization Masters (Railways)" || document.title == "Run Form - IMMIS/MMISORGRLY") {
-            body.classList.add("mmis_organization");
-        }
+		if (document.title == "MMIS - Organization Masters (Railways)" || document.title == "Run Form - IMMIS/MMISORGRLY") {
+			body.classList.add("mmis_organization");
+		}
 
-        if (document.title == "View / Manage Organization Structure" || document.title == "Run Form - ORG") {
-            body.classList.add("organization_structure");
-        }
+		if (document.title == "View / Manage Organization Structure" || document.title == "Run Form - ORG") {
+			body.classList.add("organization_structure");
+		}
 
-        if (document.title == "Processing of Purchase Orders" || document.title == "Run Form - IMMIS/PUR/ORDERAUTH") {
+		if (document.title == "Processing of Purchase Orders" || document.title == "Run Form - IMMIS/PUR/ORDERAUTH") {
 			body.classList.add("po_process");
 
 			var s_3 = document.querySelectorAll("#s_3")[0];
@@ -6834,44 +6862,40 @@ window.addEventListener(
 		}
 
 		if (document.title == "Formation of NIT for Publishing" || document.title == "Run Form - IMMIS/PUR/NITPUBLISH") {
-            body.classList.add("newspaper_publication");
+			body.classList.add("newspaper_publication");
 
-            var todFromInput = document.querySelectorAll("input[name='TOD_FR_0']")[0];
-            var todToInput = document.querySelectorAll("input[name='TOD_TO_0']")[0];
+			var todFromInput = document.querySelectorAll("input[name='TOD_FR_0']")[0];
+			var todToInput = document.querySelectorAll("input[name='TOD_TO_0']")[0];
 
-            var todFromValue = todFromInput.value;
-            var todFromArray = todFromValue.split("-");
+			var todFromValue = todFromInput.value;
+			var todFromArray = todFromValue.split("-");
 
-            todFromInput.value = todFromArray[0] + "-" + todFromArray[1] + "-" + (+todFromArray[2] - 1);
-            todToInput.value = todFromArray[0] + "-" + todFromArray[1] + "-" + (+todFromArray[2] + 1);
+			todFromInput.value = todFromArray[0] + "-" + todFromArray[1] + "-" + (+todFromArray[2] - 1);
+			todToInput.value = todFromArray[0] + "-" + todFromArray[1] + "-" + (+todFromArray[2] + 1);
 
-            var getTendersButton = document.querySelectorAll("input[name='GET_BTN_0']")[0];
+			var getTendersButton = document.querySelectorAll("input[name='GET_BTN_0']")[0];
 
-            getTendersButton.addEventListener("click", (e) => {
+			getTendersButton.addEventListener("click", (e) => {
+				var lastNITDateValue = document.querySelectorAll("input[name='MAX_NIT_DT_0']")[0].value;
+				var lastNITDate = new Date("20" + lastNITDateValue.split("-")[2], monthArray.indexOf(lastNITDateValue.split("-")[1]), lastNITDateValue.split("-")[0]);
 
-                var lastNITDateValue = document.querySelectorAll("input[name='MAX_NIT_DT_0']")[0].value;
-                var lastNITDate = new Date("20" + lastNITDateValue.split("-")[2], monthArray.indexOf(lastNITDateValue.split("-")[1]), lastNITDateValue.split("-")[0]);
+				var s_3 = document.querySelectorAll("#s_3")[0];
 
-                var s_3 = document.querySelectorAll("#s_3")[0];
+				var listTenders = s_3.querySelectorAll("div")[0].querySelectorAll("tbody")[0].children;
 
-                var listTenders = s_3.querySelectorAll("div")[0].querySelectorAll("tbody")[0].children;
+				for (var i = 1; i < listTenders.length; i++) {
+					var tender = listTenders[i];
+					var publishedDateValue = tender.children[9].innerText.trim();
+					var publishedDate = new Date("20" + publishedDateValue.split("-")[2], monthArray.indexOf(publishedDateValue.split("-")[1]), publishedDateValue.split("-")[0]);
 
-                for(var i = 1; i < listTenders.length; i++){
+					if (publishedDate < lastNITDate) {
+						tender.style.display = "none";
+					}
+				}
+			});
+		}
 
-                    var tender = listTenders[i];
-                    var publishedDateValue = tender.children[9].innerText.trim();
-                    var publishedDate = new Date("20" + publishedDateValue.split("-")[2], monthArray.indexOf(publishedDateValue.split("-")[1]), publishedDateValue.split("-")[0]);
-
-                    if(publishedDate < lastNITDate){
-                        tender.style.display = "none";
-                    }
-
-                }
-
-            });
-        }
-
-        if (document.title == "PL Group to Purchase Section Mapping" || document.title == "Run Form - IMMIS/PLSECMAP") {
+		if (document.title == "PL Group to Purchase Section Mapping" || document.title == "Run Form - IMMIS/PLSECMAP") {
 			body.classList.add("pl_section_mapping");
 		}
 
@@ -6879,7 +6903,7 @@ window.addEventListener(
 			body.classList.add("pl_unification");
 		}
 
-        if (document.title == "UDM BINCARD" || document.title == "Run Form - IMMIS/DEP/UDM_BINCARD") {
+		if (document.title == "UDM BINCARD" || document.title == "Run Form - IMMIS/DEP/UDM_BINCARD") {
 			body.classList.add("udm_bincard");
 
 			let toggleRows = (e) => {
@@ -6921,9 +6945,9 @@ window.addEventListener(
 			}
 		}
 
-        if (document.title == "Option Clause Operation" || document.title == "Run Form - IMMIS/PUR/POOPC") {
+		if (document.title == "Option Clause Operation" || document.title == "Run Form - IMMIS/PUR/POOPC") {
 			body.classList.add("option_clause");
 		}
 	},
-	false
+	false,
 );
