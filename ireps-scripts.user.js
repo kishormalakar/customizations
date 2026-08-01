@@ -217,6 +217,32 @@ window.addEventListener(
 			dateCommenceRadio.checked = true;
 			dateCompleteRadio.checked = true;
 			dateCommenceValue.value = 0;
+
+			document.addEventListener("click", (e) => {
+				if (e.target.parentElement.getAttribute("onclick").startsWith("addRowSevrblCons")) {
+					var rowId = e.target.parentElement.getAttribute("onclick").substring(18, 25);
+					var numRows = +e.target.parentElement.getAttribute("onclick").substring(28, 29) + 1;
+					console.log(e.target);
+					var deliveryRows = document.querySelectorAll("table#dpFormTbl")[0].querySelectorAll("tbody")[0].children;
+					var totalQty = 0;
+
+					for (var i = 3; i < deliveryRows.length; i++) {
+						var deliveryRow = deliveryRows[i];
+
+						if (deliveryRow.id.startsWith("row" + rowId)) {
+							if (deliveryRow.children[0].querySelectorAll("input")[0] != null || deliveryRow.children[0].querySelectorAll("input")[0] != undefined) {
+								totalQty = +deliveryRow.children[0].innerText.split("Qty.:")[1].trim();
+							}
+
+							deliveryRow.children[1].querySelectorAll("input")[0].value = Math.floor(+totalQty / +numRows);
+							deliveryRow.children[2].querySelectorAll("tbody")[0].children[1].querySelectorAll("input")[0].checked = true;
+							deliveryRow.children[3].querySelectorAll("tbody")[0].children[0].querySelectorAll("input")[0].checked = true;
+							deliveryRow.children[3].querySelectorAll("tbody")[0].children[0].querySelectorAll("input")[1].value = 3;
+							deliveryRow.children[3].querySelectorAll("tbody")[0].children[0].querySelectorAll("select")[0].value = 1;
+						}
+					}
+				}
+			});
 		}
 
 		if (pathname.startsWith("/epsn/reports/viewTenders.do")) {
