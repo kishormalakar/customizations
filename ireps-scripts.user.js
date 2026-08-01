@@ -573,6 +573,12 @@ window.addEventListener(
 				}
 			}
 		}
+
+		if (pathname.startsWith("/epsn/supply/tds/tenderFinalReport.do")) {
+			var pendingJobs = document.querySelectorAll(".advSearch")[1];
+			pendingJobs.querySelectorAll("td")[0].style.color = "red";
+			pendingJobs.querySelectorAll("td")[1].style.color = "red";
+		}
 	},
 	false,
 );
