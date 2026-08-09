@@ -5295,6 +5295,7 @@ window.addEventListener(
 				var barArray = [];
 				var consumptionArray = [];
 				var consumptionYearsArray = [];
+				var lidtArray = [];
 				var aacArray = [];
 				var mcArray = [];
 				var ipRequirementsArray = [];
@@ -5313,6 +5314,9 @@ window.addEventListener(
 					array1.push(+row1.querySelectorAll("td")[9].innerText);
 					array1.push(+row1.querySelectorAll("td")[10].innerText);
 					consumptionArray.push(array1);
+					var liDateText = row1.querySelectorAll("td")[5].innerText;
+					var liDate = new Date("20" + liDateText.split("/")[2], +liDateText.split("/")[1] - 1, +liDateText.split("/")[0]);
+					lidtArray.push(liDate);
 					aacArray.push(+row1.querySelectorAll("td")[13].innerText);
 					mcArray.push(+row1.querySelectorAll("td")[13].innerText / 12);
 				}
@@ -5433,6 +5437,7 @@ window.addEventListener(
 				data.barArray = barArray;
 				data.consumptionArray = consumptionArray;
 				data.consumptionYearsArray = consumptionYearsArray;
+				data.lidtArray = lidtArray;
 				data.aacArray = aacArray;
 				data.mcArray = mcArray;
 				data.coveredDuesArray = coveredDuesArray;
@@ -5466,6 +5471,7 @@ window.addEventListener(
 				var barArray = data.barArray;
 				var consumptionArray = data.consumptionArray;
 				var consumptionYearsArray = data.consumptionYearsArray;
+				var lidtArray = data.lidtArray;
 				var aacArray = data.aacArray;
 				var mcArray = data.mcArray;
 				var coveredDuesArray = data.coveredDuesArray;
@@ -5504,7 +5510,7 @@ window.addEventListener(
 				var td11 = document.createElement("td");
 				var text11 = document.createTextNode("Review AAC");
 				td11.appendChild(text11);
-				td11.setAttribute("colspan", "8");
+				td11.setAttribute("colspan", "9");
 				tr1.appendChild(td11);
 				tr1.setAttribute("bgcolor", "lightGrey");
 				var tr2 = document.createElement("tr");
@@ -5532,6 +5538,9 @@ window.addEventListener(
 				var td28 = document.createElement("td");
 				var text28 = document.createTextNode("Revised AAC");
 				td28.appendChild(text28);
+				var td29 = document.createElement("td");
+				var text29 = document.createTextNode("Status");
+				td29.appendChild(text29);
 				tr2.appendChild(td21);
 				tr2.appendChild(td22);
 				tr2.appendChild(td23);
@@ -5540,6 +5549,7 @@ window.addEventListener(
 				tr2.appendChild(td26);
 				tr2.appendChild(td27);
 				tr2.appendChild(td28);
+				tr2.appendChild(td29);
 				tbody1.appendChild(tr1);
 				tbody1.appendChild(tr2);
 
@@ -5608,6 +5618,25 @@ window.addEventListener(
 					});
 
 					tdP8.appendChild(inputP8);
+
+					var tdP9 = document.createElement("td");
+					var p = document.createElement("p");
+					var liDate = lidtArray[i];
+
+					if (today - liDate >= 2 * 365 * 24 * 60 * 60 * 1000) {
+						var statusText = document.createTextNode("(surplus)");
+						p.appendChild(statusText);
+						p.style.color = "red";
+						p.style.textIndent = "0";
+					} else if (today - liDate >= 365 * 24 * 60 * 60 * 1000) {
+						var statusText = document.createTextNode("(inactive)");
+						p.appendChild(statusText);
+						p.style.color = "red";
+						p.style.textIndent = "0";
+					}
+
+					tdP9.appendChild(p);
+
 					trP.appendChild(tdP1);
 					trP.appendChild(tdP2);
 					trP.appendChild(tdP3);
@@ -5616,6 +5645,7 @@ window.addEventListener(
 					trP.appendChild(tdP6);
 					trP.appendChild(tdP7);
 					trP.appendChild(tdP8);
+					trP.appendChild(tdP9);
 					tbody1.appendChild(trP);
 				}
 
@@ -5844,6 +5874,7 @@ window.addEventListener(
 				var stockArray = data.stockArray;
 				var consumptionArray = data.consumptionArray;
 				var consumptionYearsArray = data.consumptionYearsArray;
+				var lidtArray = data.lidtArray;
 				var aacArray = data.aacArray;
 				var mcArray = data.mcArray;
 				var coveredDuesArray = data.coveredDuesArray;
