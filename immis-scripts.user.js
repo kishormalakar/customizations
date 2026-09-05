@@ -3845,8 +3845,8 @@ window.addEventListener(
 						numTotalPO++;
 
 						if (row.children[0].innerHTML != "<br>") {
-							var poZone = row.children[0].innerText.split(":")[0];
-							var poNo = row.children[0].innerText.split(":")[1].split(" ")[0];
+							var poZone = row.children[0].innerHTML.split("<br>")[0];
+							var poNo = row.children[0].innerHTML.split("<br>")[1].split(" ")[0];
 							var poDate = row.children[0].innerText.split("dt.")[1];
 							var poYear = "20" + poDate.split("-")[2];
 
@@ -3868,11 +3868,11 @@ window.addEventListener(
 							row.children[0].appendChild(p2);
 						}
 
-						poQty = row.children[6].innerText.split(" ")[0];
-						cancelledQty = row.children[7].innerText == "-" ? 0 : row.children[7].innerText;
-						row.children[7].style.color = "red";
-						suppliedQty = row.children[8].innerText == "-" ? 0 : row.children[8].innerText;
-						poStatus = row.children[12].innerText;
+						poQty = row.children[5].innerHTML.split("<hr>")[0].split(" ")[0];
+						cancelledQty = row.children[5].innerHTML.split("<hr>")[1] == "-" ? 0 : row.children[5].innerHTML.split("<hr>")[1];
+						//row.children[7].style.color = "red";
+						suppliedQty = row.children[6].innerHTML.split("<hr>")[0] == "-" ? 0 : row.children[6].innerHTML.split("<hr>")[0];
+						poStatus = row.children[8].innerText;
 
 						if (+suppliedQty > 0 && +suppliedQty < 0.95 * +poQty && cancelledQty < 0.5 * poQty) {
 							numPCPO++;
