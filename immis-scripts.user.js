@@ -4976,7 +4976,7 @@ window.addEventListener(
 								var tenderDepot = uncoveredRow.children[1].innerText;
 								var tenderText = uncoveredRow.children[7].innerText;
 								var tod = uncoveredRow.children[8].innerText;
-								var todDate = new Date("20" + tod.split("/")[2], tod.split("/")[1] - 1, tod.split("/")[0]);
+								var todDate = new Date("20" + tod.split("-")[2], tod.split("-")[1] - 1, tod.split("-")[0]);
 								var tenderStatus = uncoveredRow.children[9];
 								var tenderNo;
 								var tenderQty;
