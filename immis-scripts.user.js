@@ -254,6 +254,22 @@ window.addEventListener(
 			currentZoneCode = titleBar.querySelectorAll("td")[0].innerText.split(":")[0].substring(1, 3);
 			currentZone = "ECR";
 			currentYear = new Date().getFullYear().toString();
+
+			//Make zone dropdown selectable
+			if (document.querySelectorAll("input[name='RLYNAME_0']")[0] != undefined) {
+				document.querySelectorAll("input[name='RLYNAME_0']")[0].removeAttribute("readonly");
+				document.querySelectorAll("input[name='RLYNAME_0']")[0].removeAttribute("state");
+				document.querySelectorAll("input[name='RLYNAME_0']")[0].nextElementSibling.removeAttribute("disabled");
+			}
+			//doesnot work
+			if (document.querySelectorAll("input[name='LIST_RLYNM_0']")[0] != undefined) {
+				document.querySelectorAll("input[name='LIST_RLYNM_0']")[0].removeAttribute("readonly");
+				document.querySelectorAll("input[name='LIST_RLYNM_0']")[0].nextElementSibling.removeAttribute("disabled");
+			}
+			if (document.querySelectorAll("input[name='rlyname_0']")[0] != undefined) {
+				document.querySelectorAll("input[name='rlyname_0']")[0].removeAttribute("readonly");
+				document.querySelectorAll("input[name='rlyname_0']")[0].nextElementSibling.removeAttribute("disabled");
+			}
 		}
 
 		if (document.title == "System Start Page") {
