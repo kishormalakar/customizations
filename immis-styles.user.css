@@ -122,6 +122,7 @@
 		margin-right: 2px !important;
 		margin-top: 2px !important;
 		margin-bottom: 2px !important;
+		line-height: 15px !important;
     }
 	
 	.button:active,
@@ -1587,6 +1588,50 @@
 		width: auto !important;
 		height: auto !important;
 		margin: 0 !important;
+	}
+	
+	.letter_firm #CanvassHolder {
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: wrap !important;
+		align-items: flex-start !important;
+	}
+	
+	.letter_firm #s_4,
+	.letter_firm #s_5,
+	.letter_firm #s_7 {
+		display: flex !important;
+		flex-direction: column !important;
+		position: relative !important;
+	}
+	
+	.letter_firm #s_4,
+	.letter_firm #s_5 {
+		width: 50% !important;
+		flex-shrink: 1;
+	}
+	
+	.letter_firm #s_4 table tr td:first-child,
+	.letter_firm #s_4 table tr th:first-child {
+		max-width: 100px !important;
+		white-space: normal !important;
+	}
+	
+	.letter_firm #s_4 table tr td input,
+	.letter_firm #s_4 table tr td textarea,
+	.letter_firm #s_4 table tr td select {
+		max-width: 200px !important;
+	}
+	
+	.letter_firm #s_4 table tr:nth-of-type(8) td:last-child {
+		display: flex !important;
+		flex-direction: column !important;
+		white-space: normal !important;
+	}
+	
+	.letter_firm #s_4 table tr td:has(> input) {
+		white-space: normal !important;
+		max-width: 200px !important;
 	}
 	
 }
